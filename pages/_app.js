@@ -32,12 +32,18 @@ function MyApp({ Component, pageProps }) {
           custom-element="amp-timeago"
           src="https://cdn.ampproject.org/v0/amp-timeago-0.1.js"
         ></script>
+
+        <script
+          async
+          custom-element="amp-accordion"
+          src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"
+        ></script>
       </Head>
       <Header />
       <Component {...pageProps} />
       <Footer />
       <div className="copy-right">
-        <div className='terms'>
+        <div className="terms">
           <a href="#">Terms & Conditions</a>
           <a href="#">Privacy Policy</a>
         </div>

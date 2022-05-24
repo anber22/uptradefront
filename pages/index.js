@@ -66,6 +66,7 @@ export default function Home() {
             title="home"
             width="380"
             height="413"
+            id='desktop-home-content-img'
           />
         </div>
 

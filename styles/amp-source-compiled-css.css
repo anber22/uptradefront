@@ -3,6 +3,37 @@
  * Based/build on Bootstrap (https://getbootstrap.com/)
  * Copyright 2018-2021 AMP CSS Framework
  */
+
+.dropdown-input {
+  display: none;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  text-align: left;
+  list-style: none;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+.dropdown-input + .dropdown-menu {
+  display: none;
+}
+.dropdown-input:checked + .dropdown-menu {
+  display: block;
+}
+
 :root {
   color-scheme: light;
   --blue: #0084b4;
@@ -30,7 +61,7 @@
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
+  --breakpoint-xl: 992px;
   --font-family-sans-serif: "Roboto Condensed", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
@@ -343,7 +374,7 @@ h1,
 .h1 {
   font-size: 2.5rem;
 }
-@media (max-width: 1200px) {
+@media (max-width: 992px) {
   h1,
   .h1 {
     font-size: calc(1.375rem + 1.5vw);
@@ -353,7 +384,7 @@ h2,
 .h2 {
   font-size: 2rem;
 }
-@media (max-width: 1200px) {
+@media (max-width: 992px) {
   h2,
   .h2 {
     font-size: calc(1.325rem + 0.9vw);
@@ -497,7 +528,7 @@ pre code {
     max-width: 960px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .container {
     max-width: 1140px;
   }
@@ -534,7 +565,7 @@ pre code {
     max-width: 960px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .container,
   .container-sm,
   .container-md,
@@ -842,7 +873,7 @@ pre code {
     max-width: 100%;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .col-xl {
     flex-basis: 0;
     flex-grow: 1;
@@ -2428,7 +2459,7 @@ header.fixed {
   line-height: 15px;
   border-radius: 20px;
 }
-@media (max-width: 1199.98px) {
+@media (max-width: 992px) {
   .header .main-menu .logo {
     top: 3px;
   }
@@ -2439,29 +2470,30 @@ header.fixed {
     min-width: 25px;
   }
 }
-@media (max-width: 1199.98px) and (prefers-color-scheme: light) {
+@media (max-width: 992px) and (prefers-color-scheme: light) {
   .header .main-menu .active {
     color: #212529;
     background: #fff;
   }
 }
-@media (max-width: 1199.98px) and (prefers-color-scheme: dark) {
+@media (max-width: 992px) and (prefers-color-scheme: dark) {
   .header .main-menu .active {
     color: #f8f9fa;
     background: #212529;
   }
 }
-@media (max-width: 1199.98px) and (prefers-color-scheme: light) {
+@media (max-width: 992px) and (prefers-color-scheme: light) {
   .header .main-menu .main-menu-dropdown .main-menu-dropdown-list {
     background: #fff;
   }
 }
-@media (max-width: 1199.98px) and (prefers-color-scheme: dark) {
+@media (max-width: 992px) and (prefers-color-scheme: dark) {
   .header .main-menu .main-menu-dropdown .main-menu-dropdown-list {
-    background: #212529;
+    background: #fff;
+    color: #000;
   }
 }
-@media (max-width: 1199.98px) {
+@media (max-width: 992px) {
   .header
     .main-menu
     .main-menu-dropdown
@@ -2472,27 +2504,27 @@ header.fixed {
     margin-left: 30px;
   }
 }
-@media (max-width: 1199.98px) and (prefers-color-scheme: light) {
+@media (max-width: 992px) and (prefers-color-scheme: light) {
   .header .main-menu .main-menu-dropdown .main-menu-dropdown-list li a {
     color: #212529;
   }
 }
-@media (max-width: 1199.98px) and (prefers-color-scheme: dark) {
+@media (max-width: 992px) and (prefers-color-scheme: dark) {
   .header .main-menu .main-menu-dropdown .main-menu-dropdown-list li a {
-    color: #f8f9fa;
+    color: #000;
   }
 }
-@media (max-width: 1199.98px) and (prefers-color-scheme: light) {
+@media (max-width: 992px) and (prefers-color-scheme: light) {
   .header .main-menu .main-menu-dropdown .main-menu-dropdown-list li a li a {
     color: #212529;
   }
 }
-@media (max-width: 1199.98px) and (prefers-color-scheme: dark) {
+@media (max-width: 992px) and (prefers-color-scheme: dark) {
   .header .main-menu .main-menu-dropdown .main-menu-dropdown-list li a li a {
     color: #f8f9fa;
   }
 }
-@media (max-width: 1199.98px) and (prefers-color-scheme: light) {
+@media (max-width: 992px) and (prefers-color-scheme: light) {
   .header
     .main-menu
     .main-menu-dropdown
@@ -2504,36 +2536,17 @@ header.fixed {
     background: #fff;
   }
 }
-@media (max-width: 1199.98px) and (prefers-color-scheme: dark) {
-  .header
-    .main-menu
-    .main-menu-dropdown
-    .main-menu-dropdown-list
-    li
-    a
-    li
-    a:hover {
-    background: #212529;
-  }
-}
-@media (max-width: 1199.98px) {
-  .header .main-menu li:hover a,
-  .header .main-menu li:active a {
-    border-left: 3px solid #0084b4;
-  }
+
+@media (max-width: 992px) {
   .header .main-menu .main-menu-dropdown-list li {
-    text-indent: 15px;
+    text-indent: 30px;
+    padding: 11px 0;
   }
   .header .main-menu .main-menu-dropdown-list li ul li {
     text-indent: 30px;
   }
   .header .main-menu .main-menu-dropdown-list li ul li ul li {
     text-indent: 45px;
-  }
-  .header .main-menu .main-menu-logo {
-    display: none;
-    padding: 0;
-    margin: 0;
   }
   .header .main-menu .notification-info .notification-qty {
     position: absolute;
@@ -2542,23 +2555,6 @@ header.fixed {
   }
 }
 
-@media (min-width: 992px) {
-  .header .main-menu .logo {
-    font-weight: 400;
-  }
-}
-
-@media (min-width: 992px) and (prefers-color-scheme: dark) {
-  .header .main-menu a,
-  .header .main-menu i {
-    color: #f8f9fa;
-  }
-}
-@media (min-width: 992px) {
-  .header .main-menu .fa {
-    margin-right: 5px;
-  }
-}
 @media (min-width: 992px) and (prefers-color-scheme: light) {
   .header .main-menu .active,
   .header .main-menu .active > i {
@@ -2593,13 +2589,13 @@ header.fixed {
 }
 @media (min-width: 992px) and (prefers-color-scheme: dark) {
   .header .main-menu .main-menu-dropdown .main-menu-dropdown-list {
-    background: #212529;
+    background: #fff;
   }
 }
 @media (min-width: 992px) and (prefers-color-scheme: light) {
   .header .main-menu .main-menu-dropdown .main-menu-dropdown-list li a,
   .header .main-menu .main-menu-dropdown .main-menu-dropdown-list li i {
-    color: #212529;
+    color: #fff;
   }
 }
 @media (min-width: 992px) and (prefers-color-scheme: dark) {
@@ -2815,11 +2811,10 @@ header.fixed {
     float: right;
   }
 }
-.header .arrow-down:before,
-.header .arrow-right:before {
+.arrow-down:before,
+.arrow-right:before {
   content: "";
   border-style: solid;
-  border-color: inherit;
   border-width: 0 1px 1px 0;
   display: inline-block;
   padding: 3px;
@@ -2834,7 +2829,7 @@ header.fixed {
   transform: translate(-50%, -50%) rotate(45deg);
   margin-top: -1px;
 }
-.header .arrow-right:before {
+.arrow-right:before {
   right: 16px;
   transform: rotate(-45deg);
   margin-top: 2px;
@@ -3099,12 +3094,486 @@ button.bg-dark:focus {
   content: "";
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 992px) {
   .UpTrade-header {
     height: 64px;
     padding: 0 88px;
     display: flex;
     align-items: center;
+  }
+
+  .UpTrade-header ul#desktop {
+    display: flex;
+    align-items: center;
+  }
+
+  .mega-menu .main-menu > ul > li a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 16px;
+    cursor: pointer;
+    position: relative;
+    display: block;
+    color: #ffffff;
+  }
+
+  .arrow-down:before,
+  .arrow-right:before {
+    border-color: #ffffff;
+  }
+
+  .home-content .brand {
+    width: 101px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fff;
+    border-radius: 5px;
+  }
+  .home-content {
+    background-color: #375a7d;
+    color: #f5f7f9;
+    display: flex;
+    justify-content: space-between;
+    padding: 104px 15vw 40px;
+  }
+
+  .phones-list {
+    max-width: 72vw;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .phones-list .phone-card {
+    border: 1px solid #e9e9e9;
+  }
+
+  .phones-list .phone-card .image-container {
+    padding: 16px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .phones-list .phone-card .phone-info {
+    border-top: 1px solid #e9e9e9;
+    padding: 25px 16px;
+    color: #222;
+    font-size: 16px;
+  }
+
+  .phones-list .phone-card .phone-info .price {
+    color: #3bba00;
+  }
+
+  .home-reviews .reviews-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+  }
+
+  .home-reviews .reviews-list .review-card {
+    padding: 24px;
+    box-shadow: 0 1px 10px 0 rgb(0 0 0 / 7%);
+  }
+
+  .home-reviews .reviews-list .review-card .review-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .home-reviews .reviews-list .review-card .review-content {
+    color: #272729;
+    font-size: 17px;
+    height: 180px;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .home-reviews {
+    padding: 80px;
+    border-top: 2px solid #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .home-reviews .view-more-link {
+    margin-top: 24px;
+    color: #00b4f3;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .UpTrade-footer {
+    padding-top: 32px;
+    padding-left: 104px;
+    padding-right: 104px;
+    background-color: #375a7d;
+    color: #fff;
+  }
+
+  .UpTrade-footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .UpTrade-footer .footer-container {
+    margin-top: 32px;
+    padding-bottom: 72px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .UpTrade-footer .footer-nav-container {
+    display: grid;
+    width: 60%;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .UpTrade-footer .footer-nav-list {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    row-gap: 8px;
+  }
+
+  .UpTrade-footer .footer-nav-list .footer-nav-title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .UpTrade-footer .footer-subscribe {
+    max-width: 30%;
+    flex-basis: 30%;
+  }
+
+  .UpTrade-footer .footer-subscribe .footer-subscribe-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .UpTrade-footer .subscribe-form {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .UpTrade-footer .subscribe-form amp-autocomplete {
+    flex-basis: 60%;
+  }
+
+  .UpTrade-footer .subscribe-form amp-autocomplete input {
+    width: 100%;
+  }
+  .UpTrade-footer .subscribe-form amp-autocomplete input::placeholder {
+    color: #b9b9b8;
+  }
+  .UpTrade-footer .subscribe-form button {
+    background: linear-gradient(180deg, #1ab4e7, #3498db);
+    border-radius: 4px;
+    outline: none;
+    box-shadow: none;
+    flex-basis: 38%;
+    font-size: 18px;
+    padding: 3.5px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+  }
+
+  .UpTrade-footer .social-network-subscribe-container {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+  }
+
+  .UpTrade-footer .social-network-subscribe-container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-footer-nav-container {
+    display: none;
+  }
+}
+
+@media (max-width: 1279.98px) {
+  .UpTrade-header ul#desktop {
+    display: none;
+  }
+
+  .UpTrade-header #mobile-menu > a {
+    height: 22px;
+  }
+
+  .UpTrade-header #desktop .main-menu-logo {
+    display: none;
+  }
+
+  .UpTrade-header #desktop .search-form {
+    display: none;
+  }
+
+  .UpTrade-header .main-menu-dropdown {
+    background-color: #ffffff;
+    color: #000;
+  }
+
+  .UpTrade-header .main-menu-dropdown > a {
+    color: #000;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 16px;
+    cursor: pointer;
+    position: relative;
+    display: block;
+  }
+
+  .header .arrow-down:before,
+  .header .arrow-right:before {
+    border-color: #000000;
+  }
+
+  .home-content {
+    background-color: #375a7d;
+    color: #f5f7f9;
+    display: flex;
+    justify-content: space-between;
+    padding: 100px 8.3vw 24px;
+  }
+
+  .home-content .brand {
+    width: 20vw;
+    height: 13.8vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fff;
+    border-radius: 5px;
+  }
+
+  .home-content #desktop-home-content-img {
+    display: none;
+  }
+
+  .phones-list {
+    margin-top: 24px;
+    margin-left: 5.3vw;
+    margin-right: 5.3vw;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .phones-list .phone-card {
+    border: 1px solid #e9e9e9;
+  }
+
+  .phones-list .phone-card .image-container {
+    padding: 16px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .phones-list .phone-card .phone-info {
+    border-top: 1px solid #e9e9e9;
+    padding: 25px 16px;
+    color: #222;
+    font-size: 16px;
+  }
+
+  .phones-list .phone-card .phone-info .price {
+    color: #3bba00;
+  }
+
+  .home-reviews .reviews-list {
+    width: 100%;
+  }
+
+  .home-reviews .reviews-list .review-card {
+    padding: 24px;
+    box-shadow: 0 1px 10px 0 rgb(0 0 0 / 7%);
+  }
+
+  .home-reviews .reviews-list .review-card .review-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .home-reviews .reviews-list .review-card .review-content {
+    color: #272729;
+    font-size: 17px;
+    height: 180px;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .home-reviews {
+    border-top: 2px solid #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 19.3vw 4.5vw 24vw;
+  }
+
+  .home-reviews .view-more-link {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    color: #00b4f3;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .UpTrade-footer {
+    padding-top: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: #375a7d;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .UpTrade-footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .UpTrade-footer .footer-container {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .UpTrade-footer .footer-nav-container {
+    display: none;
+  }
+
+  .UpTrade-footer .footer-nav-list {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    row-gap: 8px;
+  }
+
+  .UpTrade-footer .footer-nav-list .footer-nav-title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .UpTrade-footer .footer-subscribe {
+    order: -1;
+  }
+
+  .UpTrade-footer .footer-subscribe .footer-subscribe-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .UpTrade-footer .subscribe-form {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .UpTrade-footer .subscribe-form amp-autocomplete {
+    flex-basis: 60%;
+  }
+
+  .UpTrade-footer .subscribe-form amp-autocomplete input {
+    width: 100%;
+  }
+  .UpTrade-footer .subscribe-form amp-autocomplete input::placeholder {
+    color: #b9b9b8;
+  }
+  .UpTrade-footer .subscribe-form button {
+    background: linear-gradient(180deg, #1ab4e7, #3498db);
+    border-radius: 4px;
+    outline: none;
+    box-shadow: none;
+    flex-basis: 38%;
+    font-size: 18px;
+    padding: 3.5px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+  }
+
+  .UpTrade-footer .social-network-subscribe-container {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+  }
+
+  .UpTrade-footer .social-network-subscribe-container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+  }
+
+  .mobile-footer-nav-container {
+    display: block;
+    padding: 8px 0;
+  }
+
+  .mobile-footer-nav-container .footer-nav {
+    background: transparent;
+    border: none;
+    height: 32px;
+    padding: 4px 0;
+  }
+
+  .mobile-footer-nav-container .footer-nav > h3 {
+    background: #375a7d;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2;
+    display: flex;
+    position: relative;
+  }
+
+  .mobile-footer-nav-container .footer-nav-section {
+    padding: 7px 0;
+  }
+
+  .mobile-footer-nav-container .footer-nav .arrow-right:before {
+    top: 25%;
+  }
+
+  .mobile-footer-nav-container .footer-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .mobile-footer-nav-container .footer-nav-list a {
+    width: 100%;
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    text-align: left;
+    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    justify-content: flex-start;
+    text-decoration: none;
+    padding-left: 16px;
+    padding-right: 16px;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    color: #fff;
   }
 }
 
@@ -3151,25 +3620,6 @@ button.bg-dark:focus {
   margin-left: 24px;
 }
 
-.mega-menu .main-menu > ul > li a {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding: 16px;
-  cursor: pointer;
-  position: relative;
-  display: block;
-  color: #ffffff;
-}
-
-.home-content {
-  background-color: #375a7d;
-  color: #f5f7f9;
-  display: flex;
-  justify-content: space-between;
-  padding: 104px 15vw 40px;
-}
-
 .home-left {
   display: flex;
   flex-direction: column;
@@ -3195,16 +3645,6 @@ button.bg-dark:focus {
   font-size: 16px;
   margin-top: 8px;
   text-align: center;
-}
-
-.home-content .brand {
-  width: 101px;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #fff;
-  border-radius: 5px;
 }
 
 .home-content .brand:hover {
@@ -3245,37 +3685,6 @@ button.bg-dark:focus {
   border-bottom: 2px solid #3d3d3d;
 }
 
-.phones-list {
-  max-width: 72vw;
-  margin-top: 60px;
-  margin-left: auto;
-  margin-right: auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-.phones-list .phone-card {
-  border: 1px solid #e9e9e9;
-}
-
-.phones-list .phone-card .image-container {
-  padding: 16px 0;
-  display: flex;
-  justify-content: center;
-}
-
-.phones-list .phone-card .phone-info {
-  border-top: 1px solid #e9e9e9;
-  padding: 25px 16px;
-  color: #222;
-  font-size: 16px;
-}
-
-.phones-list .phone-card .phone-info .price {
-  color: #3bba00;
-}
-
 .home-page .button-container {
   display: flex;
   justify-content: center;
@@ -3293,48 +3702,6 @@ button.bg-dark:focus {
   box-shadow: none;
 }
 
-.home-reviews {
-  padding: 80px;
-  border-top: 2px solid #f4f4f4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.home-reviews .view-more-link {
-  margin-top: 24px;
-  color: #00b4f3;
-  font-size: 14px;
-  text-decoration: none;
-}
-
-.home-reviews .reviews-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  width: 100%;
-}
-
-.home-reviews .reviews-list .review-card {
-  padding: 24px;
-  box-shadow: 0 1px 10px 0 rgb(0 0 0 / 7%);
-}
-
-.home-reviews .reviews-list .review-card .review-info {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.home-reviews .reviews-list .review-card .review-content {
-  color: #272729;
-  font-size: 17px;
-  height: 180px;
-  display: -webkit-box;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
 .home-page .home-experts {
   padding: 80px 10vw;
   background-color: #f4f7f9;
@@ -3348,93 +3715,6 @@ button.bg-dark:focus {
   color: #3d3d3d;
   font-size: 24px;
   text-align: center;
-}
-
-.UpTrade-footer {
-  padding-top: 32px;
-  padding-left: 104px;
-  padding-right: 104px;
-  background-color: #375a7d;
-  color: #fff;
-}
-
-.UpTrade-footer a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.UpTrade-footer .footer-container {
-  margin-top: 32px;
-  padding-bottom: 72px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.UpTrade-footer .footer-nav-container {
-  display: grid;
-  width: 60%;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.UpTrade-footer .footer-nav-list {
-  display: flex;
-  flex-direction: column;
-  font-size: 12px;
-  row-gap: 8px;
-}
-
-.UpTrade-footer .footer-nav-list .footer-nav-title {
-  font-size: 18px;
-  margin-bottom: 16px;
-}
-
-.UpTrade-footer .footer-subscribe {
-  max-width: 30%;
-  flex-basis: 30%;
-}
-
-.UpTrade-footer .footer-subscribe .footer-subscribe-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.UpTrade-footer .subscribe-form {
-  display: flex;
-  justify-content: space-between;
-}
-
-.UpTrade-footer .subscribe-form amp-autocomplete {
-  flex-basis: 60%;
-}
-
-.UpTrade-footer .subscribe-form amp-autocomplete input {
-  width: 100%;
-}
-.UpTrade-footer .subscribe-form amp-autocomplete input::placeholder {
-  color: #b9b9b8;
-}
-.UpTrade-footer .subscribe-form button {
-  background: linear-gradient(180deg, #1ab4e7, #3498db);
-  border-radius: 4px;
-  outline: none;
-  box-shadow: none;
-  flex-basis: 38%;
-  font-size: 18px;
-  padding: 5px 15px;
-  border: 1px solid rgba(0, 0, 0, 0.23);
-}
-
-.UpTrade-footer .social-network-subscribe-container {
-  margin-top: 24px;
-  display: grid;
-  grid-template-columns: repeat(4, 60px);
-}
-
-.UpTrade-footer .social-network-subscribe-container a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .copy-right {

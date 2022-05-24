@@ -7,7 +7,7 @@ export const Header = () => {
             <div className="container full-width">
               <nav className="main-menu" id="main-menu">
                 <label htmlFor="mobile" id="mobile-menu">
-                  <a href="#" title="...">
+                  <a href="#" title="UpTrade">
                     <amp-img
                       alt="..."
                       title="..."
@@ -16,9 +16,6 @@ export const Header = () => {
                       height="22"
                       className="img-logo"
                     ></amp-img>
-                    <span className="logo">
-                      Google AMP <strong>Mobile</strong> Navigation
-                    </span>
                   </a>
 
                   <span className="main-menu-dropdown-icon">
@@ -29,8 +26,8 @@ export const Header = () => {
                 <input type="checkbox" id="mobile" />
 
                 <ul
+                  id="desktop"
                   className="main-menu"
-                  style={{ display: "flex", alignItems: "center" }}
                 >
                   <li className="main-menu-logo">
                     <a href="#" title="..." style={{ display: "flex" }}>
@@ -41,7 +38,6 @@ export const Header = () => {
                         width="92"
                         height="22"
                         className="img-logo"
-                        
                       ></amp-img>
                     </a>
                   </li>
@@ -52,7 +48,7 @@ export const Header = () => {
                     target="_top"
                   >
                     <amp-autocomplete filter="substring">
-                      <input placeholder="Search phone manufacturer and model" />
+                      <input type='search' placeholder="Search phone manufacturer and model" />
                     </amp-autocomplete>
                     <amp-img
                       className="search-icon"
@@ -60,10 +56,8 @@ export const Header = () => {
                       height="24"
                       layout="responsive"
                       src="/svg/search.svg"
-                      
                     />
                   </form>
-
 
                   <li className="main-menu-dropdown">
                     <a title="...">
@@ -73,8 +67,8 @@ export const Header = () => {
                       </span>
                     </a>
                     <label
-                        className="main-menu-dropdown-icon"
-                        htmlFor="main-menu-dropdown-list-blog"
+                      className="main-menu-dropdown-icon"
+                      htmlFor="main-menu-dropdown-list-blog"
                     >
                       <i className="arrow-down arrow-down-mobile"></i>
                     </label>
@@ -94,7 +88,6 @@ export const Header = () => {
                     </ul>
                   </li>
 
-
                   <li className="main-menu-dropdown">
                     <a title="...">
                       Resources
@@ -103,12 +96,15 @@ export const Header = () => {
                       </span>
                     </a>
                     <label
-                        className="main-menu-dropdown-icon"
-                        htmlFor="main-menu-dropdown-list-resources"
+                      className="main-menu-dropdown-icon"
+                      htmlFor="main-menu-dropdown-list-resources"
                     >
                       <i className="arrow-down arrow-down-mobile"></i>
                     </label>
-                    <input type="checkbox" id="main-menu-dropdown-list-resources" />
+                    <input
+                      type="checkbox"
+                      id="main-menu-dropdown-list-resources"
+                    />
 
                     <ul className="main-menu-dropdown-list">
                       <li>
@@ -142,12 +138,15 @@ export const Header = () => {
                       </span>
                     </a>
                     <label
-                        className="main-menu-dropdown-icon"
-                        htmlFor="main-menu-dropdown-list-about-us"
+                      className="main-menu-dropdown-icon"
+                      htmlFor="main-menu-dropdown-list-about-us"
                     >
                       <i className="arrow-down arrow-down-mobile"></i>
                     </label>
-                    <input type="checkbox" id="main-menu-dropdown-list-about-us" />
+                    <input
+                      type="checkbox"
+                      id="main-menu-dropdown-list-about-us"
+                    />
 
                     <ul className="main-menu-dropdown-list">
                       <li>
@@ -167,7 +166,6 @@ export const Header = () => {
                       </li>
                     </ul>
                   </li>
-
                 </ul>
               </nav>
             </div>
