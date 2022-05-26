@@ -29,12 +29,6 @@ function MyApp({ Component, pageProps }) {
         ></script>
         <script
           async
-          custom-element="amp-timeago"
-          src="https://cdn.ampproject.org/v0/amp-timeago-0.1.js"
-        ></script>
-
-        <script
-          async
           custom-element="amp-accordion"
           src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"
         ></script>

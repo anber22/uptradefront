@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { Header } from "../components/Header";
 
 export const config = { amp: true };
 
@@ -8,7 +7,15 @@ export default function Home() {
     <div>
       <Head>
         <title>UpTrade</title>
-        <meta name="description" content="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping." />
+        <meta
+          name="description"
+          content="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping."
+        />
+        <script
+          async
+          custom-element="amp-timeago"
+          src="https://cdn.ampproject.org/v0/amp-timeago-0.1.js"
+        ></script>
       </Head>
       <main className="home-page">
         <div className="home-content">
@@ -66,7 +73,7 @@ export default function Home() {
             title="home"
             width="380"
             height="413"
-            id='desktop-home-content-img'
+            id="desktop-home-content-img"
           />
         </div>
 

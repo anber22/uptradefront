@@ -3200,3 +3200,142 @@ button.bg-dark:focus {
 .copy-right .terms a {
   margin-right: 8px;
 }
+.about-page {
+  padding-top: 64px;
+}
+.about-page .title-content {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.about-page .mission-statement-content {
+  display: flex;
+  background: #444b54;
+  align-items: center;
+}
+
+.about-page .mission-statement-content .mission-background {
+  flex: 1 0;
+  height: 480px;
+}
+
+.about-page .mission-statement-content .mission-statement-description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0;
+}
+
+.about-page .description-container {
+  max-width: 428px;
+}
+
+.about-page .mission-statement-content .mission-statement-title {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 500;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+}
+
+.about-page .mission-statement-content .description-content {
+  color: #fff;
+  font-size: 18px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
+
+.about-page .our-values {
+  padding: 60.75px 0 48.75px;
+  background: #f5f7f9;
+}
+
+.about-page .values-item {
+  text-align: center;
+  margin-bottom: 46.5px;
+}
+
+.about-page .our-values-title {
+  text-align: center;
+  margin-bottom: 70.5px;
+}
+
+.about-page .values-group {
+  margin: 0 auto;
+  display: grid;
+  max-width: 1102.5px;
+  grid-column-gap: 45px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.about-page .value-title {
+  color: #222;
+  margin: 22.5px auto 7.5px;
+  font-size: 18px;
+  font-weight: 500;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
+
+.about-page .value-content {
+  color: #898ea2;
+  font-size: 16px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
+
+.about-page .our-team {
+  max-width: 808.5px;
+  margin-left: auto;
+  padding-top: 46.5px;
+  margin-right: auto;
+}
+
+.about-page .our-team > h2 {
+  color: #040e3f;
+  font-size: 32px;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 57.75px;
+}
+
+.about-page .our-team .member-group {
+  margin: 0 auto;
+  display: grid;
+  grid-column-gap: 89.25px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.about-page .our-team .member-item {
+  text-align: center;
+  margin-bottom: 75px;
+}
+
+.about-page .our-team .member-item > h3 {
+  color: #000;
+  font-size: 19.5px;
+  font-weight: 500;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
+
+.about-page .our-team .member-avatar {
+  border-radius: 50%;
+  margin-bottom: 9px;
+}
+
+.about-page .our-team .member-position {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.about-page .shop-button {
+  width: 320px;
+  padding: 2px;
+  font-size: 20px;
+  color: #fff;
+  background: linear-gradient(90deg, #1ab4e7, #3498db);
+  transition: none;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  box-shadow: none;
+}
