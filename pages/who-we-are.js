@@ -31,6 +31,13 @@ export default function AboutUs() {
             height="561"
             className="mission-background"
           />
+
+          <amp-img
+            src="/who-we-are-background.jpg"
+            width="840"
+            height="561"
+            className="mobile-mission-background"
+          />
         </div>
 
         <div className="our-values">
@@ -118,36 +125,43 @@ export default function AboutUs() {
               </p>
             </div>
           </div>
-          <div className="our-team">
-            <h2>Our Team</h2>
-            <div className="member-group">
-              <div className="member-item">
-                <amp-img
-                  src="/Marco.jpg"
-                  width="210"
-                  height="210"
-                  className="member-avatar"
-                />
-                <h3>Marco Mai</h3>
-                <div className="member-position">Head of Operations</div>
-              </div>
-              <div className="member-item">
-                <amp-img
-                  src="/Esteban.jpg"
-                  width="210"
-                  height="210"
-                  className="member-avatar"
-                />
-                <h3>Esteban Facundo</h3>
-                <div className="member-position">Head of Customer Service</div>
-              </div>
+        </div>
+        <div className="our-team">
+          <h2>Our Team</h2>
+          <div className="member-group">
+            <div className="member-item">
+              <amp-img
+                src="/Marco.jpg"
+                width="210"
+                height="210"
+                className="member-avatar"
+              />
+              <h3>Marco Mai</h3>
+              <div className="member-position">Head of Operations</div>
+            </div>
+            <div className="member-item">
+              <amp-img
+                src="/Esteban.jpg"
+                width="210"
+                height="210"
+                className="member-avatar"
+              />
+              <h3>Esteban Facundo</h3>
+              <div className="member-position">Head of Customer Service</div>
             </div>
           </div>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: 'center' }}>
-            <button className='btn shop-button'>
-              Shop Certified Used Devices
-            </button>
-          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "#fff",
+          }}
+        >
+          <button className="btn shop-button">
+            Shop Certified Used Devices
+          </button>
         </div>
       </main>
     </div>
