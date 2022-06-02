@@ -149,6 +149,16 @@ export default function AboutUs() {
               <h3>Esteban Facundo</h3>
               <div className="member-position">Head of Customer Service</div>
             </div>
+            <div className="member-item">
+              <amp-img
+                  src="/yuqi.jpeg"
+                  width="210"
+                  height="210"
+                  className="member-avatar"
+              />
+              <h3>Yuqi Ouyang</h3>
+              <div className="member-position">Engineering</div>
+            </div>
           </div>
         </div>
         <div
