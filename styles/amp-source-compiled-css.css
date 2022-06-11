@@ -3089,7 +3089,11 @@ footer {
     display: none;
   }
 
-  .buy-phone-page .sort-drawer-open {
+  .buy-phone-page .sort-drawer-show {
+    display: none;
+  }
+
+  .buy-phone-page .filter-controller {
     display: none;
   }
 }
