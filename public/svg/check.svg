@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54 (76480) - https://sketchapp.com -->
+    <title>tick</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="120" cy="120" r="120"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="tick">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="蒙版" fill="#1296DB" xlink:href="#path-1"></use>
+            <g mask="url(#mask-2)" fill="#FFFFFF" fill-rule="nonzero" id="路径">
+                <g transform="translate(41.000000, 66.000000)">
+                    <path d="M136.661034,3.64433575 L54.0148802,86.2492794 L21.338966,53.5896585 C16.4774275,48.7305442 8.50769231,48.7305442 3.64615385,53.5896585 C-1.21538462,58.4487728 -1.21538462,66.414534 3.64615385,71.2736484 L42.7775536,110.385536 C45.4075662,113.014237 50.10971,114.209101 54.0148802,113.970128 C57.9200504,114.129444 62.6221942,112.934579 65.1725095,110.385536 L154.353846,21.3283256 C159.215385,16.4692113 159.215385,8.50345008 154.353846,3.64433575 C149.492308,-1.21477858 141.60227,-1.21477858 136.661034,3.64433575 Z"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

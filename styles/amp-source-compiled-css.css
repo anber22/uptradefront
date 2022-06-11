@@ -4,6 +4,56 @@
  * Copyright 2018-2021 AMP CSS Framework
  */
 
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJbecnFHGPezSQ.woff2)
+    format("woff2");
+  unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8,
+    U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+/* latin-ext */
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJnecnFHGPezSQ.woff2)
+    format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+.dropup,
+.dropright,
+.dropdown,
+.dropleft {
+  position: relative;
+}
+.dropdown-toggle {
+  white-space: nowrap;
+}
+.dropdown-toggle:empty::after {
+  margin-left: 0;
+}
+.dropdown-input {
+  display: none;
+}
+
 .dropdown-input {
   display: none;
 }
@@ -96,7 +146,7 @@ section {
 }
 body {
   margin: 0;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: Poppins, Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1.5;
   text-align: left;
@@ -1580,149 +1630,10 @@ fieldset:disabled a.btn {
     border-color: #495057;
   }
 }
-.badge {
-  display: inline-block;
-  padding: 0.25em 0.4em;
-  font-weight: 400;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  font-size: 95%;
-  border-radius: 0.25rem;
-}
-a.badge:hover,
-a.badge:focus {
-  text-decoration: none;
-}
-.badge:empty {
-  display: none;
-}
-.btn .badge {
-  position: relative;
-  top: -2px;
-  font-size: 60%;
-}
-.badge-pill {
-  padding-right: 0.6em;
-  padding-left: 0.6em;
-  border-radius: 10rem;
-}
-.badge-primary {
-  color: #fff;
-  background: #0084b4;
-}
-a.badge-primary:hover,
-a.badge-primary:focus {
-  color: #fff;
-  background: #005f81;
-}
-a.badge-primary:focus,
-a.badge-primary.focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 132, 180, 0.5);
-}
-.badge-secondary {
-  color: #fff;
-  background: #6c757d;
-}
-a.badge-secondary:hover,
-a.badge-secondary:focus {
-  color: #fff;
-  background: #545b62;
-}
-a.badge-secondary:focus,
-a.badge-secondary.focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
-}
-.badge-success {
-  color: #fff;
-  background: #28a745;
-}
-a.badge-success:hover,
-a.badge-success:focus {
-  color: #fff;
-  background: #1e7e34;
-}
-a.badge-success:focus,
-a.badge-success.focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
-}
-.badge-info {
-  color: #fff;
-  background: #17a2b8;
-}
-a.badge-info:hover,
-a.badge-info:focus {
-  color: #fff;
-  background: #117a8b;
-}
-a.badge-info:focus,
-a.badge-info.focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
-}
-.badge-warning {
-  color: #212529;
-  background: beige;
-}
-a.badge-warning:hover,
-a.badge-warning:focus {
-  color: #212529;
-  background: #eaeab4;
-}
-a.badge-warning:focus,
-a.badge-warning.focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(245, 245, 220, 0.5);
-}
-.badge-danger {
-  color: #fff;
-  background: #dc3545;
-}
-a.badge-danger:hover,
-a.badge-danger:focus {
-  color: #fff;
-  background: #bd2130;
-}
-a.badge-danger:focus,
-a.badge-danger.focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
-}
-.badge-light {
-  color: #212529;
-  background: #dee2e6;
-}
-a.badge-light:hover,
-a.badge-light:focus {
-  color: #212529;
-  background: #c1c9d0;
-}
-a.badge-light:focus,
-a.badge-light.focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(222, 226, 230, 0.5);
-}
-.badge-dark {
-  color: #fff;
-  background: #212529;
-}
-a.badge-dark:hover,
-a.badge-dark:focus {
-  color: #fff;
-  background: #0a0c0d;
-}
-a.badge-dark:focus,
-a.badge-dark.focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(33, 37, 41, 0.5);
-}
+
 header {
   width: 100%;
-  z-index: 99999;
+  z-index: 1200;
   top: 0px;
 }
 @media (prefers-color-scheme: light) {
@@ -2477,85 +2388,14 @@ footer {
     background: #0084b4;
   }
 }
-.bg-primary {
-  background: #0084b4;
-}
-a.bg-primary:hover,
-a.bg-primary:focus,
-button.bg-primary:hover,
-button.bg-primary:focus {
-  background: #005f81;
-}
-.bg-secondary {
-  background: #6c757d;
-}
-a.bg-secondary:hover,
-a.bg-secondary:focus,
-button.bg-secondary:hover,
-button.bg-secondary:focus {
-  background: #545b62;
-}
-.bg-success {
-  background: #28a745;
-}
-a.bg-success:hover,
-a.bg-success:focus,
-button.bg-success:hover,
-button.bg-success:focus {
-  background: #1e7e34;
-}
-.bg-info {
-  background: #17a2b8;
-}
-a.bg-info:hover,
-a.bg-info:focus,
-button.bg-info:hover,
-button.bg-info:focus {
-  background: #117a8b;
-}
-.bg-warning {
-  background: beige;
-}
-a.bg-warning:hover,
-a.bg-warning:focus,
-button.bg-warning:hover,
-button.bg-warning:focus {
-  background: #eaeab4;
-}
-.bg-danger {
-  background: #dc3545;
-}
-a.bg-danger:hover,
-a.bg-danger:focus,
-button.bg-danger:hover,
-button.bg-danger:focus {
-  background: #bd2130;
-}
-.bg-light {
-  background: #dee2e6;
-}
-a.bg-light:hover,
-a.bg-light:focus,
-button.bg-light:hover,
-button.bg-light:focus {
-  background: #c1c9d0;
-}
-.bg-dark {
-  background: #212529;
-}
-a.bg-dark:hover,
-a.bg-dark:focus,
-button.bg-dark:hover,
-button.bg-dark:focus {
-  background: #0a0c0d;
-}
+
 .clearfix::after {
   display: block;
   clear: both;
   content: "";
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1280px) {
   .UpTrade-header {
     height: 64px;
     padding: 0 88px;
@@ -2985,6 +2825,309 @@ button.bg-dark:focus {
     box-shadow: none;
     line-height: 1.75;
   }
+
+  .buy-phone-page {
+    padding-top: 112px;
+    padding-bottom: 48px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .buy-phone-conditions {
+    width: 11.2vw;
+    min-width: 200px;
+    margin-right: 24px;
+  }
+
+  .conditions-content {
+    position: sticky;
+    top: 84px;
+    height: 86vh;
+    overflow: auto;
+    padding: 16px 16px 80px 16px;
+    border: 1px solid rgb(233, 233, 233);
+  }
+  .condition-section .condition-header {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 12px 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .condition-section .condition-header > i::before {
+    border-color: #000;
+    top: 38%;
+  }
+
+  .condition-section .condition-content > div {
+    color: #848484;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 0;
+  }
+
+  .buy-phone-page .buy-phone-content {
+    max-width: 62%;
+    min-width: 800px;
+    flex-basis: 62%;
+  }
+
+  .buy-phone-page .buy-phone-page-title {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .buy-phone-page .buy-phone-page-title > h1 {
+    font-size: 40px;
+    font-weight: 600;
+  }
+
+  .buy-phone-page .buy-phone-page-title > h2 {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .buy-phone-page .buy-phone-search-form {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 24px 8px 20px;
+    z-index: 1;
+    top: 64px;
+    background: #ffffff;
+    position: sticky;
+  }
+
+  .buy-phone-page .buy-phone-search-form amp-autocomplete {
+    flex-basis: 80%;
+    height: 43.5px;
+  }
+
+  .buy-phone-page .buy-phone-search-form amp-autocomplete input {
+    width: 100%;
+    height: 100%;
+  }
+
+  .buy-phone-page .buy-phone-search-form amp-autocomplete input::placeholder {
+    color: #c3c3c3;
+  }
+
+  .buy-phone-page .buy-phone-search-form .form-search-icon {
+    display: none;
+  }
+
+  .buy-phone-page .buy-phone-search-form button {
+    background: linear-gradient(180deg, #1ab4e7, #3498db);
+    color: #fff;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: none;
+    flex-basis: 16%;
+    line-height: 1.75;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 15px;
+  }
+  .buy-phone-page .carrier-options {
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 24px;
+    grid-row-gap: 16px;
+    margin-top: 16px;
+  }
+
+  .buy-phone-page .carrier-options .carrier-option {
+    font-size: 12px;
+    color: rgb(132, 132, 132);
+    background: rgb(255, 255, 255);
+    border: 1px solid #e9e9e9;
+    cursor: pointer;
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .buy-phone-page .carrier-options .carrier-option:hover {
+    color: #ffffff;
+    background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
+  }
+
+  .buy-phone-page .carrier-options .carrier-option[selected] {
+    color: #ffffff;
+    background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
+    outline: none;
+  }
+
+  .buy-phone-page .option-controllers {
+    position: sticky;
+    top: 132px;
+    z-index: 1;
+    background: #ffffff;
+    padding: 8px 24px;
+  }
+
+  .buy-phone-page .option-controllers .filters-controller {
+    display: none;
+  }
+
+  .buy-phone-page .desktop-sort {
+    color: rgb(0, 0, 0);
+  }
+
+  .buy-phone-page .mobile-sort {
+    display: none;
+  }
+
+  .buy-phone-page .sort-controller {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .buy-phone-page .sort-controller .dropdown-toggle {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+    cursor: pointer;
+  }
+
+  .buy-phone-page .sort-controller .dropdown-menu {
+    padding: 8px 12px;
+    background-color: #ffffff;
+  }
+
+  .buy-phone-page .sort-controller .dropdown-item {
+    padding: 8px 0;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .buy-phone-page .sort-controller .dropdown-item > img {
+    display: none;
+  }
+
+  .buy-phone-page .sort-controller li[selected] > img {
+    display: inline-flex;
+  }
+
+  .buy-phone-page .mobile-phone-list {
+    display: none;
+  }
+
+  .buy-phone-page .desktop-phone-list .phone-list-item {
+    padding: 0 20px;
+    display: flex;
+    border: 1px solid #e2e2e2;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .buy-phone-page .desktop-phone-list .phone-list-item:hover {
+    border: 1px solid #e1e1e1;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+  }
+
+  .buy-phone-page .desktop-phone-list .phone-list-item .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 10px;
+    font-size: 24px;
+    color: #3d3d3d;
+  }
+
+  .buy-phone-page .desktop-phone-list .phone-list-item .description .attr {
+    font-size: 18px;
+  }
+
+  .buy-phone-page .desktop-phone-list .condition {
+    display: flex;
+    padding: 6px 0;
+    justify-content: center;
+    width: 146px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Poppins-Bold;
+    color: #ffffff;
+    border-radius: 999px;
+    height: 36px;
+  }
+
+  .buy-phone-page .desktop-phone-list .phone-list-item .action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buy-phone-page .desktop-phone-list .phone-list-item .price {
+    font-size: 36px;
+    color: #3d3d3d;
+  }
+
+  .buy-phone-page .desktop-phone-list .phone-list-item .view-detail {
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #509bd7;
+    padding: 0 12px;
+    border-radius: 999px;
+  }
+
+  .buy-phone-page .mobile-filter-options {
+    display: none;
+  }
+
+  .buy-phone-page .sort-drawer-close {
+    display: none;
+  }
+
+  .buy-phone-page .sort-drawer-open {
+    display: none;
+  }
+}
+
+.buy-phone-page .filter-options > div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.buy-phone-page .filter-options .filter-option {
+  background: #fafafa;
+  font-size: 14px;
+  border-radius: 4px;
+  color: #375a7d;
+  height: 32px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-right: 5px;
+  padding-left: 12px;
+  flex-wrap: wrap;
+  outline: none;
+}
+
+.buy-phone-page .filter-options .filter-option > svg {
+  width: 14px;
+  height: 14px;
+  fill: #375a7d;
+  cursor: pointer;
+}
+
+.Fair {
+  background-color: #d95040;
+}
+
+.buy-phone-page .options-container {
+  padding: 0 24px;
 }
 
 @media (max-width: 1279.98px) {
@@ -3472,7 +3615,7 @@ button.bg-dark:focus {
     padding: 8px 16px 16px;
     font-size: 14px;
     line-height: 1.43;
-    color: rgba(0, 0, 0, .65);
+    color: rgba(0, 0, 0, 0.65);
     font-weight: 400;
   }
 
@@ -3486,6 +3629,321 @@ button.bg-dark:focus {
     border: 1px solid rgba(0, 0, 0, 0.23);
     box-shadow: none;
     line-height: 1.75;
+  }
+
+  .buy-phone-page {
+    padding: 0 24px;
+  }
+
+  .buy-phone-page .buy-phone-conditions {
+    display: none;
+  }
+
+  .buy-phone-page .buy-phone-page-title {
+    padding-top: 93px;
+  }
+
+  .buy-phone-page .buy-phone-page-title > h1 {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.43;
+  }
+
+  .buy-phone-page .buy-phone-page-title > h2 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+  }
+
+  .buy-phone-page .buy-phone-search-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0px;
+    position: sticky;
+    top: 61px;
+    z-index: 1;
+    background: #ffffff;
+  }
+
+  .buy-phone-page .buy-phone-search-form amp-autocomplete {
+    flex-basis: 90%;
+    height: 40px;
+  }
+
+  .buy-phone-page .buy-phone-search-form amp-autocomplete input {
+    width: 100%;
+    height: 100%;
+  }
+
+  .buy-phone-page .buy-phone-search-form amp-autocomplete input::placeholder {
+    color: #c3c3c3;
+  }
+
+  .buy-phone-page .buy-phone-search-form .btn {
+    display: none;
+  }
+
+  .buy-phone-page .buy-phone-search-form .form-search-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .buy-phone-page .carrier-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 24px;
+    grid-row-gap: 16px;
+    margin-top: 16px;
+  }
+
+  .buy-phone-page .carrier-options .carrier-option {
+    font-size: 12px;
+    color: rgb(132, 132, 132);
+    background: rgb(255, 255, 255);
+    border: 1px solid #e9e9e9;
+    cursor: pointer;
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .buy-phone-page .options-container {
+    padding: 0;
+  }
+
+  .buy-phone-page .carrier-options .carrier-option:hover {
+    color: #ffffff;
+    background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
+  }
+
+  .buy-phone-page .carrier-options .carrier-option[selected] {
+    color: #ffffff;
+    background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
+    outline: none;
+  }
+
+  .buy-phone-page .option-controllers {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0px;
+  }
+
+  .buy-phone-page .sort-controller .dropdown-toggle {
+    display: flex;
+    align-items: center;
+  }
+
+  .buy-phone-page .sort-controller .dropdown-toggle amp-img {
+    margin-right: 8px;
+  }
+
+  .buy-phone-page .desktop-sort {
+    display: none;
+  }
+
+  .buy-phone-page .option-controllers .filters-controller {
+  }
+
+  .buy-phone-page .option-controllers .sort-controller .dropdown-menu {
+    display: none;
+  }
+
+  .buy-phone-page .desktop-filter-options {
+    display: none;
+  }
+
+  .buy-phone-page .filter-options .filter-option {
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .buy-phone-page .desktop-phone-list {
+    display: none;
+  }
+
+  .buy-phone-page .mobile-phone-list .mobile-phone-list-item {
+    padding: 0 20px;
+    border: 1px solid #e2e2e2;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .buy-phone-page .mobile-phone-list .mobile-phone-list-item .top {
+    display: flex;
+    padding-top: 24px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .buy-phone-page .mobile-phone-list .mobile-phone-list-item .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #3d3d3d;
+  }
+
+  .buy-phone-page
+    .mobile-phone-list
+    .mobile-phone-list-item
+    .bottom
+    .description {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .buy-phone-page .mobile-phone-list .mobile-phone-list-item .bottom .price {
+    font-size: 36px;
+  }
+  .buy-phone-page .mobile-phone-list-item .condition {
+    display: flex;
+    justify-content: center;
+    width: 103px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Poppins-Bold;
+    border-radius: 999px;
+    height: 28px;
+    color: #ffffff;
+  }
+  .buy-phone-page .sort-controller .sort-drawer-close {
+    display: none;
+  }
+  .buy-phone-page .sort-controller .sort-drawer-show {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1300;
+    display: flex;
+  }
+
+  .buy-phone-page .sort-drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 50%;
+    flex: 1 0 auto;
+    height: 100%;
+    width: 50%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .buy-phone-page .sort-drawer-content {
+    max-width: 50%;
+    top: 0;
+    right: 0;
+    position: fixed;
+    flex: 1 0 auto;
+    height: 100%;
+    z-index: 1302;
+    width: 50%;
+    box-shadow: 0px 8px 10px -5px rgb(0 0 0 / 20%),
+      0px 16px 24px 2px rgb(0 0 0 / 14%), 0px 6px 30px 5px rgb(0 0 0 / 12%);
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+  }
+
+  .buy-phone-page .sort-drawer-content .sort-item {
+    padding: 8px 16px;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .buy-phone-page .sort-drawer-content .sort-item > img {
+    display: none;
+  }
+
+  .buy-phone-page .sort-drawer-content li[selected] > img {
+    display: inline-flex;
+  }
+
+  .buy-phone-page .filter-drawer-close {
+    display: none;
+  }
+
+  .buy-phone-page .filter-drawer-show {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1300;
+    display: flex;
+  }
+
+  .buy-phone-page .filter-drawer-content {
+    max-width: 50%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    flex: 1 0 auto;
+    height: 100%;
+    z-index: 1302;
+    width: 50%;
+    box-shadow: 0px 8px 10px -5px rgb(0 0 0 / 20%),
+      0px 16px 24px 2px rgb(0 0 0 / 14%), 0px 6px 30px 5px rgb(0 0 0 / 12%);
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+  }
+
+  .buy-phone-page .filter-drawer-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    max-width: 50%;
+    flex: 1 0 auto;
+    height: 100%;
+    width: 50%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .buy-phone-page .filter-drawer-content .buy-phone-conditions {
+    display: block;
+  }
+
+  .buy-phone-page .filter-drawer-content .conditions-content {
+    padding: 8px;
+  }
+  .buy-phone-page .filter-drawer-content .condition-section .condition-header {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 12px 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .buy-phone-page
+    .filter-drawer-content
+    .condition-section
+    .condition-header
+    > i::before {
+    border-color: #000;
+    top: 38%;
+  }
+
+  .buy-phone-page
+    .filter-drawer-content
+    .condition-section
+    .condition-content
+    > div {
+    color: #848484;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 0;
   }
 }
 

@@ -133,7 +133,7 @@ export const Footer = () => {
             Subscribe To Our Newsletter
           </div>
           <form className="subscribe-form" action="#" target="_top">
-            <amp-autocomplete filter="substring">
+            <amp-autocomplete filter="none">
               <input placeholder="Email" type="text" />
             </amp-autocomplete>
             <button className="btn btn-primary">Subscribe</button>
