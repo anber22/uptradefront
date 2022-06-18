@@ -1,4 +1,5 @@
 import Script from "next/script";
+import Link from "next/link";
 
 export const config = { amp: true };
 
@@ -43,14 +44,14 @@ export default function BuyPhone({ data }) {
                 <h3 className="condition-header">
                   <span>
                     CONDITION
-                    <a href="/cosmetic-conditions">
+                    <Link href="/cosmetic-conditions">
                       <amp-img
                         className="condition-alert"
                         src="/svg/alert-circle.svg"
                         width="12"
                         height="12"
                       />
-                    </a>
+                    </Link>
                   </span>
                   <i className="arrow-right"></i>
                 </h3>
@@ -227,14 +228,14 @@ export default function BuyPhone({ data }) {
                           <section className="condition-section">
                             <h3 className="condition-header">
                               <span>CONDITION</span>
-                              <a href="/cosmetic-conditions">
+                              <Link href="/cosmetic-conditions">
                                 <amp-img
                                     className="condition-alert"
                                     src="/svg/alert-circle.svg"
                                     width="12"
                                     height="12"
                                 />
-                              </a>
+                              </Link>
                               <i className="arrow-right"></i>
                             </h3>
                             <div className="condition-content">
