@@ -3049,7 +3049,7 @@ footer {
     font-size: 18px;
   }
 
-  .buy-phone-page .desktop-phone-list .condition {
+  .condition {
     display: flex;
     padding: 6px 0;
     justify-content: center;
@@ -3096,6 +3096,107 @@ footer {
   .buy-phone-page .filter-controller {
     display: none;
   }
+
+  .buy-phone-page .condition-alert {
+    margin-left: 8px;
+  }
+
+  .cosmetic-condition-page {
+    padding: 134px 14.5vw;
+  }
+
+  .cosmetic-condition-main-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 500;
+    color: #3d3d3d;
+  }
+
+  .cosmetic-condition-secondary-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+    margin-top: 74px;
+    margin-bottom: 34px;
+  }
+
+  .cosmetic-condition-page .divider {
+    height: 1px;
+    width: 100%;
+    background-color: #d8d8d8;
+  }
+
+  .cosmetic-condition-page .definition-description {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+    margin-top: 26px;
+    margin-bottom: 74px;
+  }
+
+  .cosmetic-condition-page .conditions {
+    display: flex;
+    flex-direction: column;
+    row-gap: 18px;
+  }
+
+  .cosmetic-condition-page .condition-item {
+    display: flex;
+    column-gap: 74px;
+
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+  }
+
+  .cosmetic-condition-page .comparison-description {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+    margin-top: 40px;
+    margin-bottom: 60px;
+  }
+
+  .cosmetic-condition-page .desktop-comparison-table thead tr th {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+    border-top: none;
+    padding-bottom: 22px;
+  }
+
+  .cosmetic-condition-page .desktop-comparison-table tbody tr td {
+    padding-top: 34px;
+    padding-bottom: 34px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+  }
+
+  .cosmetic-condition-page .desktop-comparison-table tbody tr th {
+    padding-top: 34px;
+    padding-bottom: 34px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .cosmetic-condition-page .desktop-comparison-table tbody tr:last-child {
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .cosmetic-condition-page .mobile-table-container {
+    display: none;
+  }
 }
 
 .buy-phone-page .filter-options > div {
@@ -3128,6 +3229,18 @@ footer {
 
 .Fair {
   background-color: #d95040;
+}
+
+.Pristine {
+  background-color: #5085eb;
+}
+
+.Excellent {
+  background-color: #58a55b;
+}
+
+.Good {
+  background-color: #f2be42;
 }
 
 .buy-phone-page .options-container {
@@ -3948,6 +4061,145 @@ footer {
     cursor: pointer;
     font-size: 16px;
     padding: 8px 0;
+  }
+
+  .cosmetic-condition-page {
+    padding: 80px 12vw;
+  }
+
+  .cosmetic-condition-main-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    color: #3d3d3d;
+  }
+
+  .cosmetic-condition-secondary-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+    margin-top: 50px;
+    margin-bottom: 9px;
+  }
+
+  .cosmetic-condition-page .divider {
+    height: 1px;
+    width: 100%;
+    background-color: #d8d8d8;
+  }
+
+  .cosmetic-condition-page .definition-description {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+    margin-top: 10px;
+    margin-bottom: 56px;
+  }
+
+  .cosmetic-condition-page .conditions {
+    display: flex;
+    flex-direction: column;
+    row-gap: 18px;
+  }
+
+  .cosmetic-condition-page .condition-item {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+  }
+
+  .cosmetic-condition-page .condition {
+    display: flex;
+    justify-content: center;
+    width: 103px;
+    min-width: 103px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Poppins-Bold;
+    border-radius: 999px;
+    height: 32px;
+    color: #ffffff;
+  }
+
+  .cosmetic-condition-page .comparison-description {
+    font-size: 14px;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+    margin-top: 24px;
+    margin-bottom: 68px;
+  }
+
+  .cosmetic-condition-page .desktop-comparison-table {
+    display: none;
+  }
+
+  .cosmetic-condition-page .mobile-table-container {
+    width: 88vw;
+    overflow-x: scroll;
+    position: relative;
+  }
+
+  .buy-phone-page .condition-alert {
+    margin-left: 8px;
+  }
+
+  .cosmetic-condition-page .mobile-comparison-table thead tr th {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+    border-top: none;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .cosmetic-condition-page .mobile-comparison-table thead tr th:first-child {
+    position: sticky;
+    left: 0;
+    background-color: #ffffff;
+    z-index: 2;
+  }
+
+  .cosmetic-condition-page .mobile-comparison-table tbody tr td {
+    padding-top: 34px;
+    padding-bottom: 34px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0em;
+    color: #3d3d3d;
+    border-top: none;
+    border-bottom: 1px solid #dee2e6;
+    line-height: 1;
+  }
+
+  .cosmetic-condition-page .mobile-comparison-table tbody tr th:first-child {
+    position: sticky;
+    left: 0;
+    background-color: #ffffff;
+    z-index: 2;
+  }
+
+  .cosmetic-condition-page .mobile-comparison-table tbody tr th {
+    padding-top: 34px;
+    padding-bottom: 34px;
+    display: flex;
+    justify-content: center;
+    border-top: none;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .cosmetic-condition-page .mobile-comparison-table tbody tr:last-child {
+    border-bottom: 1px solid #dee2e6;
   }
 }
 

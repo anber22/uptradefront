@@ -1,22 +1,20 @@
-import Head from "next/head";
+import Script from "next/script";
 
 export const config = { amp: true };
 
 export default function BuyPhone({ data }) {
   return (
     <div>
-      <Head>
-        <script
-          async
-          custom-element="amp-list"
-          src="https://cdn.ampproject.org/v0/amp-list-0.1.js"
-        ></script>
-        <script
-          async
-          custom-template="amp-mustache"
-          src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"
-        ></script>
-      </Head>
+      <Script
+        async
+        custom-element="amp-list"
+        src="https://cdn.ampproject.org/v0/amp-list-0.1.js"
+      ></Script>
+      <Script
+        async
+        custom-template="amp-mustache"
+        src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"
+      ></Script>
       <amp-state id="list">
         <script
           type="application/json"
@@ -43,7 +41,17 @@ export default function BuyPhone({ data }) {
             <amp-accordion>
               <section className="condition-section">
                 <h3 className="condition-header">
-                  <span>CONDITION</span>
+                  <span>
+                    CONDITION
+                    <a href="/cosmetic-conditions">
+                      <amp-img
+                        className="condition-alert"
+                        src="/svg/alert-circle.svg"
+                        width="12"
+                        height="12"
+                      />
+                    </a>
+                  </span>
                   <i className="arrow-right"></i>
                 </h3>
                 <div className="condition-content">
@@ -219,6 +227,14 @@ export default function BuyPhone({ data }) {
                           <section className="condition-section">
                             <h3 className="condition-header">
                               <span>CONDITION</span>
+                              <a href="/cosmetic-conditions">
+                                <amp-img
+                                    className="condition-alert"
+                                    src="/svg/alert-circle.svg"
+                                    width="12"
+                                    height="12"
+                                />
+                              </a>
                               <i className="arrow-right"></i>
                             </h3>
                             <div className="condition-content">
