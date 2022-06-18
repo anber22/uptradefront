@@ -44,14 +44,14 @@ export default function BuyPhone({ data }) {
                 <h3 className="condition-header">
                   <span>
                     CONDITION
-                    <Link href="/cosmetic-conditions">
+                    <a href="/cosmetic-conditions" target="_blank">
                       <amp-img
                         className="condition-alert"
                         src="/svg/alert-circle.svg"
                         width="12"
                         height="12"
                       />
-                    </Link>
+                    </a>
                   </span>
                   <i className="arrow-right"></i>
                 </h3>
@@ -228,14 +228,14 @@ export default function BuyPhone({ data }) {
                           <section className="condition-section">
                             <h3 className="condition-header">
                               <span>CONDITION</span>
-                              <Link href="/cosmetic-conditions">
+                              <a href="/cosmetic-conditions" target="_blank">
                                 <amp-img
                                     className="condition-alert"
                                     src="/svg/alert-circle.svg"
                                     width="12"
                                     height="12"
                                 />
-                              </Link>
+                              </a>
                               <i className="arrow-right"></i>
                             </h3>
                             <div className="condition-content">
