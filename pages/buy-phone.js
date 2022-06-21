@@ -7,12 +7,12 @@ import {
   Drawer,
   useMediaQuery,
 } from "@mui/material";
-import { useAsync } from "react-use";
+// import { useAsync } from "react-use";
 import { useCallback, useState } from "react";
-import urlcat from "urlcat";
+// import urlcat from "urlcat";
 
 export default function BuyPhone({
-  conditions: initialConditions,
+  conditions,
   carrierOptions,
 }) {
   const [selectedValues, setSelectedValues] = useState([]);
@@ -28,27 +28,27 @@ export default function BuyPhone({
         : [...prev, item];
     });
   }, []);
-
-  const { value: conditions = [] } = useAsync(async () => {
-    if (!selectedValues.length) return initialConditions;
-
-    try {
-      const ids = selectedValues.map((x) => x.categoryValueId);
-
-      const response = await fetch(
-        urlcat("http://api.276qa.com/search/category/values", {
-          parentCategoryValueIds: ids.join(","),
-        })
-      );
-      const result = await response.json();
-
-      if (!result.success) return initialConditions;
-
-      return result.data;
-    } catch {
-      return initialConditions;
-    }
-  }, [selectedValues, initialConditions]);
+  //
+  // const { value: conditions = [] } = useAsync(async () => {
+  //   if (!selectedValues.length) return initialConditions;
+  //
+  //   try {
+  //     const ids = selectedValues.map((x) => x.categoryValueId);
+  //
+  //     const response = await fetch(
+  //       urlcat("http://api.276qa.com/search/category/values", {
+  //         parentCategoryValueIds: ids.join(","),
+  //       })
+  //     );
+  //     const result = await response.json();
+  //
+  //     if (!result.success) return initialConditions;
+  //
+  //     return result.data;
+  //   } catch {
+  //     return initialConditions;
+  //   }
+  // }, [selectedValues, initialConditions]);
 
   return (
     <div>
