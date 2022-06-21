@@ -7,7 +7,8 @@ export const Header = () => {
             <div className="container full-width">
               <nav className="main-menu" id="main-menu">
                 <label htmlFor="mobile" id="mobile-menu">
-                  <a href="#" title="UpTrade">
+                  {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                  <a href="/buy-phone" title="Uptrade">
                     <amp-img
                       alt="..."
                       title="..."
@@ -25,12 +26,14 @@ export const Header = () => {
 
                 <input type="checkbox" id="mobile" />
 
-                <ul
-                  id="desktop"
-                  className="main-menu"
-                >
+                <ul id="desktop" className="main-menu">
                   <li className="main-menu-logo">
-                    <a href="#" title="..." style={{ display: "flex" }}>
+                    {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                    <a
+                      href="/buy-phone"
+                      title="Uptrade"
+                      style={{ display: "flex" }}
+                    >
                       <amp-img
                         alt="logo"
                         title="logo"
@@ -48,7 +51,10 @@ export const Header = () => {
                     target="_top"
                   >
                     <amp-autocomplete filter="substring">
-                      <input type='search' placeholder="Search phone manufacturer and model" />
+                      <input
+                        type="search"
+                        placeholder="Search phone manufacturer and model"
+                      />
                     </amp-autocomplete>
                     <amp-img
                       className="search-icon"

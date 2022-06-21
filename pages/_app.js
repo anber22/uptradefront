@@ -1,38 +1,37 @@
 import "../styles/globals.css";
-import Head from "next/head";
+import Script from "next/script";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Head>
-        <script
-          async
-          custom-element="amp-autocomplete"
-          src="https://cdn.ampproject.org/v0/amp-autocomplete-0.1.js"
-        />
-        <script
-          async
-          custom-element="amp-form"
-          src="https://cdn.ampproject.org/v0/amp-form-0.1.js"
-        />
-        <script
-          async
-          custom-element="amp-bind"
-          src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"
-        ></script>
-        <script
-          async
-          custom-element="amp-selector"
-          src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"
-        ></script>
-        <script
-          async
-          custom-element="amp-accordion"
-          src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"
-        ></script>
-      </Head>
+      <Script
+        async
+        custom-element="amp-autocomplete"
+        src="https://cdn.ampproject.org/v0/amp-autocomplete-0.1.js"
+      />
+      <Script
+        async
+        custom-element="amp-form"
+        src="https://cdn.ampproject.org/v0/amp-form-0.1.js"
+      />
+      <Script
+        async
+        custom-element="amp-bind"
+        src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"
+      ></Script>
+      <Script
+        async
+        custom-element="amp-selector"
+        src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"
+      ></Script>
+      <Script
+        async
+        custom-element="amp-accordion"
+        src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"
+      ></Script>
+
       <Header />
       <Component {...pageProps} />
       <Footer />

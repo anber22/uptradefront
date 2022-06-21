@@ -9,12 +9,14 @@ specifiers:
   raw-loader: ^4.0.2
   react: 18.1.0
   react-dom: 18.1.0
+  urlcat: ^2.0.4
 
 dependencies:
   next: 12.1.6_ef5jwxihqo6n7gxfmzogljlgcm
   next-seo: 5.4.0_2mgcgz5qhsdxw4fgpqzqeafmkq
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
+  urlcat: 2.0.4
 
 devDependencies:
   eslint: 8.16.0
@@ -1807,6 +1809,10 @@ packages:
     dependencies:
       punycode: 2.1.1
     dev: true
+
+  /urlcat/2.0.4:
+    resolution: {integrity: sha512-12c4Vi40DHVdZ/8mOLjZjp0asCzM6hi8Gj116fpImRP1FN4gBMCtMi9XhLNOmre/FEQYNqHbZmX8iyYAtIcy8Q==}
+    dev: false
 
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}

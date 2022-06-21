@@ -2847,6 +2847,11 @@ footer {
     padding: 16px 16px 80px 16px;
     border: 1px solid rgb(233, 233, 233);
   }
+
+  .buy-phone-page .conditions-content amp-script {
+    opacity: 1;
+  }
+
   .condition-section .condition-header {
     background: none;
     border: none;
@@ -2863,8 +2868,18 @@ footer {
     top: 38%;
   }
 
-  .condition-section .condition-content > div {
+  .condition-section .condition-content .condition-item {
     color: #848484;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 0;
+  }
+
+  .condition-section .condition-content .selected-condition-item {
+    border-bottom: none;
+    outline: none;
+    color: #1ab4e7;
     font-weight: 400;
     cursor: pointer;
     font-size: 16px;
@@ -4036,6 +4051,10 @@ footer {
   .buy-phone-page .filter-drawer-content .conditions-content {
     padding: 8px;
   }
+
+  .buy-phone-page .conditions-content amp-script {
+    opacity: 1;
+  }
   .buy-phone-page .filter-drawer-content .condition-section .condition-header {
     background: none;
     border: none;
@@ -4060,7 +4079,7 @@ footer {
     .filter-drawer-content
     .condition-section
     .condition-content
-    > div {
+    .condition-item {
     color: #848484;
     font-weight: 400;
     cursor: pointer;
