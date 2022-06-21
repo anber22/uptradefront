@@ -2848,35 +2848,40 @@ footer {
     border: 1px solid rgb(233, 233, 233);
   }
 
-  .buy-phone-page .conditions-content amp-script {
-    opacity: 1;
+  .conditions-content .arrow-down {
+    width: 12px;
+    height: 12px;
   }
 
   .condition-section .condition-header {
     background: none;
     border: none;
-    border-bottom: 1px solid #d9d9d9;
     padding: 12px 0;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 16px;
     line-height: 1.5;
+    margin-bottom: 0;
   }
 
-  .condition-section .condition-header > i::before {
-    border-color: #000;
-    top: 38%;
+  .accordion-header-item {
+    padding: 0;
+    min-height: 48px;
   }
 
-  .condition-section .condition-content .condition-item {
+  .condition-content {
+    padding: 0;
+  }
+
+  .condition-content .condition-item {
     color: #848484;
     font-weight: 400;
-    cursor: pointer;
     font-size: 16px;
     padding: 8px 0;
+    cursor: pointer;
   }
 
-  .condition-section .condition-content .selected-condition-item {
+  .condition-content .selected-condition-item {
     border-bottom: none;
     outline: none;
     color: #1ab4e7;
@@ -2917,17 +2922,19 @@ footer {
     position: sticky;
   }
 
-  .buy-phone-page .buy-phone-search-form amp-autocomplete {
+  .buy-phone-page .buy-phone-search-form .MuiAutocomplete-root {
     flex-basis: 80%;
     height: 43.5px;
   }
 
-  .buy-phone-page .buy-phone-search-form amp-autocomplete input {
-    width: 100%;
-    height: 100%;
+  .buy-phone-page .buy-phone-search-form .MuiOutlinedInput-root {
+    padding: 3px;
   }
 
-  .buy-phone-page .buy-phone-search-form amp-autocomplete input::placeholder {
+  .buy-phone-page
+    .buy-phone-search-form
+    .MuiOutlinedInput-root
+    input::placeholder {
     color: #c3c3c3;
   }
 
@@ -2972,7 +2979,7 @@ footer {
     background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
   }
 
-  .buy-phone-page .carrier-options .carrier-option[selected] {
+  .buy-phone-page .carrier-options .selected-carrier-option {
     color: #ffffff;
     background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
     outline: none;
@@ -3064,6 +3071,10 @@ footer {
     font-size: 18px;
   }
 
+  .buy-phone-page .accordion-content {
+    margin: 0;
+  }
+
   .condition {
     display: flex;
     padding: 6px 0;
@@ -3094,10 +3105,6 @@ footer {
     background-color: #509bd7;
     padding: 0 12px;
     border-radius: 999px;
-  }
-
-  .buy-phone-page .mobile-filter-options {
-    display: none;
   }
 
   .buy-phone-page .sort-drawer-close {
@@ -3219,7 +3226,7 @@ footer {
   }
 }
 
-.buy-phone-page .filter-options > div {
+.buy-phone-page .filter-options {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
@@ -3803,14 +3810,47 @@ footer {
     background: #ffffff;
   }
 
-  .buy-phone-page .buy-phone-search-form amp-autocomplete {
+  .buy-phone-page .buy-phone-search-form .MuiAutocomplete-root {
     flex-basis: 90%;
     height: 40px;
   }
 
-  .buy-phone-page .buy-phone-search-form amp-autocomplete input {
-    width: 100%;
-    height: 100%;
+  .buy-phone-page .buy-phone-search-form .MuiOutlinedInput-root {
+    padding: 3px;
+  }
+
+  .buy-phone-page
+    .buy-phone-search-form
+    .MuiOutlinedInput-root
+    input::placeholder {
+    font-size: 14px;
+  }
+
+  .accordion-header-item {
+    padding: 0;
+    min-height: 48px;
+  }
+
+  .condition-content {
+    padding: 0;
+  }
+
+  .condition-content .condition-item {
+    color: #848484;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 8px 0;
+    cursor: pointer;
+  }
+
+  .condition-content .selected-condition-item {
+    border-bottom: none;
+    outline: none;
+    color: #1ab4e7;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 0;
   }
 
   .buy-phone-page .buy-phone-search-form amp-autocomplete input::placeholder {
@@ -3886,10 +3926,6 @@ footer {
     display: none;
   }
 
-  .buy-phone-page .desktop-filter-options {
-    display: none;
-  }
-
   .buy-phone-page .filter-options .filter-option {
     font-size: 12px;
     gap: 8px;
@@ -3944,46 +3980,6 @@ footer {
     height: 28px;
     color: #ffffff;
   }
-  .buy-phone-page .sort-controller .sort-drawer-close {
-    display: none;
-  }
-  .buy-phone-page .sort-controller .sort-drawer-show {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 1300;
-    display: flex;
-  }
-
-  .buy-phone-page .sort-drawer-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    max-width: 50%;
-    flex: 1 0 auto;
-    height: 100%;
-    width: 50%;
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  .buy-phone-page .sort-drawer-content {
-    max-width: 50%;
-    top: 0;
-    right: 0;
-    position: fixed;
-    flex: 1 0 auto;
-    height: 100%;
-    z-index: 1302;
-    width: 50%;
-    box-shadow: 0px 8px 10px -5px rgb(0 0 0 / 20%),
-      0px 16px 24px 2px rgb(0 0 0 / 14%), 0px 6px 30px 5px rgb(0 0 0 / 12%);
-    background: #ffffff;
-    display: flex;
-    flex-direction: column;
-    padding: 8px 0;
-  }
 
   .buy-phone-page .sort-drawer-content .sort-item {
     padding: 8px 16px;
@@ -3994,97 +3990,19 @@ footer {
     justify-content: space-between;
   }
 
-  .buy-phone-page .sort-drawer-content .sort-item > img {
-    display: none;
+  .drawer-sort-item {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #000000;
   }
 
-  .buy-phone-page .sort-drawer-content li[selected] > img {
-    display: inline-flex;
-  }
-
-  .buy-phone-page .filter-drawer-close {
-    display: none;
-  }
-
-  .buy-phone-page .filter-drawer-show {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 1300;
-    display: flex;
-  }
-
-  .buy-phone-page .filter-drawer-content {
-    max-width: 50%;
-    top: 0;
-    left: 0;
-    position: fixed;
-    flex: 1 0 auto;
-    height: 100%;
-    z-index: 1302;
-    width: 50%;
-    box-shadow: 0px 8px 10px -5px rgb(0 0 0 / 20%),
-      0px 16px 24px 2px rgb(0 0 0 / 14%), 0px 6px 30px 5px rgb(0 0 0 / 12%);
-    background: #ffffff;
-    display: flex;
-    flex-direction: column;
-    padding: 8px 0;
-  }
-
-  .buy-phone-page .filter-drawer-backdrop {
-    position: fixed;
-    top: 0;
-    right: 0;
-    max-width: 50%;
-    flex: 1 0 auto;
-    height: 100%;
-    width: 50%;
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  .buy-phone-page .filter-drawer-content .buy-phone-conditions {
-    display: block;
-  }
-
-  .buy-phone-page .filter-drawer-content .conditions-content {
+  .filter-drawer {
     padding: 8px;
   }
 
   .buy-phone-page .conditions-content amp-script {
     opacity: 1;
-  }
-  .buy-phone-page .filter-drawer-content .condition-section .condition-header {
-    background: none;
-    border: none;
-    border-bottom: 1px solid #d9d9d9;
-    padding: 12px 0;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  .buy-phone-page
-    .filter-drawer-content
-    .condition-section
-    .condition-header
-    > i::before {
-    border-color: #000;
-    top: 38%;
-  }
-
-  .buy-phone-page
-    .filter-drawer-content
-    .condition-section
-    .condition-content
-    .condition-item {
-    color: #848484;
-    font-weight: 400;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 8px 0;
   }
 
   .cosmetic-condition-page {
@@ -4170,7 +4088,11 @@ footer {
     position: relative;
   }
 
-  .buy-phone-page .condition-alert {
+  .conditions-content .accordion-content {
+    margin: 0;
+  }
+
+  .condition-alert {
     margin-left: 8px;
   }
 

@@ -1,4 +1,7 @@
+import { useAmp } from "next/amp";
+
 export const Header = () => {
+  const isAmp = useAmp();
   return (
     <header className="mega-menu UpTrade-header">
       <div className="container full-width">
@@ -9,14 +12,24 @@ export const Header = () => {
                 <label htmlFor="mobile" id="mobile-menu">
                   {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                   <a href="/buy-phone" title="Uptrade">
-                    <amp-img
-                      alt="..."
-                      title="..."
-                      src="/svg/logo.svg"
-                      width="92"
-                      height="22"
-                      className="img-logo"
-                    ></amp-img>
+                    {isAmp ? (
+                      <amp-img
+                        alt="..."
+                        title="..."
+                        src="/svg/logo.svg"
+                        width="92"
+                        height="22"
+                        className="img-logo"
+                      ></amp-img>
+                    ) : (
+                      <img
+                        src="/svg/logo.svg"
+                        width="92"
+                        height="22"
+                        className="img-logo"
+                        alt=""
+                      />
+                    )}
                   </a>
 
                   <span className="main-menu-dropdown-icon">
@@ -34,14 +47,24 @@ export const Header = () => {
                       title="Uptrade"
                       style={{ display: "flex" }}
                     >
-                      <amp-img
-                        alt="logo"
-                        title="logo"
-                        src="/svg/logo.svg"
-                        width="92"
-                        height="22"
-                        className="img-logo"
-                      ></amp-img>
+                      {isAmp ? (
+                        <amp-img
+                          alt="logo"
+                          title="logo"
+                          src="/svg/logo.svg"
+                          width="92"
+                          height="22"
+                          className="img-logo"
+                        ></amp-img>
+                      ) : (
+                        <img
+                          src="/svg/logo.svg"
+                          width="92"
+                          height="22"
+                          className="img-logo"
+                          alt="logo"
+                        />
+                      )}
                     </a>
                   </li>
 
