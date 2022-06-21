@@ -36,7 +36,7 @@ export default function BuyPhone({ conditions, carrierOptions }) {
                 elevation={0}
               >
                 <AccordionSummary
-                  style={{ minHeight: 48 }}
+                  style={{ minHeight: 48, padding: 0 }}
                   classes={{
                     root: "accordion-header-item",
                     content: "accordion-content",
@@ -159,7 +159,7 @@ export default function BuyPhone({ conditions, carrierOptions }) {
                           elevation={0}
                         >
                           <AccordionSummary
-                            style={{ minHeight: 48 }}
+                            style={{ minHeight: 48, padding: 0 }}
                             classes={{
                               root: "accordion-header-item",
                               content: "accordion-content",
