@@ -6,6 +6,7 @@ import urlcat from "urlcat";
 export default function BuyPhone({
   conditions: initialConditions,
   carrierOptions,
+  data,
 }) {
   const [selectedValues, setSelectedValues] = useState([]);
   const [sortDrawerOpen, setSortDrawerOpen] = useState(false);
@@ -298,34 +299,55 @@ export default function BuyPhone({
             </div>
           </div>
 
-          {/*<amp-list*/}
-          {/*  layout="responsive"*/}
-          {/*  src="amp-state:list"*/}
-          {/*  width="1000"*/}
-          {/*  height="1000"*/}
-          {/*  className="phone-list desktop-phone-list"*/}
-          {/*>*/}
-          {/*  <template type="amp-mustache">*/}
-          {/*    <a className="phone-list-item" href="#">*/}
-          {/*      <div className="img-container">*/}
-          {/*        <amp-img width="100" height="100" src="{{ logo }}" />*/}
-          {/*      </div>*/}
-          {/*      <div className="description">*/}
-          {/*        <span>{`{{ model }}`}</span>*/}
-          {/*        <span className="attr">{`{{ attr }}`}</span>*/}
-          {/*      </div>*/}
+          <div className="desktop-phone-list">
+            {data?.map((item) => (
+              <a key={item.productId} src="#" className="phone-list-item">
+                <div className="img-container">
+                  <img width="100" height="100" src={item.brandLogoUrl} />
+                </div>
+                <div className="description">
+                  <span>{item.name}</span>
+                  <span className="attr">
+                    {`${item.CARRIER} ${item.STORAGE} ${item.COLOR}`}
+                  </span>
+                </div>
 
-          {/*      <div className="condition {{ condition }}">*/}
-          {/*        {`{{ condition }}`}*/}
-          {/*      </div>*/}
+                <div className="condition-container">
+                  <div className={`condition ${item.CONDITION} `}>
+                    {item.CONDITION}
+                  </div>
+                </div>
 
-          {/*      <div className="action">*/}
-          {/*        <span className="price">${`{{ price }}`}</span>*/}
-          {/*        <div className="view-detail">View Detail</div>*/}
-          {/*      </div>*/}
-          {/*    </a>*/}
-          {/*  </template>*/}
-          {/*</amp-list>*/}
+                <div className="action">
+                  <span className="price">${item.currentPrice}</span>
+                  <div className="view-detail">View Detail</div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div className="mobile-phone-list">
+            {data?.map((item) => (
+              <a key={item.productId} href="#" className="phone-list-item">
+                <div className="top">
+                  <img width="50" height="50" src={item.brandLogoUrl} />
+                  <div className={`condition ${item.CONDITION} `}>
+                    {item.CONDITION}
+                  </div>
+                </div>
+                <div className="bottom">
+                  <div className="description">
+                    <span>{item.name}</span>
+                    <span className="attr">
+                      {`${item.CARRIER} ${item.STORAGE} ${item.COLOR}`}
+                    </span>
+                  </div>
+
+                  <span className="price">${item.currentPrice}</span>
+                </div>
+              </a>
+            ))}
+          </div>
 
           {/*<amp-list*/}
           {/*  layout="responsive"*/}
@@ -360,29 +382,45 @@ export default function BuyPhone({
 }
 
 export async function getStaticProps() {
-  const response = await fetch("http://api.276qa.com/search/category/values");
+  const body = {
+    all: false,
+    page: 1,
+    pageSize: 20,
+  };
 
-  if (!response.ok) return { props: {} };
+  const response = await fetch("http://api.276qa.com/search/category/values");
+  const listResponse = await fetch("http://api.276qa.com/search", {
+    method: "POST",
+    headers: {
+      ["Content-Type"]: "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok || !listResponse.ok) return { props: {} };
 
   const data = await response.json();
+  const listData = await listResponse.json();
 
-  if (!data.success) return { props: {} };
+  if (!data.success || !listData.success) return { props: {} };
 
   const carrierOptions = data.data.find((x) => x.name === "CARRIER");
 
+  const listResults = listData.data.data.map((item) => {
+    const specs = item.specs.reduce(
+      (acc, { key, value }) => ({ ...acc, [key]: value }),
+      {}
+    );
+    return {
+      ...item,
+      ...specs,
+    };
+  });
   return {
     props: {
       conditions: data.data,
       carrierOptions: carrierOptions ? carrierOptions.values : [],
-      // data: [
-      //   {
-      //     model: "iphone8",
-      //     logo: "/brand/backMarket.png",
-      //     attr: "AT&T 64GB Red",
-      //     condition: "Fair",
-      //     price: 279,
-      //   },
-      // ],
+      data: listResults,
     },
   };
 }
