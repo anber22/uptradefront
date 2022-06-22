@@ -12,6 +12,7 @@ specifiers:
   raw-loader: ^4.0.2
   react: 18.1.0
   react-dom: 18.1.0
+  react-lazy-hydration: ^0.1.0
   react-use: ^17.4.0
   urlcat: ^2.0.4
 
@@ -23,6 +24,7 @@ dependencies:
   next-seo: 5.4.0_2mgcgz5qhsdxw4fgpqzqeafmkq
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
+  react-lazy-hydration: 0.1.0_react@18.1.0
   react-use: 17.4.0_ef5jwxihqo6n7gxfmzogljlgcm
   urlcat: 2.0.4
 
@@ -2098,6 +2100,15 @@ packages:
 
   /react-is/17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
+    dev: false
+
+  /react-lazy-hydration/0.1.0_react@18.1.0:
+    resolution: {integrity: sha512-TyQ55cxsvheS7ZGFH8zcrLrnfrpXy23wo0I0dtB3p3n8+VhpQE6vbULc7T8ikSOig2gbcS1CZUrti0U/8zZVZQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      '@babel/runtime': 7.18.0
+      react: 18.1.0
     dev: false
 
   /react-transition-group/4.4.2_ef5jwxihqo6n7gxfmzogljlgcm:
