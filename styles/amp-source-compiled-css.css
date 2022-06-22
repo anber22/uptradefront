@@ -2848,11 +2848,6 @@ footer {
     border: 1px solid rgb(233, 233, 233);
   }
 
-  .conditions-content .arrow-down {
-    width: 12px;
-    height: 12px;
-  }
-
   .condition-section .condition-header {
     background: none;
     border: none;
@@ -2866,7 +2861,11 @@ footer {
 
   .accordion-header-item {
     padding: 0;
-    min-height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #d9d9d9;
   }
 
   .condition-content {
@@ -2922,19 +2921,18 @@ footer {
     position: sticky;
   }
 
-  .buy-phone-page .buy-phone-search-form .MuiAutocomplete-root {
+  .buy-phone-page .buy-phone-search-form .select-search {
     flex-basis: 80%;
     height: 43.5px;
   }
 
-  .buy-phone-page .buy-phone-search-form .MuiOutlinedInput-root {
+  .buy-phone-page .buy-phone-search-form .select-search input {
+    width: 100%;
     padding: 3px;
+    height: 43.5px;
   }
 
-  .buy-phone-page
-    .buy-phone-search-form
-    .MuiOutlinedInput-root
-    input::placeholder {
+  .buy-phone-page .buy-phone-search-form input::placeholder {
     color: #c3c3c3;
   }
 
@@ -3810,20 +3808,20 @@ footer {
     background: #ffffff;
   }
 
-  .buy-phone-page .buy-phone-search-form .MuiAutocomplete-root {
+  .buy-phone-page .buy-phone-search-form .select-search {
     flex-basis: 90%;
     height: 40px;
   }
 
-  .buy-phone-page .buy-phone-search-form .MuiOutlinedInput-root {
+  .buy-phone-page .buy-phone-search-form .select-search input {
+    width: 100%;
     padding: 3px;
+    height: 40px;
   }
 
-  .buy-phone-page
-    .buy-phone-search-form
-    .MuiOutlinedInput-root
-    input::placeholder {
+  .buy-phone-page .buy-phone-search-form input::placeholder {
     font-size: 14px;
+    color: #c3c3c3;
   }
 
   .accordion-header-item {
@@ -3969,6 +3967,7 @@ footer {
   .buy-phone-page .mobile-phone-list .mobile-phone-list-item .bottom .price {
     font-size: 36px;
   }
+
   .buy-phone-page .mobile-phone-list-item .condition {
     display: flex;
     justify-content: center;
@@ -3990,6 +3989,48 @@ footer {
     justify-content: space-between;
   }
 
+  .buy-phone-page .sort-controller .sort-drawer-close {
+    display: none;
+  }
+
+  .buy-phone-page .sort-controller .sort-drawer-show {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1300;
+    display: flex;
+  }
+
+  .buy-phone-page .sort-drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 50%;
+    flex: 1 0 auto;
+    height: 100%;
+    width: 50%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .buy-phone-page .sort-drawer-content {
+    max-width: 50%;
+    top: 0;
+    right: 0;
+    position: fixed;
+    flex: 1 0 auto;
+    height: 100%;
+    z-index: 1302;
+    width: 50%;
+    box-shadow: 0px 8px 10px -5px rgb(0 0 0 / 20%),
+      0px 16px 24px 2px rgb(0 0 0 / 14%), 0px 6px 30px 5px rgb(0 0 0 / 12%);
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+  }
+
   .drawer-sort-item {
     padding: 8px 16px;
     font-size: 16px;
@@ -3997,12 +4038,88 @@ footer {
     color: #000000;
   }
 
-  .filter-drawer {
+  .buy-phone-page .filter-drawer-close {
+    display: none;
+  }
+
+  .buy-phone-page .filter-drawer-show {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1300;
+    display: flex;
+  }
+
+  .buy-phone-page .filter-drawer-content {
+    max-width: 50%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    flex: 1 0 auto;
+    height: 100%;
+    z-index: 1302;
+    width: 50%;
+    box-shadow: 0px 8px 10px -5px rgb(0 0 0 / 20%),
+      0px 16px 24px 2px rgb(0 0 0 / 14%), 0px 6px 30px 5px rgb(0 0 0 / 12%);
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
     padding: 8px;
   }
 
-  .buy-phone-page .conditions-content amp-script {
-    opacity: 1;
+  .buy-phone-page .filter-drawer-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    max-width: 50%;
+    flex: 1 0 auto;
+    height: 100%;
+    width: 50%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .condition-section .condition-header {
+    background: none;
+    border: none;
+    padding: 12px 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  .accordion-header-item {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+  .condition-content {
+    padding: 0;
+  }
+
+  .condition-content .condition-item {
+    color: #848484;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 8px 0;
+    cursor: pointer;
+  }
+
+  .condition-content .selected-condition-item {
+    border-bottom: none;
+    outline: none;
+    color: #1ab4e7;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 0;
   }
 
   .cosmetic-condition-page {

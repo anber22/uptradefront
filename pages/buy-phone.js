@@ -1,15 +1,6 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Autocomplete,
-  TextField,
-  Drawer,
-  useMediaQuery,
-} from "@mui/material";
-import LazyHydrate from "react-lazy-hydration";
 import { useAsync } from "react-use";
 import { useCallback, useState } from "react";
+import SelectSearch from "react-select-search";
 import urlcat from "urlcat";
 
 export default function BuyPhone({
@@ -19,13 +10,20 @@ export default function BuyPhone({
   const [selectedValues, setSelectedValues] = useState([]);
   const [sortDrawerOpen, setSortDrawerOpen] = useState(false);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
-
-  const matches = useMediaQuery("(min-width: 1280px)");
+  const [expanded, setExpanded] = useState([]);
 
   const onOptionSelect = useCallback((item) => {
     setSelectedValues((prev) => {
       return prev.some((x) => x.categoryValueId === item.categoryValueId)
         ? prev.filter((x) => x.categoryValueId !== item.categoryValueId)
+        : [...prev, item];
+    });
+  }, []);
+
+  const onAccordionClick = useCallback((item) => {
+    setExpanded((prev) => {
+      return prev.some((x) => x === item)
+        ? prev.filter((x) => x !== item)
         : [...prev, item];
     });
   }, []);
@@ -56,66 +54,57 @@ export default function BuyPhone({
       <main className="buy-phone-page">
         <div className="buy-phone-conditions">
           <div className="conditions-content">
-            {matches
-              ? conditions.map((data) => (
-                  <Accordion
-                    className="condition-section"
-                    key={data.id}
-                    elevation={0}
-                  >
-                    <AccordionSummary
-                      style={{ minHeight: 48, padding: 0 }}
-                      classes={{
-                        root: "accordion-header-item",
-                        content: "accordion-content",
-                      }}
-                      expandIcon={
+            {conditions.map((data) => (
+              <div className="condition-section" key={data.id}>
+                <div
+                  className="accordion-header-item"
+                  onClick={() => onAccordionClick(data.name)}
+                >
+                  <h3 className="condition-header">
+                    {data.name}
+                    {data.name === "CONDITION" ? (
+                      <a href="/cosmetic-conditions" target="_blank">
                         <img
-                          style={{ width: 24, height: 24 }}
-                          src="/svg/arrow-down.svg"
-                          alt="arrow-down"
+                          className="condition-alert"
+                          src="/svg/alert-circle.svg"
+                          width="12"
+                          height="12"
                         />
-                      }
+                      </a>
+                    ) : null}
+                  </h3>
+                  <img
+                    src="/svg/arrow-down.svg"
+                    alt="arrow-down"
+                    style={{ width: 24, height: 24 }}
+                  />
+                </div>
+                <div
+                  className="condition-content"
+                  style={{
+                    display: expanded.some((x) => x === data.name)
+                      ? "block"
+                      : "none",
+                  }}
+                >
+                  {data.values.map((item) => (
+                    <div
+                      key={item.categoryValueId}
+                      onClick={() => onOptionSelect(item)}
+                      className={`condition-item ${
+                        selectedValues.some(
+                          (x) => x.categoryValueId === item.categoryValueId
+                        )
+                          ? "selected-condition-item"
+                          : undefined
+                      }`}
                     >
-                      <h3 className="condition-header">
-                        <span>
-                          {data.name}
-                          {data.name === "CONDITION" ? (
-                            <a href="/cosmetic-conditions" target="_blank">
-                              <img
-                                className="condition-alert"
-                                src="/svg/alert-circle.svg"
-                                width="12"
-                                height="12"
-                              />
-                            </a>
-                          ) : null}
-                        </span>
-                      </h3>
-                    </AccordionSummary>
-                    <AccordionDetails classes={{ root: "condition-content" }}>
-                      {data.values.map((item) => {
-                        return (
-                          <div
-                            key={item.categoryValueId}
-                            onClick={() => onOptionSelect(item)}
-                            className={`condition-item ${
-                              selectedValues.some(
-                                (x) =>
-                                  x.categoryValueId === item.categoryValueId
-                              )
-                                ? "selected-condition-item"
-                                : undefined
-                            }`}
-                          >
-                            {item.name}
-                          </div>
-                        );
-                      })}
-                    </AccordionDetails>
-                  </Accordion>
-                ))
-              : null}
+                      {item.name}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -130,16 +119,12 @@ export default function BuyPhone({
           </div>
 
           <div className="buy-phone-search-form">
-            <Autocomplete
-              freeSolo
+            <SelectSearch
               options={[]}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  variant="outlined"
-                  placeholder="Search phone manufacturer and model"
-                />
-              )}
+              name="search"
+              value=""
+              placeholder="Search phone manufacturer and model"
+              search
             />
             <button className="btn btn-primary">Search</button>
             <svg
@@ -175,83 +160,71 @@ export default function BuyPhone({
                   <span>Filters</span>
                 </span>
               </label>
-              <LazyHydrate on="click">
-                {!matches ? (
-                  <Drawer
-                    open={filterDrawerOpen}
-                    onClose={() => setFilterDrawerOpen(false)}
-                  >
-                    <div className="filter-drawer buy-phone-conditions">
-                      <div className="conditions-content">
-                        {conditions.map((data) => (
-                          <Accordion
-                            className="condition-section"
-                            key={data.id}
-                            elevation={0}
+              <div
+                className={`filter-drawer-close ${
+                  filterDrawerOpen ? "filter-drawer-show" : ""
+                }`}
+              >
+                <div
+                  className="filter-drawer-backdrop"
+                  onClick={() => setFilterDrawerOpen(false)}
+                ></div>
+
+                <div className="filter-drawer-content">
+                  {conditions.map((data) => (
+                    <div className="condition-section" key={data.id}>
+                      <div
+                        className="accordion-header-item"
+                        onClick={() => onAccordionClick(data.name)}
+                      >
+                        <h3 className="condition-header">
+                          {data.name}
+                          {data.name === "CONDITION" ? (
+                            <a href="/cosmetic-conditions" target="_blank">
+                              <img
+                                className="condition-alert"
+                                src="/svg/alert-circle.svg"
+                                width="12"
+                                height="12"
+                              />
+                            </a>
+                          ) : null}
+                        </h3>
+                        <img
+                          src="/svg/arrow-down.svg"
+                          alt="arrow-down"
+                          style={{ width: 24, height: 24 }}
+                        />
+                      </div>
+                      <div
+                        className="condition-content"
+                        style={{
+                          display: expanded.some((x) => x === data.name)
+                            ? "block"
+                            : "none",
+                        }}
+                      >
+                        {data.values.map((item) => (
+                          <div
+                            key={item.categoryValueId}
+                            onClick={() => onOptionSelect(item)}
+                            className={`condition-item ${
+                              selectedValues.some(
+                                (x) =>
+                                  x.categoryValueId === item.categoryValueId
+                              )
+                                ? "selected-condition-item"
+                                : undefined
+                            }`}
                           >
-                            <AccordionSummary
-                              style={{ minHeight: 48, padding: 0 }}
-                              classes={{
-                                root: "accordion-header-item",
-                                content: "accordion-content",
-                              }}
-                              expandIcon={
-                                <img
-                                  style={{ width: 24, height: 24 }}
-                                  src="/svg/arrow-down.svg"
-                                  alt="arrow-down"
-                                />
-                              }
-                            >
-                              <h3 className="condition-header">
-                                <span>
-                                  {data.name}
-                                  {data.name === "CONDITION" ? (
-                                    <a
-                                      href="/cosmetic-conditions"
-                                      target="_blank"
-                                    >
-                                      <img
-                                        className="condition-alert"
-                                        src="/svg/alert-circle.svg"
-                                        width="12"
-                                        height="12"
-                                      />
-                                    </a>
-                                  ) : null}
-                                </span>
-                              </h3>
-                            </AccordionSummary>
-                            <AccordionDetails
-                              classes={{ root: "condition-content" }}
-                            >
-                              {data.values.map((item) => {
-                                return (
-                                  <div
-                                    key={item.categoryValueId}
-                                    onClick={() => onOptionSelect(item)}
-                                    className={`condition-item ${
-                                      selectedValues.some(
-                                        (x) =>
-                                          x.categoryValueId ===
-                                          item.categoryValueId
-                                      )
-                                        ? "selected-condition-item"
-                                        : undefined
-                                    }`}
-                                  >
-                                    {item.name}
-                                  </div>
-                                );
-                              })}
-                            </AccordionDetails>
-                          </Accordion>
+                            {item.name}
+                          </div>
                         ))}
                       </div>
                     </div>
-                  </Drawer>
-                ) : null}
-              </LazyHydrate>
+                  ))}
+                </div>
+              </div>
             </div>
             <div className="sort-controller">
               <label className="dropdown">
@@ -279,33 +252,36 @@ export default function BuyPhone({
                   </li>
                 </ul>
               </label>
-              <LazyHydrate on="click">
-                {!matches ? (
-                  <Drawer
-                    anchor="right"
-                    open={sortDrawerOpen}
-                    onClose={() => setSortDrawerOpen(false)}
+
+              <div
+                className={`sort-drawer-close ${
+                  sortDrawerOpen ? "sort-drawer-show" : ""
+                }`}
+              >
+                <div
+                  className="sort-drawer-backdrop"
+                  onClick={() => setSortDrawerOpen(false)}
+                ></div>
+                <div className="sort-drawer-content">
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      padding: "8px 0",
+                    }}
                   >
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        padding: "8px 0",
-                      }}
-                    >
-                      <div className="drawer-sort-item" option="lowest">
-                        <span>Lowest Price</span>
-                      </div>
-                      <div className="drawer-sort-item" option="highest">
-                        <span>Highest Price</span>
-                      </div>
-                      <div className="drawer-sort-item" option="best">
-                        <span>Best Condition</span>
-                      </div>
+                    <div className="drawer-sort-item" option="lowest">
+                      <span>Lowest Price</span>
                     </div>
-                  </Drawer>
-                ) : null}
-              </LazyHydrate>
+                    <div className="drawer-sort-item" option="highest">
+                      <span>Highest Price</span>
+                    </div>
+                    <div className="drawer-sort-item" option="best">
+                      <span>Best Condition</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
