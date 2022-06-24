@@ -1,25 +1,51 @@
 import { useAsync } from "react-use";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import SelectSearch from "react-select-search";
 import urlcat from "urlcat";
 
 export default function BuyPhone({
   conditions: initialConditions,
   carrierOptions,
-  data,
+  data: initData,
+  products,
 }) {
-  const [selectedValues, setSelectedValues] = useState([]);
+  const cacheList = useRef([...(initData ? initData : [])]);
   const [sortDrawerOpen, setSortDrawerOpen] = useState(false);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   const [expanded, setExpanded] = useState([]);
+  const [searchKey, setSearchKey] = useState("");
+  const [searchKeys, setSearchKeys] = useState({
+    selectedValues: [],
+    pageNum: 1,
+    searchKey: "",
+  });
 
   const onOptionSelect = useCallback((item) => {
-    setSelectedValues((prev) => {
-      return prev.some((x) => x.categoryValueId === item.categoryValueId)
-        ? prev.filter((x) => x.categoryValueId !== item.categoryValueId)
-        : [...prev, item];
+    setSearchKeys((prev) => {
+      const values = prev.selectedValues.some(
+        (x) => x.categoryValueId === item.categoryValueId
+      )
+        ? prev.selectedValues.filter(
+            (x) => x.categoryValueId !== item.categoryValueId
+          )
+        : [...prev.selectedValues, item];
+
+      return {
+        pageNum: 1,
+        selectedValues: values,
+      };
     });
   }, []);
+
+  const onSearchClick = useCallback(() => {
+    if (!searchKey) return;
+
+    setSearchKeys((prev) => ({
+      ...prev,
+      pageNum: 1,
+      searchKey,
+    }));
+  }, [searchKey]);
 
   const onAccordionClick = useCallback((item) => {
     setExpanded((prev) => {
@@ -30,25 +56,141 @@ export default function BuyPhone({
   }, []);
 
   const { value: conditions = [] } = useAsync(async () => {
-    if (!selectedValues.length) return initialConditions;
+    if (!searchKeys.selectedValues.length) return initialConditions;
 
     try {
-      const ids = selectedValues.map((x) => x.categoryValueId);
+      const ids = searchKeys.selectedValues.map((x) => x.categoryValueId);
 
       const response = await fetch(
-        urlcat("http://api.276qa.com/search/category/values", {
+        urlcat("https://api.276qa.com/search/category/values", {
           parentCategoryValueIds: ids.join(","),
         })
-      );
-      const result = await response.json();
+      ).then((response) => response.json());
 
-      if (!result.success) return initialConditions;
+      if (!response.success) return initialConditions;
 
-      return result.data;
+      return response.data;
     } catch {
       return initialConditions;
     }
-  }, [selectedValues, initialConditions]);
+  }, [searchKeys.selectedValues, initialConditions]);
+
+  const { value: data = [] } = useAsync(async () => {
+    if (!searchKeys.selectedValues.length && searchKeys.pageNum === 1) {
+      cacheList.current = initData;
+      return cacheList.current;
+    }
+
+    try {
+      // fetch next page data
+      if (searchKeys.pageNum !== 1) {
+        const body = {
+          all: false,
+          pageNum: searchKeys.pageNum,
+          pageSize: 20,
+          valueIds: searchKeys.selectedValues.map((x) => x.categoryValueId),
+        };
+
+        const listData = await fetch("https://api.276qa.com/search", {
+          method: "POST",
+          headers: {
+            ["Content-Type"]: "application/json",
+          },
+          body: JSON.stringify(body),
+        }).then((response) => response.json());
+
+        if (!listData.success) return cacheList.current;
+
+        const listResults = listData.data.data.map((item) => {
+          const specs = item.specs.reduce(
+            (acc, { key, value }) => ({ ...acc, [key]: value }),
+            {}
+          );
+          return {
+            ...item,
+            ...specs,
+          };
+        });
+
+        cacheList.current = [...cacheList, ...listResults];
+
+        return cacheList.current;
+      }
+
+      // filter data
+      if (searchKeys.selectedValues.length) {
+        // const valueMap = new Map();
+        //
+        // searchKeys.selectedValues.forEach((x) => {
+        //   const prev = valueMap.get(x.categoryId);
+        //   if (!prev) {
+        //     valueMap.set(x.categoryId, [x.categoryValueId]);
+        //     return;
+        //   }
+        //   valueMap.set(x.categoryId, [...prev, x.categoryValueId]);
+        // });
+        //
+        // const result = [...valueMap].map(([key, values]) => ({
+        //   key,
+        //   values,
+        // }));
+
+        const body = {
+          all: false,
+          pageNum: 1,
+          pageSize: 20,
+          valueIds: searchKeys.selectedValues.map((x) => x.categoryValueId),
+        };
+
+        const listData = await fetch("https://api.276qa.com/search", {
+          method: "POST",
+          headers: {
+            ["Content-Type"]: "application/json",
+          },
+          body: JSON.stringify(body),
+        }).then((response) => response.json());
+
+        if (!listData.success) return cacheList.current;
+
+        const listResults = listData.data.data.map((item) => {
+          const specs = item.specs.reduce(
+            (acc, { key, value }) => ({ ...acc, [key]: value }),
+            {}
+          );
+          return {
+            ...item,
+            ...specs,
+          };
+        });
+
+        cacheList.current = listResults;
+
+        return cacheList.current;
+      }
+      return cacheList.current;
+    } catch (error) {
+      return cacheList.current;
+    }
+  }, [searchKeys, initData]);
+
+  const getOptions = useCallback(
+    async (query) => {
+      if (!query) return products;
+
+      try {
+        const productData = await fetch(
+          urlcat("https://api.276qa.com/search/product", { name: query })
+        ).then((response) => response.json());
+
+        if (!productData.success) return products;
+
+        return productData.data.map((x) => ({ name: x.name, value: x.name }));
+      } catch {
+        return products;
+      }
+    },
+    [products]
+  );
 
   return (
     <div>
@@ -93,7 +235,7 @@ export default function BuyPhone({
                       key={item.categoryValueId}
                       onClick={() => onOptionSelect(item)}
                       className={`condition-item ${
-                        selectedValues.some(
+                        searchKeys.selectedValues.some(
                           (x) => x.categoryValueId === item.categoryValueId
                         )
                           ? "selected-condition-item"
@@ -121,13 +263,21 @@ export default function BuyPhone({
 
           <div className="buy-phone-search-form">
             <SelectSearch
-              options={[]}
+              options={products}
               name="search"
-              value=""
+              value={searchKeys}
+              onChange={(key) => setSearchKey(key)}
               placeholder="Search phone manufacturer and model"
               search
+              getOptions={getOptions}
+              debounce={1000}
             />
-            <button className="btn btn-primary">Search</button>
+            <button
+              className="btn btn-primary search-button"
+              onClick={onSearchClick}
+            >
+              Search
+            </button>
             <svg
               className="form-search-icon"
               viewBox="0 0 24 24"
@@ -141,7 +291,7 @@ export default function BuyPhone({
               <div
                 key={item.categoryValueId}
                 className={`carrier-option ${
-                  selectedValues.some(
+                  searchKeys.selectedValues.some(
                     (x) => x.categoryValueId === item.categoryValueId
                   )
                     ? "selected-carrier-option"
@@ -210,7 +360,7 @@ export default function BuyPhone({
                             key={item.categoryValueId}
                             onClick={() => onOptionSelect(item)}
                             className={`condition-item ${
-                              selectedValues.some(
+                              searchKeys.selectedValues.some(
                                 (x) =>
                                   x.categoryValueId === item.categoryValueId
                               )
@@ -288,10 +438,15 @@ export default function BuyPhone({
 
           <div className="options-container">
             <div className="filter-options">
-              {selectedValues.map((x) => (
+              {searchKeys.selectedValues.map((x) => (
                 <div className="filter-option" key={x.categoryValueId}>
                   {x.name}
-                  <svg width="24px" height="24px" viewBox="0 0 24 24">
+                  <svg
+                    width="24px"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    onClick={() => onOptionSelect(x)}
+                  >
                     <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
                   </svg>
                 </div>
@@ -319,7 +474,7 @@ export default function BuyPhone({
                 </div>
 
                 <div className="action">
-                  <span className="price">${item.currentPrice}</span>
+                  <span className="price">${item.currentPrice / 100}</span>
                   <div className="view-detail">View Detail</div>
                 </div>
               </a>
@@ -343,38 +498,24 @@ export default function BuyPhone({
                     </span>
                   </div>
 
-                  <span className="price">${item.currentPrice}</span>
+                  <span className="price">${item.currentPrice / 100}</span>
                 </div>
               </a>
             ))}
           </div>
 
-          {/*<amp-list*/}
-          {/*  layout="responsive"*/}
-          {/*  src="amp-state:list"*/}
-          {/*  width="1000"*/}
-          {/*  height="1000"*/}
-          {/*  className="phone-list mobile-phone-list"*/}
-          {/*>*/}
-          {/*  <template type="amp-mustache">*/}
-          {/*    <a href="#" className="mobile-phone-list-item">*/}
-          {/*      <div className="top">*/}
-          {/*        <amp-img width="50" height="50" src="{{ logo }}" />*/}
-          {/*        <div className="condition {{ condition }}">*/}
-          {/*          {`{{ condition }}`}*/}
-          {/*        </div>*/}
-          {/*      </div>*/}
-          {/*      <div className="bottom">*/}
-          {/*        <div className="description">*/}
-          {/*          <span>{`{{ model }}`}</span>*/}
-          {/*          <span className="attr">{`{{ attr }}`}</span>*/}
-          {/*        </div>*/}
-
-          {/*        <span className="price">${`{{ price }}`}</span>*/}
-          {/*      </div>*/}
-          {/*    </a>*/}
-          {/*  </template>*/}
-          {/*</amp-list>*/}
+          <div className="next-page-container">
+            <button
+              onClick={() =>
+                setSearchKeys((prev) => ({
+                  ...prev,
+                  pageNum: prev.pageNum + 1,
+                }))
+              }
+            >
+              Show More
+            </button>
+          </div>
         </div>
       </main>
     </div>
@@ -384,25 +525,34 @@ export default function BuyPhone({
 export async function getStaticProps() {
   const body = {
     all: false,
-    page: 1,
+    pageNum: 1,
     pageSize: 20,
   };
 
-  const response = await fetch("http://api.276qa.com/search/category/values");
-  const listResponse = await fetch("http://api.276qa.com/search", {
+  const data = await fetch("https://api.276qa.com/search/category/values").then(
+    (response) => response.json()
+  );
+  const listData = await fetch("https://api.276qa.com/search", {
     method: "POST",
     headers: {
       ["Content-Type"]: "application/json",
     },
     body: JSON.stringify(body),
-  });
+  }).then((response) => response.json());
 
-  if (!response.ok || !listResponse.ok) return { props: {} };
+  const productData = await fetch("https://api.276qa.com/search/product").then(
+    (response) => response.json()
+  );
 
-  const data = await response.json();
-  const listData = await listResponse.json();
-
-  if (!data.success || !listData.success) return { props: {} };
+  if (!data.success || !listData.success || !productData.success)
+    return {
+      props: {
+        conditions: [],
+        carrierOptions: [],
+        data: [],
+        products: [],
+      },
+    };
 
   const carrierOptions = data.data.find((x) => x.name === "CARRIER");
 
@@ -421,6 +571,7 @@ export async function getStaticProps() {
       conditions: data.data,
       carrierOptions: carrierOptions ? carrierOptions.values : [],
       data: listResults,
+      products: productData.data.map((x) => ({ name: x.name, value: x.name })),
     },
   };
 }

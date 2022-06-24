@@ -2940,7 +2940,7 @@ footer {
     display: none;
   }
 
-  .buy-phone-page .buy-phone-search-form button {
+  .buy-phone-page .buy-phone-search-form .search-button {
     background: linear-gradient(180deg, #1ab4e7, #3498db);
     color: #fff;
     border-radius: 4px;
@@ -2952,6 +2952,31 @@ footer {
     font-weight: 500;
     padding: 5px 15px;
   }
+
+  .buy-phone-page .buy-phone-search-form .select-search__select {
+    background: #ffffff;
+    z-index: 1300;
+    border: 1px solid #e2e2e2;
+  }
+
+  .buy-phone-page .buy-phone-search-form .select-search__select ul {
+    width: 100%;
+  }
+
+  .buy-phone-page .buy-phone-search-form .select-search__select li {
+    list-style-type: none;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .buy-phone-page .buy-phone-search-form .select-search__select li button {
+    background: none;
+    border: none;
+    margin: 8px 0;
+    width: 100%;
+    text-align: start;
+  }
+
   .buy-phone-page .carrier-options {
     padding: 0 24px;
     display: grid;
@@ -2987,7 +3012,6 @@ footer {
     position: sticky;
     top: 132px;
     z-index: 1;
-    background: #ffffff;
     padding: 8px 24px;
   }
 
@@ -3131,6 +3155,27 @@ footer {
 
   .buy-phone-page .condition-alert {
     margin-left: 8px;
+  }
+
+  .buy-phone-page .next-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .buy-phone-page .next-page-container button {
+    background: linear-gradient(180deg, #1ab4e7, #3498db);
+    color: #fff;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: none;
+    flex-basis: 16%;
+    line-height: 1.75;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 15px;
+    border: none;
   }
 
   .cosmetic-condition-page {
@@ -3282,6 +3327,7 @@ footer {
 
 .buy-phone-page .options-container {
   padding: 0 24px;
+  margin-bottom: 24px;
 }
 
 @media (max-width: 1279.98px) {
