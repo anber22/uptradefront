@@ -4341,6 +4341,31 @@ footer {
   .cosmetic-condition-page .mobile-comparison-table tbody tr:last-child {
     border-bottom: 1px solid #dee2e6;
   }
+
+  .buy-phone-page .buy-phone-search-form .select-search__select {
+    background: #ffffff;
+    z-index: 1300;
+    border: 1px solid #e2e2e2;
+  }
+
+  .buy-phone-page .buy-phone-search-form .select-search__select ul {
+    width: 100%;
+  }
+
+  .buy-phone-page .buy-phone-search-form .select-search__select li {
+    list-style-type: none;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .buy-phone-page .buy-phone-search-form .select-search__select li button {
+    background: none;
+    border: none;
+    margin: 8px 0;
+    width: 100%;
+    text-align: start;
+  }
+
 }
 
 .UpTrade-header {
