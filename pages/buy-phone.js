@@ -1,7 +1,54 @@
 import { useAsync } from "react-use";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, useEffect } from "react";
 import SelectSearch from "react-select-search";
 import urlcat from "urlcat";
+
+const orderByDict = {
+  LOWEST_PRICE: "Lowest Price",
+  HIGHEST_PRICE: "Highest Price",
+  BEST_CONDITION: "Best Condition",
+};
+
+function useMediaQuery(query) {
+  const getMatches = (query) => {
+    // Prevents SSR issues
+    if (typeof window !== "undefined") {
+      return window.matchMedia(query).matches;
+    }
+    return false;
+  };
+
+  const [matches, setMatches] = useState(getMatches(query));
+
+  function handleChange() {
+    setMatches(getMatches(query));
+  }
+
+  useEffect(() => {
+    const matchMedia = window.matchMedia(query);
+
+    // Triggered at the first client-side load and if query changes
+    handleChange();
+
+    // Listen matchMedia
+    if (matchMedia.addListener) {
+      matchMedia.addListener(handleChange);
+    } else {
+      matchMedia.addEventListener("change", handleChange);
+    }
+
+    return () => {
+      if (matchMedia.removeListener) {
+        matchMedia.removeListener(handleChange);
+      } else {
+        matchMedia.removeEventListener("change", handleChange);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
+
+  return matches;
+}
 
 export default function BuyPhone({
   conditions: initialConditions,
@@ -18,7 +65,11 @@ export default function BuyPhone({
     selectedValues: [],
     pageNum: 1,
     searchKey: "",
+    orderBy: "LOWEST_PRICE",
   });
+  const [chevronExpand, setChevronExpand] = useState(false);
+
+  const matchMedia = useMediaQuery("(min-width: 1280px");
 
   const onOptionSelect = useCallback((item) => {
     setSearchKeys((prev) => {
@@ -46,6 +97,33 @@ export default function BuyPhone({
       searchKey,
     }));
   }, [searchKey]);
+
+  const getOptions = useCallback(
+    async (query) => {
+      if (!query) return products;
+
+      try {
+        const productData = await fetch(
+          urlcat("https://api.276qa.com/search/product", { name: query })
+        ).then((response) => response.json());
+
+        if (!productData.success) return products;
+
+        return productData.data.map((x) => ({ name: x.name, value: x.name }));
+      } catch {
+        return products;
+      }
+    },
+    [products]
+  );
+
+  const onOrderClick = useCallback((orderBy) => {
+    setSearchKeys((prev) => ({
+      ...prev,
+      orderBy,
+      pageNum: 1,
+    }));
+  }, []);
 
   const onAccordionClick = useCallback((item) => {
     setExpanded((prev) => {
@@ -76,7 +154,12 @@ export default function BuyPhone({
   }, [searchKeys.selectedValues, initialConditions]);
 
   const { value: data = [] } = useAsync(async () => {
-    if (!searchKeys.selectedValues.length && searchKeys.pageNum === 1) {
+    if (
+      !searchKeys.selectedValues.length &&
+      searchKeys.pageNum === 1 &&
+      searchKeys.orderBy === "LOWEST_PRICE" &&
+      !searchKeys.searchKey
+    ) {
       cacheList.current = initData;
       return cacheList.current;
     }
@@ -89,6 +172,8 @@ export default function BuyPhone({
           pageNum: searchKeys.pageNum,
           pageSize: 20,
           valueIds: searchKeys.selectedValues.map((x) => x.categoryValueId),
+          searchKey: searchKeys.searchKey,
+          orderBy: searchKeys.orderBy,
         };
 
         const listData = await fetch("https://api.276qa.com/search", {
@@ -118,79 +203,43 @@ export default function BuyPhone({
       }
 
       // filter data
-      if (searchKeys.selectedValues.length) {
-        // const valueMap = new Map();
-        //
-        // searchKeys.selectedValues.forEach((x) => {
-        //   const prev = valueMap.get(x.categoryId);
-        //   if (!prev) {
-        //     valueMap.set(x.categoryId, [x.categoryValueId]);
-        //     return;
-        //   }
-        //   valueMap.set(x.categoryId, [...prev, x.categoryValueId]);
-        // });
-        //
-        // const result = [...valueMap].map(([key, values]) => ({
-        //   key,
-        //   values,
-        // }));
+      const body = {
+        all: false,
+        pageNum: 1,
+        pageSize: 20,
+        valueIds: searchKeys.selectedValues.map((x) => x.categoryValueId),
+        searchKey: searchKeys.searchKey,
+        orderBy: searchKeys.orderBy,
+      };
 
-        const body = {
-          all: false,
-          pageNum: 1,
-          pageSize: 20,
-          valueIds: searchKeys.selectedValues.map((x) => x.categoryValueId),
+      const listData = await fetch("https://api.276qa.com/search", {
+        method: "POST",
+        headers: {
+          ["Content-Type"]: "application/json",
+        },
+        body: JSON.stringify(body),
+      }).then((response) => response.json());
+
+      if (!listData.success) return cacheList.current;
+
+      const listResults = listData.data.data.map((item) => {
+        const specs = item.specs.reduce(
+          (acc, { key, value }) => ({ ...acc, [key]: value }),
+          {}
+        );
+        return {
+          ...item,
+          ...specs,
         };
+      });
 
-        const listData = await fetch("https://api.276qa.com/search", {
-          method: "POST",
-          headers: {
-            ["Content-Type"]: "application/json",
-          },
-          body: JSON.stringify(body),
-        }).then((response) => response.json());
+      cacheList.current = listResults;
 
-        if (!listData.success) return cacheList.current;
-
-        const listResults = listData.data.data.map((item) => {
-          const specs = item.specs.reduce(
-            (acc, { key, value }) => ({ ...acc, [key]: value }),
-            {}
-          );
-          return {
-            ...item,
-            ...specs,
-          };
-        });
-
-        cacheList.current = listResults;
-
-        return cacheList.current;
-      }
       return cacheList.current;
     } catch (error) {
       return cacheList.current;
     }
   }, [searchKeys, initData]);
-
-  const getOptions = useCallback(
-    async (query) => {
-      if (!query) return products;
-
-      try {
-        const productData = await fetch(
-          urlcat("https://api.276qa.com/search/product", { name: query })
-        ).then((response) => response.json());
-
-        if (!productData.success) return products;
-
-        return productData.data.map((x) => ({ name: x.name, value: x.name }));
-      } catch {
-        return products;
-      }
-    },
-    [products]
-  );
 
   return (
     <div>
@@ -265,7 +314,7 @@ export default function BuyPhone({
             <SelectSearch
               options={products}
               name="search"
-              value={searchKeys}
+              value={searchKeys.searchKey}
               onChange={(key) => setSearchKey(key)}
               placeholder="Search phone manufacturer and model"
               search
@@ -286,7 +335,12 @@ export default function BuyPhone({
               <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
             </svg>
           </div>
-          <div className="carrier-options">
+          <div
+            className="carrier-options"
+            style={{
+              height: !matchMedia && !chevronExpand ? 88 : undefined,
+            }}
+          >
             {carrierOptions.map((item) => (
               <div
                 key={item.categoryValueId}
@@ -311,6 +365,7 @@ export default function BuyPhone({
                   <span>Filters</span>
                 </span>
               </label>
+
               <div
                 className={`filter-drawer-close ${
                   filterDrawerOpen ? "filter-drawer-show" : ""
@@ -377,6 +432,16 @@ export default function BuyPhone({
                 </div>
               </div>
             </div>
+            {!matchMedia ? (
+              <img
+                src="/svg/chevron-states.svg"
+                className="chevron"
+                style={{
+                  transform: chevronExpand ? "rotate(180deg)" : undefined,
+                }}
+                onClick={() => setChevronExpand(!chevronExpand)}
+              />
+            ) : null}
             <div className="sort-controller">
               <label className="dropdown">
                 <span
@@ -384,23 +449,27 @@ export default function BuyPhone({
                   onClick={() => setSortDrawerOpen(true)}
                 >
                   <img src="/svg/sort.svg" width="20" height="15" />
-                  <span className="desktop-sort">Sort By: Lowest Price</span>
+                  <span className="desktop-sort">
+                    Sort By: {orderByDict[searchKeys.orderBy]}
+                  </span>
                   <span className="mobile-sort">Sort</span>
                 </span>
                 <input type="checkbox" className="dropdown-input" id="sort" />
                 <ul className="dropdown-menu">
-                  <li className="dropdown-item" option="lowest" selected>
-                    <span>Lowest Price</span>
-                    <img width="20" height="20" src="/svg/check.svg" />
-                  </li>
-                  <li className="dropdown-item" option="highest">
-                    <span>Highest Price</span>
-                    <img width="20" height="20" src="/svg/check.svg" />
-                  </li>
-                  <li className="dropdown-item" option="best">
-                    <span>Best Condition</span>
-                    <img width="20" height="20" src="/svg/check.svg" />
-                  </li>
+                  {Object.entries(orderByDict).map(([key, value]) => {
+                    return (
+                      <li
+                        className="dropdown-item"
+                        key={key}
+                        onClick={() => onOrderClick(key)}
+                      >
+                        <span>{value}</span>
+                        {searchKeys.orderBy === key ? (
+                          <img width="20" height="20" src="/svg/check.svg" />
+                        ) : null}
+                      </li>
+                    );
+                  })}
                 </ul>
               </label>
 
@@ -421,15 +490,29 @@ export default function BuyPhone({
                       padding: "8px 0",
                     }}
                   >
-                    <div className="drawer-sort-item" option="lowest">
-                      <span>Lowest Price</span>
-                    </div>
-                    <div className="drawer-sort-item" option="highest">
-                      <span>Highest Price</span>
-                    </div>
-                    <div className="drawer-sort-item" option="best">
-                      <span>Best Condition</span>
-                    </div>
+                    {/*<div className="drawer-sort-item" option="lowest">*/}
+                    {/*  <span>Lowest Price</span>*/}
+                    {/*</div>*/}
+                    {/*<div className="drawer-sort-item" option="highest">*/}
+                    {/*  <span>Highest Price</span>*/}
+                    {/*</div>*/}
+                    {/*<div className="drawer-sort-item" option="best">*/}
+                    {/*  <span>Best Condition</span>*/}
+                    {/*</div>*/}
+                    {Object.entries(orderByDict).map(([key, value]) => {
+                      return (
+                        <div
+                          className="drawer-sort-item"
+                          key={key}
+                          onClick={() => onOrderClick(key)}
+                        >
+                          <span>{value}</span>
+                          {searchKeys.orderBy === key ? (
+                            <img width="20" height="20" src="/svg/check.svg" />
+                          ) : null}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
