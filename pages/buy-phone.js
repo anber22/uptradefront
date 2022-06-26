@@ -105,11 +105,11 @@ export default function BuyPhone({
 
   const getOptions = useCallback(
     async (query) => {
-      if (!query) return products;
+      if (!searchKey) return products;
 
       try {
         const productData = await fetch(
-          urlcat("https://api.276qa.com/search/product", { name: query })
+          urlcat("https://api.276qa.com/search/product", { name: searchKey })
         ).then((response) => response.json());
 
         if (!productData.success) return products;
@@ -119,7 +119,7 @@ export default function BuyPhone({
         return products;
       }
     },
-    [products]
+    [products, searchKey]
   );
 
   const onOrderClick = useCallback((orderBy) => {
@@ -324,6 +324,25 @@ export default function BuyPhone({
             search
             getOptions={getOptions}
             debounce={1000}
+            renderValue={(props, snapshot, className) => {
+              return (
+                <input
+                  {...props}
+                  value={searchKey}
+                  onChange={(event) => {
+                    setSearchKey(event.target.value);
+                    props.onChange(event);
+                  }}
+                  onKeyDown={(event) => {
+                    props.onKeyDown(event);
+                    if (event.key === "Enter") {
+                      onSearchClick();
+                    }
+                  }}
+                  className={className}
+                />
+              );
+            }}
           />
           <button
             className="btn btn-primary search-button"
@@ -539,7 +558,16 @@ export default function BuyPhone({
 
         <div className="desktop-phone-list">
           {data?.data?.map((item) => (
-            <a key={item.productId} src="#" className="phone-list-item">
+            <a
+              key={item.productId}
+              href={urlcat(`/redirect/:gradeAndMerchant`, {
+                gradeAndMerchant: `${item.CONDITION}-${item.merchant}`,
+                redirectUrl: item.buyUrl,
+              })}
+              target="_blank"
+              rel="nofollow noreferrer"
+              className="phone-list-item"
+            >
               <div className="img-container">
                 <img width="100" height="100" src={item.brandLogoUrl} />
               </div>
@@ -566,7 +594,16 @@ export default function BuyPhone({
 
         <div className="mobile-phone-list">
           {data?.data?.map((item) => (
-            <a key={item.productId} href="#" className="phone-list-item">
+            <a
+              key={item.productId}
+              href={urlcat(`/redirect/:gradeAndMerchant`, {
+                gradeAndMerchant: `${item.CONDITION}-${item.merchant}`,
+                redirectUrl: item.buyUrl,
+              })}
+              className="phone-list-item"
+              target="_blank"
+              rel="nofollow noreferrer"
+            >
               <div className="top">
                 <img width="50" height="50" src={item.brandLogoUrl} />
                 <div className={`condition ${item.CONDITION} `}>
