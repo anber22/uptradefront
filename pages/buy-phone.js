@@ -1,6 +1,7 @@
-import { useAsync } from "react-use";
+import { useAsync, useLocation } from "react-use";
 import { useCallback, useState, useEffect } from "react";
 import Pagination from "rc-pagination";
+import SelectSearch from "react-select-search";
 import urlcat from "urlcat";
 
 const orderByDict = {
@@ -86,6 +87,7 @@ export default function BuyPhone({
 
       return {
         pageNum: 1,
+        ...prev,
         selectedValues: values,
       };
     });
@@ -218,6 +220,32 @@ export default function BuyPhone({
     }
   }, [searchKeys, initData]);
 
+  useEffect(() => {
+    if (!location?.search) return;
+
+    const search = new URLSearchParams(location.search);
+    const brand = search.get("brand");
+    const brandCategoryValueId = search.get("brandCategoryValueId");
+    const modelName = search.get("modelName");
+    const modelId = search.get("modelId");
+
+    setSearchKeys((prev) => ({
+      ...prev,
+      selectedValues: [
+        modelId
+          ? { name: modelName, categoryValueId: Number(modelId), categoryId: 4 }
+          : undefined,
+        brand
+          ? {
+              name: brand,
+              categoryValueId: Number(brandCategoryValueId),
+              categoryId: 3,
+            }
+          : undefined,
+      ].filter(Boolean),
+    }));
+  }, []);
+
   return (
     <main className="buy-phone-page">
       <div className="buy-phone-conditions">
@@ -287,7 +315,16 @@ export default function BuyPhone({
         </div>
 
         <div className="buy-phone-search-form">
-
+          <SelectSearch
+            options={products}
+            name="search"
+            value={searchKey}
+            onChange={(key) => setSearchKey(key)}
+            placeholder="Search phone manufacturer and model"
+            search
+            getOptions={getOptions}
+            debounce={1000}
+          />
           <button
             className="btn btn-primary search-button"
             onClick={onSearchClick}
@@ -617,7 +654,7 @@ export async function getStaticProps() {
         ...listData.data,
         data: listResults,
       },
-      products: productData.data.map((x) => ({ label: x.name, value: x.name })),
+      products: productData.data.map((x) => ({ name: x.name, value: x.name })),
     },
   };
 }

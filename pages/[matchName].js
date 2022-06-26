@@ -1,13 +1,17 @@
 import Head from "next/head";
+import urlcat from "urlcat";
 
 export const config = { amp: true };
 
 export default function Model({
   productImageUrl,
+  productCategoryValueId,
   productName,
   price,
   reviewsInfo,
   relatedGoods,
+  brand,
+  brandCategoryValueId,
 }) {
   return (
     <div>
@@ -82,14 +86,26 @@ export default function Model({
                 </div>
 
                 <div className="model-price">
-                  From <strong>${price / 100}</strong>
+                  {price ? (
+                    <>
+                      From <strong>${price / 100}</strong>
+                    </>
+                  ) : (
+                    "Out of Stock"
+                  )}
                 </div>
               </div>
             </div>
 
             <div className="mobile-model-description">
               <div className="model-price">
-                From <strong>${price / 100}</strong>
+                {price ? (
+                  <>
+                    From <strong>${price / 100}</strong>
+                  </>
+                ) : (
+                  "Out of Stock"
+                )}
               </div>
               <div className="model-tag-item">
                 <amp-img src="/svg/check-circle.svg" width="15" height="15" />
@@ -110,7 +126,14 @@ export default function Model({
             </div>
 
             <div className="model-info-footer">
-              <button className="model-see-more">See More</button>
+              <a
+                href={urlcat("/buy-phone", {
+                  modelName: productName,
+                  modelId: productCategoryValueId,
+                })}
+              >
+                <button className="model-see-more">See More</button>
+              </a>
             </div>
           </div>
           <div className="right">
@@ -217,15 +240,15 @@ export default function Model({
           </div>
 
           <div className="model-related-content-footer">
-            <button>See More</button>
+            <a href={urlcat("/buy-phone", { brand, brandCategoryValueId })}>
+              <button>See More</button>
+            </a>
           </div>
         </div>
       </main>
     </div>
   );
 }
-
-let searchDataCache = null;
 
 export async function getStaticPaths() {
   const response = await fetch(
@@ -235,8 +258,6 @@ export async function getStaticPaths() {
   if (!response.success) return { paths: [] };
 
   const result = response.data;
-
-  searchDataCache = result;
 
   const paths = result.map((x) => ({
     params: {
@@ -251,9 +272,11 @@ export async function getStaticPaths() {
 }
 
 let reviewsResponseCache = null;
+let searchDataCache = null;
 
 export async function getStaticProps({ params }) {
   let reviewsResponse = null;
+  let searchResponse = null;
   if (reviewsResponseCache) {
     reviewsResponse = reviewsResponseCache;
   } else {
@@ -264,7 +287,16 @@ export async function getStaticProps({ params }) {
     reviewsResponseCache = reviewsResponse;
   }
 
-  const product = searchDataCache.find(
+  if (searchDataCache) {
+    searchResponse = searchDataCache;
+  } else {
+    const response = await fetch(
+      "https://api.276qa.com/product/search/low-price"
+    ).then((response) => response.json());
+    searchResponse = response.data;
+  }
+
+  const product = searchResponse.find(
     (x) =>
       params.matchName ===
       `buy-used-refurbished-${x.productName.split(" ").join("-").toLowerCase()}`
@@ -279,6 +311,16 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       ...product,
+      relatedGoods: product.relatedGoods.map((item) => {
+        const specs = item.specs.reduce(
+          (acc, { key, value }) => ({ ...acc, [key]: value }),
+          {}
+        );
+        return {
+          ...item,
+          ...specs,
+        };
+      }),
       reviewsInfo,
     },
   };
