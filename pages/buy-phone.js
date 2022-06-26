@@ -493,15 +493,6 @@ export default function BuyPhone({
                       padding: "8px 0",
                     }}
                   >
-                    {/*<div className="drawer-sort-item" option="lowest">*/}
-                    {/*  <span>Lowest Price</span>*/}
-                    {/*</div>*/}
-                    {/*<div className="drawer-sort-item" option="highest">*/}
-                    {/*  <span>Highest Price</span>*/}
-                    {/*</div>*/}
-                    {/*<div className="drawer-sort-item" option="best">*/}
-                    {/*  <span>Best Condition</span>*/}
-                    {/*</div>*/}
                     {Object.entries(orderByDict).map(([key, value]) => {
                       return (
                         <div
