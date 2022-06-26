@@ -17,6 +17,7 @@ export default function Model({
           custom-element="amp-carousel"
           src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"
         ></script>
+        <link rel="preload" as="image" href={productImageUrl} type="image" />
       </Head>
       <main className="model-page">
         <div className="icon-list">
