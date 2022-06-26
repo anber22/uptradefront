@@ -2114,8 +2114,8 @@ footer {
   .buy-phone-page .option-controllers {
     position: sticky;
     top: 132px;
-    z-index: 1;
     padding: 8px 24px;
+    background-color: #ffffff;
   }
 
   .buy-phone-page .option-controllers .filters-controller {
@@ -2595,6 +2595,18 @@ footer {
   align-items: center;
   color: #ffffff;
   flex-direction: column;
+}
+
+.redirect-page header {
+  display: none;
+}
+
+.redirect-page footer {
+  display: none;
+}
+
+.copy-right .copy-right {
+  display: none;
 }
 
 .buy-phone-page .filter-options {
