@@ -294,6 +294,7 @@ export async function getStaticProps({ params }) {
       "https://api.276qa.com/product/search/low-price"
     ).then((response) => response.json());
     searchResponse = response.data;
+    searchDataCache = searchResponse
   }
 
   const product = searchResponse.find(
