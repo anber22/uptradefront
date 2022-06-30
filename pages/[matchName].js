@@ -1,5 +1,7 @@
 import Head from "next/head";
 import urlcat from "urlcat";
+import { promises as fs } from "fs";
+import path from "path";
 
 export const config = { amp: true };
 
@@ -193,7 +195,7 @@ export default function Model({
             {relatedGoods?.map((item) => (
               <a key={item.productId} href="#" className="phone-list-item">
                 <div className="img-container">
-                  <img width="100" height="100" src={item.brandLogoUrl} />
+                  <amp-img width="100" height="100" src={item.brandLogoUrl} />
                 </div>
                 <div className="description">
                   <span>{item.name}</span>
@@ -220,7 +222,7 @@ export default function Model({
             {relatedGoods?.map((item) => (
               <a key={item.productId} href="#" className="phone-list-item">
                 <div className="top">
-                  <img width="50" height="50" src={item.brandLogoUrl} />
+                  <amp-img width="50" height="50" src={item.brandLogoUrl} />
                   <div className={`condition ${item.CONDITION} `}>
                     {item.CONDITION}
                   </div>
@@ -240,7 +242,12 @@ export default function Model({
           </div>
 
           <div className="model-related-content-footer">
-            <a href={urlcat("/buy-phone", { brand, brandCategoryValueId })}>
+            <a
+              href={urlcat("/buy-phone", {
+                modelName: productName,
+                modelId: productCategoryValueId,
+              })}
+            >
               <button>See More</button>
             </a>
           </div>
@@ -255,9 +262,14 @@ export async function getStaticPaths() {
     "https://api.276qa.com/product/search/low-price"
   ).then((response) => response.json());
 
-  if (!response.success) return { paths: [] };
+  if (!response.success) return { paths: [], fallback: false };
 
   const result = response.data;
+
+  await fs.writeFile(
+    path.join(process.cwd(), "cache.json"),
+    JSON.stringify(result)
+  );
 
   const paths = result.map((x) => ({
     params: {
@@ -272,11 +284,9 @@ export async function getStaticPaths() {
 }
 
 let reviewsResponseCache = null;
-let searchDataCache = null;
 
 export async function getStaticProps({ params }) {
   let reviewsResponse = null;
-  let searchResponse = null;
   if (reviewsResponseCache) {
     reviewsResponse = reviewsResponseCache;
   } else {
@@ -287,15 +297,8 @@ export async function getStaticProps({ params }) {
     reviewsResponseCache = reviewsResponse;
   }
 
-  if (searchDataCache) {
-    searchResponse = searchDataCache;
-  } else {
-    const response = await fetch(
-      "https://api.276qa.com/product/search/low-price"
-    ).then((response) => response.json());
-    searchResponse = response.data;
-    searchDataCache = searchResponse
-  }
+  const cache = await fs.readFile(path.join(process.cwd(), "cache.json"));
+  const searchResponse = JSON.parse(cache);
 
   const product = searchResponse.find(
     (x) =>
