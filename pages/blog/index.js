@@ -1,6 +1,6 @@
 export const config = { amp: true };
 
-export default function Blog({ topic }) {
+export default function Blog({ topic, list }) {
   return (
     <main className="blog-page">
       <div className="blog-page-title">
@@ -22,8 +22,23 @@ export default function Blog({ topic }) {
           </div>
         </div>
       </div>
-      <div className="blog-tag-content">
-        <amp-selector></amp-selector>
+      <div className="blog-list-content">
+        {list.map((item, index) => (
+          // eslint-disable-next-line react/jsx-key
+          <a href={`/blog/${item.slug}`} className="blog-list-item" key={index}>
+            <amp-img
+              src={item.thumbnailFullUrl}
+              width="700"
+              height="204"
+              layout="flex-item"
+            />
+            <div className="blog-list-item-content">
+              <div className="blog-list-item-title">{item.title}</div>
+              <div className="blog-list-item-release">{item.releaseDt}</div>
+              <p className="blog-list-item-desc">{item.seoDesc}</p>
+            </div>
+          </a>
+        ))}
       </div>
     </main>
   );
@@ -45,11 +60,36 @@ export async function getStaticProps() {
     }
   ).then((response) => response.json());
 
+  const blogListResponse = await fetch(
+    "https://api-gateway.uptradeit.com/api/market/blog/search",
+    {
+      method: "POST",
+      headers: {
+        ["Content-Type"]: "application/json",
+      },
+      body: JSON.stringify({
+        tagSlug: "",
+        featured: false,
+        pageNum: 0,
+        pageSize: 0,
+        all: false,
+      }),
+    }
+  ).then((response) => response.json());
+
   const topic = blogResponse.data.list[0];
+  const list = blogListResponse.data.list.slice(1).map((x) => ({
+    thumbnailFullUrl: x.thumbnailFullUrl,
+    title: x.title,
+    releaseDt: x.releaseDt,
+    seoDesc: x.seoDesc,
+    slug: x.slug,
+  }));
 
   return {
     props: {
       topic,
+      list,
     },
   };
 }
