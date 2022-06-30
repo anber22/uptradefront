@@ -15,11 +15,13 @@ export default function Blog({ topic, list }) {
             height="500"
             layout="responsive"
           />
-          <div className="blog-topic-card-content">
-            <h3>{topic.title}</h3>
-            <div className="topic-desc">{topic.seoDesc}</div>
-            <div className="topic-release">{topic.releaseDt}</div>
-          </div>
+          <a href={`/blog/${topic.slug}`}>
+            <div className="blog-topic-card-content">
+              <h3>{topic.title}</h3>
+              <div className="topic-desc">{topic.seoDesc}</div>
+              <div className="topic-release">{topic.releaseDt}</div>
+            </div>
+          </a>
         </div>
       </div>
       <div className="blog-list-content">
