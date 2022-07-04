@@ -14,6 +14,7 @@ export default function Blog({ topic, list }) {
             width="1000"
             height="500"
             layout="responsive"
+            data-hero
           />
           <a href={`/blog/${topic.slug}`}>
             <div className="blog-topic-card-content">
