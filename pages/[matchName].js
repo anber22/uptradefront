@@ -296,14 +296,16 @@ export async function getStaticPaths() {
     JSON.stringify(result)
   );
 
-  const paths = result.map((x) => ({
-    params: {
-      matchName: `buy-used-refurbished-${x.productName
-        .split(" ")
-        .join("-")
-        .toLowerCase()}`,
-    },
-  }));
+  const paths = result
+    .filter((x) => !!x.productImageUrl)
+    .map((x) => ({
+      params: {
+        matchName: `buy-used-refurbished-${x.productName
+          .split(" ")
+          .join("-")
+          .toLowerCase()}`,
+      },
+    }));
 
   return { paths, fallback: false };
 }
@@ -340,16 +342,18 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       ...product,
-      relatedGoods: product.relatedGoods.map((item) => {
-        const specs = item.specs.reduce(
-          (acc, { key, value }) => ({ ...acc, [key]: value }),
-          {}
-        );
-        return {
-          ...item,
-          ...specs,
-        };
-      }),
+      relatedGoods: product.relatedGoods
+        .filter((x) => !!x.spes)
+        .map((item) => {
+          const specs = item.specs.reduce(
+            (acc, { key, value }) => ({ ...acc, [key]: value }),
+            {}
+          );
+          return {
+            ...item,
+            ...specs,
+          };
+        }),
       reviewsInfo,
     },
   };

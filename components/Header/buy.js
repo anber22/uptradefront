@@ -6,7 +6,7 @@ export default function BuyNav({ navbar }) {
 
   return (
     <li className="main-menu-dropdown">
-      <a title="Blog">
+      <a title="Blog" key="blog">
         Buy
         <span className="main-menu-dropdown-icon">
           <i className="arrow-down"></i>
@@ -50,9 +50,9 @@ export default function BuyNav({ navbar }) {
           </div>
           <div className="buy-dropdown-right">
             <div className="buy-nav-list">
-              {selectedNavList?.map((x) => (
+              {selectedNavList?.map((x, index) => (
                 // eslint-disable-next-line react/jsx-key
-                <a className="nav-link-item" href={x.url}>
+                <a className="nav-link-item" href={x.url} key={index}>
                   {x.value}
                 </a>
               ))}
@@ -79,8 +79,8 @@ export default function BuyNav({ navbar }) {
               className="header-nav-content"
               style={{ display: item.key === selectedBrand ? "flex" : "none" }}
             >
-              {item.values.map((x) => (
-                <a href={x.url} className="value-item" key={x.valueId}>
+              {item.values.map((x, index) => (
+                <a href={x.url} className="value-item" key={index}>
                   {x.value}
                 </a>
               ))}

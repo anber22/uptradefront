@@ -2430,6 +2430,11 @@ header.fixed {
     column-gap: 120px;
   }
 
+  .reviews-controller > span {
+    display: flex;
+    align-items: center;
+  }
+
   .reviews-page-select {
     margin-left: 8px;
     padding: 1px 8px;
@@ -4214,13 +4219,19 @@ header.fixed {
   .reviews-controller {
     margin-top: 18px;
     display: flex;
+    flex-direction: column;
     border-bottom: 1px solid #f4f4f4;
     padding-bottom: 14px;
     font-size: 13px;
     line-height: 30px;
     color: rgba(0, 0, 0, 0.5);
-    column-gap: 16px;
+    row-gap: 16px;
     padding-left: 8px;
+  }
+
+  .reviews-controller > span {
+    display: flex;
+    align-items: center;
   }
 
   .reviews-page-select {

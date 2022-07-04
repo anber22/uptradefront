@@ -2,7 +2,7 @@ import urlcat from "urlcat";
 import Pagination from "rc-pagination";
 import { useState } from "react";
 import { useAsync } from "react-use";
-
+import Select from "react-select";
 export default function Reviews({ data: initData }) {
   const [params, setParams] = useState({
     page: 0,
@@ -67,38 +67,40 @@ export default function Reviews({ data: initData }) {
         <div className="reviews-controller">
           <span>
             Sort By
-            <select
+            <Select
               className="reviews-page-select"
               name="sort"
-              value={params.sort}
-              onChange={(event) =>
-                setParams((prev) => ({ ...prev, sort: event.target.value }))
+              defaultValue={{ label: "Most Recent", value: "desc" }}
+              onChange={({ value }) =>
+                setParams((prev) => ({ ...prev, sort: value }))
               }
-            >
-              <option value="desc">Most Recent</option>
-              <option value="highest_rated">Highest Rated</option>
-            </select>
+              options={[
+                { label: "Most Recent", value: "desc" },
+                { label: "Highest Rated", value: "highest_rated" },
+              ]}
+            />
           </span>
           <span>
             Filter By
-            <select
+            <Select
               className="reviews-page-select"
               name="sort"
-              value={params.filterValue}
-              onChange={(event) =>
+              defaultValue={{ label: "None", value: "0" }}
+              onChange={({ value }) =>
                 setParams((prev) => ({
                   ...prev,
-                  filterValue: event.target.value,
+                  filterValue: value,
                 }))
               }
-            >
-              <option value="0">None</option>
-              <option value="5">5 stars</option>
-              <option value="4">4 stars</option>
-              <option value="3">3 stars</option>
-              <option value="2">2 stars</option>
-              <option value="1">1 stars</option>
-            </select>
+              options={[
+                { label: "None", value: "0" },
+                { label: "5 stars", value: "5" },
+                { label: "4 stars", value: "4" },
+                { label: "3 stars", value: "3" },
+                { label: "2 stars", value: "2" },
+                { label: "1 stars", value: "1" },
+              ]}
+            />
           </span>
         </div>
 
