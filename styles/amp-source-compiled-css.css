@@ -183,6 +183,7 @@ small {
 a {
   text-decoration: none;
   background: transparent;
+  color: inherit;
 }
 
 img {
@@ -370,6 +371,8 @@ header.fixed {
 }
 .mega-menu #mobile:checked + .main-menu {
   display: block;
+  max-height: 100vh;
+  overflow: scroll;
 }
 .mega-menu #mobile-menu {
   position: relative;
@@ -1060,6 +1063,13 @@ header.fixed {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .buy-dropdown-right .buy-nav-list {
+    width: 400px;
+    height: 300px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .buy-category-item {
     cursor: pointer;
     padding: 4px 16px;
@@ -1070,6 +1080,14 @@ header.fixed {
 
   .buy-category-item > amp-img {
     display: none;
+  }
+
+  .buy-category-item > img {
+    display: none;
+  }
+
+  .buy-category-item-selected > img {
+    display: block;
   }
 
   .buy-dropdown-left .buy-category-item[selected] > amp-img {
@@ -1104,6 +1122,13 @@ header.fixed {
   }
 
   .buy-dropdown-left .buy-category-item[selected] {
+    border: none;
+    outline: none;
+    color: rgb(55, 90, 125);
+    text-decoration: underline;
+  }
+
+  .buy-dropdown-left .buy-category-item-selected {
     border: none;
     outline: none;
     color: rgb(55, 90, 125);
@@ -3817,7 +3842,6 @@ header.fixed {
     font-size: 14px;
   }
 
-
   .model-page .model-content {
     display: flex;
     flex-direction: column;
@@ -3964,6 +3988,32 @@ header.fixed {
     padding: 11px 22px;
     color: #000000;
     font-size: 14px;
+  }
+
+  .mobile-by-dropdown-item .header-nav-item {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 24px;
+    font-size: 14px;
+    color: #000000;
+  }
+
+  .main-menu-dropdown {
+    border-bottom: 1px solid #d9e0e7;
+  }
+
+  .mobile-by-dropdown-item .header-nav-item .arrow-right:before {
+    position: unset;
+  }
+
+  .mobile-by-dropdown-item .header-nav-content {
+    flex-direction: column;
+    padding-left: 16px;
+  }
+
+  .mobile-by-dropdown-item .header-nav-content .value-item {
+    padding: 8px 0;
+    font-size: 12px;
   }
 
   #mobile-buy-dropdown .mobile-by-dropdown-item .value-container {

@@ -58,6 +58,7 @@ export default function BuyPhone({
   data: initData,
   products,
 }) {
+  console.log(initialConditions);
   const [sortDrawerOpen, setSortDrawerOpen] = useState(false);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   const [expanded, setExpanded] = useState([]);
@@ -656,12 +657,12 @@ export async function getStaticProps() {
     },
     body: JSON.stringify(body),
   }).then((response) => response.json());
+  //
+  // const productData = await fetch("https://api.276qa.com/search/product").then(
+  //   (response) => response.json()
+  // );
 
-  const productData = await fetch("https://api.276qa.com/search/product").then(
-    (response) => response.json()
-  );
-
-  if (!data.success || !listData.success || !productData.success)
+  if (!data.success || !listData.success)
     return {
       props: {
         conditions: [],
@@ -691,7 +692,8 @@ export async function getStaticProps() {
         ...listData.data,
         data: listResults,
       },
-      products: productData.data.map((x) => ({ name: x.name, value: x.name })),
+      // products: productData.data.map((x) => ({ name: x.name, value: x.name })),
+      products: [],
     },
   };
 }

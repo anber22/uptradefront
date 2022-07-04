@@ -1,4 +1,5 @@
 import { useAmp } from "next/amp";
+import BuyNav from "./buy";
 
 export const Header = ({ navbar }) => {
   const isAmp = useAmp();
@@ -48,7 +49,21 @@ export const Header = ({ navbar }) => {
 
                   {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                   <a href="/buy-phone" className="search-icon-container">
-                    <amp-img src="/svg/search.svg" width="24" height="24" />
+                    {isAmp ? (
+                      <amp-img
+                        src="/svg/search.svg"
+                        width="24"
+                        height="24"
+                        alt="search"
+                      />
+                    ) : (
+                      <img
+                        src="/svg/search.svg"
+                        width="24"
+                        height="24"
+                        alt="search"
+                      />
+                    )}
                   </a>
                   <span className="main-menu-dropdown-icon">
                     <i className="hamburger"></i>
@@ -61,7 +76,7 @@ export const Header = ({ navbar }) => {
                   <li className="main-menu-logo">
                     {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                     <a
-                      href="/buy-phone"
+                      href="/"
                       title="Uptrade"
                       style={{ display: "flex" }}
                     >
@@ -216,7 +231,9 @@ export const Header = ({ navbar }) => {
                         </div>
                       </ul>
                     </li>
-                  ) : null}
+                  ) : (
+                    <BuyNav navbar={navbar} />
+                  )}
 
                   <li className="main-menu-dropdown">
                     <a title="Blog">
