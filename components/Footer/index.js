@@ -1,17 +1,30 @@
 import Link from "next/link";
+import { useAmp } from "next/amp";
+import FooterBuyNav from "./buy";
 
 export const Footer = () => {
+  const isAmp = useAmp();
   return (
     <footer className="UpTrade-footer">
       <div>
         <Link href="/" title="Home">
-          <amp-img
-            src="/svg/logo.svg"
-            width="92"
-            height="22"
-            alt="logo"
-            title="logo"
-          />
+          {isAmp ? (
+            <amp-img
+              src="/svg/logo.svg"
+              width="92"
+              height="22"
+              alt="logo"
+              title="logo"
+            />
+          ) : (
+            <img
+              src="/svg/logo.svg"
+              width="92"
+              height="22"
+              alt="logo"
+              title="logo"
+            />
+          )}
         </Link>
       </div>
 
@@ -76,83 +89,106 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div
-          className="mobile-footer-nav-container"
-          id="mobile-footer-nav-container"
-        >
-          <amp-accordion>
-            <section className="footer-nav-section">
-              <h3 className="footer-nav">
-                <span>Blog</span> <i className="arrow-right"></i>
-              </h3>
+        {isAmp ? (
+          <div
+            className="mobile-footer-nav-container"
+            id="mobile-footer-nav-container"
+          >
+            <amp-accordion>
+              <section className="footer-nav-section">
+                <h3 className="footer-nav">
+                  <span>Blog</span> <i className="arrow-right"></i>
+                </h3>
 
-              <div className="footer-nav-list">
-                <a href="#" title="...">
-                  Sell My Phone
-                </a>
-                <a href="#" title="...">
-                  Smartphones
-                </a>
-              </div>
-            </section>
-            <section className="footer-nav-section">
-              <h3 className="footer-nav">
-                <span>Resources</span> <i className="arrow-right"></i>
-              </h3>
+                <div className="footer-nav-list">
+                  <a href="#" title="...">
+                    Sell My Phone
+                  </a>
+                  <a href="#" title="...">
+                    Smartphones
+                  </a>
+                </div>
+              </section>
+              <section className="footer-nav-section">
+                <h3 className="footer-nav">
+                  <span>Resources</span> <i className="arrow-right"></i>
+                </h3>
 
-              <div className="footer-nav-list">
-                <a href="#" title="...">
-                  FAQs
-                </a>
-                <a href="#" title="...">
-                  Return and Exchange Policy
-                </a>
-                <a href="#">Shipping Policy</a>
-                <a href="#">Protection Plan</a>
-              </div>
-            </section>
-            <section className="footer-nav-section">
-              <h3 className="footer-nav">
-                <span>About Us</span> <i className="arrow-right"></i>
-              </h3>
+                <div className="footer-nav-list">
+                  <a href="#" title="...">
+                    FAQs
+                  </a>
+                  <a href="#" title="...">
+                    Return and Exchange Policy
+                  </a>
+                  <a href="#">Shipping Policy</a>
+                  <a href="#">Protection Plan</a>
+                </div>
+              </section>
+              <section className="footer-nav-section">
+                <h3 className="footer-nav">
+                  <span>About Us</span> <i className="arrow-right"></i>
+                </h3>
 
-              <div className="footer-nav-list">
-                <a href="#" title="...">
-                  Who We Are
-                </a>
-                <a href="#" title="...">
-                  Contract Us
-                </a>
-                <a href="#">Buy in Bulk</a>
-              </div>
-            </section>
-          </amp-accordion>
-        </div>
+                <div className="footer-nav-list">
+                  <a href="#" title="...">
+                    Who We Are
+                  </a>
+                  <a href="#" title="...">
+                    Contract Us
+                  </a>
+                  <a href="#">Buy in Bulk</a>
+                </div>
+              </section>
+            </amp-accordion>
+          </div>
+        ) : <FooterBuyNav />}
         <div className="footer-subscribe">
           <div className="footer-subscribe-title">
             Subscribe To Our Newsletter
           </div>
           <form className="subscribe-form" action="#" target="_top">
-            <amp-autocomplete filter="none">
-              <input placeholder="Email" type="text" />
-            </amp-autocomplete>
+            {isAmp ? (
+              <amp-autocomplete filter="none">
+                <input placeholder="Email" type="text" />
+              </amp-autocomplete>
+            ) : (
+              <input placeholder="Email" type="email" />
+            )}
             <button className="btn btn-primary">Subscribe</button>
           </form>
 
-          <div className="social-network-subscribe-container">
-            <a href="#">
-              <amp-img width="42" height="42" src="/svg/twitter.svg" />
-            </a>
-            <a href="#">
-              <amp-img width="42" height="42" src="/svg/facebook.svg" />
-            </a>
-            <a href="#">
-              <amp-img width="42" height="42" src="/svg/instgram.svg" />
-            </a>
-            <a href="#">
-              <amp-img width="42" height="42" src="/svg/youtube.svg" />
-            </a>
-          </div>
+          {isAmp ? (
+            <div className="social-network-subscribe-container">
+              <a href="#">
+                <amp-img width="42" height="42" src="/svg/twitter.svg" />
+              </a>
+              <a href="#">
+                <amp-img width="42" height="42" src="/svg/facebook.svg" />
+              </a>
+              <a href="#">
+                <amp-img width="42" height="42" src="/svg/instgram.svg" />
+              </a>
+              <a href="#">
+                <amp-img width="42" height="42" src="/svg/youtube.svg" />
+              </a>
+            </div>
+          ) : (
+            <div className="social-network-subscribe-container">
+              <a href="#">
+                <img width="42" height="42" src="/svg/twitter.svg" />
+              </a>
+              <a href="#">
+                <img width="42" height="42" src="/svg/facebook.svg" />
+              </a>
+              <a href="#">
+                <img width="42" height="42" src="/svg/instgram.svg" />
+              </a>
+              <a href="#">
+                <img width="42" height="42" src="/svg/youtube.svg" />
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </footer>

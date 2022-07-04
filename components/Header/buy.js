@@ -65,6 +65,10 @@ export default function BuyNav({ navbar }) {
             <h3
               className="header-nav-item"
               onClick={() => {
+                if (selectedBrand === item.key) {
+                  setSelectedBrand("");
+                  return;
+                }
                 setSelectedBrand(item.key);
                 setSelectedNavList(item.values);
               }}

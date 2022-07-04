@@ -1,5 +1,6 @@
 import { useAmp } from "next/amp";
 import BuyNav from "./buy";
+import Search from "./search";
 
 export const Header = ({ navbar }) => {
   const isAmp = useAmp();
@@ -75,11 +76,7 @@ export const Header = ({ navbar }) => {
                 <ul id="desktop" className="main-menu">
                   <li className="main-menu-logo">
                     {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                    <a
-                      href="/"
-                      title="Uptrade"
-                      style={{ display: "flex" }}
-                    >
+                    <a href="/" title="Uptrade" style={{ display: "flex" }}>
                       {isAmp ? (
                         <amp-img
                           alt="logo"
@@ -102,11 +99,7 @@ export const Header = ({ navbar }) => {
                   </li>
 
                   {isAmp ? (
-                    <form
-                      className="search-form"
-                      action="https://amp.dev/documentation/examples/api/echo"
-                      target="_top"
-                    >
+                    <form className="search-form" action="#" target="_top">
                       <amp-autocomplete
                         filter="substring"
                         src="https://api.276qa.com/search/product"
@@ -135,7 +128,17 @@ export const Header = ({ navbar }) => {
                         src="/svg/search.svg"
                       />
                     </form>
-                  ) : null}
+                  ) : (
+                    <form className="search-form" action="#" target="_top">
+                      <Search />
+                      <img
+                          className="search-icon"
+                          width="24"
+                          height="24"
+                          src="/svg/search.svg"
+                      />
+                    </form>
+                  )}
 
                   {isAmp ? (
                     <li className="main-menu-dropdown">

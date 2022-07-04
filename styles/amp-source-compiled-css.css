@@ -4002,6 +4002,34 @@ header.fixed {
     border-bottom: 1px solid #d9e0e7;
   }
 
+  .mobile-footer-nav-container .footer-nav-item {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 24px;
+  }
+
+  .mobile-footer-nav-container .footer-nav-item .arrow-right:before {
+    position: unset;
+  }
+
+  .react-footer .footer-nav-content {
+    flex-direction: column;
+  }
+
+  .react-footer .footer-nav-content a {
+    width: 100%;
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    text-align: left;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+    padding: 8px 16px;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    color: #fff;
+  }
+
   .mobile-by-dropdown-item .header-nav-item .arrow-right:before {
     position: unset;
   }
@@ -4422,6 +4450,10 @@ header.fixed {
 }
 
 .search-form amp-autocomplete {
+  flex: 1;
+}
+
+.UpTrade-header .search-form .select-search {
   flex: 1;
 }
 
