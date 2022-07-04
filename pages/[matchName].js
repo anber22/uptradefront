@@ -12,8 +12,8 @@ export default function Model({
   price,
   reviewsInfo,
   relatedGoods,
-  brand,
-  brandCategoryValueId,
+  metaDescCategory,
+  qa,
 }) {
   return (
     <div>
@@ -24,6 +24,9 @@ export default function Model({
           src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"
         ></script>
         <link rel="preload" as="image" href={productImageUrl} type="image" />
+        {metaDescCategory ? (
+          <meta name="description" content={metaDescCategory} />
+        ) : null}
       </Head>
       <main className="model-page">
         <div className="icon-list">
@@ -47,6 +50,17 @@ export default function Model({
               <strong>Secure Payment</strong>
               <div>Visa, MasterCard, American Express</div>
             </div>
+          </div>
+        </div>
+        <div className="model-page-description">
+          <div className="breadcrumbs">
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a href="/buy-phone">All</a>
+            <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
+            <a>Refurbished {productName}</a>
+          </div>
+          <div className="model-page-description-content">
+            {metaDescCategory}
           </div>
         </div>
         <div className="model-content">
@@ -189,6 +203,17 @@ export default function Model({
             </div>
           </div>
         </div>
+
+        {qa ? (
+          <div className="model-page-faq">
+            {Object.entries(qa).map(([title, content], index) => (
+              <div className="model-page-faq-item" key={index} id={title}>
+                <div className="model-page-faq-title">{title}</div>
+                <div className="model-page-faq-content">{content}</div>
+              </div>
+            ))}
+          </div>
+        ) : null}
 
         <div className="model-related-content">
           <div className="desktop-phone-list">
