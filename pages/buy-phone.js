@@ -657,12 +657,12 @@ export async function getStaticProps() {
     },
     body: JSON.stringify(body),
   }).then((response) => response.json());
-  //
-  // const productData = await fetch("https://api.276qa.com/search/product").then(
-  //   (response) => response.json()
-  // );
 
-  if (!data.success || !listData.success)
+  const productData = await fetch("https://api.276qa.com/search/product").then(
+    (response) => response.json()
+  );
+
+  if (!data.success || !listData.success || !productData.success)
     return {
       props: {
         conditions: [],
@@ -692,8 +692,7 @@ export async function getStaticProps() {
         ...listData.data,
         data: listResults,
       },
-      // products: productData.data.map((x) => ({ name: x.name, value: x.name })),
-      products: [],
+      products: productData.data.map((x) => ({ name: x.name, value: x.name })),
     },
   };
 }
