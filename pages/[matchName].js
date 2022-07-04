@@ -71,11 +71,13 @@ export default function Model({
             <div className="model-info">
               <amp-img
                 src={productImageUrl}
+                data-hero
                 width="270"
                 height="270"
                 className="desktop-img"
               />
               <amp-img
+                data-hero
                 src={productImageUrl}
                 width="270"
                 height="270"
