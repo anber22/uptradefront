@@ -12,7 +12,7 @@ export default function Model({
   price,
   reviewsInfo,
   relatedGoods,
-  metaDescCategory,
+  metaDescription,
   qa,
 }) {
   return (
@@ -23,9 +23,8 @@ export default function Model({
           custom-element="amp-carousel"
           src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"
         ></script>
-        <link rel="preload" as="image" href={productImageUrl} type="image" />
-        {metaDescCategory ? (
-          <meta name="description" content={metaDescCategory} />
+        {metaDescription ? (
+          <meta name="description" content={metaDescription} />
         ) : null}
       </Head>
       <main className="model-page">
@@ -60,7 +59,7 @@ export default function Model({
             <a>Refurbished {productName}</a>
           </div>
           <div className="model-page-description-content">
-            {metaDescCategory}
+            {metaDescription}
           </div>
         </div>
         <div className="model-content">
@@ -70,7 +69,7 @@ export default function Model({
             </h1>
             <div className="model-info">
               <amp-img
-                src={productImageUrl}
+                src={productImageUrl ?? '/default-image.png'}
                 data-hero
                 width="270"
                 height="270"
@@ -78,7 +77,7 @@ export default function Model({
               />
               <amp-img
                 data-hero
-                src={productImageUrl}
+                src={productImageUrl ?? '/default-image.png'}
                 width="270"
                 height="270"
                 layout="responsive"
@@ -298,16 +297,14 @@ export async function getStaticPaths() {
     JSON.stringify(result)
   );
 
-  const paths = result
-    .filter((x) => !!x.productImageUrl)
-    .map((x) => ({
-      params: {
-        matchName: `buy-used-refurbished-${x.productName
-          .split(" ")
-          .join("-")
-          .toLowerCase()}`,
-      },
-    }));
+  const paths = result.map((x) => ({
+    params: {
+      matchName: `buy-used-refurbished-${x.productName
+        .split(" ")
+        .join("-")
+        .toLowerCase()}`,
+    },
+  }));
 
   return { paths, fallback: false };
 }
