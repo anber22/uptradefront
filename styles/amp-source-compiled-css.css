@@ -1318,7 +1318,7 @@ header.fixed {
   .UpTrade-footer .footer-nav-container {
     display: grid;
     width: 60%;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .UpTrade-footer .footer-nav-list {
@@ -2676,6 +2676,10 @@ header.fixed {
   .model-page-faq-content {
     color: grey;
     font-size: 14px;
+  }
+
+  .mobile-by-dropdown {
+    display: none;
   }
 
   /*  Desktop css*/
@@ -4557,6 +4561,7 @@ header.fixed {
   padding: 14px 125px;
   font-size: 15px;
   line-height: 1.75;
+  color: #ffffff;
   background: linear-gradient(180deg, #1ab4e7, #3498db);
   border-radius: 6px;
   border: none;

@@ -69,7 +69,7 @@ export default function Model({
             </h1>
             <div className="model-info">
               <amp-img
-                src={productImageUrl ?? '/default-image.png'}
+                src={productImageUrl ?? "/default-image.png"}
                 data-hero
                 width="270"
                 height="270"
@@ -77,7 +77,7 @@ export default function Model({
               />
               <amp-img
                 data-hero
-                src={productImageUrl ?? '/default-image.png'}
+                src={productImageUrl ?? "/default-image.png"}
                 width="270"
                 height="270"
                 layout="responsive"
@@ -342,7 +342,7 @@ export async function getStaticProps({ params }) {
     props: {
       ...product,
       relatedGoods: product.relatedGoods
-        .filter((x) => !!x.spes)
+        .filter((x) => !!x.specs)
         .map((item) => {
           const specs = item.specs.reduce(
             (acc, { key, value }) => ({ ...acc, [key]: value }),

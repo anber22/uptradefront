@@ -16,11 +16,30 @@ export default function FooterBuyNav() {
           style={{ display: selectedNav === "blog" ? "flex" : "none" }}
         >
           <a href="#" title="...">
-            Sell My Phone
+            Buy Used Phones
           </a>
-          <a href="#" title="...">
-            Smartphones
+          <a href="/blog" title="...">
+            All
           </a>
+        </div>
+      </section>
+
+      <section className="footer-nav-section">
+        <h3
+            className="footer-nav footer-nav-item"
+            onClick={() => setSelectedNav(selectedNav !== "buy" ? "buy" : "")}
+        >
+          <span>Buy</span> <i className="arrow-right"></i>
+        </h3>
+        <div
+            className="footer-nav-content"
+            style={{ display: selectedNav === "buy" ? "flex" : "none" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a href="/buy-phone">
+            Sell All Products
+          </a>
+
         </div>
       </section>
 

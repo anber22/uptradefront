@@ -562,7 +562,7 @@ export default function BuyPhone({
             <a
               key={item.productId}
               href={urlcat(`/redirect/:gradeAndMerchant`, {
-                gradeAndMerchant: `${item.CONDITION}-${item.merchant}`,
+                gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
                 redirectUrl: item.buyUrl,
               })}
               target="_blank"
@@ -598,7 +598,7 @@ export default function BuyPhone({
             <a
               key={item.productId}
               href={urlcat(`/redirect/:gradeAndMerchant`, {
-                gradeAndMerchant: `${item.CONDITION}-${item.merchant}`,
+                gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
                 redirectUrl: item.buyUrl,
               })}
               className="phone-list-item"

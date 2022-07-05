@@ -30,8 +30,8 @@ export const Header = ({ navbar }) => {
                   <a className="logo-link" href="/" title="Uptrade">
                     {isAmp ? (
                       <amp-img
-                        alt="..."
-                        title="..."
+                        alt="logo"
+                        title="logo"
                         src="/svg/logo.svg"
                         width="92"
                         height="22"
@@ -142,7 +142,7 @@ export const Header = ({ navbar }) => {
 
                   {isAmp ? (
                     <li className="main-menu-dropdown">
-                      <a title="Blog">
+                      <a title="Buy">
                         Buy
                         <span className="main-menu-dropdown-icon">
                           <i className="arrow-down"></i>
@@ -194,6 +194,7 @@ export const Header = ({ navbar }) => {
                               data-amp-bind-src="filterNavBar.items"
                               width="400"
                               height="300"
+                              binding="no"
                             >
                               <template type="amp-mustache">
                                 <a
@@ -255,20 +256,20 @@ export const Header = ({ navbar }) => {
 
                     <ul className="main-menu-dropdown-list">
                       <li>
-                        <a href="#" title="...">
-                          Sell My Phone
+                        <a href="#" title="Buy Used Phones">
+                          Buy Used Phones
                         </a>
                       </li>
                       <li>
-                        <a href="#" title="...">
-                          Smartphones
+                        <a href="/blog" title="Smartphones">
+                          All
                         </a>
                       </li>
                     </ul>
                   </li>
 
                   <li className="main-menu-dropdown">
-                    <a title="...">
+                    <a title="Resources">
                       Resources
                       <span className="main-menu-dropdown-icon">
                         <i className="arrow-down"></i>
@@ -287,30 +288,16 @@ export const Header = ({ navbar }) => {
 
                     <ul className="main-menu-dropdown-list">
                       <li>
-                        <a href="#" title="...">
+                        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                        <a href="/faq" title="FAQ">
                           FAQs
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" title="...">
-                          Return and Exchange Policy
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" title="...">
-                          Shipping Policy
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" title="...">
-                          Protection Plan
                         </a>
                       </li>
                     </ul>
                   </li>
 
                   <li className="main-menu-dropdown">
-                    <a title="...">
+                    <a title="About Us">
                       About Us
                       <span className="main-menu-dropdown-icon">
                         <i className="arrow-down"></i>
@@ -329,17 +316,17 @@ export const Header = ({ navbar }) => {
 
                     <ul className="main-menu-dropdown-list">
                       <li>
-                        <a href="#" title="...">
+                        <a href="#" title="Who We Are">
                           Who We Are
                         </a>
                       </li>
                       <li>
-                        <a href="#" title="...">
+                        <a href="#" title="Contract Us">
                           Contract Us
                         </a>
                       </li>
                       <li>
-                        <a href="#" title="...">
+                        <a href="#" title="Buy in Bulk">
                           Buy in Bulk
                         </a>
                       </li>

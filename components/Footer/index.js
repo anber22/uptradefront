@@ -50,28 +50,27 @@ export const Footer = () => {
           </div>
 
           <div className="footer-nav-list">
+            <div className="footer-nav-title">Buy</div>
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a href="/buy-phone" className="footer-nav-item">
+              Sell All Products
+            </a>
+          </div>
+
+          <div className="footer-nav-list">
             <div className="footer-nav-title">Blog</div>
             <a href="#" className="footer-nav-item">
-              Sell My Phone
+              Buy Used Phones
             </a>
-            <a href="#" className="footer-nav-item">
-              Smartphones
+            <a href="/faq" className="footer-nav-item">
+              All
             </a>
           </div>
 
           <div className="footer-nav-list">
             <div className="footer-nav-title">Resources</div>
-            <a href="#" className="footer-nav-item">
+            <a href="/faq" className="footer-nav-item">
               FAQs
-            </a>
-            <a href="#" className="footer-nav-item">
-              Return and Exchange Policy
-            </a>
-            <a href="#" className="footer-nav-item">
-              Shipping Policy
-            </a>
-            <a href="#" className="footer-nav-item">
-              Protection Plan
             </a>
           </div>
 
@@ -102,11 +101,21 @@ export const Footer = () => {
 
                 <div className="footer-nav-list">
                   <a href="#" title="...">
-                    Sell My Phone
+                    Buy My Phone
                   </a>
-                  <a href="#" title="...">
-                    Smartphones
+                  <a href="/blog" title="...">
+                    All
                   </a>
+                </div>
+              </section>
+              <section className="footer-nav-section">
+                <h3 className="footer-nav">
+                  <span>Buy</span> <i className="arrow-right"></i>
+                </h3>
+
+                <div className="footer-nav-list">
+                  {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                  <a href="/buy-phone">Sell All Products</a>
                 </div>
               </section>
               <section className="footer-nav-section">
@@ -115,14 +124,9 @@ export const Footer = () => {
                 </h3>
 
                 <div className="footer-nav-list">
-                  <a href="#" title="...">
+                  <a href="/faq" title="...">
                     FAQs
                   </a>
-                  <a href="#" title="...">
-                    Return and Exchange Policy
-                  </a>
-                  <a href="#">Shipping Policy</a>
-                  <a href="#">Protection Plan</a>
                 </div>
               </section>
               <section className="footer-nav-section">
@@ -142,7 +146,9 @@ export const Footer = () => {
               </section>
             </amp-accordion>
           </div>
-        ) : <FooterBuyNav />}
+        ) : (
+          <FooterBuyNav />
+        )}
         <div className="footer-subscribe">
           <div className="footer-subscribe-title">
             Subscribe To Our Newsletter

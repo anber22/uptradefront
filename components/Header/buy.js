@@ -60,33 +60,37 @@ export default function BuyNav({ navbar }) {
           </div>
         </div>
 
-        {navbar?.map((item) => (
-          <li className="mobile-by-dropdown-item" key={item.key}>
-            <h3
-              className="header-nav-item"
-              onClick={() => {
-                if (selectedBrand === item.key) {
-                  setSelectedBrand("");
-                  return;
-                }
-                setSelectedBrand(item.key);
-                setSelectedNavList(item.values);
-              }}
-            >
-              <span>{item.key}</span> <i className="arrow-right"></i>
-            </h3>
-            <div
-              className="header-nav-content"
-              style={{ display: item.key === selectedBrand ? "flex" : "none" }}
-            >
-              {item.values.map((x, index) => (
-                <a href={x.url} className="value-item" key={index}>
-                  {x.value}
-                </a>
-              ))}
-            </div>
-          </li>
-        ))}
+        <div className="mobile-by-dropdown">
+          {navbar?.map((item) => (
+            <li className="mobile-by-dropdown-item" key={item.key}>
+              <h3
+                className="header-nav-item"
+                onClick={() => {
+                  if (selectedBrand === item.key) {
+                    setSelectedBrand("");
+                    return;
+                  }
+                  setSelectedBrand(item.key);
+                  setSelectedNavList(item.values);
+                }}
+              >
+                <span>{item.key}</span> <i className="arrow-right"></i>
+              </h3>
+              <div
+                className="header-nav-content"
+                style={{
+                  display: item.key === selectedBrand ? "flex" : "none",
+                }}
+              >
+                {item.values.map((x, index) => (
+                  <a href={x.url} className="value-item" key={index}>
+                    {x.value}
+                  </a>
+                ))}
+              </div>
+            </li>
+          ))}
+        </div>
       </ul>
     </li>
   );
