@@ -10,7 +10,7 @@ export default function AboutUs() {
       </Head>
       <main className="about-page">
         <div className="title-content">
-          <h1>Out Mission</h1>
+          <h1>Our Mission</h1>
         </div>
         <div className="mission-statement-content">
           <div className="mission-statement-description">
@@ -137,7 +137,7 @@ export default function AboutUs() {
                 className="member-avatar"
               />
               <h3>Marco Mai</h3>
-              <div className="member-position">Head of Operations</div>
+              <div className="member-position">Marco Mai - CEO</div>
             </div>
             <div className="member-item">
               <amp-img
@@ -147,14 +147,14 @@ export default function AboutUs() {
                 className="member-avatar"
               />
               <h3>Esteban Facundo</h3>
-              <div className="member-position">Head of Customer Service</div>
+              <div className="member-position">Sales and Service</div>
             </div>
             <div className="member-item">
               <amp-img
-                  src="/yuqi.jpeg"
-                  width="210"
-                  height="210"
-                  className="member-avatar"
+                src="/yuqi.jpeg"
+                width="210"
+                height="210"
+                className="member-avatar"
               />
               <h3>Yuqi Ouyang</h3>
               <div className="member-position">Engineering</div>
@@ -169,9 +169,11 @@ export default function AboutUs() {
             background: "#fff",
           }}
         >
-          <button className="btn shop-button">
-            Shop Certified Used Devices
-          </button>
+          <a href="/buy-phone">
+            <button className="btn shop-button">
+              Shop Certified Used Devices
+            </button>
+          </a>
         </div>
       </main>
     </div>

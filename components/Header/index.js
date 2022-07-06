@@ -316,18 +316,13 @@ export const Header = ({ navbar }) => {
 
                     <ul className="main-menu-dropdown-list">
                       <li>
-                        <a href="#" title="Who We Are">
+                        <a href="/who-we-are" title="Who We Are">
                           Who We Are
                         </a>
                       </li>
                       <li>
-                        <a href="#" title="Contract Us">
-                          Contract Us
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" title="Buy in Bulk">
-                          Buy in Bulk
+                        <a href="/contact" title="Contact Us">
+                          Contact Us
                         </a>
                       </li>
                     </ul>

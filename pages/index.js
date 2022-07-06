@@ -2,7 +2,7 @@ import Head from "next/head";
 
 export const config = { amp: true };
 
-export default function Home() {
+export default function Home({ listedProduct, reviews }) {
   return (
     <div>
       <Head>
@@ -11,12 +11,15 @@ export default function Home() {
           name="description"
           content="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping."
         />
-        <script
-          async
-          custom-element="amp-timeago"
-          src="https://cdn.ampproject.org/v0/amp-timeago-0.1.js"
-        ></script>
       </Head>
+      <amp-state id="currentTab">
+        <script
+          type="application/json"
+          dangerouslySetInnerHTML={{
+            __html: `{ "current": "apple" }`,
+          }}
+        ></script>
+      </amp-state>
       <main className="home-page">
         <div className="home-content">
           <div className="home-left">
@@ -82,7 +85,11 @@ export default function Home() {
             Browse Newly Listed Certified Used Phones
           </h2>
 
-          <amp-selector role="tablist" className="brands">
+          <amp-selector
+            role="tablist"
+            className="brands"
+            on={`select: AMP.setState({ currentTab: { current: event.targetOption } })`}
+          >
             <div role="tab" selected option="apple">
               Apple
             </div>
@@ -91,44 +98,64 @@ export default function Home() {
             </div>
           </amp-selector>
 
-          <div className="phones-list">
-            <div className="phone-card">
-              <div className="image-container">
-                <amp-img
-                  alt="phone"
-                  width="120"
-                  height="120"
-                  src="https://d5ps8hbhb8roq.cloudfront.net/sell/web/iPhone11promax_eedb783825e14920837709e0f4398db4_d556175dc62d4ac58a259a0fe0fc4701_ce63a1f4048f45ef8117773162911856.jpeg"
-                />
-              </div>
-              <div className="phone-info">
-                <strong>iPhone XS</strong>
-                <div>
-                  As low as / <span className="price">$260</span>
+          <div
+            className="phone-list-show"
+            data-amp-bind-class="currentTab.current == 'apple' ? 'phone-list-show' : 'phone-list-hidden'"
+          >
+            {listedProduct["Apple"].map((x, index) => (
+              <a href={x.url} key={index}>
+                <div className="phone-card" key={index}>
+                  <div className="image-container">
+                    <amp-img
+                      alt="phone"
+                      width="120"
+                      height="120"
+                      src={x.photoUrl}
+                    />
+                  </div>
+                  <div className="phone-info">
+                    <strong>{x.name}</strong>
+                    <div>
+                      As low as /
+                      <span className="price">${x.lowPrice / 100}</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </a>
+            ))}
+          </div>
 
-            <div className="phone-card">
-              <div className="image-container">
-                <amp-img
-                  alt="phone"
-                  width="120"
-                  height="120"
-                  src="https://d5ps8hbhb8roq.cloudfront.net/sell/web/iPhone11promax_eedb783825e14920837709e0f4398db4_d556175dc62d4ac58a259a0fe0fc4701_ce63a1f4048f45ef8117773162911856.jpeg"
-                />
-              </div>
-              <div className="phone-info">
-                <strong>iPhone XS</strong>
-                <div>
-                  As low as / <span className="price">$260</span>
-                </div>
-              </div>
-            </div>
+          <div
+            className="phone-list-hidden"
+            data-amp-bind-class="currentTab.current == 'samsung' ? 'phone-list-show' : 'phone-list-hidden'"
+          >
+            {listedProduct["Samsung"].map((x, index) => (
+                <a href={x.url} key={index}>
+                  <div className="phone-card" key={index}>
+                    <div className="image-container">
+                      <amp-img
+                          alt="phone"
+                          width="120"
+                          height="120"
+                          src={x.photoUrl}
+                      />
+                    </div>
+                    <div className="phone-info">
+                      <strong>{x.name}</strong>
+                      <div>
+                        As low as /
+                        <span className="price">${x.lowPrice / 100}</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+            ))}
           </div>
 
           <div className="button-container">
-            <button className="btn btn-primary">View All</button>
+            <a href="/buy-phone">
+              <button className="btn btn-primary">View All</button>
+            </a>
           </div>
         </div>
 
@@ -137,60 +164,34 @@ export default function Home() {
             See Why Customers Love UpTrade
           </h2>
 
-          <a href="#" className="view-more-link">
+          <a href="/reviews" className="view-more-link">
             {"View more >"}
           </a>
 
           <div className="reviews-list">
-            <div className="review-card">
-              <div className="review-info">
-                <div className="review-ratings">
-                  <amp-img
-                    width="30"
-                    height="30"
-                    alt="rating"
-                    src="/rating.svg"
-                  />
-                  <amp-img
-                    width="30"
-                    height="30"
-                    alt="rating"
-                    src="/rating.svg"
-                  />
-                  <amp-img
-                    width="30"
-                    height="30"
-                    alt="rating"
-                    src="/rating.svg"
-                  />
-                  <amp-img
-                    width="30"
-                    height="30"
-                    alt="rating"
-                    src="/rating.svg"
-                  />
-                  <amp-img
-                    width="30"
-                    height="30"
-                    alt="rating"
-                    src="/rating.svg"
-                  />
+            {reviews.map((x, index) => (
+              <div className="review-card" key={index}>
+                <div className="review-info">
+                  <div className="review-ratings">
+                    {new Array(x.rating).fill("").map((x, index) => (
+                      <amp-img
+                        key={index}
+                        width="30"
+                        height="30"
+                        alt="rating"
+                        src="/rating.svg"
+                      />
+                    ))}
+                  </div>
+                  <div className="m1">{x.timeago}</div>
                 </div>
-                <amp-timeago
-                  className="m1"
-                  height="20"
-                  datetime="2022-05-14T00:37:33.809Z"
-                >
-                  Tuesday 14 March 2017 00.37
-                </amp-timeago>
+                <div
+                  className="review-content"
+                  dangerouslySetInnerHTML={{ __html: x.comments }}
+                />
+                <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
               </div>
-              <div className="review-content">
-                Phone was as promised and was delivered as stated. Would do
-                business with them again
-              </div>
-
-              <div className="review-author">Anonymous</div>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -271,4 +272,21 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const listedProduct = await fetch(
+    "https://api.276qa.com/search/newly-listed-product"
+  ).then((response) => response.json());
+
+  const reviewsResponse = await fetch(
+    "https://api.reviews.io/merchant/reviews?page=0&per_page=1000&order=rating&sort=highest_rated&store=uptradeit-com"
+  ).then((response) => response.json());
+
+  return {
+    props: {
+      listedProduct: listedProduct.data,
+      reviews: reviewsResponse.reviews.slice(0, 3),
+    },
+  };
 }

@@ -1017,6 +1017,10 @@ header.fixed {
   content: "";
 }
 
+.more-blog-list-hidden {
+  display: none;
+}
+
 @media (min-width: 1280px) {
   #desktop-buy-menu-dropdown-list {
     left: -200px;
@@ -1222,7 +1226,7 @@ header.fixed {
     padding: 104px 15vw 40px;
   }
 
-  .phones-list {
+  .phone-list-show {
     max-width: 72vw;
     margin-top: 60px;
     margin-left: auto;
@@ -1232,24 +1236,24 @@ header.fixed {
     gap: 24px;
   }
 
-  .phones-list .phone-card {
+  .phone-list-show .phone-card {
     border: 1px solid #e9e9e9;
   }
 
-  .phones-list .phone-card .image-container {
+  .phone-list-show .phone-card .image-container {
     padding: 16px 0;
     display: flex;
     justify-content: center;
   }
 
-  .phones-list .phone-card .phone-info {
+  .phone-list-show .phone-card .phone-info {
     border-top: 1px solid #e9e9e9;
     padding: 25px 16px;
     color: #222;
     font-size: 16px;
   }
 
-  .phones-list .phone-card .phone-info .price {
+  .phone-list-show .phone-card .phone-info .price {
     color: #3bba00;
   }
 
@@ -1290,6 +1294,7 @@ header.fixed {
 
   .home-reviews .view-more-link {
     margin-top: 24px;
+    margin-bottom: 24px;
     color: #00b4f3;
     font-size: 14px;
     text-decoration: none;
@@ -1349,14 +1354,14 @@ header.fixed {
     justify-content: space-between;
   }
 
-  .UpTrade-footer .subscribe-form amp-autocomplete {
+  .UpTrade-footer .subscribe-form input {
     flex-basis: 60%;
   }
 
-  .UpTrade-footer .subscribe-form amp-autocomplete input {
+  .UpTrade-footer .subscribe-form input {
     width: 100%;
   }
-  .UpTrade-footer .subscribe-form amp-autocomplete input::placeholder {
+  .UpTrade-footer .subscribe-form input::placeholder {
     color: #b9b9b8;
   }
   .UpTrade-footer .subscribe-form button {
@@ -1389,6 +1394,7 @@ header.fixed {
 
   .about-page {
     padding-top: 64px;
+    padding-bottom: 81.75px;
   }
   .about-page .title-content {
     padding: 60px 0;
@@ -1751,6 +1757,34 @@ header.fixed {
   }
 
   .buy-phone-page .buy-phone-search-form .select-search__select li button {
+    background: none;
+    border: none;
+    margin: 8px 0;
+    width: 100%;
+    text-align: start;
+  }
+
+  .search-form .select-search {
+    height: 30px;
+  }
+
+  .search-form .select-search__select {
+    background: #ffffff;
+    z-index: 1300;
+    border: 1px solid #e2e2e2;
+  }
+
+  .search-form .select-search__select ul {
+    width: 100%;
+  }
+
+  .search-form .select-search__select li {
+    list-style-type: none;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .search-form .select-search__select li button {
     background: none;
     border: none;
     margin: 8px 0;
@@ -2255,7 +2289,7 @@ header.fixed {
     outline: none;
     box-shadow: none;
     line-height: 1.75;
-
+    width: 100%;
     font-size: 18px;
     font-weight: 500;
     padding: 5px 15px;
@@ -2264,6 +2298,12 @@ header.fixed {
 
   .blog-page {
     padding-top: 64px;
+  }
+
+  .blog-page a {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
   }
 
   .blog-page-title {
@@ -2329,6 +2369,25 @@ header.fixed {
     row-gap: 43px;
   }
 
+  .blog-list-content .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .blog-list-content .button-container > button {
+    background: linear-gradient(180deg, #1ab4e7, #3498db);
+    color: #fff;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: none;
+    line-height: 1.75;
+    flex-basis: 50%;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 15px;
+    border: none;
+  }
   .blog-list-item {
     display: flex;
     column-gap: 24px;
@@ -2503,6 +2562,13 @@ header.fixed {
     line-height: normal;
   }
 
+  .terms-page li {
+    color: gray;
+    margin: 8px 0;
+    font-size: 18px;
+    line-height: normal;
+  }
+
   .terms-page .terms-divider {
     width: 200px;
     height: 1px;
@@ -2558,6 +2624,13 @@ header.fixed {
   .card-content .card-content-field {
     display: flex;
     flex-direction: column;
+  }
+
+  .card-content .card-content-field .error-message {
+    color: #f5222d;
+    padding-left: 8px;
+    padding-top: 4px;
+    font-size: 12px;
   }
 
   .card-content .card-content-field > label::before {
@@ -2682,6 +2755,20 @@ header.fixed {
     display: none;
   }
 
+  .help-mobile {
+    display: none;
+  }
+  .global-help {
+    position: fixed;
+    bottom: 34px;
+    right: 1.5vw;
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  .mobile-mission-background {
+    display: none;
+  }
   /*  Desktop css*/
 }
 
@@ -2757,6 +2844,15 @@ header.fixed {
   margin-bottom: 24px;
 }
 
+.phone-list-hidden {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
 @media (max-width: 1279.98px) {
   .UpTrade-header ul#desktop {
     display: none;
@@ -2827,7 +2923,7 @@ header.fixed {
     display: none;
   }
 
-  .phones-list {
+  .phone-list-show {
     margin-top: 24px;
     margin-left: 5.3vw;
     margin-right: 5.3vw;
@@ -2836,24 +2932,24 @@ header.fixed {
     gap: 24px;
   }
 
-  .phones-list .phone-card {
+  .phone-list-show .phone-card {
     border: 1px solid #e9e9e9;
   }
 
-  .phones-list .phone-card .image-container {
+  .phone-list-show .phone-card .image-container {
     padding: 16px 0;
     display: flex;
     justify-content: center;
   }
 
-  .phones-list .phone-card .phone-info {
+  .phone-list-show .phone-card .phone-info {
     border-top: 1px solid #e9e9e9;
     padding: 25px 16px;
     color: #222;
     font-size: 16px;
   }
 
-  .phones-list .phone-card .phone-info .price {
+  .phone-list-show .phone-card .phone-info .price {
     color: #3bba00;
   }
 
@@ -2949,14 +3045,14 @@ header.fixed {
     justify-content: space-between;
   }
 
-  .UpTrade-footer .subscribe-form amp-autocomplete {
+  .UpTrade-footer .subscribe-form input {
     flex-basis: 60%;
   }
 
-  .UpTrade-footer .subscribe-form amp-autocomplete input {
+  .UpTrade-footer .subscribe-form input {
     width: 100%;
   }
-  .UpTrade-footer .subscribe-form amp-autocomplete input::placeholder {
+  .UpTrade-footer .subscribe-form input::placeholder {
     color: #b9b9b8;
   }
   .UpTrade-footer .subscribe-form button {
@@ -3795,6 +3891,30 @@ header.fixed {
     text-align: start;
   }
 
+  .search-form .select-search__select {
+    background: #ffffff;
+    z-index: 1300;
+    border: 1px solid #e2e2e2;
+  }
+
+  .search-form .select-search__select ul {
+    width: 100%;
+  }
+
+  .search-form .select-search__select li {
+    list-style-type: none;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .search-form .select-search__select li button {
+    background: none;
+    border: none;
+    margin: 8px 0;
+    width: 100%;
+    text-align: start;
+  }
+
   .model-page {
     padding-top: 61px;
   }
@@ -4068,6 +4188,12 @@ header.fixed {
     padding-top: 61px;
   }
 
+  .blog-page a {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
   .blog-page-title {
     text-align: center;
     padding: 40px 0;
@@ -4120,11 +4246,31 @@ header.fixed {
   }
 
   .blog-list-content {
-    padding: 0 16px;
+    padding: 0 16px 24px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     row-gap: 43px;
+  }
+
+  .blog-list-content .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .blog-list-content .button-container > button {
+    background: linear-gradient(180deg, #1ab4e7, #3498db);
+    color: #fff;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: none;
+    line-height: 1.75;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 15px;
+    border: none;
   }
 
   .blog-list-item {
@@ -4306,6 +4452,13 @@ header.fixed {
     line-height: normal;
   }
 
+  .terms-page li {
+    color: gray;
+    margin: 8px 0;
+    font-size: 18px;
+    line-height: normal;
+  }
+
   .terms-page .terms-divider {
     width: 200px;
     height: 1px;
@@ -4364,6 +4517,13 @@ header.fixed {
     flex-direction: column;
   }
 
+  .card-content .card-content-field .error-message {
+    color: #f5222d;
+    padding-left: 8px;
+    padding-top: 4px;
+    font-size: 12px;
+  }
+
   .card-content .card-content-field > label::before {
     color: #f5222d;
     content: "*";
@@ -4419,7 +4579,7 @@ header.fixed {
     margin-top: 24px;
   }
 
-  .card-content .button-container > button {
+  .card-content .button-container button {
     background: #1ab4e7;
     width: 50%;
     padding: 15px;
@@ -4435,6 +4595,17 @@ header.fixed {
     padding: 19px 14px;
     border-radius: 4px;
     height: auto;
+  }
+
+  .help-pc {
+    display: none;
+  }
+  .global-help {
+    right: 0.53333333rem;
+    bottom: 73px;
+    cursor: pointer;
+    z-index: 999;
+    position: fixed;
   }
   /*Mobile css  */
 }

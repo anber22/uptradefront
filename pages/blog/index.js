@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export const config = { amp: true };
 
 export default function Blog({ topic, list }) {
@@ -8,25 +10,27 @@ export default function Blog({ topic, list }) {
       </div>
       <div className="blog-main-content">
         <h2>Featured Teach Talk</h2>
-        <div className="blog-topic-card">
-          <amp-img
-            src={topic.thumbnailFullUrl}
-            width="1000"
-            height="500"
-            layout="responsive"
-            data-hero
-          />
-          <a href={`/blog/${topic.slug}`}>
+        <a href={`/blog/${topic.slug}`}>
+          <div className="blog-topic-card">
+            <amp-img
+              src={topic.thumbnailFullUrl}
+              width="1000"
+              height="500"
+              layout="responsive"
+              data-hero
+            />
             <div className="blog-topic-card-content">
               <h3>{topic.title}</h3>
               <div className="topic-desc">{topic.seoDesc}</div>
-              <div className="topic-release">{topic.releaseDt}</div>
+              <div className="topic-release">
+                {dayjs(topic.releaseDt).format("MMM DD, YYYY")}
+              </div>
             </div>
-          </a>
-        </div>
+          </div>
+        </a>
       </div>
       <div className="blog-list-content">
-        {list.map((item, index) => (
+        {list.slice(0, 3).map((item, index) => (
           // eslint-disable-next-line react/jsx-key
           <a href={`/blog/${item.slug}`} className="blog-list-item" key={index}>
             <amp-img
@@ -37,11 +41,48 @@ export default function Blog({ topic, list }) {
             />
             <div className="blog-list-item-content">
               <div className="blog-list-item-title">{item.title}</div>
-              <div className="blog-list-item-release">{item.releaseDt}</div>
+              <div className="blog-list-item-release">
+                {dayjs(item.releaseDt).format("MMM DD, YYYY")}
+              </div>
               <p className="blog-list-item-desc">{item.seoDesc}</p>
             </div>
           </a>
         ))}
+
+        <div
+          className="button-container"
+          data-amp-bind-class="showMore ? 'more-blog-list-hidden' : 'button-container'"
+        >
+          <button on="tap: AMP.setState({ showMore: true })">View more</button>
+        </div>
+
+        <div
+          className="more-blog-list-hidden"
+          data-amp-bind-class="showMore ? 'more-blog-list-show' : 'more-blog-list-hidden'"
+        >
+          {list.slice(3).map((item, index) => (
+            // eslint-disable-next-line react/jsx-key
+            <a
+              href={`/blog/${item.slug}`}
+              className="blog-list-item"
+              key={index}
+            >
+              <amp-img
+                src={item.thumbnailFullUrl}
+                width="700"
+                height="204"
+                layout="flex-item"
+              />
+              <div className="blog-list-item-content">
+                <div className="blog-list-item-title">{item.title}</div>
+                <div className="blog-list-item-release">
+                  {dayjs(item.releaseDt).format("MMM DD, YYYY")}
+                </div>
+                <p className="blog-list-item-desc">{item.seoDesc}</p>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </main>
   );

@@ -1,8 +1,10 @@
 import Head from "next/head";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { useAmp } from "next/amp";
 
-function MyApp({ Component, pageProps, navbar }) {
+function MyApp({ Component, pageProps, navbar, initProduct }) {
+  const isAmp = useAmp();
   return (
     <>
       <Head>
@@ -43,8 +45,39 @@ function MyApp({ Component, pageProps, navbar }) {
         ></script>
       </Head>
 
-      {Component.name !== "Redirect" ? <Header navbar={navbar} /> : null}
+      {Component.name !== "Redirect" ? <Header navbar={navbar} product={initProduct} /> : null}
       <Component {...pageProps} />
+      {isAmp ? (
+        <a href="/contact" className="global-help">
+          <amp-img
+            src="/svg/help-pc.svg"
+            className="help-pc"
+            width="105"
+            height="34"
+          />
+          <amp-img
+            src="/svg/help-mobile.svg"
+            width="36"
+            height="36"
+            className="help-mobile"
+          />
+        </a>
+      ) : (
+        <a href='/contact' className="global-help">
+          <img
+            src="/svg/help-pc.svg"
+            className="help-pc"
+            width="105"
+            height="34"
+          />
+          <img
+            src="/svg/help-mobile.svg"
+            width="36"
+            height="36"
+            className="help-mobile"
+          />
+        </a>
+      )}
       {Component.name !== "Redirect" ? (
         <>
           <Footer />

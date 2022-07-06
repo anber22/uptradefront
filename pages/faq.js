@@ -179,7 +179,7 @@ export default function FAQ() {
             marginTop: 36,
           }}
         >
-          <button className="btn faq-button">Contract Us</button>
+          <a href="/contact"><button className="btn faq-button">Contact Us</button></a>
         </div>
       </main>
     </div>

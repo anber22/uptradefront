@@ -1,5 +1,5 @@
 import Head from "next/head";
-import urlcat from "urlcat";
+import urlcat  from "urlcat";
 import { promises as fs } from "fs";
 import path from "path";
 
@@ -161,7 +161,7 @@ export default function Model({
             </div>
             <div className="reviews-subtitle">
               {reviewsInfo.average_rating} Rating based on{" "}
-              <a href="#">{reviewsInfo.total} Reviews</a>
+              <a href="/reviews">{reviewsInfo.total} Reviews</a>
             </div>
             <div className="divider" />
 

@@ -80,13 +80,12 @@ export default function FooterBuyNav() {
           className="footer-nav-content"
           style={{ display: selectedNav === "about-us" ? "flex" : "none" }}
         >
-          <a href="#" title="...">
+          <a href="/who-we-are" title="Who we are">
             Who We Are
           </a>
-          <a href="#" title="...">
-            Contract Us
+          <a href="/contact" title="Contact Us">
+            Contact Us
           </a>
-          <a href="#">Buy in Bulk</a>
         </div>
       </section>
     </div>

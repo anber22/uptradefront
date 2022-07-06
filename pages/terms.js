@@ -463,10 +463,17 @@ export default function Terms() {
         </p>
         <h2>Contact Us</h2>
         <p>
-          UP Trade welcomes your questions or comments regarding the Terms: UP
-          Trade Technologies, Incorporated 550 S Watters Rd, Suite 276 Allen, TX
-          75013 Email Address: support@uptradeit.com
-          <div className="terms-divider"></div>
+          UP Trade welcomes your questions or comments regarding the Terms:{" "}
+        </p>
+        <p>
+          UP Trade Technologies, 3400 N Central Expy <br />
+          Suite 110-276
+          <br />
+          Richardson, TX 750803 <br />
+        </p>
+        <p>Email Address: support@uptradeit.com</p>
+        <div className="terms-divider"></div>
+        <p>
           <p>Last Updated: August 29, 2019</p>
         </p>
       </div>

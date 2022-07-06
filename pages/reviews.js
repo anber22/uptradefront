@@ -23,7 +23,7 @@ export default function Reviews({ data: initData }) {
         urlcat("https://api.reviews.io/merchant/reviews", {
           page: params.page,
           per_page: 10,
-          order: "rating",
+          order: "asc",
           sort: params.sort,
           store: "uptradeit-com",
           min_rating: params.filterValue,
@@ -70,7 +70,7 @@ export default function Reviews({ data: initData }) {
             <Select
               className="reviews-page-select"
               name="sort"
-              defaultValue={{ label: "Most Recent", value: "desc" }}
+              defaultValue={{ label: "Highest Rated", value: "highest_rated" }}
               onChange={({ value }) =>
                 setParams((prev) => ({ ...prev, sort: value }))
               }
@@ -120,6 +120,15 @@ export default function Reviews({ data: initData }) {
                         src="/rating.svg"
                       />
                     ))}
+                    {new Array(5 - x.rating).fill("").map((x, index) => (
+                      <img
+                        key={index}
+                        width="24"
+                        height="24"
+                        alt="rating"
+                        src="/svg/grey-rating.svg"
+                      />
+                    ))}
                   </div>
                 </div>
 
@@ -157,7 +166,7 @@ export async function getStaticProps({ params }) {
     urlcat("https://api.reviews.io/merchant/reviews", {
       page: 0,
       per_page: 10,
-      order: "rating",
+      order: "asc",
       sort: "highest_rated",
       store: "uptradeit-com",
       min_rating: 0,

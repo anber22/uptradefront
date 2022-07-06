@@ -76,14 +76,11 @@ export const Footer = () => {
 
           <div className="footer-nav-list">
             <div className="footer-nav-title">About Us</div>
-            <a href="#" className="footer-nav-item">
+            <a href="/who-we-are" className="footer-nav-item">
               Who We Are
             </a>
-            <a href="#" className="footer-nav-item">
-              Contract Us
-            </a>
-            <a href="#" className="footer-nav-item">
-              Buy in Bulk
+            <a href="/contact" className="footer-nav-item">
+              Contact Us
             </a>
           </div>
         </div>
@@ -135,13 +132,12 @@ export const Footer = () => {
                 </h3>
 
                 <div className="footer-nav-list">
-                  <a href="#" title="...">
+                  <a href="/who-we-are" title="Who we are">
                     Who We Are
                   </a>
-                  <a href="#" title="...">
-                    Contract Us
+                  <a href="/contact" title="Contact Us">
+                    Contact Us
                   </a>
-                  <a href="#">Buy in Bulk</a>
                 </div>
               </section>
             </amp-accordion>
@@ -154,14 +150,8 @@ export const Footer = () => {
             Subscribe To Our Newsletter
           </div>
           <form className="subscribe-form" action="#" target="_top">
-            {isAmp ? (
-              <amp-autocomplete filter="none">
-                <input placeholder="Email" type="text" />
-              </amp-autocomplete>
-            ) : (
-              <input placeholder="Email" type="email" />
-            )}
-            <button className="btn btn-primary">Subscribe</button>
+            <input placeholder="Email" type="email" />
+            <button className="btn btn-primary" type="submit">Subscribe</button>
           </form>
 
           {isAmp ? (
