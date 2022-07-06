@@ -18,11 +18,7 @@ export default function Model({
   return (
     <div>
       <Head>
-        <script
-          async
-          custom-element="amp-carousel"
-          src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"
-        ></script>
+        <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"></script>
         {metaDescription ? (
           <meta name="description" content={metaDescription} />
         ) : null}

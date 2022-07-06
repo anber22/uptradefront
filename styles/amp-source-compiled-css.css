@@ -870,7 +870,7 @@ header.fixed {
 }
 @media (prefers-color-scheme: light) {
   .header .main-menu .hamburger {
-    background: #212529;
+    background: #f8f9fa;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -2769,6 +2769,10 @@ header.fixed {
   .mobile-mission-background {
     display: none;
   }
+
+  .home-reviews .mobile-review-list {
+    display: none;
+  }
   /*  Desktop css*/
 }
 
@@ -2953,22 +2957,26 @@ button {
     color: #3bba00;
   }
 
+  .desktop-reviews-list {
+    display: none;
+  }
+
   .home-reviews .reviews-list {
     width: 100%;
   }
 
-  .home-reviews .reviews-list .review-card {
+  .home-reviews .review-card {
     padding: 24px;
     box-shadow: 0 1px 10px 0 rgb(0 0 0 / 7%);
   }
 
-  .home-reviews .reviews-list .review-card .review-info {
+  .home-reviews .review-card .review-info {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
   }
 
-  .home-reviews .reviews-list .review-card .review-content {
+  .home-reviews.review-card .review-content {
     color: #272729;
     font-size: 17px;
     height: 180px;

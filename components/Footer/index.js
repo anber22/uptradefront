@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useAmp } from "next/amp";
 import FooterBuyNav from "./buy";
 
-export const Footer = () => {
+export const Footer = ({ appleList }) => {
   const isAmp = useAmp();
   return (
     <footer className="UpTrade-footer">
@@ -32,21 +32,11 @@ export const Footer = () => {
         <div className="footer-nav-container">
           <div className="footer-nav-list">
             <div className="footer-nav-title">Popular Searches</div>
-            <a href="#" className="footer-nav-item">
-              Buy Used iPhone
-            </a>
-            <a href="#" className="footer-nav-item">
-              Buy Used iPhone 7
-            </a>
-            <a href="#" className="footer-nav-item">
-              Buy Used iPhone 8
-            </a>
-            <a href="#" className="footer-nav-item">
-              Buy Used iPhone X
-            </a>
-            <a href="#" className="footer-nav-item">
-              Buy Used iPhone XR
-            </a>
+            {appleList?.map((x, index) => (
+              <a href={x.url} className="footer-nav-item" key={index}>
+                Buy Used {x.value}
+              </a>
+            ))}
           </div>
 
           <div className="footer-nav-list">
@@ -91,6 +81,19 @@ export const Footer = () => {
             id="mobile-footer-nav-container"
           >
             <amp-accordion>
+              <section className="footer-nav-section">
+                <h3 className="footer-nav">
+                  <span>Popular Searchs</span> <i className="arrow-right"></i>
+                </h3>
+
+                <div className="footer-nav-list">
+                  {appleList?.map((x, index) => (
+                      <a href={x.url} key={index}>
+                        Buy Used {x.value}
+                      </a>
+                  ))}
+                </div>
+              </section>
               <section className="footer-nav-section">
                 <h3 className="footer-nav">
                   <span>Blog</span> <i className="arrow-right"></i>
@@ -143,7 +146,7 @@ export const Footer = () => {
             </amp-accordion>
           </div>
         ) : (
-          <FooterBuyNav />
+          <FooterBuyNav appleList={appleList} />
         )}
         <div className="footer-subscribe">
           <div className="footer-subscribe-title">
@@ -151,7 +154,9 @@ export const Footer = () => {
           </div>
           <form className="subscribe-form" action="#" target="_top">
             <input placeholder="Email" type="email" />
-            <button className="btn btn-primary" type="submit">Subscribe</button>
+            <button className="btn btn-primary" type="submit">
+              Subscribe
+            </button>
           </form>
 
           {isAmp ? (

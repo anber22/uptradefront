@@ -3,7 +3,7 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { useAmp } from "next/amp";
 
-function MyApp({ Component, pageProps, navbar, initProduct }) {
+function MyApp({ Component, pageProps, navbar, appleList }) {
   const isAmp = useAmp();
   return (
     <>
@@ -45,7 +45,9 @@ function MyApp({ Component, pageProps, navbar, initProduct }) {
         ></script>
       </Head>
 
-      {Component.name !== "Redirect" ? <Header navbar={navbar} product={initProduct} /> : null}
+      {Component.name !== "Redirect" ? (
+        <Header navbar={navbar} />
+      ) : null}
       <Component {...pageProps} />
       {isAmp ? (
         <a href="/contact" className="global-help">
@@ -63,7 +65,7 @@ function MyApp({ Component, pageProps, navbar, initProduct }) {
           />
         </a>
       ) : (
-        <a href='/contact' className="global-help">
+        <a href="/contact" className="global-help">
           <img
             src="/svg/help-pc.svg"
             className="help-pc"
@@ -80,7 +82,7 @@ function MyApp({ Component, pageProps, navbar, initProduct }) {
       )}
       {Component.name !== "Redirect" ? (
         <>
-          <Footer />
+          <Footer appleList={appleList} />
           <div className="copy-right">
             <div className="terms">
               <a href="#">Terms & Conditions</a>
@@ -100,8 +102,10 @@ MyApp.getInitialProps = async () => {
     "https://api.276qa.com/search/category/buy/navigation/bar"
   ).then((response) => response.json());
 
+  const appleList = navbarResponse.data.find((x) => x.key === "Apple").values;
   return {
     navbar: navbarResponse.data,
+    appleList: appleList,
   };
 };
 

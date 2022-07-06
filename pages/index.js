@@ -11,6 +11,7 @@ export default function Home({ listedProduct, reviews }) {
           name="description"
           content="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping."
         />
+        <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"></script>
       </Head>
       <amp-state id="currentTab">
         <script
@@ -130,25 +131,25 @@ export default function Home({ listedProduct, reviews }) {
             data-amp-bind-class="currentTab.current == 'samsung' ? 'phone-list-show' : 'phone-list-hidden'"
           >
             {listedProduct["Samsung"].map((x, index) => (
-                <a href={x.url} key={index}>
-                  <div className="phone-card" key={index}>
-                    <div className="image-container">
-                      <amp-img
-                          alt="phone"
-                          width="120"
-                          height="120"
-                          src={x.photoUrl}
-                      />
-                    </div>
-                    <div className="phone-info">
-                      <strong>{x.name}</strong>
-                      <div>
-                        As low as /
-                        <span className="price">${x.lowPrice / 100}</span>
-                      </div>
+              <a href={x.url} key={index}>
+                <div className="phone-card" key={index}>
+                  <div className="image-container">
+                    <amp-img
+                      alt="phone"
+                      width="120"
+                      height="120"
+                      src={x.photoUrl}
+                    />
+                  </div>
+                  <div className="phone-info">
+                    <strong>{x.name}</strong>
+                    <div>
+                      As low as /
+                      <span className="price">${x.lowPrice / 100}</span>
                     </div>
                   </div>
-                </a>
+                </div>
+              </a>
             ))}
           </div>
 
@@ -168,7 +169,7 @@ export default function Home({ listedProduct, reviews }) {
             {"View more >"}
           </a>
 
-          <div className="reviews-list">
+          <div className="reviews-list desktop-reviews-list">
             {reviews.map((x, index) => (
               <div className="review-card" key={index}>
                 <div className="review-info">
@@ -192,6 +193,41 @@ export default function Home({ listedProduct, reviews }) {
                 <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
               </div>
             ))}
+          </div>
+
+          <div className='reviews-list mobile-review-list'>
+            <amp-carousel
+                type="slides"
+                height="290"
+                role="region"
+                layout="flex-item"
+                controls
+                // className="reviews-list mobile-reviews-list"
+            >
+              {reviews.map((x, index) => (
+                  <div className="review-card" key={`${x.store_review_id}-${index}`}>
+                    <div className="review-info">
+                      <div className="review-ratings">
+                        {new Array(x.rating).fill("").map((x, index) => (
+                            <amp-img
+                                key={index}
+                                width="30"
+                                height="30"
+                                alt="rating"
+                                src="/rating.svg"
+                            />
+                        ))}
+                      </div>
+                      <div className="m1">{x.timeago}</div>
+                    </div>
+                    <div
+                        className="review-content"
+                        dangerouslySetInnerHTML={{ __html: x.comments }}
+                    />
+                    <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
+                  </div>
+              ))}
+            </amp-carousel>
           </div>
         </div>
 
