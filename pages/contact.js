@@ -93,7 +93,7 @@ export default function Contact() {
         <div className="contact-card">
           <h2>Send us message</h2>
           <div className="card-content">
-            <form action="#">
+            <form>
               <div className="name-fields">
                 <div className="card-content-field">
                   <label>Full Name:</label>

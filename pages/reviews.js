@@ -6,14 +6,14 @@ import Select from "react-select";
 export default function Reviews({ data: initData }) {
   const [params, setParams] = useState({
     page: 0,
-    sort: "highest_rated",
+    sort: "rating",
     filterValue: 0,
   });
 
   const { value: data = initData } = useAsync(async () => {
     if (
       params.page === 0 &&
-      params.sort === "highest_rated" &&
+      params.sort === "rating" &&
       params.filterValue === 0
     )
       return initData;
@@ -23,8 +23,7 @@ export default function Reviews({ data: initData }) {
         urlcat("https://api.reviews.io/merchant/reviews", {
           page: params.page,
           per_page: 10,
-          order: "asc",
-          sort: params.sort,
+          order: params.sort,
           store: "uptradeit-com",
           min_rating: params.filterValue,
           max_rating: params.filterValue,
@@ -65,21 +64,26 @@ export default function Reviews({ data: initData }) {
         </div>
 
         <div className="reviews-controller">
-          <span>
-            Sort By
-            <Select
-              className="reviews-page-select"
-              name="sort"
-              defaultValue={{ label: "Highest Rated", value: "highest_rated" }}
-              onChange={({ value }) =>
-                setParams((prev) => ({ ...prev, sort: value }))
-              }
-              options={[
-                { label: "Most Recent", value: "desc" },
-                { label: "Highest Rated", value: "highest_rated" },
-              ]}
-            />
-          </span>
+          {params.filterValue === 0 ? (
+            <span>
+              Sort By
+              <Select
+                className="reviews-page-select"
+                name="sort"
+                defaultValue={{
+                  label: "Highest Rated",
+                  value: "highest_rated",
+                }}
+                onChange={({ value }) =>
+                  setParams((prev) => ({ ...prev, sort: value }))
+                }
+                options={[
+                  { label: "Most Recent", value: "desc" },
+                  { label: "Highest Rated", value: "rating" },
+                ]}
+              />
+            </span>
+          ) : null}
           <span>
             Filter By
             <Select
@@ -89,7 +93,7 @@ export default function Reviews({ data: initData }) {
               onChange={({ value }) =>
                 setParams((prev) => ({
                   ...prev,
-                  filterValue: value,
+                  filterValue: Number(value),
                 }))
               }
               options={[
@@ -166,8 +170,7 @@ export async function getStaticProps({ params }) {
     urlcat("https://api.reviews.io/merchant/reviews", {
       page: 0,
       per_page: 10,
-      order: "asc",
-      sort: "highest_rated",
+      order: "rating",
       store: "uptradeit-com",
       min_rating: 0,
       max_rating: 0,

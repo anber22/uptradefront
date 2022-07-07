@@ -152,8 +152,8 @@ export const Footer = ({ appleList }) => {
           <div className="footer-subscribe-title">
             Subscribe To Our Newsletter
           </div>
-          <form className="subscribe-form" action="#" target="_top">
-            <input placeholder="Email" type="email" />
+          <form className="subscribe-form" method="post" action-xhr="https://api-gateway.uptradeit.com/api/message_books/subscribed" target="_top">
+            <input placeholder="Email" type="email"  name="email" />
             <button className="btn btn-primary" type="submit">
               Subscribe
             </button>
