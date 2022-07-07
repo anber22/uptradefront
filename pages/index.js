@@ -1,18 +1,41 @@
 import Head from "next/head";
-
+import { NextSeo } from "next-seo";
 export const config = { amp: true };
 
 export default function Home({ listedProduct, reviews }) {
   return (
     <div>
       <Head>
-        <title>UpTrade</title>
         <meta
-          name="description"
-          content="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping."
+          name="facebook-domain-verification"
+          content="xqixprug1s29tiyy50ug7ydb5cup5f"
         />
-        <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"></script>
+        <script
+          async
+          custom-element="amp-carousel"
+          src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
+        ></script>
       </Head>
+      <NextSeo
+        title="Buy Used Phones | Sell My Phone | UpTrade"
+        description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping."
+        canonical={process.env.BASEURL}
+        openGraph={{
+          title: "Buy Used Phones | Sell My Phone | UpTrade",
+          type: "Website",
+          images: [
+            {
+              url: `${process.env.BASEURL}/og_logo.png`,
+              width: 200,
+              height: 200,
+            },
+          ],
+          url: process.env.BASEURL,
+          description:
+            "Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping.",
+          site_name: "UpTrade",
+        }}
+      />
       <amp-state id="currentTab">
         <script
           type="application/json"
@@ -195,37 +218,40 @@ export default function Home({ listedProduct, reviews }) {
             ))}
           </div>
 
-          <div className='reviews-list mobile-review-list'>
+          <div className="reviews-list mobile-review-list">
             <amp-carousel
-                type="slides"
-                height="290"
-                role="region"
-                layout="flex-item"
-                controls
-                // className="reviews-list mobile-reviews-list"
+              type="slides"
+              height="290"
+              role="region"
+              layout="flex-item"
+              controls
+              // className="reviews-list mobile-reviews-list"
             >
               {reviews.map((x, index) => (
-                  <div className="review-card" key={`${x.store_review_id}-${index}`}>
-                    <div className="review-info">
-                      <div className="review-ratings">
-                        {new Array(x.rating).fill("").map((x, index) => (
-                            <amp-img
-                                key={index}
-                                width="30"
-                                height="30"
-                                alt="rating"
-                                src="/rating.svg"
-                            />
-                        ))}
-                      </div>
-                      <div className="m1">{x.timeago}</div>
+                <div
+                  className="review-card"
+                  key={`${x.store_review_id}-${index}`}
+                >
+                  <div className="review-info">
+                    <div className="review-ratings">
+                      {new Array(x.rating).fill("").map((x, index) => (
+                        <amp-img
+                          key={index}
+                          width="30"
+                          height="30"
+                          alt="rating"
+                          src="/rating.svg"
+                        />
+                      ))}
                     </div>
-                    <div
-                        className="review-content"
-                        dangerouslySetInnerHTML={{ __html: x.comments }}
-                    />
-                    <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
+                    <div className="m1">{x.timeago}</div>
                   </div>
+                  <div
+                    className="review-content"
+                    dangerouslySetInnerHTML={{ __html: x.comments }}
+                  />
+                  <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
+                </div>
               ))}
             </amp-carousel>
           </div>

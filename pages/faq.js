@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { NextSeo } from "next-seo";
 
 export const config = { amp: true };
 
@@ -10,6 +11,11 @@ export default function FAQ() {
       </Head>
 
       <main className="faq-page">
+        <NextSeo
+          title="Frequently Asked Questions | UpTrade"
+          description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | FAQ"
+          canonical={`${process.env.BASEURL}/faq`}
+        />
         <h1 className="faq-page-title">
           Frequently Asked Questions about Used Phones
         </h1>
@@ -179,7 +185,9 @@ export default function FAQ() {
             marginTop: 36,
           }}
         >
-          <a href="/contact"><button className="btn faq-button">Contact Us</button></a>
+          <a href="/contact">
+            <button className="btn faq-button">Contact Us</button>
+          </a>
         </div>
       </main>
     </div>

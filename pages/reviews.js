@@ -3,6 +3,8 @@ import Pagination from "rc-pagination";
 import { useState } from "react";
 import { useAsync } from "react-use";
 import Select from "react-select";
+import { NextSeo } from "next-seo";
+
 export default function Reviews({ data: initData }) {
   const [params, setParams] = useState({
     page: 0,
@@ -38,6 +40,25 @@ export default function Reviews({ data: initData }) {
 
   return (
     <main className="reviews-page">
+      <NextSeo
+        title="Customer Reviews | UpTrade"
+        description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Reviews"
+        canonical={`${process.env.BASEURL}/reviews`}
+        openGraph={{
+          title: "Customer Reviews | UpTrade",
+          type: "Website",
+          images: [
+            {
+              url: `${process.env.BASEURL}/og_logo.png`,
+              width: 200,
+              height: 200,
+            },
+          ],
+          url: `${process.env.BASEURL}/reviews`,
+          description: `Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Reviews`,
+          site_name: "UpTrade",
+        }}
+      />
       <div className="reviews-page-content">
         <h1 className="reviews-page-title">UpTrade Reviews</h1>
 

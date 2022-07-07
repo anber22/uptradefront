@@ -1,8 +1,15 @@
+import { NextSeo } from "next-seo";
+
 export const config = { amp: true };
 
 export default function privacyPolicy() {
   return (
     <main className="terms-page">
+      <NextSeo
+          title="Privacy Policy | UpTrade"
+          description="Privacy Policy | UpTrade"
+          canonical={`${process.env.BASEURL}/privacy-policy`}
+      />
       <div className="content">
         <h1>Privacy Policy</h1>
         <p>
@@ -209,10 +216,10 @@ export default function privacyPolicy() {
           UP Trade welcomes your questions or comments regarding the Terms:
         </p>
         <p>
-          UP Trade Technologies, 3400 N Central Expy <br />
-          Suite 110-276
+          UP Trade Technologies, Incorporated <br />
+          3400 N Central Expy, Suite 110-276
           <br />
-          Richardson, TX 750803 <br />
+          Richardson, TX 75080 <br />
         </p>
         <p>Email Address: support@uptradeit.com</p>
         <div className="terms-divider"></div>

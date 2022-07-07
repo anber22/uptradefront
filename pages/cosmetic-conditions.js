@@ -1,17 +1,15 @@
-import Head from "next/head";
-import Link from "next/link";
 import { NextSeo } from "next-seo";
 export const config = { amp: true };
 
 export default function CosmeticConditions() {
   return (
     <>
-      <NextSeo
-        title="Condition Comparison of Used Phones and Devices"
-        canonical="/cosmetic-conditions"
-        description="Compare Used Condition and Grading Definitions of UpTrade, Apple, Amazon, BackMarket, Gazelle, and other Used Phone and Device Seller"
-      />
       <main className="cosmetic-condition-page">
+        <NextSeo
+          title="Condition Comparison of Used Phones and Devices"
+          description="Compare Used Condition and Grading Definitions of UpTrade, Apple, Amazon, BackMarket, Gazelle, and other Used Phone and Device Seller"
+          canonical={`${process.env.BASEURL}/cosmetic-conditions`}
+        />
         <h1 className="cosmetic-condition-main-title">Cosmetic Conditions</h1>
 
         <h2 className="cosmetic-condition-secondary-title">Definition</h2>

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useAsyncFn } from "react-use";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 
 export default function Contact() {
   const fullNameRef = useRef();
@@ -86,6 +87,26 @@ export default function Contact() {
 
   return (
     <main className="contact-page">
+      <NextSeo
+          title="Contact us | UpTrade"
+          description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Contact"
+          canonical={`${process.env.BASEURL}/contact`}
+          openGraph={{
+            title: 'Contact us | UpTrade',
+            type: 'Website',
+            images: [
+              {
+                url: `${process.env.BASEURL}/og_logo.png`,
+                width: 200,
+                height: 200,
+              },
+            ],
+            url: `${process.env.BASEURL}/contact`,
+            description:
+                'Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Contact',
+            site_name: 'UpTrade',
+          }}
+      />
       <div className="title-container">
         <h1>Contact us?</h1>
       </div>
@@ -93,7 +114,7 @@ export default function Contact() {
         <div className="contact-card">
           <h2>Send us message</h2>
           <div className="card-content">
-            <form>
+            <div>
               <div className="name-fields">
                 <div className="card-content-field">
                   <label>Full Name:</label>
@@ -119,7 +140,7 @@ export default function Contact() {
               <div className="button-container">
                 <button onClick={creatEmail}>Submit</button>
               </div>
-            </form>
+            </div>
             <div className="card-description">
               <div>
                 <h3>We are located at</h3>

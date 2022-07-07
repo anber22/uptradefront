@@ -1,10 +1,30 @@
 import dayjs from "dayjs";
+import { NextSeo } from "next-seo";
 
 export const config = { amp: true };
 
 export default function Blog({ topic, list }) {
   return (
     <main className="blog-page">
+      <NextSeo
+        title="UpTrade Blog | UpTrade"
+        description="UpTrade's Blog"
+        canonical={`${process.env.BASEURL}/blog`}
+        openGraph={{
+          title: "UpTrade Blog | UpTrade",
+          type: "Website",
+          images: [
+            {
+              url: `${process.env.BASEURL}/og_logo.png`,
+              width: 200,
+              height: 200,
+            },
+          ],
+          url: `${process.env.BASEURL}/blog`,
+          description: `UpTrade's Blog`,
+          site_name: "UpTrade",
+        }}
+      />
       <div className="blog-page-title">
         <h1>Tech Talk</h1>
       </div>

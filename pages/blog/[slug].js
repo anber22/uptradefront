@@ -1,8 +1,29 @@
 import urlcat from "urlcat";
+import dayjs from "dayjs";
+import { NextSeo } from "next-seo";
 
 export default function BlogDetail({ data }) {
   return (
     <main className="blog-page">
+      <NextSeo
+        title={data?.title}
+        description={data?.seoDesc}
+        canonical={`${process.env.BASEURL}/blog/${data?.slug}`}
+        openGraph={{
+          title: data?.title,
+          type: "Website",
+          images: [
+            {
+              url: `${process.env.BASEURL}/og_logo.png`,
+              width: 200,
+              height: 200,
+            },
+          ],
+          url: `${process.env.BASEURL}/blog/${data?.slug}`,
+          description: data?.seoDesc,
+          site_name: "UpTrade",
+        }}
+      />
       <div className="blog-page-title">
         <div>Tech Talk</div>
       </div>
@@ -10,7 +31,7 @@ export default function BlogDetail({ data }) {
         <div className="blog-detail-main">
           <h1>{data.title}</h1>
           <div className="detail-release-data">
-            <div>{data.releaseDt}</div>
+            <div>{dayjs(data.releaseDt).format("MMM DD, YYYY")}</div>
             <div>
               <img src="/svg/twitter-s.svg" width="24" height="14" />
               <img src="/svg/facebook-s.svg" width="24" height="14" />
@@ -84,6 +105,8 @@ export async function getStaticProps({ params }) {
         title: blogDetailResponse.data.title,
         releaseDt: blogDetailResponse.data.releaseDt,
         content: blogDetailResponse.data.content,
+        slug: blogDetailResponse.data.slug,
+        seoDesc: blogDetailResponse.data.seoDesc,
       },
     },
   };

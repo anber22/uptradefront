@@ -1,14 +1,27 @@
-import { useAsync, useLocation } from "react-use";
+import { useAsync, useAsyncFn } from "react-use";
 import { useCallback, useState, useEffect } from "react";
 import Pagination from "rc-pagination";
 import SelectSearch from "react-select-search";
 import urlcat from "urlcat";
+import { NextSeo } from "next-seo";
+import {useRouter} from "next/router";
 
 const orderByDict = {
   LOWEST_PRICE: "Lowest Price",
   HIGHEST_PRICE: "Highest Price",
   BEST_CONDITION: "Best Condition",
 };
+
+
+function pageTitleHandler(pageTitle) {
+  let showTitle = pageTitle
+
+  if (pageTitle && pageTitle.substr(pageTitle.length - 1) === '|') {
+    showTitle = pageTitle.substr(0, pageTitle.length - 1)
+  }
+  if (showTitle && `${showTitle} | UpTrade`.length > 60) return showTitle
+  return `${showTitle} | UpTrade`
+}
 
 function useMediaQuery(query) {
   const getMatches = (query) => {
@@ -58,7 +71,7 @@ export default function BuyPhone({
   data: initData,
   products,
 }) {
-  console.log(initialConditions);
+  const router = useRouter()
   const [sortDrawerOpen, setSortDrawerOpen] = useState(false);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   const [expanded, setExpanded] = useState([]);
@@ -221,6 +234,12 @@ export default function BuyPhone({
     }
   }, [searchKeys, initData]);
 
+  const [, addRank] = useAsyncFn(async (name) => {
+    return fetch(urlcat("https://api.276qa.com/search/:name/rank", { name }), {
+      method: "PUT",
+    });
+  }, []);
+
   useEffect(() => {
     if (!location?.search) return;
 
@@ -249,6 +268,31 @@ export default function BuyPhone({
 
   return (
     <main className="buy-phone-page">
+      <NextSeo
+          title={pageTitleHandler(
+              `Browse Used Refurbished Phones and Devices for Sale`,
+          )}
+          canonical={`${process.env.BASEURL}/buy-phone`}
+          description={`Considering buying a used phone? Browse UpTrade certified phones. View photos of the phone you'll receive. 30 day free returns. Free shipping.`}
+          openGraph={{
+            title: pageTitleHandler(
+                `Browse Used Refurbished Phones and Devices for Sale`,
+            ),
+            type: 'Product.group',
+            'twitter:image':
+                'https://prod-uptrade.s3.us-east-2.amazonaws.com/website/logo/Up_Logo.png',
+            images: [
+              {
+                url: `${process.env.BASEURL}/og_logo.png`,
+                width: 200,
+                height: 200,
+              },
+            ],
+            url: `${process.env.BASEURL}${router.asPath}`,
+            description: `Considering buying a used phone? Browse UpTrade certified phones. View photos of the phone you'll receive. 30 day free returns. Free shipping.`,
+            site_name: 'UpTrade',
+          }}
+      />
       <div className="buy-phone-conditions">
         <div className="conditions-content">
           {conditions.map((data) => (
@@ -342,6 +386,20 @@ export default function BuyPhone({
                   }}
                   className={className}
                 />
+              );
+            }}
+            renderOption={(optionsProps, optionData) => {
+              console.log(optionsProps);
+              return (
+                <button
+                  {...optionsProps}
+                  onMouseDown={(event) => {
+                    optionsProps.onMouseDown(event);
+                    addRank(optionData.name);
+                  }}
+                >
+                  {optionData.name}
+                </button>
               );
             }}
           />

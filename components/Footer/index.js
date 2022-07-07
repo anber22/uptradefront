@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useAmp } from "next/amp";
 import FooterBuyNav from "./buy";
+import Subscribe from "./subscribe";
 
 export const Footer = ({ appleList }) => {
   const isAmp = useAmp();
@@ -87,10 +88,13 @@ export const Footer = ({ appleList }) => {
                 </h3>
 
                 <div className="footer-nav-list">
+                  <a href='/buy-used-refurbished-apple'>
+                    Buy Used iPhone
+                  </a>
                   {appleList?.map((x, index) => (
-                      <a href={x.url} key={index}>
-                        Buy Used {x.value}
-                      </a>
+                    <a href={x.url} key={index}>
+                      Buy Used {x.value}
+                    </a>
                   ))}
                 </div>
               </section>
@@ -149,15 +153,34 @@ export const Footer = ({ appleList }) => {
           <FooterBuyNav appleList={appleList} />
         )}
         <div className="footer-subscribe">
-          <div className="footer-subscribe-title">
-            Subscribe To Our Newsletter
-          </div>
-          <form className="subscribe-form" method="post" action-xhr="https://api-gateway.uptradeit.com/api/message_books/subscribed" target="_top">
-            <input placeholder="Email" type="email"  name="email" />
-            <button className="btn btn-primary" type="submit">
-              Subscribe
-            </button>
-          </form>
+          {isAmp ? (
+            <>
+              <div className="footer-subscribe-title">
+                Subscribe To Our Newsletter
+              </div>
+              <form
+                className="subscribe-form"
+                method="post"
+                action-xhr="https://api-gateway.uptradeit.com/api/message_books/subscribed"
+                target="_top"
+                on="submit-error: AMP.setState({ subSuccess: true })"
+              >
+                <input placeholder="Email" type="email" name="email" />
+                <button className="btn btn-primary" type="submit">
+                  Subscribe
+                </button>
+              </form>
+
+              <div
+                className="subscribe-hidden"
+                data-amp-bind-class="subSuccess ? 'subscribe-success' : 'subscribe-hidden'"
+              >
+                Succeed to subscribe
+              </div>
+            </>
+          ) : (
+            <Subscribe />
+          )}
 
           {isAmp ? (
             <div className="social-network-subscribe-container">

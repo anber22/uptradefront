@@ -194,7 +194,7 @@ export const Header = ({ navbar }) => {
                               data-amp-bind-src="filterNavBar.items"
                               width="400"
                               height="300"
-                              binding="no"
+                              binding="always"
                             >
                               <template type="amp-mustache">
                                 <a

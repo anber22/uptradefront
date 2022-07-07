@@ -1,5 +1,6 @@
 import Head from "next/head";
-import urlcat  from "urlcat";
+import urlcat from "urlcat";
+import { NextSeo } from "next-seo";
 import { promises as fs } from "fs";
 import path from "path";
 
@@ -14,15 +15,41 @@ export default function Model({
   relatedGoods,
   metaDescription,
   qa,
+  path,
+  keyword,
 }) {
   return (
     <div>
       <Head>
-        <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"></script>
-        {metaDescription ? (
-          <meta name="description" content={metaDescription} />
-        ) : null}
+        <script
+          async
+          custom-element="amp-carousel"
+          src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
+        ></script>
       </Head>
+      <NextSeo
+        title={`Best Certified Used ${keyword || productName} and Refurbished ${
+          keyword || productName
+        }`}
+        description={metaDescription}
+        canonical={`${process.env.BASEURL}${path}`}
+        openGraph={{
+          title: `Best Certified Used ${
+            keyword || productName
+          } and Refurbished ${keyword || productName}`,
+          type: "Product.group",
+          images: [
+            {
+              url: `${process.env.BASEURL}/og_logo.png`,
+              width: 200,
+              height: 200,
+            },
+          ],
+          url: `${process.env.BASEURL}${path}`,
+          description: metaDescription,
+          site_name: "UpTrade",
+        }}
+      />
       <main className="model-page">
         <div className="icon-list">
           <div className="icon-list-item">
@@ -52,7 +79,7 @@ export default function Model({
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a href="/buy-phone">All</a>
             <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
-            <a>Refurbished {productName}</a>
+            <a>Refurbished {keyword || productName}</a>
           </div>
           <div className="model-page-description-content">
             {metaDescription}
@@ -61,7 +88,7 @@ export default function Model({
         <div className="model-content">
           <div className="left">
             <h1 className="model-page-title">
-              Best Certified Used {productName} and Refurbished {productName}
+              Best Certified Used {keyword || productName} and Refurbished {keyword || productName}
             </h1>
             <div className="model-info">
               <amp-img
@@ -150,15 +177,37 @@ export default function Model({
             </div>
           </div>
           <div className="right">
-            <h2 className="reviews-title">Customer Reviews</h2>
-            <div className="reviews-from">
-              <span>Data From</span>
-              <amp-img src="/svg/reviewsio-logo.svg" width="80" height="11" />
+            <div className="desktop-reviews-title">
+              <h2 className="reviews-title">Customer reviews</h2>
+              <div className="reviews-from">
+                <span>Data From</span>
+                <amp-img src="/svg/reviewsio-logo.svg" width="80" height="11" />
+              </div>
+              <div className="reviews-subtitle">
+                {reviewsInfo.average_rating} Rating based on{" "}
+                <a href="/reviews">{reviewsInfo.total} Reviews</a>
+              </div>
             </div>
-            <div className="reviews-subtitle">
-              {reviewsInfo.average_rating} Rating based on{" "}
-              <a href="/reviews">{reviewsInfo.total} Reviews</a>
+
+            <div className="mobile-reviews-title">
+              <h2 className="reviews-title">
+                <span>Customer reviews</span>
+                <div className="reviews-from">
+                  <span>Data From</span>
+                  <amp-img
+                    src="/svg/reviewsio-logo.svg"
+                    width="80"
+                    height="11"
+                  />
+                </div>
+              </h2>
+
+              <div className="reviews-subtitle">
+                {reviewsInfo.average_rating} Rating based on{" "}
+                <a href="/reviews">{reviewsInfo.total} Reviews</a>
+              </div>
             </div>
+
             <div className="divider" />
 
             <amp-carousel
@@ -293,14 +342,40 @@ export async function getStaticPaths() {
     JSON.stringify(result)
   );
 
-  const paths = result.map((x) => ({
-    params: {
-      matchName: `buy-used-refurbished-${x.productName
-        .split(" ")
-        .join("-")
-        .toLowerCase()}`,
-    },
-  }));
+  const paths = result.map((x) => {
+    if (x.type === "BRAND") {
+      return {
+        params: {
+          matchName: `buy-used-refurbished-${x.brand
+            .split(" ")
+            .join("-")
+            .toLowerCase()}`,
+        },
+      };
+    }
+
+    if (x.type === "CARRIER") {
+      return {
+        params: {
+          matchName: `buy-used-refurbished-${x.brand
+            .replaceAll("&", "")
+            .replaceAll("-", "")
+            .split(" ")
+            .join("-")
+            .toLowerCase()}-phones`,
+        },
+      };
+    }
+
+    return {
+      params: {
+        matchName: `buy-used-refurbished-${x.productName
+          .split(" ")
+          .join("-")
+          .toLowerCase()}`,
+      },
+    };
+  });
 
   return { paths, fallback: false };
 }
@@ -322,11 +397,24 @@ export async function getStaticProps({ params }) {
   const cache = await fs.readFile(path.join(process.cwd(), "cache.json"));
   const searchResponse = JSON.parse(cache);
 
-  const product = searchResponse.find(
-    (x) =>
+  const product = searchResponse.find((x) => {
+    return (
       params.matchName ===
-      `buy-used-refurbished-${x.productName.split(" ").join("-").toLowerCase()}`
-  );
+        `buy-used-refurbished-${x.productName
+          .split(" ")
+          .join("-")
+          .toLowerCase()}` ||
+      params.matchName ===
+        `buy-used-refurbished-${x.brand.split(" ").join("-").toLowerCase()}` ||
+      params.matchName ===
+        `buy-used-refurbished-${x.brand
+          .replaceAll("&", "")
+          .replaceAll("-", "")
+          .split(" ")
+          .join("-")
+          .toLowerCase()}-phones`
+    );
+  });
 
   const reviewsInfo = {
     total: reviewsResponse.stats.total_reviews,
@@ -337,6 +425,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       ...product,
+      path: `/${params.matchName}`,
       relatedGoods: product.relatedGoods
         .filter((x) => !!x.specs)
         .map((item) => {

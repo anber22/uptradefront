@@ -1,10 +1,16 @@
 import Head from "next/head";
+import { NextSeo } from "next-seo";
 
 export const config = { amp: true };
 
 export default function AboutUs() {
   return (
     <div>
+      <NextSeo
+        title="UpTrade Mission Statement - Who We Are | UpTrade"
+        description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Who We Are"
+        canonical={`${process.env.BASEURL}/who-we-are`}
+      />
       <Head>
         <title>UpTrade Mission Statement - Who We Are | UpTrade</title>
       </Head>

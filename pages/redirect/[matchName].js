@@ -10,7 +10,7 @@ export default function Redirect() {
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
     const path = location.pathname?.replace("/redirect/", "");
-    const [grade, merchant] = path?.split("-") ?? [];
+    const [productId, grade, merchant] = path?.split("-") ?? [];
     setMerchant(merchant);
   }, [location]);
 
@@ -20,13 +20,27 @@ export default function Redirect() {
     const redirectUrl = params.get("redirectUrl");
     if (!redirectUrl) return;
 
-    const url = urlcat(redirectUrl, {
-      utm_source: "uptradeit.com",
-      utm_medium: "affiliate",
-      utm_campaign: "buy",
-    });
+    const path = location.pathname?.replace("/redirect/", "");
+    const [productId] = path?.split("-") ?? [];
 
-    window.location.href = url;
+    fetch("https://api.276qa.com/statistics/request-record", {
+      method: "POST",
+      headers: {
+        ["Content-Type"]: "application/json",
+      },
+      body: JSON.stringify({
+        productId,
+        target: redirectUrl,
+      }),
+    }).finally(() => {
+      const url = urlcat(redirectUrl, {
+        utm_source: "uptradeit.com",
+        utm_medium: "affiliate",
+        utm_campaign: "buy",
+      });
+
+      window.location.href = url;
+    });
   }, [location]);
 
   return (

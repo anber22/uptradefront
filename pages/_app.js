@@ -8,6 +8,7 @@ function MyApp({ Component, pageProps, navbar, appleList }) {
   return (
     <>
       <Head>
+        <meta name="twitter:card" content="summary" />
         <script
           async
           custom-element="amp-autocomplete"
