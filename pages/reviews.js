@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAsync } from "react-use";
 import Select from "react-select";
 import { NextSeo } from "next-seo";
+import Head from "next/head";
 
 export default function Reviews({ data: initData }) {
   const [params, setParams] = useState({
@@ -39,150 +40,155 @@ export default function Reviews({ data: initData }) {
   }, [initData, params]);
 
   return (
-    <main className="reviews-page">
-      <NextSeo
-        title="Customer Reviews | UpTrade"
-        description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Reviews"
-        canonical={`${process.env.BASEURL}/reviews`}
-        openGraph={{
-          title: "Customer Reviews | UpTrade",
-          type: "Website",
-          images: [
-            {
-              url: `${process.env.BASEURL}/og_logo.png`,
-              width: 200,
-              height: 200,
-            },
-          ],
-          url: `${process.env.BASEURL}/reviews`,
-          description: `Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Reviews`,
-          site_name: "UpTrade",
-        }}
-      />
-      <div className="reviews-page-content">
-        <h1 className="reviews-page-title">UpTrade Reviews</h1>
+    <Head>
+      <Head>
+        <link rel="stylesheet" href="/rc.css" />
+      </Head>
+      <main className="reviews-page">
+        <NextSeo
+          title="Customer Reviews | UpTrade"
+          description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Reviews"
+          canonical={`${process.env.BASEURL}/reviews`}
+          openGraph={{
+            title: "Customer Reviews | UpTrade",
+            type: "Website",
+            images: [
+              {
+                url: `${process.env.BASEURL}/og_logo.png`,
+                width: 200,
+                height: 200,
+              },
+            ],
+            url: `${process.env.BASEURL}/reviews`,
+            description: `Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Reviews`,
+            site_name: "UpTrade",
+          }}
+        />
+        <div className="reviews-page-content">
+          <h1 className="reviews-page-title">UpTrade Reviews</h1>
 
-        <div className="reviews-page-average_rating">
-          {new Array(Math.ceil(+data.stats.average_rating))
-            .fill("")
-            .map((x, index) => (
-              <img
-                key={index}
-                width="24"
-                height="24"
-                alt="rating"
-                src="/rating.svg"
-              />
-            ))}
-        </div>
+          <div className="reviews-page-average_rating">
+            {new Array(Math.ceil(+data.stats.average_rating))
+              .fill("")
+              .map((x, index) => (
+                <img
+                  key={index}
+                  width="24"
+                  height="24"
+                  alt="rating"
+                  src="/rating.svg"
+                />
+              ))}
+          </div>
 
-        <div className="reviews-page-desc">
-          <span>{data.stats.average_rating} Rating</span>
-          <span>
-            Data From
-            <img src="/svg/reviewsio-logo.svg" width="80" height="11" />
-          </span>
-        </div>
-
-        <div className="reviews-controller">
-          {params.filterValue === 0 ? (
+          <div className="reviews-page-desc">
+            <span>{data.stats.average_rating} Rating</span>
             <span>
-              Sort By
+              Data From
+              <img src="/svg/reviewsio-logo.svg" width="80" height="11" />
+            </span>
+          </div>
+
+          <div className="reviews-controller">
+            {params.filterValue === 0 ? (
+              <span>
+                Sort By
+                <Select
+                  className="reviews-page-select"
+                  name="sort"
+                  defaultValue={{
+                    label: "Highest Rated",
+                    value: "highest_rated",
+                  }}
+                  onChange={({ value }) =>
+                    setParams((prev) => ({ ...prev, sort: value }))
+                  }
+                  options={[
+                    { label: "Most Recent", value: "desc" },
+                    { label: "Highest Rated", value: "rating" },
+                  ]}
+                />
+              </span>
+            ) : null}
+            <span>
+              Filter By
               <Select
                 className="reviews-page-select"
                 name="sort"
-                defaultValue={{
-                  label: "Highest Rated",
-                  value: "highest_rated",
-                }}
+                defaultValue={{ label: "None", value: "0" }}
                 onChange={({ value }) =>
-                  setParams((prev) => ({ ...prev, sort: value }))
+                  setParams((prev) => ({
+                    ...prev,
+                    filterValue: Number(value),
+                  }))
                 }
                 options={[
-                  { label: "Most Recent", value: "desc" },
-                  { label: "Highest Rated", value: "rating" },
+                  { label: "None", value: "0" },
+                  { label: "5 stars", value: "5" },
+                  { label: "4 stars", value: "4" },
+                  { label: "3 stars", value: "3" },
+                  { label: "2 stars", value: "2" },
+                  { label: "1 stars", value: "1" },
                 ]}
               />
             </span>
-          ) : null}
-          <span>
-            Filter By
-            <Select
-              className="reviews-page-select"
-              name="sort"
-              defaultValue={{ label: "None", value: "0" }}
-              onChange={({ value }) =>
+          </div>
+
+          <div className="reviews-list">
+            {data.reviews.map((x) => {
+              return (
+                <div key={x.store_review_id} className="review-card">
+                  <div className="review-author">
+                    {`${x.reviewer.first_name} ${x.reviewer.last_name}`}
+                    <div className="review-ratings">
+                      {new Array(x.rating).fill("").map((x, index) => (
+                        <img
+                          key={index}
+                          width="24"
+                          height="24"
+                          alt="rating"
+                          src="/rating.svg"
+                        />
+                      ))}
+                      {new Array(5 - x.rating).fill("").map((x, index) => (
+                        <img
+                          key={index}
+                          width="24"
+                          height="24"
+                          alt="rating"
+                          src="/svg/grey-rating.svg"
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <div
+                    className="review-content"
+                    dangerouslySetInnerHTML={{ __html: x.comments }}
+                  ></div>
+
+                  <div className="review-date">{x.timeago}</div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="reviews-pagination">
+            <Pagination
+              onChange={(value) =>
                 setParams((prev) => ({
                   ...prev,
-                  filterValue: Number(value),
+                  page: value - 1,
                 }))
               }
-              options={[
-                { label: "None", value: "0" },
-                { label: "5 stars", value: "5" },
-                { label: "4 stars", value: "4" },
-                { label: "3 stars", value: "3" },
-                { label: "2 stars", value: "2" },
-                { label: "1 stars", value: "1" },
-              ]}
+              current={params.page + 1}
+              total={data.total_pages * 10}
+              pageSize={10}
             />
-          </span>
+          </div>
         </div>
-
-        <div className="reviews-list">
-          {data.reviews.map((x) => {
-            return (
-              <div key={x.store_review_id} className="review-card">
-                <div className="review-author">
-                  {`${x.reviewer.first_name} ${x.reviewer.last_name}`}
-                  <div className="review-ratings">
-                    {new Array(x.rating).fill("").map((x, index) => (
-                      <img
-                        key={index}
-                        width="24"
-                        height="24"
-                        alt="rating"
-                        src="/rating.svg"
-                      />
-                    ))}
-                    {new Array(5 - x.rating).fill("").map((x, index) => (
-                      <img
-                        key={index}
-                        width="24"
-                        height="24"
-                        alt="rating"
-                        src="/svg/grey-rating.svg"
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <div
-                  className="review-content"
-                  dangerouslySetInnerHTML={{ __html: x.comments }}
-                ></div>
-
-                <div className="review-date">{x.timeago}</div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="reviews-pagination">
-          <Pagination
-            onChange={(value) =>
-              setParams((prev) => ({
-                ...prev,
-                page: value - 1,
-              }))
-            }
-            current={params.page + 1}
-            total={data.total_pages * 10}
-            pageSize={10}
-          />
-        </div>
-      </div>
-    </main>
+      </main>
+    </Head>
   );
 }
 
