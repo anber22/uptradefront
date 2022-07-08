@@ -1814,7 +1814,6 @@ header.fixed {
     width: 146px;
     font-size: 18px;
     font-weight: bold;
-    font-family: Poppins-Bold;
     color: #ffffff;
     border-radius: 999px;
     height: 36px;
@@ -3460,7 +3459,6 @@ button {
     width: 103px;
     font-size: 18px;
     font-weight: bold;
-    font-family: Poppins-Bold;
     border-radius: 999px;
     height: 28px;
     color: #ffffff;
@@ -3676,7 +3674,6 @@ button {
     min-width: 103px;
     font-size: 18px;
     font-weight: bold;
-    font-family: Poppins-Bold;
     border-radius: 999px;
     height: 32px;
     color: #ffffff;
