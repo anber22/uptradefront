@@ -100,8 +100,8 @@ export default function BuyPhone({
         : [...prev.selectedValues, item];
 
       return {
-        pageNum: 1,
         ...prev,
+        pageNum: 1,
         selectedValues: values,
       };
     });

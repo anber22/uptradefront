@@ -9,14 +9,14 @@ import Head from "next/head";
 export default function Reviews({ data: initData }) {
   const [params, setParams] = useState({
     page: 0,
-    sort: "rating",
+    sort: "highest",
     filterValue: 0,
   });
 
   const { value: data = initData } = useAsync(async () => {
     if (
       params.page === 0 &&
-      params.sort === "rating" &&
+      params.sort === "highest" &&
       params.filterValue === 0
     )
       return initData;
@@ -26,10 +26,16 @@ export default function Reviews({ data: initData }) {
         urlcat("https://api.reviews.io/merchant/reviews", {
           page: params.page,
           per_page: 10,
-          order: params.sort,
+          order: "desc",
           store: "uptradeit-com",
-          min_rating: params.filterValue,
-          max_rating: params.filterValue,
+          min_rating:
+            params.sort === "highest" && params.filterValue === 0
+              ? 5
+              : params.filterValue,
+          max_rating:
+            params.sort === "highest" && params.filterValue === 0
+              ? 5
+              : params.filterValue,
         })
       ).then((response) => response.json());
     } catch {
@@ -40,7 +46,7 @@ export default function Reviews({ data: initData }) {
   }, [initData, params]);
 
   return (
-    <Head>
+    <>
       <Head>
         <link rel="stylesheet" href="/rc.css" />
       </Head>
@@ -105,7 +111,7 @@ export default function Reviews({ data: initData }) {
                   }
                   options={[
                     { label: "Most Recent", value: "desc" },
-                    { label: "Highest Rated", value: "rating" },
+                    { label: "Highest Rated", value: "highest" },
                   ]}
                 />
               </span>
@@ -188,7 +194,7 @@ export default function Reviews({ data: initData }) {
           </div>
         </div>
       </main>
-    </Head>
+    </>
   );
 }
 
@@ -197,10 +203,10 @@ export async function getStaticProps({ params }) {
     urlcat("https://api.reviews.io/merchant/reviews", {
       page: 0,
       per_page: 10,
-      order: "rating",
+      order: "desc",
       store: "uptradeit-com",
-      min_rating: 0,
-      max_rating: 0,
+      min_rating: 5,
+      max_rating: 5,
     })
   ).then((response) => response.json());
 
