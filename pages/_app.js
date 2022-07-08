@@ -86,8 +86,8 @@ function MyApp({ Component, pageProps, navbar, appleList }) {
           <Footer appleList={appleList} />
           <div className="copy-right">
             <div className="terms">
-              <a href="#">Terms & Conditions</a>
-              <a href="#">Privacy Policy</a>
+              <a href="/terms">Terms & Conditions</a>
+              <a href="/privacy-policy">Privacy Policy</a>
             </div>
 
             <p>© 2021 UP Trade Technologies, Inc.</p>

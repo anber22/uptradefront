@@ -56,7 +56,7 @@ export default function Home({ listedProduct, reviews }) {
 
             <div className="brands">
               <div>
-                <div className="brand">
+                <a href="/buy-used-refurbished-apple" className="brand">
                   <amp-img
                     width="70"
                     height="70"
@@ -64,11 +64,11 @@ export default function Home({ listedProduct, reviews }) {
                     title="apple"
                     src="/brand/Apple.svg"
                   />
-                </div>
+                </a>
                 <div className="brand-name">Apple</div>
               </div>
               <div>
-                <div className="brand">
+                <a href='/buy-used-refurbished-samsung' className="brand">
                   <amp-img
                     width="70"
                     height="70"
@@ -76,11 +76,11 @@ export default function Home({ listedProduct, reviews }) {
                     title="Samsung"
                     src="/brand/Samsung.svg"
                   />
-                </div>
+                </a>
                 <div className="brand-name">Samsung</div>
               </div>
               <div>
-                <div className="brand">
+                <a href='/buy-used-refurbished-google' className="brand">
                   <amp-img
                     width="70"
                     height="70"
@@ -88,7 +88,7 @@ export default function Home({ listedProduct, reviews }) {
                     title="Google"
                     src="/brand/Google.svg"
                   />
-                </div>
+                </a>
                 <div className="brand-name">Google</div>
               </div>
             </div>

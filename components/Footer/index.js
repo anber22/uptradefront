@@ -88,9 +88,7 @@ export const Footer = ({ appleList }) => {
                 </h3>
 
                 <div className="footer-nav-list">
-                  <a href='/buy-used-refurbished-apple'>
-                    Buy Used iPhone
-                  </a>
+                  <a href="/buy-used-refurbished-apple">Buy Used iPhone</a>
                   {appleList?.map((x, index) => (
                     <a href={x.url} key={index}>
                       Buy Used {x.value}
@@ -184,31 +182,63 @@ export const Footer = ({ appleList }) => {
 
           {isAmp ? (
             <div className="social-network-subscribe-container">
-              <a href="#">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://twitter.com/UpTrade_it"
+              >
                 <amp-img width="42" height="42" src="/svg/twitter.svg" />
               </a>
-              <a href="#">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.facebook.com/UpTradeit"
+              >
                 <amp-img width="42" height="42" src="/svg/facebook.svg" />
               </a>
-              <a href="#">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.instagram.com/uptradeit/"
+              >
                 <amp-img width="42" height="42" src="/svg/instgram.svg" />
               </a>
-              <a href="#">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.youtube.com/channel/UCdrJKNCze37qQIk9EX3a_lw"
+              >
                 <amp-img width="42" height="42" src="/svg/youtube.svg" />
               </a>
             </div>
           ) : (
             <div className="social-network-subscribe-container">
-              <a href="#">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https:///twitter.com/UpTrade_it"
+              >
                 <img width="42" height="42" src="/svg/twitter.svg" />
               </a>
-              <a href="#">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.facebook.com/UpTradeit"
+              >
                 <img width="42" height="42" src="/svg/facebook.svg" />
               </a>
-              <a href="#">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.instagram.com/uptradeit/"
+              >
                 <img width="42" height="42" src="/svg/instgram.svg" />
               </a>
-              <a href="#">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.youtube.com/channel/UCdrJKNCze37qQIk9EX3a_lw"
+              >
                 <img width="42" height="42" src="/svg/youtube.svg" />
               </a>
             </div>
