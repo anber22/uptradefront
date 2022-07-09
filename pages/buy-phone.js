@@ -519,8 +519,8 @@ export default function BuyPhone({
               <img
                 src="/svg/chevron-states.svg"
                 className="chevron"
-                width="24"
-                height="24"
+                width="18"
+                height="18"
                 style={{
                   transform: chevronExpand ? "rotate(180deg)" : undefined,
                 }}
