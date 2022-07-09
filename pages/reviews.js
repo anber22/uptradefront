@@ -107,7 +107,7 @@ export default function Reviews({ data: initData }) {
                     value: "highest_rated",
                   }}
                   onChange={({ value }) =>
-                    setParams((prev) => ({ ...prev, sort: value }))
+                    setParams((prev) => ({ ...prev, page: 0, sort: value }))
                   }
                   options={[
                     { label: "Most Recent", value: "desc" },

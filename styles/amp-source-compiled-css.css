@@ -340,15 +340,17 @@ header.fixed {
 }
 .mega-menu #mobile:checked + .main-menu {
   display: block;
+  height: 100vh;
   max-height: 100vh;
   overflow: scroll;
-  background-color: #ffffff;
+  background: rgba(0, 0, 0, 0.5);
 }
 .mega-menu #mobile-menu {
   position: relative;
   display: block;
   padding: 16px;
   cursor: pointer;
+  background: #375a7d;
 }
 
 .hamburger-hidden {
@@ -1058,6 +1060,7 @@ header.fixed {
     padding: 0 88px;
     display: flex;
     align-items: center;
+    background: #375a7d;
   }
 
   .UpTrade-header ul#desktop {
@@ -2577,8 +2580,14 @@ header.fixed {
 
   .card-content .button-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 24px;
+  }
+
+  .contact-success-message {
+    margin-top: 12px;
+    height: 24px;
   }
 
   .card-content .button-container > button {
@@ -2669,6 +2678,7 @@ header.fixed {
   .mobile-reviews-title {
     display: none;
   }
+
   /*  Desktop css*/
 }
 
@@ -4490,8 +4500,14 @@ button {
 
   .card-content .button-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 24px;
+  }
+
+  .contact-success-message {
+    margin-top: 12px;
+    height: 24px;
   }
 
   .card-content .button-container button {
@@ -4567,7 +4583,6 @@ button {
 }
 
 .UpTrade-header {
-  background-color: #375a7d;
   position: fixed;
   top: 0;
   left: 0;
@@ -4605,6 +4620,7 @@ button {
 
 .search-form input {
   width: 100%;
+  height: 34.5px;
 }
 
 .search-icon {

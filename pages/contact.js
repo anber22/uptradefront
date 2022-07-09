@@ -1,18 +1,17 @@
 import { useRef, useState } from "react";
 import { useAsyncFn } from "react-use";
-import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 
 export default function Contact() {
   const fullNameRef = useRef();
   const emailRef = useRef();
   const messageRef = useRef();
-  const router = useRouter();
   const [errorMessages, setErrorMessages] = useState({
     fullName: "",
     email: "",
     message: "",
   });
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const [, creatEmail] = useAsyncFn(async () => {
     if (
@@ -80,32 +79,30 @@ export default function Contact() {
           subject: "Customer Message",
         }),
       }
-    );
-
-    router.push("/");
-  }, [router]);
+    ).then(() => setSubmitSuccess(true));
+  }, []);
 
   return (
     <main className="contact-page">
       <NextSeo
-          title="Contact us | UpTrade"
-          description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Contact"
-          canonical={`${process.env.BASEURL}/contact`}
-          openGraph={{
-            title: 'Contact us | UpTrade',
-            type: 'Website',
-            images: [
-              {
-                url: `${process.env.BASEURL}/og_logo.png`,
-                width: 200,
-                height: 200,
-              },
-            ],
-            url: `${process.env.BASEURL}/contact`,
-            description:
-                'Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Contact',
-            site_name: 'UpTrade',
-          }}
+        title="Contact us | UpTrade"
+        description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Contact"
+        canonical={`${process.env.BASEURL}/contact`}
+        openGraph={{
+          title: "Contact us | UpTrade",
+          type: "Website",
+          images: [
+            {
+              url: `${process.env.BASEURL}/og_logo.png`,
+              width: 200,
+              height: 200,
+            },
+          ],
+          url: `${process.env.BASEURL}/contact`,
+          description:
+            "Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Contact",
+          site_name: "UpTrade",
+        }}
       />
       <div className="title-container">
         <h1>Contact us?</h1>
@@ -118,12 +115,20 @@ export default function Contact() {
               <div className="name-fields">
                 <div className="card-content-field">
                   <label>Full Name:</label>
-                  <input type="text" ref={fullNameRef} />
+                  <input
+                    type="text"
+                    ref={fullNameRef}
+                    onChange={() => setSubmitSuccess(false)}
+                  />
                   <div className="error-message">{errorMessages.fullName}</div>
                 </div>
                 <div className="card-content-field">
                   <label>Email:</label>
-                  <input type="email" ref={emailRef} />
+                  <input
+                    type="email"
+                    ref={emailRef}
+                    onChange={() => setSubmitSuccess(false)}
+                  />
                   <div className="error-message">{errorMessages.email}</div>
                 </div>
               </div>
@@ -132,6 +137,7 @@ export default function Contact() {
                 <input
                   type="text"
                   className="multiline-input"
+                  onChange={() => setSubmitSuccess(false)}
                   ref={messageRef}
                 />
                 <div className="error-message">{errorMessages.message}</div>
@@ -139,6 +145,9 @@ export default function Contact() {
 
               <div className="button-container">
                 <button onClick={creatEmail}>Submit</button>
+                <div className="contact-success-message">
+                  {submitSuccess ? "Message sent!" : ""}
+                </div>
               </div>
             </div>
             <div className="card-description">
