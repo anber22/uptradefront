@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function BuyNav({ navbar }) {
-  const [selectedBrand, setSelectedBrand] = useState("Apple");
+  const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedNavList, setSelectedNavList] = useState(navbar[0].values);
 
   return (
@@ -90,6 +90,11 @@ export default function BuyNav({ navbar }) {
               </div>
             </li>
           ))}
+          <li className="mobile-by-dropdown-item">
+            <a id="all-product" style={{ padding: 0 }} href="/buy-phone">
+              Sell all product
+            </a>
+          </li>
         </div>
       </ul>
     </li>

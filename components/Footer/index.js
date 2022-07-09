@@ -156,17 +156,37 @@ export const Footer = ({ appleList }) => {
               <div className="footer-subscribe-title">
                 Subscribe To Our Newsletter
               </div>
+
               <form
                 className="subscribe-form"
                 method="post"
                 action-xhr="https://api-gateway.uptradeit.com/api/message_books/subscribed"
-                target="_top"
+                custom-validation-reporting="show-all-on-submit"
                 on="submit-error: AMP.setState({ subSuccess: true })"
+                target="_top"
               >
-                <input placeholder="Email" type="email" name="email" />
-                <button className="btn btn-primary" type="submit">
-                  Subscribe
-                </button>
+                <div className="subscribe-form-input">
+                  <input type="email" name="email" id="email5" required on="change: AMP.setState({ subSuccess: false })" />
+                  <button className="btn btn-primary" type="submit">
+                    Subscribe
+                  </button>
+                </div>
+                <div>
+                  <span
+                    visible-when-invalid="valueMissing"
+                    validation-for="email5"
+                  >
+                    Please enter an valid email.
+                  </span>
+                  <span
+                    visible-when-invalid="typeMismatch"
+                    validation-for="email5"
+                  >
+                    Invalid email address, only letters, numbers, periods (‘.’),
+                    and underscores (‘_’) are allowed in your user name and
+                    domain.
+                  </span>
+                </div>
               </form>
 
               <div

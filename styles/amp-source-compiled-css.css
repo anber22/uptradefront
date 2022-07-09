@@ -234,7 +234,6 @@ amp-img[class^="-amp"] {
   max-width: 100%;
 }
 
-
 table {
   width: 100%;
   margin-bottom: 1rem;
@@ -350,6 +349,10 @@ header.fixed {
   display: block;
   padding: 16px;
   cursor: pointer;
+}
+
+.hamburger-hidden {
+  display: none;
 }
 .mega-menu #mobile-menu span.main-menu-dropdown-icon {
   bottom: 0;
@@ -1223,13 +1226,14 @@ header.fixed {
     margin-bottom: 16px;
   }
 
-  .UpTrade-footer .subscribe-form {
+  .UpTrade-footer .subscribe-form .subscribe-form-input {
     display: flex;
     justify-content: space-between;
+    width: 100%;
   }
-
   .UpTrade-footer .subscribe-form input {
     flex-basis: 60%;
+    height: 55px;
   }
 
   .UpTrade-footer .subscribe-form input {
@@ -1724,12 +1728,12 @@ header.fixed {
     display: none;
   }
 
-   .sort-controller {
+  .sort-controller {
     display: flex;
     justify-content: flex-end;
   }
 
-   .sort-controller .dropdown-toggle {
+  .sort-controller .dropdown-toggle {
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -1737,12 +1741,12 @@ header.fixed {
     cursor: pointer;
   }
 
-   .sort-controller .dropdown-menu {
+  .sort-controller .dropdown-menu {
     padding: 8px 12px;
     background-color: #ffffff;
   }
 
-   .sort-controller .dropdown-item {
+  .sort-controller .dropdown-item {
     padding: 8px 0;
     cursor: pointer;
     outline: none;
@@ -1771,7 +1775,7 @@ header.fixed {
     cursor: pointer;
   }
 
-   .phone-list-item .condition-container {
+  .phone-list-item .condition-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1814,7 +1818,7 @@ header.fixed {
     border-radius: 999px;
   }
 
-   .accordion-content {
+  .accordion-content {
     margin: 0;
   }
 
@@ -1830,23 +1834,23 @@ header.fixed {
     height: 36px;
   }
 
-   .sort-drawer-close {
+  .sort-drawer-close {
     display: none;
   }
 
-   .sort-drawer-show {
+  .sort-drawer-show {
     display: none;
   }
 
-   .filter-controller {
+  .filter-controller {
     display: none;
   }
 
-   .condition-alert {
+  .condition-alert {
     margin-left: 8px;
   }
 
-   .next-page-container {
+  .next-page-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2691,13 +2695,13 @@ header.fixed {
   display: none;
 }
 
- .filter-options {
+.filter-options {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
 }
 
- .filter-options .filter-option {
+.filter-options .filter-option {
   background: #fafafa;
   font-size: 14px;
   border-radius: 4px;
@@ -2712,7 +2716,7 @@ header.fixed {
   outline: none;
 }
 
- .filter-options .filter-option > svg {
+.filter-options .filter-option > svg {
   width: 14px;
   height: 14px;
   fill: #375a7d;
@@ -2735,7 +2739,7 @@ header.fixed {
   background-color: #f2be42;
 }
 
- .options-container {
+.options-container {
   padding: 0 24px;
   margin-bottom: 24px;
 }
@@ -2940,13 +2944,15 @@ button {
     margin-bottom: 16px;
   }
 
-  .UpTrade-footer .subscribe-form {
+  .UpTrade-footer .subscribe-form .subscribe-form-input {
     display: flex;
     justify-content: space-between;
+    width: 100%;
   }
 
   .UpTrade-footer .subscribe-form input {
     flex-basis: 60%;
+    height: 42px;
   }
 
   .footer-subscribe .subscribe-hidden {
@@ -3272,10 +3278,10 @@ button {
   }
 
   .buy-phone-page {
-    padding: 0 24px 48px 24px;
+    padding: 56px 24px 48px 24px;
   }
 
-   .buy-phone-conditions {
+  .buy-phone-conditions {
     display: none;
   }
 
@@ -3283,19 +3289,19 @@ button {
     padding-top: 93px;
   }
 
-   .buy-phone-page-title > h1 {
+  .buy-phone-page-title > h1 {
     font-size: 26px;
     font-weight: 600;
     line-height: 1.43;
   }
 
-   .buy-phone-page-title > h2 {
+  .buy-phone-page-title > h2 {
     font-size: 14px;
     font-weight: 400;
     line-height: 1.43;
   }
 
-   .buy-phone-search-form {
+  .buy-phone-search-form {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -3306,18 +3312,18 @@ button {
     background: #ffffff;
   }
 
-   .buy-phone-search-form .select-search {
+  .buy-phone-search-form .select-search {
     flex-basis: 90%;
     height: 40px;
   }
 
-   .buy-phone-search-form .select-search input {
+  .buy-phone-search-form .select-search input {
     width: 100%;
     padding: 3px;
     height: 40px;
   }
 
-   .buy-phone-search-form input::placeholder {
+  .buy-phone-search-form input::placeholder {
     font-size: 14px;
     color: #c3c3c3;
   }
@@ -3349,20 +3355,20 @@ button {
     padding: 8px 0;
   }
 
-   .buy-phone-search-form amp-autocomplete input::placeholder {
+  .buy-phone-search-form amp-autocomplete input::placeholder {
     color: #c3c3c3;
   }
 
-   .buy-phone-search-form .btn {
+  .buy-phone-search-form .btn {
     display: none;
   }
 
-   .buy-phone-search-form .form-search-icon {
+  .buy-phone-search-form .form-search-icon {
     width: 24px;
     height: 24px;
   }
 
-   .carrier-options {
+  .carrier-options {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 24px;
@@ -3371,7 +3377,7 @@ button {
     overflow: hidden;
   }
 
-   .carrier-options .carrier-option {
+  .carrier-options .carrier-option {
     font-size: 12px;
     color: rgb(132, 132, 132);
     background: rgb(255, 255, 255);
@@ -3382,48 +3388,48 @@ button {
     justify-content: center;
   }
 
-   .options-container {
+  .options-container {
     padding: 0;
   }
 
-   .carrier-options .carrier-option:hover {
+  .carrier-options .carrier-option:hover {
     color: #ffffff;
     background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
   }
 
-   .carrier-options .carrier-option[selected] {
+  .carrier-options .carrier-option[selected] {
     color: #ffffff;
     background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
     outline: none;
   }
 
-   .option-controllers {
+  .option-controllers {
     display: flex;
     justify-content: space-between;
     padding: 8px 0px;
   }
 
-   .sort-controller .dropdown-toggle {
+  .sort-controller .dropdown-toggle {
     display: flex;
     align-items: center;
   }
 
-   .sort-controller .dropdown-toggle amp-img {
+  .sort-controller .dropdown-toggle amp-img {
     margin-right: 8px;
   }
 
-   .desktop-sort {
+  .desktop-sort {
     display: none;
   }
 
-   .option-controllers .filters-controller {
+  .option-controllers .filters-controller {
   }
 
-   .option-controllers .sort-controller .dropdown-menu {
+  .option-controllers .sort-controller .dropdown-menu {
     display: none;
   }
 
-   .filter-options .filter-option {
+  .filter-options .filter-option {
     font-size: 12px;
     gap: 8px;
   }
@@ -3480,7 +3486,7 @@ button {
     color: #ffffff;
   }
 
-   .sort-drawer-content .sort-item {
+  .sort-drawer-content .sort-item {
     padding: 8px 16px;
     cursor: pointer;
     outline: none;
@@ -3489,11 +3495,11 @@ button {
     justify-content: space-between;
   }
 
-   .sort-controller .sort-drawer-close {
+  .sort-controller .sort-drawer-close {
     display: none;
   }
 
-   .sort-controller .sort-drawer-show {
+  .sort-controller .sort-drawer-show {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -3503,7 +3509,7 @@ button {
     display: flex;
   }
 
-   .sort-drawer-backdrop {
+  .sort-drawer-backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -3514,7 +3520,7 @@ button {
     background: rgba(0, 0, 0, 0.5);
   }
 
-   .sort-drawer-content {
+  .sort-drawer-content {
     max-width: 50%;
     top: 0;
     right: 0;
@@ -3541,17 +3547,17 @@ button {
     align-items: center;
   }
 
-   .next-page-container {
+  .next-page-container {
     display: flex;
     align-items: center;
     margin-top: 16px;
   }
 
-   .filter-drawer-close {
+  .filter-drawer-close {
     display: none;
   }
 
-   .filter-drawer-show {
+  .filter-drawer-show {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -3561,7 +3567,7 @@ button {
     display: flex;
   }
 
-   .filter-drawer-content {
+  .filter-drawer-content {
     max-width: 50%;
     top: 0;
     left: 0;
@@ -3578,7 +3584,7 @@ button {
     padding: 8px;
   }
 
-   .filter-drawer-backdrop {
+  .filter-drawer-backdrop {
     position: fixed;
     top: 0;
     right: 0;
@@ -3773,23 +3779,23 @@ button {
     border-bottom: 1px solid #dee2e6;
   }
 
-   .buy-phone-search-form .select-search__select {
+  .buy-phone-search-form .select-search__select {
     background: #ffffff;
     z-index: 1300;
     border: 1px solid #e2e2e2;
   }
 
-   .buy-phone-search-form .select-search__select ul {
+  .buy-phone-search-form .select-search__select ul {
     width: 100%;
   }
 
-   .buy-phone-search-form .select-search__select li {
+  .buy-phone-search-form .select-search__select li {
     list-style-type: none;
     width: 100%;
     cursor: pointer;
   }
 
-   .buy-phone-search-form .select-search__select li button {
+  .buy-phone-search-form .select-search__select li button {
     background: none;
     border: none;
     margin: 8px 0;
@@ -4548,6 +4554,15 @@ button {
     width: 100%;
     background-color: #e9e9e8;
   }
+
+  #all-product {
+    padding: 11px 22px;
+    color: rgb(26, 180, 231);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+  }
   /*Mobile css  */
 }
 
@@ -4716,4 +4731,3 @@ button {
 .copy-right .terms a {
   margin-right: 8px;
 }
-

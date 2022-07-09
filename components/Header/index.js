@@ -132,10 +132,10 @@ export const Header = ({ navbar }) => {
                     <form className="search-form" action="#" target="_top">
                       <Search />
                       <img
-                          className="search-icon"
-                          width="24"
-                          height="24"
-                          src="/svg/search.svg"
+                        className="search-icon"
+                        width="24"
+                        height="24"
+                        src="/svg/search.svg"
                       />
                     </form>
                   )}
@@ -232,6 +232,9 @@ export const Header = ({ navbar }) => {
                               </section>
                             ))}
                           </amp-accordion>
+                          <a id="all-product" href="/buy-phone">
+                            Sell all product
+                          </a>
                         </div>
                       </ul>
                     </li>
