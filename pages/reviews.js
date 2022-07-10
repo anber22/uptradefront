@@ -125,6 +125,7 @@ export default function Reviews({ data: initData }) {
                 onChange={({ value }) =>
                   setParams((prev) => ({
                     ...prev,
+                    page: 0,
                     filterValue: Number(value),
                   }))
                 }
