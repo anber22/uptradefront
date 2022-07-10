@@ -3318,7 +3318,6 @@ button {
     padding: 8px 0px;
     position: sticky;
     top: 56px;
-    z-index: 1;
     background: #ffffff;
   }
 
