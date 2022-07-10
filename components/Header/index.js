@@ -184,7 +184,7 @@ export const Header = ({ navbar }) => {
 
                             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                             <a id="all-product" href="/buy-phone">
-                              Sell all product
+                              See All Products
                             </a>
                           </div>
                           <div className="buy-dropdown-right">
@@ -233,7 +233,7 @@ export const Header = ({ navbar }) => {
                             ))}
                           </amp-accordion>
                           <a id="all-product" href="/buy-phone">
-                            Sell all product
+                            See All Products
                           </a>
                         </div>
                       </ul>
