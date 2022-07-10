@@ -3,6 +3,7 @@ import urlcat from "urlcat";
 import { NextSeo } from "next-seo";
 import { promises as fs } from "fs";
 import path from "path";
+import dayjs from "dayjs";
 
 export const config = { amp: true };
 
@@ -17,6 +18,9 @@ export default function Model({
   qa,
   path,
   keyword,
+  title,
+  brand,
+    productId,
 }) {
   return (
     <div>
@@ -26,17 +30,100 @@ export default function Model({
           custom-element="amp-carousel"
           src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
         ></script>
+        {/*<script*/}
+        {/*  type="application/ld+json"*/}
+        {/*  dangerouslySetInnerHTML={*/}
+        {/*    pageData?.canSold*/}
+        {/*      ? {*/}
+        {/*          __html: JSON.stringify({*/}
+        {/*            "@context": "https://schema.org",*/}
+        {/*            "@type": "ItemList",*/}
+        {/*            name: "ProductList",*/}
+        {/*            itemListElement: [*/}
+        {/*              {*/}
+        {/*                "@type": "ListItem",*/}
+        {/*                position: "1",*/}
+        {/*                url: `${process.env.CurrURL}/buy/${parentUrl}`,*/}
+        {/*              },*/}
+        {/*            ],*/}
+        {/*          }),*/}
+        {/*        }*/}
+        {/*      : {*/}
+        {/*          __html: "",*/}
+        {/*        }*/}
+        {/*  }*/}
+        {/*/>*/}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org/",
+              "@type": "BreadcrumbList",
+              name: "Breadcrumb",
+              itemListElement: [
+                {
+                  name: "All",
+                  position: 1,
+                  "@type": "ListItem",
+                  item: `${process.env.BASEURL}/buy-phone`,
+                },
+                {
+                  name: `Refurbished ${keyword || productName}`,
+                  position: 2,
+                  "@type": "ListItem",
+                },
+              ],
+            }),
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              name: `Certified Used ${productName}`,
+              description: `Best deals on Certifiied Used and Refurbished ${productName}. Up to 70% off compared to new ✌ Free shipping ✅ 100% fully function ✅ 30 days risk free `,
+              image: [
+                productImageUrl ?? `${process.env.BASEURL}/default-image.png`,
+              ],
+              offers: {
+                "@type": "Offer",
+                availability: "http://schema.org/InStock",
+                price: `${price / 100 || ""}`,
+                priceValidUntil: dayjs().add(90, "day").format("YYYY-MM-DD"),
+                brand: brand,
+                sku: `${brand}-${productName
+                  .split(" ")
+                  .join("-")
+                  }`,
+                gtin: productId,
+                url: `${process.env.BASEURL}${path}`,
+                priceCurrency: "USD",
+                usedCondition: "http://schema.org/RefurbishedCondition",
+                seller: {
+                  "@type": "Organization",
+                  name: "UpTrade",
+                },
+              },
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: 4.5,
+                reviewCount: 838,
+                bestRating: 5,
+                worstRating: 1,
+              },
+            }),
+          }}
+        />
       </Head>
       <NextSeo
-        title={`Best Certified Used ${keyword || productName} and Refurbished ${
-          keyword || productName
-        }`}
+        title={title}
         description={metaDescription}
         canonical={`${process.env.BASEURL}${path}`}
         openGraph={{
-          title: `Best Certified Used ${
-            keyword || productName
-          } and Refurbished ${keyword || productName}`,
+          title: title,
           type: "Product.group",
           images: [
             {
@@ -88,7 +175,8 @@ export default function Model({
         <div className="model-content">
           <div className="left">
             <h1 className="model-page-title">
-              Best Certified Used {keyword || productName} and Refurbished {keyword || productName}
+              Best Certified Used {keyword || productName} and Refurbished{" "}
+              {keyword || productName}
             </h1>
             <div className="model-info">
               <amp-img
@@ -398,21 +486,25 @@ export async function getStaticProps({ params }) {
   const searchResponse = JSON.parse(cache);
 
   const product = searchResponse.find((x) => {
-    return (
-      params.matchName ===
-        `buy-used-refurbished-${x.productName
-          .split(" ")
-          .join("-")
-          .toLowerCase()}` ||
-      params.matchName ===
-        `buy-used-refurbished-${x.brand.split(" ").join("-").toLowerCase()}` ||
-      params.matchName ===
+    if (x.type === "BRAND")
+      return (
+        params.matchName ===
+        `buy-used-refurbished-${x.brand.split(" ").join("-").toLowerCase()}`
+      );
+    else if (x.type === "CARRIER")
+      return (
+        params.matchName ===
         `buy-used-refurbished-${x.brand
           .replaceAll("&", "")
           .replaceAll("-", "")
           .split(" ")
           .join("-")
           .toLowerCase()}-phones`
+      );
+
+    return (
+      params.matchName ===
+      `buy-used-refurbished-${x.productName.split(" ").join("-").toLowerCase()}`
     );
   });
 
@@ -422,9 +514,21 @@ export async function getStaticProps({ params }) {
     reviews: reviewsResponse.reviews.slice(0, 5),
   };
 
+  const title =
+    product.type === "BRAND"
+      ? `Used ${
+          product.brand === "Apple" ? "iPhones" : `${prodcut.brand} Phones`
+        } for Sale - Best Deals | UpTrade`
+      : product.type === "CARRIER"
+      ? `Buy Used Refurbished ${product.brand} Phones | UpTrade`
+      : `Buy Used Refurbished ${
+          product.keyword || product.productName
+        } | UpTrade`;
+
   return {
     props: {
       ...product,
+      title,
       path: `/${params.matchName}`,
       relatedGoods: product.relatedGoods
         .filter((x) => !!x.specs)

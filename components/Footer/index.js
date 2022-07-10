@@ -44,7 +44,7 @@ export const Footer = ({ appleList }) => {
             <div className="footer-nav-title">Buy</div>
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a href="/buy-phone" className="footer-nav-item">
-              Sell All Products
+              See All Products
             </a>
           </div>
 
@@ -117,7 +117,7 @@ export const Footer = ({ appleList }) => {
 
                 <div className="footer-nav-list">
                   {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                  <a href="/buy-phone">Sell All Products</a>
+                  <a href="/buy-phone">See All Products</a>
                 </div>
               </section>
               <section className="footer-nav-section">

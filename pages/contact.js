@@ -118,7 +118,13 @@ export default function Contact() {
                   <input
                     type="text"
                     ref={fullNameRef}
-                    onChange={() => setSubmitSuccess(false)}
+                    onChange={() => {
+                      setSubmitSuccess(false);
+                      setErrorMessages((prev) => ({
+                        ...prev,
+                        fullName: "",
+                      }));
+                    }}
                   />
                   <div className="error-message">{errorMessages.fullName}</div>
                 </div>
@@ -127,7 +133,13 @@ export default function Contact() {
                   <input
                     type="email"
                     ref={emailRef}
-                    onChange={() => setSubmitSuccess(false)}
+                    onChange={() => {
+                      setSubmitSuccess(false);
+                      setErrorMessages((prev) => ({
+                        ...prev,
+                        email: "",
+                      }));
+                    }}
                   />
                   <div className="error-message">{errorMessages.email}</div>
                 </div>
@@ -137,7 +149,13 @@ export default function Contact() {
                 <input
                   type="text"
                   className="multiline-input"
-                  onChange={() => setSubmitSuccess(false)}
+                  onChange={() => {
+                    setSubmitSuccess(false);
+                    setErrorMessages((prev) => ({
+                      ...prev,
+                      message: "",
+                    }));
+                  }}
                   ref={messageRef}
                 />
                 <div className="error-message">{errorMessages.message}</div>

@@ -56,7 +56,7 @@ export default function FooterBuyNav({ appleList }) {
           style={{ display: selectedNav === "buy" ? "flex" : "none" }}
         >
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-          <a href="/buy-phone">Sell All Products</a>
+          <a href="/buy-phone">See All Products</a>
         </div>
       </section>
 

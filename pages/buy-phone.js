@@ -270,6 +270,25 @@ export default function BuyPhone({
     <>
       <Head>
         <link rel="stylesheet" href="/rc.css" />
+
+        {/*<script*/}
+        {/*  type="application/ld+json"*/}
+        {/*  dangerouslySetInnerHTML={{*/}
+        {/*    __html:*/}
+        {/*      JSON.stringify({*/}
+        {/*        "@context": "https://schema.org",*/}
+        {/*        "@type": "ItemList",*/}
+        {/*        name: "ProductList",*/}
+        {/*        itemListElement: data?.data?.map((item, index) => {*/}
+        {/*          return {*/}
+        {/*            "@type": "ListItem",*/}
+        {/*            position: index + 1,*/}
+        {/*            url: urlProcessor(fromSource, item),*/}
+        {/*          };*/}
+        {/*        }),*/}
+        {/*      }),*/}
+        {/*  }}*/}
+        {/*/>*/}
       </Head>
       <main className="buy-phone-page">
         <NextSeo
@@ -324,9 +343,7 @@ export default function BuyPhone({
                     style={{ width: 24, height: 24 }}
                   />
                 </div>
-                <div
-                  className="condition-content"
-                >
+                <div className="condition-content">
                   {expanded.some((x) => x === data.name)
                     ? data.values.map((item) => (
                         <div
@@ -422,10 +439,7 @@ export default function BuyPhone({
           <div
             className="carrier-options"
             style={{
-              height:
-                typeof window !== "undefined" && !matchMedia && !chevronExpand
-                  ? 88
-                  : undefined,
+              height: !matchMedia && !chevronExpand ? 88 : undefined,
             }}
           >
             {carrierOptions.map((item) => (
@@ -444,6 +458,28 @@ export default function BuyPhone({
               </div>
             ))}
           </div>
+
+          {!matchMedia ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "12px",
+              }}
+            >
+              <img
+                src="/svg/chevron-states.svg"
+                className="chevron"
+                width="18"
+                height="18"
+                style={{
+                  transform: chevronExpand ? "rotate(180deg)" : undefined,
+                }}
+                onClick={() => setChevronExpand(!chevronExpand)}
+              />
+            </div>
+          ) : null}
+
           <div className="option-controllers">
             <div className="filter-controller">
               <label className="dropdown">
@@ -489,44 +525,31 @@ export default function BuyPhone({
                           style={{ width: 24, height: 24 }}
                         />
                       </div>
-                      <div
-                        className="condition-content"
-                      >
+                      <div className="condition-content">
                         {expanded.some((x) => x === data.name)
-                            ? data.values.map((item) => (
-                                <div
-                                    key={item.categoryValueId}
-                                    onClick={() => onOptionSelect(item)}
-                                    className={`condition-item ${
-                                        searchKeys.selectedValues.some(
-                                            (x) => x.categoryValueId === item.categoryValueId
-                                        )
-                                            ? "selected-condition-item"
-                                            : undefined
-                                    }`}
-                                >
-                                  {item.name}
-                                </div>
+                          ? data.values.map((item) => (
+                              <div
+                                key={item.categoryValueId}
+                                onClick={() => onOptionSelect(item)}
+                                className={`condition-item ${
+                                  searchKeys.selectedValues.some(
+                                    (x) =>
+                                      x.categoryValueId === item.categoryValueId
+                                  )
+                                    ? "selected-condition-item"
+                                    : undefined
+                                }`}
+                              >
+                                {item.name}
+                              </div>
                             ))
-                            : null}
+                          : null}
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-            {!matchMedia ? (
-              <img
-                src="/svg/chevron-states.svg"
-                className="chevron"
-                width="18"
-                height="18"
-                style={{
-                  transform: chevronExpand ? "rotate(180deg)" : undefined,
-                }}
-                onClick={() => setChevronExpand(!chevronExpand)}
-              />
-            ) : null}
             <div className="sort-controller">
               <label className="dropdown">
                 <span
@@ -613,84 +636,91 @@ export default function BuyPhone({
             </div>
           </div>
 
-          <div className="desktop-phone-list">
-            {data?.data?.map((item) => (
-              <a
-                key={item.productId}
-                href={urlcat(`/redirect/:gradeAndMerchant`, {
-                  gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
-                  redirectUrl: item.buyUrl,
-                })}
-                target="_blank"
-                rel="nofollow noreferrer"
-                className="phone-list-item"
-              >
-                <div className="img-container">
-                  <img width="100" height="100" src={item.brandLogoUrl} />
-                </div>
-                <div className="description">
-                  <span>{item.name}</span>
-                  <span className="attr">
-                    {`${item.CARRIER} ${item.STORAGE} ${item.COLOR}`}
-                  </span>
-                </div>
+          {data?.data?.length ? (
+            <>
+              <div className="desktop-phone-list">
+                {data?.data?.map((item) => (
+                  <a
+                    key={item.productId}
+                    href={urlcat(`/redirect/:gradeAndMerchant`, {
+                      gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
+                      redirectUrl: item.buyUrl,
+                    })}
+                    target="_blank"
+                    rel="nofollow noreferrer"
+                    className="phone-list-item"
+                  >
+                    <div className="img-container">
+                      <img width="100" height="100" src={item.brandLogoUrl} />
+                    </div>
+                    <div className="description">
+                      <span>{item.name}</span>
+                      <span className="attr">
+                        {`${item.CARRIER} ${item.STORAGE} ${item.COLOR}`}
+                      </span>
+                    </div>
 
-                <div className="condition-container">
-                  <div className={`condition ${item.CONDITION} `}>
-                    {item.CONDITION}
-                  </div>
-                </div>
+                    <div className="condition-container">
+                      <div className={`condition ${item.CONDITION} `}>
+                        {item.CONDITION}
+                      </div>
+                    </div>
 
-                <div className="action">
-                  <span className="price">${item.currentPrice / 100}</span>
-                  <div className="view-detail">View Detail</div>
-                </div>
-              </a>
-            ))}
-          </div>
+                    <div className="action">
+                      <span className="price">${item.currentPrice / 100}</span>
+                      <div className="view-detail">View Detail</div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              <div className="mobile-phone-list">
+                {data?.data?.map((item) => (
+                  <a
+                    key={item.productId}
+                    href={urlcat(`/redirect/:gradeAndMerchant`, {
+                      gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
+                      redirectUrl: item.buyUrl,
+                    })}
+                    className="phone-list-item"
+                    target="_blank"
+                    rel="nofollow noreferrer"
+                  >
+                    <div className="top">
+                      <img width="50" height="50" src={item.brandLogoUrl} />
+                      <div className={`condition ${item.CONDITION} `}>
+                        {item.CONDITION}
+                      </div>
+                    </div>
+                    <div className="bottom">
+                      <div className="description">
+                        <span>{item.name}</span>
+                        <span className="attr">
+                          {`${item.CARRIER} ${item.STORAGE} ${item.COLOR}`}
+                        </span>
+                      </div>
 
-          <div className="mobile-phone-list">
-            {data?.data?.map((item) => (
-              <a
-                key={item.productId}
-                href={urlcat(`/redirect/:gradeAndMerchant`, {
-                  gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
-                  redirectUrl: item.buyUrl,
-                })}
-                className="phone-list-item"
-                target="_blank"
-                rel="nofollow noreferrer"
-              >
-                <div className="top">
-                  <img width="50" height="50" src={item.brandLogoUrl} />
-                  <div className={`condition ${item.CONDITION} `}>
-                    {item.CONDITION}
-                  </div>
-                </div>
-                <div className="bottom">
-                  <div className="description">
-                    <span>{item.name}</span>
-                    <span className="attr">
-                      {`${item.CARRIER} ${item.STORAGE} ${item.COLOR}`}
-                    </span>
-                  </div>
-
-                  <span className="price">${item.currentPrice / 100}</span>
-                </div>
-              </a>
-            ))}
-          </div>
-
-          <div className="next-page-container">
-            <Pagination
-              onChange={(value) =>
-                setSearchKeys((prev) => ({ ...prev, pageNum: value }))
-              }
-              current={searchKeys.pageNum}
-              total={data?.count ?? 0}
-              pageSize={20}
-            />
-          </div>
+                      <span className="price">${item.currentPrice / 100}</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              <div className="next-page-container">
+                <Pagination
+                  onChange={(value) =>
+                    setSearchKeys((prev) => ({ ...prev, pageNum: value }))
+                  }
+                  current={searchKeys.pageNum}
+                  total={data?.count ?? 0}
+                  pageSize={20}
+                />
+              </div>{" "}
+            </>
+          ) : (
+            <div style={{ fontSize: 14 }}>
+              We couldn&apos;t find anything that matches what you were looking
+              for. Try to change the filter setting.
+            </div>
+          )}
         </div>
       </main>
     </>
