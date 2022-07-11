@@ -20,9 +20,9 @@ export default function Model({
   keyword,
   title,
   brand,
-  productId,
   metaName,
   sku,
+  gtin,
 }) {
   return (
     <div>
@@ -76,7 +76,7 @@ export default function Model({
                 priceValidUntil: dayjs().add(90, "day").format("YYYY-MM-DD"),
                 brand: brand,
                 sku: sku,
-                gtin: productId,
+                gtin: gtin,
                 url: `${process.env.BASEURL}${path}`,
                 priceCurrency: "USD",
                 usedCondition: "http://schema.org/RefurbishedCondition",
