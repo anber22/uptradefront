@@ -1,6 +1,4 @@
 #!/bin/bash
-
-ENV=$1
 # 启动 pm2
 pm2 flush
 pm2 stop uptrade
