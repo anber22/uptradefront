@@ -547,6 +547,8 @@ export default function BuyPhone({
                                 onClick={() => {
                                   onOptionSelect(item);
                                   setFilterDrawerOpen(false);
+                                  document.body.style.overflow = "unset";
+                                  document.body.style.position = "unset";
                                 }}
                                 className={`condition-item ${
                                   searchKeys.selectedValues.some(
@@ -631,6 +633,8 @@ export default function BuyPhone({
                           onClick={() => {
                             onOrderClick(key);
                             setSortDrawerOpen(false);
+                            document.body.style.overflow = "unset";
+                            document.body.style.position = "unset";
                           }}
                         >
                           <span>{value}</span>
