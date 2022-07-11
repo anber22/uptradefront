@@ -407,7 +407,6 @@ export default function BuyPhone({
                 );
               }}
               renderOption={(optionsProps, optionData) => {
-                console.log(optionsProps);
                 return (
                   <button
                     {...optionsProps}
@@ -540,7 +539,10 @@ export default function BuyPhone({
                           ? data.values.map((item) => (
                               <div
                                 key={item.categoryValueId}
-                                onClick={() => onOptionSelect(item)}
+                                onClick={() => {
+                                  onOptionSelect(item);
+                                  setFilterDrawerOpen(false);
+                                }}
                                 className={`condition-item ${
                                   searchKeys.selectedValues.some(
                                     (x) =>
@@ -565,7 +567,7 @@ export default function BuyPhone({
                 <span
                   className="dropdown-toggle"
                   onClick={() => {
-                    setSortDrawerOpen(true)
+                    setSortDrawerOpen(true);
                     document.body.style.overflow = "hidden";
                     document.body.style.position = "fixed";
                   }}
@@ -603,7 +605,7 @@ export default function BuyPhone({
                 <div
                   className="sort-drawer-backdrop"
                   onClick={() => {
-                    setSortDrawerOpen(false)
+                    setSortDrawerOpen(false);
                     document.body.style.overflow = "unset";
                     document.body.style.position = "unset";
                   }}
@@ -621,7 +623,10 @@ export default function BuyPhone({
                         <div
                           className="drawer-sort-item"
                           key={key}
-                          onClick={() => onOrderClick(key)}
+                          onClick={() => {
+                            onOrderClick(key);
+                            setSortDrawerOpen(false);
+                          }}
                         >
                           <span>{value}</span>
                           {searchKeys.orderBy === key ? (
