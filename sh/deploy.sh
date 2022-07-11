@@ -1,9 +1,9 @@
 #!/bin/bash
 # 启动 pm2
 pm2 flush
-pm2 stop uptrade
-pm2 delete uptrade
-pm2 start npm --name "uptrade" -- run start
+pm2 stop new-uptrade
+pm2 delete new-uptrade
+pm2 start npm --name "new-uptrade" -- run start
 
 sudo /sbin/nginx -t
 sudo /sbin/nginx -s reload
