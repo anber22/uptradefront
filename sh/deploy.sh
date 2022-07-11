@@ -2,8 +2,11 @@
 
 corepack enable
 
+rm -rf build.tar.gz
+rm -rf cache.json
 pnpm -v
 pnpm install --frozen-lockfile --prefer-offline
+pnpm run build
 # 启动 pm2
 pm2 flush
 pm2 stop new-uptrade
