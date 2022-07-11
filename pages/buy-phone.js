@@ -483,7 +483,13 @@ export default function BuyPhone({
           <div className="option-controllers">
             <div className="filter-controller">
               <label className="dropdown">
-                <span onClick={() => setFilterDrawerOpen(true)}>
+                <span
+                  onClick={() => {
+                    setFilterDrawerOpen(true);
+                    document.body.style.overflow = "hidden";
+                    document.body.style.position = "fixed";
+                  }}
+                >
                   <img src="/svg/filter.svg" width="20" height="12" />
                   <span>Filters</span>
                 </span>
@@ -493,11 +499,14 @@ export default function BuyPhone({
                 className={`filter-drawer-close ${
                   filterDrawerOpen ? "filter-drawer-show" : ""
                 }`}
-                onTouchMove={(event) => event.preventDefault()}
               >
                 <div
                   className="filter-drawer-backdrop"
-                  onClick={() => setFilterDrawerOpen(false)}
+                  onClick={() => {
+                    setFilterDrawerOpen(false);
+                    document.body.style.overflow = "unset";
+                    document.body.style.position = "unset";
+                  }}
                 ></div>
 
                 <div className="filter-drawer-content">
@@ -555,7 +564,11 @@ export default function BuyPhone({
               <label className="dropdown">
                 <span
                   className="dropdown-toggle"
-                  onClick={() => setSortDrawerOpen(true)}
+                  onClick={() => {
+                    setSortDrawerOpen(true)
+                    document.body.style.overflow = "hidden";
+                    document.body.style.position = "fixed";
+                  }}
                 >
                   <img src="/svg/sort.svg" width="20" height="15" />
                   <span className="desktop-sort">
@@ -586,11 +599,14 @@ export default function BuyPhone({
                 className={`sort-drawer-close ${
                   sortDrawerOpen ? "sort-drawer-show" : ""
                 }`}
-                onTouchMove={(event) => event.preventDefault()}
               >
                 <div
                   className="sort-drawer-backdrop"
-                  onClick={() => setSortDrawerOpen(false)}
+                  onClick={() => {
+                    setSortDrawerOpen(false)
+                    document.body.style.overflow = "unset";
+                    document.body.style.position = "unset";
+                  }}
                 ></div>
                 <div className="sort-drawer-content">
                   <div
