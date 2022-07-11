@@ -5,7 +5,6 @@ import { promises as fs } from "fs";
 import path from "path";
 import dayjs from "dayjs";
 
-
 export const config = { amp: true };
 
 export default function Model({
@@ -350,7 +349,14 @@ export default function Model({
         <div className="model-related-content">
           <div className="desktop-phone-list">
             {relatedGoods?.map((item) => (
-              <a key={item.productId} href="#" className="phone-list-item">
+              <a
+                key={item.productId}
+                href={urlcat(`/redirect/:gradeAndMerchant`, {
+                  gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
+                  redirectUrl: item.buyUrl,
+                })}
+                className="phone-list-item"
+              >
                 <div className="img-container">
                   <amp-img width="100" height="100" src={item.brandLogoUrl} />
                 </div>
@@ -377,7 +383,14 @@ export default function Model({
 
           <div className="mobile-phone-list">
             {relatedGoods?.map((item) => (
-              <a key={item.productId} href="#" className="phone-list-item">
+              <a
+                key={item.productId}
+                href={urlcat(`/redirect/:gradeAndMerchant`, {
+                  gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
+                  redirectUrl: item.buyUrl,
+                })}
+                className="phone-list-item"
+              >
                 <div className="top">
                   <amp-img width="50" height="50" src={item.brandLogoUrl} />
                   <div className={`condition ${item.CONDITION} `}>

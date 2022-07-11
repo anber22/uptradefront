@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { useAmp } from "next/amp";
+import Script from "next/script";
 
 function MyApp({ Component, pageProps, navbar, appleList }) {
   const isAmp = useAmp();
@@ -45,13 +46,18 @@ function MyApp({ Component, pageProps, navbar, appleList }) {
           src="https://cdn.ampproject.org/v0/amp-list-0.1.js"
         ></script>
       </Head>
-
-      {Component.name !== "Redirect" ? (
-        <Header navbar={navbar} />
-      ) : null}
+      <Script id="google-tag-manager" strategy="afterInteractive">
+        {`
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+							new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+							j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+							'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+							})(window,document,'script','dataLayer','GTM-TXWLTL3');`}
+      </Script>
+      {Component.name !== "Redirect" ? <Header navbar={navbar} /> : null}
       <Component {...pageProps} />
       {isAmp ? (
-        <a href="/contact" className="global-help">
+        <a href="/contact" className="global-help" target="_blank">
           <amp-img
             src="/svg/help-pc.svg"
             className="help-pc"
@@ -66,7 +72,7 @@ function MyApp({ Component, pageProps, navbar, appleList }) {
           />
         </a>
       ) : (
-        <a href="/contact" className="global-help">
+        <a href="/contact" className="global-help" target="_blank">
           <img
             src="/svg/help-pc.svg"
             className="help-pc"

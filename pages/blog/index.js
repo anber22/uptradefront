@@ -29,7 +29,7 @@ export default function Blog({ topic, list }) {
         <h1>Tech Talk</h1>
       </div>
       <div className="blog-main-content">
-        <h2>Featured Teach Talk</h2>
+        <h2>Featured Tech Talk</h2>
         <a href={`/blog/${topic.slug}`}>
           <div className="blog-topic-card">
             <amp-img

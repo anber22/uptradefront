@@ -132,47 +132,13 @@ export default function AboutUs() {
             </div>
           </div>
         </div>
-        <div className="our-team">
-          <h2>Our Team</h2>
-          <div className="member-group">
-            <div className="member-item">
-              <amp-img
-                src="/Marco.jpg"
-                width="210"
-                height="210"
-                className="member-avatar"
-              />
-              <h3>Marco Mai</h3>
-              <div className="member-position">Marco Mai - CEO</div>
-            </div>
-            <div className="member-item">
-              <amp-img
-                src="/Esteban.jpg"
-                width="210"
-                height="210"
-                className="member-avatar"
-              />
-              <h3>Esteban Facundo</h3>
-              <div className="member-position">Sales and Service</div>
-            </div>
-            <div className="member-item">
-              <amp-img
-                src="/yuqi.jpeg"
-                width="210"
-                height="210"
-                className="member-avatar"
-              />
-              <h3>Yuqi Ouyang</h3>
-              <div className="member-position">Engineering</div>
-            </div>
-          </div>
-        </div>
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             background: "#fff",
+            marginTop: 48,
           }}
         >
           <a href="/buy-phone">

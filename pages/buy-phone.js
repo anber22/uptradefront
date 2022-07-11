@@ -493,6 +493,7 @@ export default function BuyPhone({
                 className={`filter-drawer-close ${
                   filterDrawerOpen ? "filter-drawer-show" : ""
                 }`}
+                onTouchMove={(event) => event.preventDefault()}
               >
                 <div
                   className="filter-drawer-backdrop"
@@ -585,6 +586,7 @@ export default function BuyPhone({
                 className={`sort-drawer-close ${
                   sortDrawerOpen ? "sort-drawer-show" : ""
                 }`}
+                onTouchMove={(event) => event.preventDefault()}
               >
                 <div
                   className="sort-drawer-backdrop"
