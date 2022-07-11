@@ -5,9 +5,9 @@ APP_WORKSPACE="$(pwd)"
 
 echo "APP_WORKSPACE: ${APP_WORKSPACE}, BUILD: ${BUILD}"
 
-npm -v
-npm install
-npm run build
+/home/ec2-user/node-v8.11.4-linux-x64/bin/npm -v
+/home/ec2-user/node-v8.11.4-linux-x64/bin/npm install
+/home/ec2-user/node-v8.11.4-linux-x64/bin/npm run build
 
 rm -rf build.tar.gz
 rm -rf cache.json
