@@ -1,9 +1,14 @@
 #!/bin/bash
+
+corepack enable
+
+pnpm -v
+pnpm install --frozen-lockfile --prefer-offline
 # 启动 pm2
 pm2 flush
 pm2 stop new-uptrade
 pm2 delete new-uptrade
-pm2 start npm --name "new-uptrade" -- run start
+pm2 start pnpm --name "new-uptrade" -- run start
 
 sudo /sbin/nginx -t
 sudo /sbin/nginx -s reload
