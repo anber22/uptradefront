@@ -1,5 +1,6 @@
 #!/bin/bash
 
+pnpm install --frozen-lockfile --prefer-offline
 
 # 启动 pm2
 pm2 flush
