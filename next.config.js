@@ -9,7 +9,7 @@ const nextConfig = {
     return config;
   },
   env: {
-    BASEURL: 'https://uptradeit.com'
+    BASEURL: 'https://276qa.com'
   },
 };
 
