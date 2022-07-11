@@ -271,24 +271,29 @@ export default function BuyPhone({
       <Head>
         <link rel="stylesheet" href="/rc.css" />
 
-        {/*<script*/}
-        {/*  type="application/ld+json"*/}
-        {/*  dangerouslySetInnerHTML={{*/}
-        {/*    __html:*/}
-        {/*      JSON.stringify({*/}
-        {/*        "@context": "https://schema.org",*/}
-        {/*        "@type": "ItemList",*/}
-        {/*        name: "ProductList",*/}
-        {/*        itemListElement: data?.data?.map((item, index) => {*/}
-        {/*          return {*/}
-        {/*            "@type": "ListItem",*/}
-        {/*            position: index + 1,*/}
-        {/*            url: urlProcessor(fromSource, item),*/}
-        {/*          };*/}
-        {/*        }),*/}
-        {/*      }),*/}
-        {/*  }}*/}
-        {/*/>*/}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              name: "ProductList",
+              itemListElement: data?.data?.map((item, index) => {
+                return {
+                  "@type": "ListItem",
+                  position: index + 1,
+                  url: urlcat(
+                    `${process.env.BASEURL}/redirect/:gradeAndMerchant`,
+                    {
+                      gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
+                      redirectUrl: item.buyUrl,
+                    }
+                  ),
+                };
+              }),
+            }),
+          }}
+        />
       </Head>
       <main className="buy-phone-page">
         <NextSeo

@@ -50,10 +50,7 @@ export const Footer = ({ appleList }) => {
 
           <div className="footer-nav-list">
             <div className="footer-nav-title">Blog</div>
-            <a href="#" className="footer-nav-item">
-              Buy Used Phones
-            </a>
-            <a href="/faq" className="footer-nav-item">
+            <a href="/blog" className="footer-nav-item">
               All
             </a>
           </div>

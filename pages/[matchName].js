@@ -21,6 +21,8 @@ export default function Model({
   title,
   brand,
   productId,
+  metaName,
+  sku,
 }) {
   return (
     <div>
@@ -30,29 +32,6 @@ export default function Model({
           custom-element="amp-carousel"
           src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
         ></script>
-        {/*<script*/}
-        {/*  type="application/ld+json"*/}
-        {/*  dangerouslySetInnerHTML={*/}
-        {/*    pageData?.canSold*/}
-        {/*      ? {*/}
-        {/*          __html: JSON.stringify({*/}
-        {/*            "@context": "https://schema.org",*/}
-        {/*            "@type": "ItemList",*/}
-        {/*            name: "ProductList",*/}
-        {/*            itemListElement: [*/}
-        {/*              {*/}
-        {/*                "@type": "ListItem",*/}
-        {/*                position: "1",*/}
-        {/*                url: `${process.env.CurrURL}/buy/${parentUrl}`,*/}
-        {/*              },*/}
-        {/*            ],*/}
-        {/*          }),*/}
-        {/*        }*/}
-        {/*      : {*/}
-        {/*          __html: "",*/}
-        {/*        }*/}
-        {/*  }*/}
-        {/*/>*/}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -83,8 +62,10 @@ export default function Model({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Product",
-              name: `Certified Used ${productName}`,
-              description: `Best deals on Certifiied Used and Refurbished ${productName}. Up to 70% off compared to new ✌ Free shipping ✅ 100% fully function ✅ 30 days risk free `,
+              name: metaName,
+              description: `Best deals on Certified Used and Refurbished ${
+                keyword || productName
+              }. Up to 70% off compared to new ✌ Free shipping ✅ 100% fully function ✅ 30 days risk free `,
               image: [
                 productImageUrl ?? `${process.env.BASEURL}/default-image.png`,
               ],
@@ -94,7 +75,7 @@ export default function Model({
                 price: `${price / 100 || ""}`,
                 priceValidUntil: dayjs().add(90, "day").format("YYYY-MM-DD"),
                 brand: brand,
-                sku: `${brand}-${productName.split(" ").join("-")}`,
+                sku: sku,
                 gtin: productId,
                 url: `${process.env.BASEURL}${path}`,
                 priceCurrency: "USD",
@@ -538,10 +519,25 @@ export async function getStaticProps({ params }) {
           product.keyword || product.productName
         } | UpTrade`;
 
+  const metaName = !!product.type
+    ? `Certified Used ${product.keyword} phone`
+    : `Certified Used ${product.productName}`;
+
+  const sku =
+    product.type === "BRAND"
+      ? product.brand === "Apple"
+        ? "apple-iphone"
+        : `${product.brand.toLowerCase()}-phone`
+      : product.type === "CARRIER"
+      ? `${product.brand.toLowerCase()}-phone`
+      : `${product.brand}-${product.productName.split(" ").join("-")}`;
+
   return {
     props: {
       ...product,
       title,
+      metaName,
+      sku,
       path: `/${params.matchName}`,
       relatedGoods: product.relatedGoods
         .filter((x) => !!x.specs)

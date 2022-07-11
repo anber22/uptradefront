@@ -259,12 +259,7 @@ export const Header = ({ navbar }) => {
 
                     <ul className="main-menu-dropdown-list">
                       <li>
-                        <a href="#" title="Buy Used Phones">
-                          Buy Used Phones
-                        </a>
-                      </li>
-                      <li>
-                        <a href="/blog" title="Smartphones">
+                        <a href="/blog" title="Blog">
                           All
                         </a>
                       </li>

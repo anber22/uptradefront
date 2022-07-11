@@ -35,10 +35,7 @@ export default function FooterBuyNav({ appleList }) {
           className="footer-nav-content"
           style={{ display: selectedNav === "blog" ? "flex" : "none" }}
         >
-          <a href="#" title="...">
-            Buy Used Phones
-          </a>
-          <a href="/blog" title="...">
+          <a href="/blog" title="blog">
             All
           </a>
         </div>
