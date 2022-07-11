@@ -1,5 +1,6 @@
 #!/bin/bash
 
+node -v
 npm -v
 rm -rf build.tar.gz
 rm -rf cache.json
