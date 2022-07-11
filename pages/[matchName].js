@@ -336,6 +336,8 @@ export default function Model({
                   gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
                   redirectUrl: item.buyUrl,
                 })}
+                target="_blank"
+                rel="noreferrer"
                 className="phone-list-item"
               >
                 <div className="img-container">
@@ -370,6 +372,8 @@ export default function Model({
                   gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
                   redirectUrl: item.buyUrl,
                 })}
+                target="_blank"
+                rel="noreferrer"
                 className="phone-list-item"
               >
                 <div className="top">
