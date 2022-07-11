@@ -2691,6 +2691,8 @@ header.fixed {
   align-items: center;
   color: #ffffff;
   flex-direction: column;
+  padding: 0px 20px;
+  text-align: center;
 }
 
 .redirect-page header {

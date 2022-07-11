@@ -490,8 +490,10 @@ export default function BuyPhone({
                 <span
                   onClick={() => {
                     setFilterDrawerOpen(true);
-                    document.body.style.overflow = "hidden";
-                    document.body.style.position = "fixed";
+                    if(!matchMedia) {
+                      document.body.style.overflow = "hidden";
+                      document.body.style.position = "fixed";
+                    }
                   }}
                 >
                   <img src="/svg/filter.svg" width="20" height="12" />
@@ -575,8 +577,10 @@ export default function BuyPhone({
                   className="dropdown-toggle"
                   onClick={() => {
                     setSortDrawerOpen(true);
-                    document.body.style.overflow = "hidden";
-                    document.body.style.position = "fixed";
+                    if (!matchMedia) {
+                      document.body.style.overflow = "hidden";
+                      document.body.style.position = "fixed";
+                    }
                   }}
                 >
                   <img src="/svg/sort.svg" width="20" height="15" />
