@@ -211,7 +211,6 @@ export default function Home({ listedProduct, reviews, navbar, appleList }) {
                       />
                     ))}
                   </div>
-                  <div className="m1">{x.timeago}</div>
                 </div>
                 <div
                   className="review-content"
