@@ -735,7 +735,7 @@ export default function BuyPhone({
                     </div>
                     <div className="bottom">
                       <div className="description">
-                        <span>{item.name}</span>
+                        <span className="attr-name">{item.name}</span>
                         <span className="attr">
                           {`${item.CARRIER} ${item.STORAGE} ${item.COLOR}`}
                         </span>
