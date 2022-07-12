@@ -8,7 +8,7 @@ export const Footer = ({ appleList }) => {
   return (
     <footer className="UpTrade-footer">
       <div>
-        <Link href="/" title="Home">
+        <a href="/" title="Home">
           {isAmp ? (
             <amp-img
               src="/svg/logo.svg"
@@ -26,7 +26,7 @@ export const Footer = ({ appleList }) => {
               title="logo"
             />
           )}
-        </Link>
+        </a>
       </div>
 
       <div className="footer-container">
