@@ -5,8 +5,11 @@ import { useAsync } from "react-use";
 import Select from "react-select";
 import { NextSeo } from "next-seo";
 import Head from "next/head";
+import { getNavBar } from "../utils/getNavBar";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
-export default function Reviews({ data: initData }) {
+export default function Reviews({ data: initData, navbar, appleList }) {
   const [params, setParams] = useState({
     page: 0,
     sort: "highest",
@@ -50,6 +53,7 @@ export default function Reviews({ data: initData }) {
       <Head>
         <link rel="stylesheet" href="/rc.css" />
       </Head>
+      <Header navbar={navbar} />
       <main className="reviews-page">
         <NextSeo
           title="Customer Reviews | UpTrade"
@@ -195,6 +199,15 @@ export default function Reviews({ data: initData }) {
           </div>
         </div>
       </main>
+      <Footer appleList={appleList} />
+      <div className="copy-right">
+        <div className="terms">
+          <a href="/terms">Terms & Conditions</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+
+        <p>© 2021 UP Trade Technologies, Inc.</p>
+      </div>
     </>
   );
 }
@@ -211,7 +224,9 @@ export async function getStaticProps({ params }) {
     })
   ).then((response) => response.json());
 
+  const navBarData = await getNavBar();
+
   return {
-    props: { data: reviewsResponse },
+    props: { data: reviewsResponse, ...navBarData },
   };
 }

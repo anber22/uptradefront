@@ -99,10 +99,7 @@ export const Footer = ({ appleList }) => {
                 </h3>
 
                 <div className="footer-nav-list">
-                  <a href="#" title="...">
-                    Buy My Phone
-                  </a>
-                  <a href="/blog" title="...">
+                  <a href="/blog" title="All">
                     All
                   </a>
                 </div>

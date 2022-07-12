@@ -1,15 +1,19 @@
 import Head from "next/head";
 import { NextSeo } from "next-seo";
+import { getNavBar } from "../utils/getNavBar";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 export const config = { amp: true };
 
-export default function FAQ() {
+export default function FAQ({ navbar, appleList }) {
   return (
     <div>
       <Head>
         <title>Frequently Asked Questions | UpTrade</title>
       </Head>
 
+      <Header navbar={navbar} />
       <main className="faq-page">
         <NextSeo
           title="Frequently Asked Questions | UpTrade"
@@ -190,6 +194,25 @@ export default function FAQ() {
           </a>
         </div>
       </main>
+      <Footer appleList={appleList} />
+      <div className="copy-right">
+        <div className="terms">
+          <a href="/terms">Terms & Conditions</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+
+        <p>© 2021 UP Trade Technologies, Inc.</p>
+      </div>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const navBarData = await getNavBar();
+
+  return {
+    props: {
+      ...navBarData,
+    },
+  };
 }

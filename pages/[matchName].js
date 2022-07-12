@@ -4,6 +4,9 @@ import { NextSeo } from "next-seo";
 import { promises as fs } from "fs";
 import path from "path";
 import dayjs from "dayjs";
+import { getNavBar } from "../utils/getNavBar";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 export const config = { amp: true };
 
@@ -23,6 +26,8 @@ export default function Model({
   metaName,
   sku,
   gtin,
+  navbar,
+  appleList,
 }) {
   return (
     <div>
@@ -115,6 +120,7 @@ export default function Model({
           site_name: "UpTrade",
         }}
       />
+      <Header navbar={navbar} />
       <main className="model-page">
         <div className="icon-list">
           <div className="icon-list-item">
@@ -408,6 +414,15 @@ export default function Model({
           </div>
         </div>
       </main>
+      <Footer appleList={appleList} />
+      <div className="copy-right">
+        <div className="terms">
+          <a href="/terms">Terms & Conditions</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+
+        <p>© 2021 UP Trade Technologies, Inc.</p>
+      </div>
     </div>
   );
 }
@@ -536,6 +551,8 @@ export async function getStaticProps({ params }) {
       ? `${product.brand.toLowerCase()}-phone`
       : `${product.brand}-${product.productName.split(" ").join("-")}`;
 
+  const navbar = await getNavBar();
+
   return {
     props: {
       ...product,
@@ -556,6 +573,7 @@ export async function getStaticProps({ params }) {
           };
         }),
       reviewsInfo,
+      ...navbar,
     },
   };
 }

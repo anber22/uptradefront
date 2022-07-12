@@ -1,50 +1,65 @@
 import urlcat from "urlcat";
 import dayjs from "dayjs";
 import { NextSeo } from "next-seo";
+import { getNavBar } from "../../utils/getNavBar";
+import { Header } from "../../components/Header";
+import { Footer } from "../../components/Footer";
 
-export default function BlogDetail({ data }) {
+export default function BlogDetail({ data, navbar, appleList }) {
   return (
-    <main className="blog-page">
-      <NextSeo
-        title={data?.title}
-        description={data?.seoDesc}
-        canonical={`${process.env.BASEURL}/blog/${data?.slug}`}
-        openGraph={{
-          title: data?.title,
-          type: "Website",
-          images: [
-            {
-              url: `${process.env.BASEURL}/og_logo.png`,
-              width: 200,
-              height: 200,
-            },
-          ],
-          url: `${process.env.BASEURL}/blog/${data?.slug}`,
-          description: data?.seoDesc,
-          site_name: "UpTrade",
-        }}
-      />
-      <div className="blog-page-title">
-        <div>Tech Talk</div>
-      </div>
-      <div className="blog-main-content">
-        <div className="blog-detail-main">
-          <h1>{data.title}</h1>
-          <div className="detail-release-data">
-            <div>{dayjs(data.releaseDt).format("MMM DD, YYYY")}</div>
-            <div>
-              <img src="/svg/twitter-s.svg" width="24" height="14" />
-              <img src="/svg/facebook-s.svg" width="24" height="14" />
-              <img src="/svg/email.svg" width="24" height="14" />
-            </div>
-          </div>
-          <div
-            className="blog-detail-content"
-            dangerouslySetInnerHTML={{ __html: data.content }}
-          ></div>
+    <>
+      <Header navbar={navbar} />
+      <main className="blog-page">
+        <NextSeo
+          title={data?.title}
+          description={data?.seoDesc}
+          canonical={`${process.env.BASEURL}/blog/${data?.slug}`}
+          openGraph={{
+            title: data?.title,
+            type: "Website",
+            images: [
+              {
+                url: `${process.env.BASEURL}/og_logo.png`,
+                width: 200,
+                height: 200,
+              },
+            ],
+            url: `${process.env.BASEURL}/blog/${data?.slug}`,
+            description: data?.seoDesc,
+            site_name: "UpTrade",
+          }}
+        />
+        <div className="blog-page-title">
+          <div>Tech Talk</div>
         </div>
+        <div className="blog-main-content">
+          <div className="blog-detail-main">
+            <h1>{data.title}</h1>
+            <div className="detail-release-data">
+              <div>{dayjs(data.releaseDt).format("MMM DD, YYYY")}</div>
+              <div>
+                <img src="/svg/twitter-s.svg" width="24" height="14" />
+                <img src="/svg/facebook-s.svg" width="24" height="14" />
+                <img src="/svg/email.svg" width="24" height="14" />
+              </div>
+            </div>
+            <div
+              className="blog-detail-content"
+              dangerouslySetInnerHTML={{ __html: data.content }}
+            ></div>
+          </div>
+        </div>
+      </main>
+      <Footer appleList={appleList} />
+      <div className="copy-right">
+        <div className="terms">
+          <a href="/terms">Terms & Conditions</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+
+        <p>© 2021 UP Trade Technologies, Inc.</p>
       </div>
-    </main>
+    </>
   );
 }
 
@@ -99,6 +114,7 @@ export async function getStaticProps({ params }) {
     })
   ).then((response) => response.json());
 
+  const navbarData = await getNavBar();
   return {
     props: {
       data: {
@@ -108,6 +124,7 @@ export async function getStaticProps({ params }) {
         slug: blogDetailResponse.data.slug,
         seoDesc: blogDetailResponse.data.seoDesc,
       },
+      ...navbarData,
     },
   };
 }

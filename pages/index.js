@@ -1,8 +1,11 @@
 import Head from "next/head";
 import { NextSeo } from "next-seo";
+import { getNavBar } from "../utils/getNavBar";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 export const config = { amp: true };
 
-export default function Home({ listedProduct, reviews }) {
+export default function Home({ listedProduct, reviews, navbar, appleList }) {
   return (
     <div>
       <Head>
@@ -44,6 +47,7 @@ export default function Home({ listedProduct, reviews }) {
           }}
         ></script>
       </amp-state>
+      <Header navbar={navbar} />
       <main className="home-page">
         <div className="home-content">
           <div className="home-left">
@@ -68,7 +72,7 @@ export default function Home({ listedProduct, reviews }) {
                 <div className="brand-name">Apple</div>
               </div>
               <div>
-                <a href='/buy-used-refurbished-samsung' className="brand">
+                <a href="/buy-used-refurbished-samsung" className="brand">
                   <amp-img
                     width="70"
                     height="70"
@@ -80,7 +84,7 @@ export default function Home({ listedProduct, reviews }) {
                 <div className="brand-name">Samsung</div>
               </div>
               <div>
-                <a href='/buy-used-refurbished-google' className="brand">
+                <a href="/buy-used-refurbished-google" className="brand">
                   <amp-img
                     width="70"
                     height="70"
@@ -244,7 +248,6 @@ export default function Home({ listedProduct, reviews }) {
                         />
                       ))}
                     </div>
-                    <div className="m1">{x.timeago}</div>
                   </div>
                   <div
                     className="review-content"
@@ -332,6 +335,16 @@ export default function Home({ listedProduct, reviews }) {
           </p>
         </div>
       </main>
+
+      <Footer appleList={appleList} />
+      <div className="copy-right">
+        <div className="terms">
+          <a href="/terms">Terms & Conditions</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+
+        <p>© 2021 UP Trade Technologies, Inc.</p>
+      </div>
     </div>
   );
 }
@@ -345,10 +358,13 @@ export async function getStaticProps() {
     "https://api.reviews.io/merchant/reviews?page=0&per_page=1000&order=rating&sort=highest_rated&store=uptradeit-com"
   ).then((response) => response.json());
 
+  const navBarData = await getNavBar();
+
   return {
     props: {
       listedProduct: listedProduct.data,
       reviews: reviewsResponse.reviews.slice(0, 3),
+      ...navBarData,
     },
   };
 }

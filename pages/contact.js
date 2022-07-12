@@ -1,8 +1,11 @@
 import { useRef, useState } from "react";
 import { useAsyncFn } from "react-use";
 import { NextSeo } from "next-seo";
+import { getNavBar } from "../utils/getNavBar";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
-export default function Contact() {
+export default function Contact({ navbar, appleList }) {
   const fullNameRef = useRef();
   const emailRef = useRef();
   const messageRef = useRef();
@@ -83,114 +86,138 @@ export default function Contact() {
   }, []);
 
   return (
-    <main className="contact-page">
-      <NextSeo
-        title="Contact us | UpTrade"
-        description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Contact"
-        canonical={`${process.env.BASEURL}/contact`}
-        openGraph={{
-          title: "Contact us | UpTrade",
-          type: "Website",
-          images: [
-            {
-              url: `${process.env.BASEURL}/og_logo.png`,
-              width: 200,
-              height: 200,
-            },
-          ],
-          url: `${process.env.BASEURL}/contact`,
-          description:
-            "Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Contact",
-          site_name: "UpTrade",
-        }}
-      />
-      <div className="title-container">
-        <h1>Contact us?</h1>
-      </div>
-      <div className="content-container">
-        <div className="contact-card">
-          <h2>Send us message</h2>
-          <div className="card-content">
-            <div>
-              <div className="name-fields">
+    <>
+      <Header navbar={navbar} />
+      <main className="contact-page">
+        <NextSeo
+          title="Contact us | UpTrade"
+          description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Contact"
+          canonical={`${process.env.BASEURL}/contact`}
+          openGraph={{
+            title: "Contact us | UpTrade",
+            type: "Website",
+            images: [
+              {
+                url: `${process.env.BASEURL}/og_logo.png`,
+                width: 200,
+                height: 200,
+              },
+            ],
+            url: `${process.env.BASEURL}/contact`,
+            description:
+              "Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping. | Contact",
+            site_name: "UpTrade",
+          }}
+        />
+        <div className="title-container">
+          <h1>Contact us?</h1>
+        </div>
+        <div className="content-container">
+          <div className="contact-card">
+            <h2>Send us message</h2>
+            <div className="card-content">
+              <div>
+                <div className="name-fields">
+                  <div className="card-content-field">
+                    <label>Full Name:</label>
+                    <input
+                      type="text"
+                      ref={fullNameRef}
+                      onChange={() => {
+                        setSubmitSuccess(false);
+                        setErrorMessages((prev) => ({
+                          ...prev,
+                          fullName: "",
+                        }));
+                      }}
+                    />
+                    <div className="error-message">
+                      {errorMessages.fullName}
+                    </div>
+                  </div>
+                  <div className="card-content-field">
+                    <label>Email:</label>
+                    <input
+                      type="email"
+                      ref={emailRef}
+                      onChange={() => {
+                        setSubmitSuccess(false);
+                        setErrorMessages((prev) => ({
+                          ...prev,
+                          email: "",
+                        }));
+                      }}
+                    />
+                    <div className="error-message">{errorMessages.email}</div>
+                  </div>
+                </div>
                 <div className="card-content-field">
-                  <label>Full Name:</label>
+                  <label>Message:</label>
                   <input
                     type="text"
-                    ref={fullNameRef}
+                    className="multiline-input"
                     onChange={() => {
                       setSubmitSuccess(false);
                       setErrorMessages((prev) => ({
                         ...prev,
-                        fullName: "",
+                        message: "",
                       }));
                     }}
+                    ref={messageRef}
                   />
-                  <div className="error-message">{errorMessages.fullName}</div>
+                  <div className="error-message">{errorMessages.message}</div>
                 </div>
-                <div className="card-content-field">
-                  <label>Email:</label>
-                  <input
-                    type="email"
-                    ref={emailRef}
-                    onChange={() => {
-                      setSubmitSuccess(false);
-                      setErrorMessages((prev) => ({
-                        ...prev,
-                        email: "",
-                      }));
-                    }}
-                  />
-                  <div className="error-message">{errorMessages.email}</div>
-                </div>
-              </div>
-              <div className="card-content-field">
-                <label>Message:</label>
-                <input
-                  type="text"
-                  className="multiline-input"
-                  onChange={() => {
-                    setSubmitSuccess(false);
-                    setErrorMessages((prev) => ({
-                      ...prev,
-                      message: "",
-                    }));
-                  }}
-                  ref={messageRef}
-                />
-                <div className="error-message">{errorMessages.message}</div>
-              </div>
 
-              <div className="button-container">
-                <button onClick={creatEmail}>Submit</button>
-                <div className="contact-success-message">
-                  {submitSuccess ? "Message sent!" : ""}
+                <div className="button-container">
+                  <button onClick={creatEmail}>Submit</button>
+                  <div className="contact-success-message">
+                    {submitSuccess ? "Message sent!" : ""}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="card-description">
-              <div>
-                <h3>We are located at</h3>
+              <div className="card-description">
                 <div>
-                  UP Trade Technologies 550 S Watters Rd Suite 276 Allen, TX
-                  75013
+                  <h3>We are located at</h3>
+                  <div>
+                    UP Trade Technologies 550 S Watters Rd Suite 276 Allen, TX
+                    75013
+                  </div>
                 </div>
-              </div>
-              <div>
-                <h3>Hours</h3>
-                <div>M-F: 9am to 5pm Saturday: CLOSED Sunday: CLOSED</div>
-              </div>
-              <div>
-                <h3>Direct</h3>
-                <div>972.833.0136</div>
-              </div>
-              <div>
-                <h3>Email us</h3> <p>support@uptradeit.com</p>
+                <div>
+                  <h3>Hours</h3>
+                  <div>M-F: 9am to 5pm Saturday: CLOSED Sunday: CLOSED</div>
+                </div>
+                <div>
+                  <h3>Direct</h3>
+                  <div>972.833.0136</div>
+                </div>
+                <div>
+                  <h3>Email us</h3> <p>support@uptradeit.com</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </main>
+      <Footer appleList={appleList} />
+      <div className="copy-right">
+        <div className="terms">
+          <a href="/terms">Terms & Conditions</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+
+        <p>© 2021 UP Trade Technologies, Inc.</p>
       </div>
-    </main>
+    </>
   );
+}
+
+export async function getStaticProps() {
+  const navBarData = await getNavBar();
+
+  return {
+    props: {
+      ...navBarData,
+    },
+  };
 }

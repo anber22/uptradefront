@@ -1,9 +1,13 @@
 import { NextSeo } from "next-seo";
+import {getNavBar} from "../utils/getNavBar";
+import {Header} from "../components/Header";
+import {Footer} from "../components/Footer";
 export const config = { amp: true };
 
-export default function CosmeticConditions() {
+export default function CosmeticConditions({ navbar, appleList }) {
   return (
     <>
+      <Header navbar={navbar} />
       <main className="cosmetic-condition-page">
         <NextSeo
           title="Condition Comparison of Used Phones and Devices"
@@ -156,6 +160,27 @@ export default function CosmeticConditions() {
           </table>
         </div>
       </main>
+      <Footer appleList={appleList} />
+      <div className="copy-right">
+        <div className="terms">
+          <a href="/terms">Terms & Conditions</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+
+        <p>© 2021 UP Trade Technologies, Inc.</p>
+      </div>
     </>
   );
 }
+
+
+export async function getStaticProps() {
+  const navBarData = await getNavBar();
+
+  return {
+    props: {
+      ...navBarData,
+    },
+  };
+}
+

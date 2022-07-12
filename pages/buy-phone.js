@@ -6,6 +6,9 @@ import urlcat from "urlcat";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { getNavBar } from "../utils/getNavBar";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 const orderByDict = {
   LOWEST_PRICE: "Lowest Price",
@@ -70,6 +73,8 @@ export default function BuyPhone({
   carrierOptions,
   data: initData,
   products,
+  navbar,
+  appleList,
 }) {
   const router = useRouter();
   const [sortDrawerOpen, setSortDrawerOpen] = useState(false);
@@ -295,6 +300,7 @@ export default function BuyPhone({
           }}
         />
       </Head>
+      <Header navbar={navbar} />
       <main className="buy-phone-page">
         <NextSeo
           title={pageTitleHandler(
@@ -490,7 +496,7 @@ export default function BuyPhone({
                 <span
                   onClick={() => {
                     setFilterDrawerOpen(true);
-                    if(!matchMedia) {
+                    if (!matchMedia) {
                       document.body.style.overflow = "hidden";
                       document.body.style.position = "fixed";
                     }
@@ -759,6 +765,15 @@ export default function BuyPhone({
           )}
         </div>
       </main>
+      <Footer appleList={appleList} />
+      <div className="copy-right">
+        <div className="terms">
+          <a href="/terms">Terms & Conditions</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+
+        <p>© 2021 UP Trade Technologies, Inc.</p>
+      </div>
     </>
   );
 }
@@ -807,8 +822,12 @@ export async function getStaticProps() {
       ...specs,
     };
   });
+
+  const navBarData = await getNavBar();
+
   return {
     props: {
+      ...navBarData,
       conditions: data.data,
       carrierOptions: carrierOptions ? carrierOptions.values : [],
       data: {

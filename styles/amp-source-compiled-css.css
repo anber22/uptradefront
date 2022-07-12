@@ -939,9 +939,15 @@ header.fixed {
     padding: 0 24px;
   }
 
-  .buy-dropdown-right div[role="list"] {
+  .buy-dropdown-right .show {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    width: 400px;
+    height: 300px;
+  }
+
+  .buy-dropdown-right .hidden {
+    display: none;
   }
 
   .buy-dropdown-right .buy-nav-list {
@@ -1771,7 +1777,7 @@ header.fixed {
   .desktop-phone-list .phone-list-item {
     padding: 0 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 20% 30% 25% 25%;
     border: 1px solid #e2e2e2;
     align-items: center;
     text-decoration: none;

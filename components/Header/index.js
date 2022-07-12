@@ -6,20 +6,6 @@ export const Header = ({ navbar }) => {
   const isAmp = useAmp();
   return (
     <header className="mega-menu UpTrade-header">
-      <amp-state id="buyNavbar">
-        <script
-          type="application/json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(navbar) }}
-        ></script>
-      </amp-state>
-      <amp-state id="filterNavBar">
-        <script
-          type="application/json"
-          dangerouslySetInnerHTML={{
-            __html: `{ "items": ${JSON.stringify(navbar[0].values)} }`,
-          }}
-        ></script>
-      </amp-state>
       <div className="container full-width">
         <div className="row">
           <div className="header">
@@ -163,7 +149,7 @@ export const Header = ({ navbar }) => {
                         <div id="desktop-buy-dropdown">
                           <div className="buy-dropdown-left">
                             <amp-selector
-                              on={`select: AMP.setState({ filterNavBar: { items: buyNavbar.filter(a => event.targetOption == a.key)[0].values } })`}
+                              on={`select: AMP.setState({ selected: event.targetOption })`}
                             >
                               {navbar?.map((item) => (
                                 <div
@@ -188,21 +174,42 @@ export const Header = ({ navbar }) => {
                             </a>
                           </div>
                           <div className="buy-dropdown-right">
-                            <amp-list
-                              layout="flex-item"
-                              src="amp-state:filterNavBar"
-                              data-amp-bind-src="filterNavBar.items"
-                              width="400"
-                              height="300"
-                              binding="always"
-                            >
-                              <template type="amp-mustache">
-                                <a
-                                  className="nav-link-item"
-                                  href="{{url}}"
-                                >{`{{value}}`}</a>
-                              </template>
-                            </amp-list>
+                            {navbar?.map((x) => {
+                              return (
+                                <div
+                                  key={x.key}
+                                  className={
+                                    x.key === "Apple" ? "show" : "hidden"
+                                  }
+                                  data-amp-bind-class={`selected == '${x.key}' ? 'show' : 'hidden'`}
+                                >
+                                  {x.values.map((item, index) => (
+                                    <a
+                                      key={index}
+                                      href={item.url}
+                                      className="nav-link-item"
+                                    >
+                                      {item.value}
+                                    </a>
+                                  ))}
+                                </div>
+                              );
+                            })}
+                            {/*<amp-list*/}
+                            {/*  layout="flex-item"*/}
+                            {/*  src="amp-state:filterNavBar"*/}
+                            {/*  data-amp-bind-src="filterNavBar.items"*/}
+                            {/*  width="400"*/}
+                            {/*  height="300"*/}
+                            {/*  binding="always"*/}
+                            {/*>*/}
+                            {/*  <template type="amp-mustache">*/}
+                            {/*    <a*/}
+                            {/*      className="nav-link-item"*/}
+                            {/*      href="{{url}}"*/}
+                            {/*    >{`{{value}}`}</a>*/}
+                            {/*  </template>*/}
+                            {/*</amp-list>*/}
                           </div>
                         </div>
 

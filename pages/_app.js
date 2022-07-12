@@ -4,7 +4,7 @@ import { Footer } from "../components/Footer";
 import { useAmp } from "next/amp";
 import Script from "next/script";
 
-function MyApp({ Component, pageProps, navbar, appleList }) {
+function MyApp({ Component, pageProps }) {
   const isAmp = useAmp();
   return (
     <>
@@ -54,7 +54,6 @@ function MyApp({ Component, pageProps, navbar, appleList }) {
 							'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 							})(window,document,'script','dataLayer','GTM-TXWLTL3');`}
       </Script>
-      {Component.name !== "Redirect" ? <Header navbar={navbar} /> : null}
       <Component {...pageProps} />
       {isAmp ? (
         <a href="/contact" className="global-help" target="_blank">
@@ -87,33 +86,7 @@ function MyApp({ Component, pageProps, navbar, appleList }) {
           />
         </a>
       )}
-      {Component.name !== "Redirect" ? (
-        <>
-          <Footer appleList={appleList} />
-          <div className="copy-right">
-            <div className="terms">
-              <a href="/terms">Terms & Conditions</a>
-              <a href="/privacy-policy">Privacy Policy</a>
-            </div>
-
-            <p>© 2021 UP Trade Technologies, Inc.</p>
-          </div>
-        </>
-      ) : null}
     </>
   );
 }
-
-MyApp.getInitialProps = async () => {
-  const navbarResponse = await fetch(
-    "https://api.276qa.com/search/category/buy/navigation/bar"
-  ).then((response) => response.json());
-
-  const appleList = navbarResponse.data.find((x) => x.key === "Apple").values;
-  return {
-    navbar: navbarResponse.data,
-    appleList: appleList,
-  };
-};
-
 export default MyApp;
