@@ -163,21 +163,13 @@ export default function Model({
               {keyword || productName}
             </h1>
             <div className="model-info">
-              {/*<amp-img*/}
-              {/*  src={productImageUrl ?? "/default-image.png"}*/}
-              {/*  data-hero*/}
-              {/*  width="270"*/}
-              {/*  height="270"*/}
-              {/*  className="desktop-img"*/}
-              {/*/>*/}
-              {/*<amp-img*/}
-              {/*  data-hero*/}
-              {/*  src={productImageUrl ?? "/default-image.png"}*/}
-              {/*  width="270"*/}
-              {/*  height="270"*/}
-              {/*  layout="responsive"*/}
-              {/*  className="mobile-img"*/}
-              {/*/>*/}
+              <amp-img
+                src={productImageUrl ?? "/default-image.png"}
+                data-hero
+                width="270"
+                height="270"
+                className="desktop-img"
+              />
               <amp-img
                 data-hero
                 className="mobile-img"
@@ -186,8 +178,8 @@ export default function Model({
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 srcset={`${productImageUrl ?? "/default-image.png"} 1024w, ${productImageUrl ?? "/default-image.png"} 300w, ${productImageUrl ?? "/default-image.png"} 768w, ${productImageUrl ?? "/default-image.png"} 1536w, ${productImageUrl ?? "/default-image.png"} 2048w`}
                 alt="iphone 12 mini vs iphone 8"
-                width="270"
-                height="270"
+                width="250"
+                height="250"
                 data-pagespeed-url-hash="1625762605"
               />
 
