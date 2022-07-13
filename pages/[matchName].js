@@ -182,7 +182,6 @@ export default function Model({
                 data-hero
                 className="mobile-img"
                 layout="responsive"
-                style="box-sizing: border-box; margin: 0px; padding: 0px; border: none; outline: 0px; font-variant: inherit; font-stretch: inherit; line-height: inherit; vertical-align: middle; font-family: inherit; font-style: inherit; font-weight: inherit; max-width: 100%; height: auto; border-radius: 0px; box-shadow: none; display: inline-block;"
                 src={productImageUrl}
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 srcset={`${productImageUrl} 1024w, ${productImageUrl} 300w, ${productImageUrl} 768w,${productImageUrl} 1536w, ${productImageUrl} 2048w`}
