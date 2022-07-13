@@ -2685,6 +2685,12 @@ header.fixed {
     display: none;
   }
 
+  .more-blog-list-show {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+
   /*  Desktop css*/
 }
 
@@ -4599,6 +4605,12 @@ button {
 
   .attr-name {
     font-size: 20px;
+  }
+
+  .more-blog-list-show {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
   }
   /*Mobile css  */
 }
