@@ -182,9 +182,9 @@ export default function Model({
                 data-hero
                 className="mobile-img"
                 layout="responsive"
-                src={productImageUrl}
+                src={productImageUrl ?? "/default-image.png"}
                 sizes="(max-width: 1024px) 100vw, 1024px"
-                srcset={`${productImageUrl} 1024w, ${productImageUrl} 300w, ${productImageUrl} 768w,${productImageUrl} 1536w, ${productImageUrl} 2048w`}
+                srcset={`${productImageUrl ?? "/default-image.png"} 1024w, ${productImageUrl ?? "/default-image.png"} 300w, ${productImageUrl ?? "/default-image.png"} 768w, ${productImageUrl ?? "/default-image.png"} 1536w, ${productImageUrl ?? "/default-image.png"} 2048w`}
                 alt="iphone 12 mini vs iphone 8"
                 width="270"
                 height="270"
@@ -571,6 +571,7 @@ export async function getStaticProps({ params }) {
       title,
       metaName,
       sku,
+      productImageUrl: product.productImageUrl?.replaceAll(' ', '%20') ?? null,
       path: `/${params.matchName}`,
       relatedGoods: product.relatedGoods
         .filter((x) => !!x.specs)
