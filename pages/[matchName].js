@@ -171,6 +171,7 @@ export default function Model({
                 className="desktop-img"
               />
               <amp-img
+                data-hero
                 className="mobile-img"
                 layout="fixed"
                 src={"/iPhone_12.webp" ?? "/default-image.png"}
