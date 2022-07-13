@@ -4612,6 +4612,11 @@ button {
     flex-direction: column;
     row-gap: 16px;
   }
+
+  .mobile-img {
+    width: 250px;
+    height: 250px;
+  }
   /*Mobile css  */
 }
 

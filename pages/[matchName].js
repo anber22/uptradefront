@@ -177,10 +177,8 @@ export default function Model({
                 src={productImageUrl ?? "/default-image.png"}
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 srcset={`${productImageUrl ?? "/default-image.png"} 1024w, ${productImageUrl ?? "/default-image.png"} 300w, ${productImageUrl ?? "/default-image.png"} 768w, ${productImageUrl ?? "/default-image.png"} 1536w, ${productImageUrl ?? "/default-image.png"} 2048w`}
-                alt="iphone 12 mini vs iphone 8"
                 width="250"
                 height="250"
-                data-pagespeed-url-hash="1625762605"
               />
 
               <div className="desktop-model-description">
