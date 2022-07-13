@@ -179,12 +179,16 @@ export default function Model({
               {/*  className="mobile-img"*/}
               {/*/>*/}
               <amp-img
+                data-hero
                 className="mobile-img"
+                layout="responsive"
+                style="box-sizing: border-box; margin: 0px; padding: 0px; border: none; outline: 0px; font-variant: inherit; font-stretch: inherit; line-height: inherit; vertical-align: middle; font-family: inherit; font-style: inherit; font-weight: inherit; max-width: 100%; height: auto; border-radius: 0px; box-shadow: none; display: inline-block;"
                 src="https://guides.uptradeit.com/wp-content/uploads/2020/10/iPhone-12-mini-vs-iPhone-8-1024x538.png"
                 sizes="(max-width: 1024px) 100vw, 1024px"
-                srcSet="https://guides.uptradeit.com/wp-content/uploads/2020/10/iPhone-12-mini-vs-iPhone-8-1024x538.png 1024w, https://guides.uptradeit.com/wp-content/uploads/2020/10/iPhone-12-mini-vs-iPhone-8-300x158.png 300w, https://guides.uptradeit.com/wp-content/uploads/2020/10/iPhone-12-mini-vs-iPhone-8-768x403.png 768w, https://guides.uptradeit.com/wp-content/uploads/2020/10/iPhone-12-mini-vs-iPhone-8-1536x806.png 1536w, https://guides.uptradeit.com/wp-content/uploads/2020/10/iPhone-12-mini-vs-iPhone-8-2048x1075.png 2048w"
+                srcset="https://guides.uptradeit.com/wp-content/uploads/2020/10/iPhone-12-mini-vs-iPhone-8-1024x538.png 1024w, https://guides.uptradeit.com/wp-content/uploads/2020/10/iPhone-12-mini-vs-iPhone-8-300x158.png 300w, https://guides.uptradeit.com/wp-content/uploads/2020/10/iPhone-12-mini-vs-iPhone-8-768x403.png 768w, https://guides.uptradeit.com/wp-content/uploads/2020/10/iPhone-12-mini-vs-iPhone-8-1536x806.png 1536w, https://guides.uptradeit.com/wp-content/uploads/2020/10/iPhone-12-mini-vs-iPhone-8-2048x1075.png 2048w"
                 alt="iphone 12 mini vs iphone 8"
-                height="538"
+                width="270"
+                height="270"
                 data-pagespeed-url-hash="1625762605"
               />
 
