@@ -164,7 +164,7 @@ export default function Model({
             </h1>
             <div className="model-info">
               <amp-img
-                src={"/iphone_12.webp" ?? "/default-image.png"}
+                src={"/iPhone_12.webp" ?? "/default-image.png"}
                 data-hero
                 width="270"
                 height="270"
@@ -173,13 +173,13 @@ export default function Model({
               <amp-img
                 className="mobile-img"
                 layout="fixed"
-                src={"/iphone_12.webp" ?? "/default-image.png"}
+                src={"/iPhone_12.webp" ?? "/default-image.png"}
                 sizes="(max-width: 1024px) 100vw, 1024px"
-                srcset={`${"/iphone_12.webp" ?? "/default-image.png"} 1024w, ${
-                  "/iphone_12.webp" ?? "/default-image.png"
-                } 300w, ${"/iphone_12.webp" ?? "/default-image.png"} 768w, ${
-                  "/iphone_12.webp" ?? "/default-image.png"
-                } 1536w, ${"/iphone_12.webp" ?? "/default-image.png"} 2048w`}
+                srcset={`${"/iPhone_12.webp" ?? "/default-image.png"} 1024w, ${
+                  "/iPhone_12.webp" ?? "/default-image.png"
+                } 300w, ${"/iPhone_12.webp" ?? "/default-image.png"} 768w, ${
+                  "/iPhone_12.webp" ?? "/default-image.png"
+                } 1536w, ${"/iPhone_12.webp" ?? "/default-image.png"} 2048w`}
                 width="250"
                 height="250"
               />
