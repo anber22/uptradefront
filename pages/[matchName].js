@@ -164,19 +164,22 @@ export default function Model({
             </h1>
             <div className="model-info">
               <amp-img
-                src={productImageUrl ?? "/default-image.png"}
+                src={"/iphone_12.webp" ?? "/default-image.png"}
                 data-hero
                 width="270"
                 height="270"
                 className="desktop-img"
               />
               <amp-img
-                data-hero
                 className="mobile-img"
-                layout="responsive"
-                src={productImageUrl ?? "/default-image.png"}
+                layout="fixed"
+                src={"/iphone_12.webp" ?? "/default-image.png"}
                 sizes="(max-width: 1024px) 100vw, 1024px"
-                srcset={`${productImageUrl ?? "/default-image.png"} 1024w, ${productImageUrl ?? "/default-image.png"} 300w, ${productImageUrl ?? "/default-image.png"} 768w, ${productImageUrl ?? "/default-image.png"} 1536w, ${productImageUrl ?? "/default-image.png"} 2048w`}
+                srcset={`${"/iphone_12.webp" ?? "/default-image.png"} 1024w, ${
+                  "/iphone_12.webp" ?? "/default-image.png"
+                } 300w, ${"/iphone_12.webp" ?? "/default-image.png"} 768w, ${
+                  "/iphone_12.webp" ?? "/default-image.png"
+                } 1536w, ${"/iphone_12.webp" ?? "/default-image.png"} 2048w`}
                 width="250"
                 height="250"
               />
@@ -561,7 +564,7 @@ export async function getStaticProps({ params }) {
       title,
       metaName,
       sku,
-      productImageUrl: product.productImageUrl?.replaceAll(' ', '%20') ?? null,
+      productImageUrl: product.productImageUrl?.replaceAll(" ", "%20") ?? null,
       path: `/${params.matchName}`,
       relatedGoods: product.relatedGoods
         .filter((x) => !!x.specs)
