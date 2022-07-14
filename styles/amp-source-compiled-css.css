@@ -2126,7 +2126,7 @@ header.fixed {
 
   .model-page .review-card .review-content {
     color: #272729;
-    font-size: 14px;
+    font-size: 17px;
     height: 180px;
     display: -webkit-box;
     text-overflow: ellipsis;
@@ -3995,7 +3995,7 @@ button {
 
   .model-page .review-card .review-content {
     color: #272729;
-    font-size: 17px;
+    font-size: 14px;
     height: 180px;
     display: -webkit-box;
     text-overflow: ellipsis;
