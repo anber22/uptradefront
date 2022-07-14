@@ -3933,6 +3933,8 @@ button {
 
   .model-page .model-info {
     order: -1;
+    background-color: #ffffff;
+    text-align: center;
   }
 
   .model-page .desktop-model-description {
@@ -4659,6 +4661,8 @@ button {
 .search-form input {
   width: 100%;
   height: 34.5px;
+  border-radius: 4px;
+  padding: 8px;
 }
 
 .search-icon {

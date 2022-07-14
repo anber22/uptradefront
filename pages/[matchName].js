@@ -28,6 +28,7 @@ export default function Model({
   gtin,
   navbar,
   appleList,
+  brandCategoryValueId,
 }) {
   return (
     <div>
@@ -74,14 +75,15 @@ export default function Model({
               image: [
                 productImageUrl ?? `${process.env.BASEURL}/default-image.png`,
               ],
+              review: 'I’ve purchased an iPad and an iPhone from upgrade. I have been completely satisfied. They’ve exceeded my expectations on both purchases. I highly recommend them.',
+              sku: sku,
+              gtin: gtin,
+              brand: brand,
               offers: {
                 "@type": "Offer",
                 availability: "http://schema.org/InStock",
                 price: `${price / 100 || ""}`,
                 priceValidUntil: dayjs().add(90, "day").format("YYYY-MM-DD"),
-                brand: brand,
-                sku: sku,
-                gtin: gtin,
                 url: `${process.env.BASEURL}${path}`,
                 priceCurrency: "USD",
                 usedCondition: "http://schema.org/RefurbishedCondition",
@@ -245,10 +247,15 @@ export default function Model({
 
             <div className="model-info-footer">
               <a
-                href={urlcat("/buy-phone", {
-                  modelName: productName,
-                  modelId: productCategoryValueId,
-                })}
+                href={urlcat(
+                  "/buy-phone",
+                  price
+                    ? {
+                        modelName: productName,
+                        modelId: productCategoryValueId,
+                      }
+                    : { brand, brandCategoryValueId }
+                )}
               >
                 <button className="model-see-more">See More</button>
               </a>
@@ -544,7 +551,7 @@ export async function getStaticProps({ params }) {
           product.keyword || product.productName
         } | UpTrade`;
 
-  const metaName = !!product.type
+  const metaName = product.type !== 'MODEL'
     ? `Certified Used ${product.keyword} phone`
     : `Certified Used ${product.productName}`;
 

@@ -175,26 +175,7 @@ export default function Contact({ navbar, appleList }) {
                   </div>
                 </div>
               </div>
-              <div className="card-description">
-                <div>
-                  <h3>We are located at</h3>
-                  <div>
-                    UP Trade Technologies 550 S Watters Rd Suite 276 Allen, TX
-                    75013
-                  </div>
-                </div>
-                <div>
-                  <h3>Hours</h3>
-                  <div>M-F: 9am to 5pm Saturday: CLOSED Sunday: CLOSED</div>
-                </div>
-                <div>
-                  <h3>Direct</h3>
-                  <div>972.833.0136</div>
-                </div>
-                <div>
-                  <h3>Email us</h3> <p>support@uptradeit.com</p>
-                </div>
-              </div>
+              <div className="card-description"></div>
             </div>
           </div>
         </div>
