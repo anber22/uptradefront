@@ -75,10 +75,24 @@ export default function Model({
               image: [
                 productImageUrl ?? `${process.env.BASEURL}/default-image.png`,
               ],
-              review: 'I’ve purchased an iPad and an iPhone from upgrade. I have been completely satisfied. They’ve exceeded my expectations on both purchases. I highly recommend them.',
+              "review": {
+                "@type": "Review",
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5",
+                  "bestRating": "5"
+                },
+                "author": {
+                  "@type": "Person",
+                  "name": "Pat OBrien"
+                }
+              },
               sku: sku,
               gtin: gtin,
-              brand: brand,
+              brand: {
+                "@type": "Brand",
+                "name": brand
+              },
               offers: {
                 "@type": "Offer",
                 availability: "http://schema.org/InStock",
