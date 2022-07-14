@@ -2126,7 +2126,7 @@ header.fixed {
 
   .model-page .review-card .review-content {
     color: #272729;
-    font-size: 17px;
+    font-size: 14px;
     height: 180px;
     display: -webkit-box;
     text-overflow: ellipsis;
@@ -4053,6 +4053,7 @@ button {
     font-weight: 500;
     padding: 5px 15px;
     border: none;
+    width: 100%;
   }
 
   #desktop-buy-dropdown {
@@ -4619,6 +4620,16 @@ button {
     width: 250px;
     height: 250px;
   }
+
+  .model-page .reviews-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .model-related-content-footer > a {
+    width: 100%;
+  }
   /*Mobile css  */
 }
 
@@ -4663,6 +4674,7 @@ button {
   height: 34.5px;
   border-radius: 4px;
   padding: 8px;
+  font-size: 16px;
 }
 
 .search-icon {
