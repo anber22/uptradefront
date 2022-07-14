@@ -342,7 +342,7 @@ export default function Model({
             </amp-carousel>
 
             <div className="model-reviews-footer">
-              <a href="#">
+              <a href="/reviews">
                 <button>See All Reviews</button>
               </a>
             </div>
