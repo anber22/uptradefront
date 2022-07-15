@@ -431,10 +431,15 @@ export default function Model({
 
           <div className="model-related-content-footer">
             <a
-              href={urlcat("/buy-phone", {
-                modelName: productName,
-                modelId: productCategoryValueId,
-              })}
+              href={urlcat(
+                  "/buy-phone",
+                  price
+                      ? {
+                        modelName: productName,
+                        modelId: productCategoryValueId,
+                      }
+                      : { brand, brandCategoryValueId }
+              )}
             >
               <button>See More</button>
             </a>

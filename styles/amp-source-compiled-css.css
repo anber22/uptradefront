@@ -3430,7 +3430,6 @@ button {
     display: flex;
     justify-content: space-between;
     padding: 8px 0px;
-    position: sticky;
     top: 112px;
     background-color: #ffffff;
   }
@@ -3721,6 +3720,7 @@ button {
   .cosmetic-condition-page .condition {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 103px;
     min-width: 103px;
     font-size: 18px;
@@ -3789,6 +3789,13 @@ button {
   }
 
   .cosmetic-condition-page .mobile-comparison-table tbody tr th:first-child {
+    position: sticky;
+    left: 0;
+    background-color: #ffffff;
+    z-index: 2;
+  }
+
+  .first-th {
     position: sticky;
     left: 0;
     background-color: #ffffff;

@@ -66,7 +66,7 @@ export default function CosmeticConditions({ navbar, appleList }) {
           </thead>
           <tbody>
             <tr>
-              <th scope="row">
+              <th scope="row first-th">
                 <div className="condition Pristine">Pristine</div>
               </th>
               <td>Refurbished</td>
@@ -119,18 +119,18 @@ export default function CosmeticConditions({ navbar, appleList }) {
             </thead>
             <tbody>
               <tr>
-                <th scope="row">
+                <td className='first-th'>
                   <div className="condition Pristine">Pristine</div>
-                </th>
+                </td>
                 <td>Refurbished</td>
                 <td>Renew Premium</td>
                 <td />
                 <td />
               </tr>
               <tr>
-                <th scope="row">
+                <td className='first-th'>
                   <div className="condition Excellent">Excellent</div>
-                </th>
+                </td>
                 <td />
                 <td>Renew</td>
                 <td>Excellent</td>
@@ -138,9 +138,9 @@ export default function CosmeticConditions({ navbar, appleList }) {
               </tr>
 
               <tr>
-                <th scope="row">
+                <td className='first-th'>
                   <div className="condition Good">Good</div>
-                </th>
+                </td>
                 <td />
                 <td />
                 <td>Good</td>
@@ -148,9 +148,9 @@ export default function CosmeticConditions({ navbar, appleList }) {
               </tr>
 
               <tr>
-                <th scope="row">
+                <td className='first-th'>
                   <div className="condition Fair">Fair</div>
-                </th>
+                </td>
                 <td />
                 <td />
                 <td>Fair</td>

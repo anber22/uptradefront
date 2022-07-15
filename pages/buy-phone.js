@@ -77,6 +77,7 @@ export default function BuyPhone({
   appleList,
 }) {
   const router = useRouter();
+  const [isFocus, setIsFocus] = useState(false);
   const [sortDrawerOpen, setSortDrawerOpen] = useState(false);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   const [expanded, setExpanded] = useState([]);
@@ -112,13 +113,14 @@ export default function BuyPhone({
     });
   }, []);
 
-  const onSearchClick = useCallback(() => {
-    if (!searchKey) return;
+  const onSearchClick = useCallback((name) => {
+    if (!searchKey && !name) return;
 
+    console.log(name)
     setSearchKeys((prev) => ({
       ...prev,
       pageNum: 1,
-      searchKey,
+      searchKey: name ?? searchKey,
     }));
   }, [searchKey]);
 
@@ -413,6 +415,14 @@ export default function BuyPhone({
                         onSearchClick();
                       }
                     }}
+                    onFocus={(e) => {
+                      props.onFocus(e)
+                      setIsFocus(true)
+                    }}
+                    onBlur={(e) => {
+                      props.onBlur(e)
+                      setIsFocus(false)
+                    }}
                     className={className}
                   />
                 );
@@ -423,6 +433,7 @@ export default function BuyPhone({
                     {...optionsProps}
                     onMouseDown={(event) => {
                       optionsProps.onMouseDown(event);
+                      onSearchClick(optionData.name)
                       addRank(optionData.name);
                     }}
                   >
@@ -490,9 +501,12 @@ export default function BuyPhone({
             </div>
           ) : null}
 
-          <div className="option-controllers">
+          <div
+            className="option-controllers"
+            style={{ position: !isFocus ? "sticky" : undefined }}
+          >
             <div className="filter-controller">
-              <label className="dropdown">
+              <label>
                 <span
                   onClick={() => {
                     setFilterDrawerOpen(true);
@@ -578,7 +592,7 @@ export default function BuyPhone({
               </div>
             </div>
             <div className="sort-controller">
-              <label className="dropdown">
+              <label>
                 <span
                   className="dropdown-toggle"
                   onClick={() => {
