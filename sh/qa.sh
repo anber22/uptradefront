@@ -1,9 +1,10 @@
 #!/bin/bash
 
 corepack enable
-
+ls 
 rm -rf build.tar.gz
-rm -rf cache.json
+rm cache.json
+
 pnpm -v
 pnpm install --frozen-lockfile --prefer-offline
 pnpm run build

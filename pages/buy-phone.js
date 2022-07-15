@@ -116,7 +116,6 @@ export default function BuyPhone({
   const onSearchClick = useCallback((name) => {
     if (!searchKey && !name) return;
 
-    console.log(name)
     setSearchKeys((prev) => ({
       ...prev,
       pageNum: 1,
@@ -256,6 +255,7 @@ export default function BuyPhone({
     const modelName = search.get("modelName");
     const modelId = search.get("modelId");
 
+    console.log(modelName)
     setSearchKeys((prev) => ({
       ...prev,
       selectedValues: [
