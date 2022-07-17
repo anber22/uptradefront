@@ -113,15 +113,18 @@ export default function BuyPhone({
     });
   }, []);
 
-  const onSearchClick = useCallback((name) => {
-    if (!searchKey && !name) return;
+  const onSearchClick = useCallback(
+    (name) => {
+      if (!searchKey && !name) return;
 
-    setSearchKeys((prev) => ({
-      ...prev,
-      pageNum: 1,
-      searchKey: name ?? searchKey,
-    }));
-  }, [searchKey]);
+      setSearchKeys((prev) => ({
+        ...prev,
+        pageNum: 1,
+        searchKey: name ?? searchKey,
+      }));
+    },
+    [searchKey]
+  );
 
   const getOptions = useCallback(
     async (query) => {
@@ -255,7 +258,7 @@ export default function BuyPhone({
     const modelName = search.get("modelName");
     const modelId = search.get("modelId");
 
-    console.log(modelName)
+    console.log(modelName);
     setSearchKeys((prev) => ({
       ...prev,
       selectedValues: [
@@ -416,12 +419,12 @@ export default function BuyPhone({
                       }
                     }}
                     onFocus={(e) => {
-                      props.onFocus(e)
-                      setIsFocus(true)
+                      props.onFocus(e);
+                      setIsFocus(true);
                     }}
                     onBlur={(e) => {
-                      props.onBlur(e)
-                      setIsFocus(false)
+                      props.onBlur(e);
+                      setIsFocus(false);
                     }}
                     className={className}
                   />
@@ -433,7 +436,7 @@ export default function BuyPhone({
                     {...optionsProps}
                     onMouseDown={(event) => {
                       optionsProps.onMouseDown(event);
-                      onSearchClick(optionData.name)
+                      onSearchClick(optionData.name);
                       addRank(optionData.name);
                     }}
                   >
@@ -501,194 +504,198 @@ export default function BuyPhone({
             </div>
           ) : null}
 
-          <div
-            className="option-controllers"
-            style={{ position: !isFocus ? "sticky" : undefined }}
-          >
-            <div className="filter-controller">
-              <label>
-                <span
-                  onClick={() => {
-                    setFilterDrawerOpen(true);
-                    if (!matchMedia) {
-                      document.body.style.overflow = "hidden";
-                      document.body.style.position = "fixed";
-                    }
-                  }}
-                >
-                  <img src="/svg/filter.svg" width="20" height="12" />
-                  <span>Filters</span>
-                </span>
-              </label>
-
-              <div
-                className={`filter-drawer-close ${
-                  filterDrawerOpen ? "filter-drawer-show" : ""
-                }`}
-              >
-                <div
-                  className="filter-drawer-backdrop"
-                  onClick={() => {
-                    setFilterDrawerOpen(false);
-                    document.body.style.overflow = "unset";
-                    document.body.style.position = "unset";
-                  }}
-                ></div>
-
-                <div className="filter-drawer-content">
-                  {conditions.map((data) => (
-                    <div className="condition-section" key={data.id}>
-                      <div
-                        className="accordion-header-item"
-                        onClick={() => onAccordionClick(data.name)}
-                      >
-                        <h3 className="condition-header">
-                          {data.name}
-                          {data.name === "CONDITION" ? (
-                            <a href="/cosmetic-conditions" target="_blank">
-                              <img
-                                className="condition-alert"
-                                src="/svg/alert-circle.svg"
-                                width="12"
-                                height="12"
-                              />
-                            </a>
-                          ) : null}
-                        </h3>
-                        <img
-                          src="/svg/arrow-down.svg"
-                          alt="arrow-down"
-                          style={{ width: 24, height: 24 }}
-                        />
-                      </div>
-                      <div className="condition-content">
-                        {expanded.some((x) => x === data.name)
-                          ? data.values.map((item) => (
-                              <div
-                                key={item.categoryValueId}
-                                onClick={() => {
-                                  onOptionSelect(item);
-                                  setFilterDrawerOpen(false);
-                                  document.body.style.overflow = "unset";
-                                  document.body.style.position = "unset";
-                                }}
-                                className={`condition-item ${
-                                  searchKeys.selectedValues.some(
-                                    (x) =>
-                                      x.categoryValueId === item.categoryValueId
-                                  )
-                                    ? "selected-condition-item"
-                                    : undefined
-                                }`}
-                              >
-                                {item.name}
-                              </div>
-                            ))
-                          : null}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="sort-controller">
-              <label>
-                <span
-                  className="dropdown-toggle"
-                  onClick={() => {
-                    setSortDrawerOpen(true);
-                    if (!matchMedia) {
-                      document.body.style.overflow = "hidden";
-                      document.body.style.position = "fixed";
-                    }
-                  }}
-                >
-                  <img src="/svg/sort.svg" width="20" height="15" />
-                  <span className="desktop-sort">
-                    Sort By: {orderByDict[searchKeys.orderBy]}
-                  </span>
-                  <span className="mobile-sort">Sort</span>
-                </span>
-                <input type="checkbox" className="dropdown-input" id="sort" />
-                <ul className="dropdown-menu">
-                  {Object.entries(orderByDict).map(([key, value]) => {
-                    return (
-                      <li
-                        className="dropdown-item"
-                        key={key}
-                        onClick={() => onOrderClick(key)}
-                      >
-                        <span>{value}</span>
-                        {searchKeys.orderBy === key ? (
-                          <img width="20" height="20" src="/svg/check.svg" />
-                        ) : null}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </label>
-
-              <div
-                className={`sort-drawer-close ${
-                  sortDrawerOpen ? "sort-drawer-show" : ""
-                }`}
-              >
-                <div
-                  className="sort-drawer-backdrop"
-                  onClick={() => {
-                    setSortDrawerOpen(false);
-                    document.body.style.overflow = "unset";
-                    document.body.style.position = "unset";
-                  }}
-                ></div>
-                <div className="sort-drawer-content">
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      padding: "8px 0",
+          <div style={{ position: !isFocus ? "sticky" : undefined }} className="options-controller-container">
+            <div className="option-controllers">
+              <div className="filter-controller">
+                <label>
+                  <span
+                    onClick={() => {
+                      setFilterDrawerOpen(true);
+                      if (!matchMedia) {
+                        document.body.style.overflow = "hidden";
+                        document.body.style.position = "fixed";
+                      }
                     }}
                   >
+                    <img src="/svg/filter.svg" width="20" height="12" />
+                    <span>Filters</span>
+                  </span>
+                </label>
+
+                <div
+                  className={`filter-drawer-close ${
+                    filterDrawerOpen ? "filter-drawer-show" : ""
+                  }`}
+                >
+                  <div
+                    className="filter-drawer-backdrop"
+                    onClick={() => {
+                      setFilterDrawerOpen(false);
+                      document.body.style.overflow = "unset";
+                      document.body.style.position = "unset";
+                    }}
+                  ></div>
+
+                  <div className="filter-drawer-content">
+                    {conditions.map((data) => (
+                      <div className="condition-section" key={data.id}>
+                        <div
+                          className="accordion-header-item"
+                          onClick={() => onAccordionClick(data.name)}
+                        >
+                          <h3 className="condition-header">
+                            {data.name}
+                            {data.name === "CONDITION" ? (
+                              <a href="/cosmetic-conditions" target="_blank">
+                                <img
+                                  className="condition-alert"
+                                  src="/svg/alert-circle.svg"
+                                  width="12"
+                                  height="12"
+                                />
+                              </a>
+                            ) : null}
+                          </h3>
+                          <img
+                            src="/svg/arrow-down.svg"
+                            alt="arrow-down"
+                            style={{ width: 24, height: 24 }}
+                          />
+                        </div>
+                        <div className="condition-content">
+                          {expanded.some((x) => x === data.name)
+                            ? data.values.map((item) => (
+                                <div
+                                  key={item.categoryValueId}
+                                  onClick={() => {
+                                    onOptionSelect(item);
+                                    setFilterDrawerOpen(false);
+                                    document.body.style.overflow = "unset";
+                                    document.body.style.position = "unset";
+                                  }}
+                                  className={`condition-item ${
+                                    searchKeys.selectedValues.some(
+                                      (x) =>
+                                        x.categoryValueId ===
+                                        item.categoryValueId
+                                    )
+                                      ? "selected-condition-item"
+                                      : undefined
+                                  }`}
+                                >
+                                  {item.name}
+                                </div>
+                              ))
+                            : null}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="sort-controller">
+                <label>
+                  <span
+                    className="dropdown-toggle"
+                    onClick={() => {
+                      setSortDrawerOpen(true);
+                      if (!matchMedia) {
+                        document.body.style.overflow = "hidden";
+                        document.body.style.position = "fixed";
+                      }
+                    }}
+                  >
+                    <img src="/svg/sort.svg" width="20" height="15" />
+                    <span className="desktop-sort">
+                      Sort By: {orderByDict[searchKeys.orderBy]}
+                    </span>
+                    <span className="mobile-sort">Sort</span>
+                  </span>
+                  <input type="checkbox" className="dropdown-input" id="sort" />
+                  <ul className="dropdown-menu">
                     {Object.entries(orderByDict).map(([key, value]) => {
                       return (
-                        <div
-                          className="drawer-sort-item"
+                        <li
+                          className="dropdown-item"
                           key={key}
-                          onClick={() => {
-                            onOrderClick(key);
-                            setSortDrawerOpen(false);
-                            document.body.style.overflow = "unset";
-                            document.body.style.position = "unset";
-                          }}
+                          onClick={() => onOrderClick(key)}
                         >
                           <span>{value}</span>
                           {searchKeys.orderBy === key ? (
                             <img width="20" height="20" src="/svg/check.svg" />
                           ) : null}
-                        </div>
+                        </li>
                       );
                     })}
+                  </ul>
+                </label>
+
+                <div
+                  className={`sort-drawer-close ${
+                    sortDrawerOpen ? "sort-drawer-show" : ""
+                  }`}
+                >
+                  <div
+                    className="sort-drawer-backdrop"
+                    onClick={() => {
+                      setSortDrawerOpen(false);
+                      document.body.style.overflow = "unset";
+                      document.body.style.position = "unset";
+                    }}
+                  ></div>
+                  <div className="sort-drawer-content">
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        padding: "8px 0",
+                      }}
+                    >
+                      {Object.entries(orderByDict).map(([key, value]) => {
+                        return (
+                          <div
+                            className="drawer-sort-item"
+                            key={key}
+                            onClick={() => {
+                              onOrderClick(key);
+                              setSortDrawerOpen(false);
+                              document.body.style.overflow = "unset";
+                              document.body.style.position = "unset";
+                            }}
+                          >
+                            <span>{value}</span>
+                            {searchKeys.orderBy === key ? (
+                              <img
+                                width="20"
+                                height="20"
+                                src="/svg/check.svg"
+                              />
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="options-container">
-            <div className="filter-options">
-              {searchKeys.selectedValues.map((x) => (
-                <div className="filter-option" key={x.categoryValueId}>
-                  {x.name}
-                  <svg
-                    width="24px"
-                    height="24px"
-                    viewBox="0 0 24 24"
-                    onClick={() => onOptionSelect(x)}
-                  >
-                    <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-                  </svg>
-                </div>
-              ))}
+            <div className="options-container">
+              <div className="filter-options">
+                {searchKeys.selectedValues.map((x) => (
+                  <div className="filter-option" key={x.categoryValueId}>
+                    {x.name}
+                    <svg
+                      width="24px"
+                      height="24px"
+                      viewBox="0 0 24 24"
+                      onClick={() => onOptionSelect(x)}
+                    >
+                      <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                    </svg>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 

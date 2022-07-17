@@ -106,23 +106,10 @@ export const Header = ({ navbar }) => {
                           >{`{{name}}`}</div>
                         </template>
                       </amp-autocomplete>
-                      <amp-img
-                        className="search-icon"
-                        width="24"
-                        height="24"
-                        layout="responsive"
-                        src="/svg/search.svg"
-                      />
                     </form>
                   ) : (
                     <form className="search-form" action="#" target="_top">
                       <Search />
-                      <img
-                        className="search-icon"
-                        width="24"
-                        height="24"
-                        src="/svg/search.svg"
-                      />
                     </form>
                   )}
 

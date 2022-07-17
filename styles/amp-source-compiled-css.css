@@ -1719,8 +1719,6 @@ header.fixed {
   }
 
   .buy-phone-page .option-controllers {
-    position: sticky;
-    top: 132px;
     padding: 8px 24px;
     background-color: #ffffff;
   }
@@ -1762,6 +1760,10 @@ header.fixed {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .sort-controller > label {
+    position: relative;
   }
 
   .mobile-phone-list {
@@ -2691,6 +2693,9 @@ header.fixed {
     row-gap: 16px;
   }
 
+  .options-controller-container {
+    top: 132px;
+  }
   /*  Desktop css*/
 }
 
@@ -2764,8 +2769,9 @@ header.fixed {
 }
 
 .options-container {
-  padding: 0 24px;
-  margin-bottom: 24px;
+  padding: 0 24px 24px;
+  top: 177px;
+  background: #fff;
 }
 
 .phone-list-hidden {
@@ -3412,7 +3418,8 @@ button {
   }
 
   .options-container {
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .carrier-options .carrier-option:hover {
@@ -3445,9 +3452,6 @@ button {
 
   .desktop-sort {
     display: none;
-  }
-
-  .option-controllers .filters-controller {
   }
 
   .option-controllers .sort-controller .dropdown-menu {
@@ -4637,6 +4641,10 @@ button {
 
   .model-related-content-footer > a {
     width: 100%;
+  }
+
+  .options-controller-container {
+    top: 112px;
   }
   /*Mobile css  */
 }
