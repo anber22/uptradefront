@@ -29,6 +29,7 @@ export default function Model({
   navbar,
   appleList,
   brandCategoryValueId,
+  productMobileImageUrl,
 }) {
   return (
     <div>
@@ -75,23 +76,23 @@ export default function Model({
               image: [
                 productImageUrl ?? `${process.env.BASEURL}/default-image.png`,
               ],
-              "review": {
+              review: {
                 "@type": "Review",
-                "reviewRating": {
+                reviewRating: {
                   "@type": "Rating",
-                  "ratingValue": "5",
-                  "bestRating": "5"
+                  ratingValue: "5",
+                  bestRating: "5",
                 },
-                "author": {
+                author: {
                   "@type": "Person",
-                  "name": "Pat OBrien"
-                }
+                  name: "Pat OBrien",
+                },
               },
               sku: sku,
               gtin: gtin,
               brand: {
                 "@type": "Brand",
-                "name": brand
+                name: brand,
               },
               offers: {
                 "@type": "Offer",
@@ -190,13 +191,13 @@ export default function Model({
                 data-hero
                 className="mobile-img"
                 layout="fixed"
-                src={productImageUrl ?? "/default-image.png"}
+                src={productMobileImageUrl ?? "/default-image.png"}
                 sizes="(max-width: 1024px) 100vw, 1024px"
-                srcset={`${productImageUrl ?? "/default-image.png"} 1024w, ${
-                  productImageUrl ?? "/default-image.png"
-                } 300w, ${productImageUrl ?? "/default-image.png"} 768w, ${
-                  productImageUrl ?? "/default-image.png"
-                } 1536w, ${productImageUrl ?? "/default-image.png"} 2048w`}
+                srcset={`${productMobileImageUrl ?? "/default-image.png"} 1024w, ${
+                    productMobileImageUrl ?? "/default-image.png"
+                } 300w, ${productMobileImageUrl ?? "/default-image.png"} 768w, ${
+                    productMobileImageUrl ?? "/default-image.png"
+                } 1536w, ${productMobileImageUrl ?? "/default-image.png"} 2048w`}
                 width="250"
                 height="250"
               />
@@ -432,13 +433,13 @@ export default function Model({
           <div className="model-related-content-footer">
             <a
               href={urlcat(
-                  "/buy-phone",
-                  price
-                      ? {
-                        modelName: productName,
-                        modelId: productCategoryValueId,
-                      }
-                      : { brand, brandCategoryValueId }
+                "/buy-phone",
+                price
+                  ? {
+                      modelName: productName,
+                      modelId: productCategoryValueId,
+                    }
+                  : { brand, brandCategoryValueId }
               )}
             >
               <button>See More</button>
@@ -570,9 +571,10 @@ export async function getStaticProps({ params }) {
           product.keyword || product.productName
         } | UpTrade`;
 
-  const metaName = product.type !== 'MODEL'
-    ? `Certified Used ${product.keyword} phone`
-    : `Certified Used ${product.productName}`;
+  const metaName =
+    product.type !== "MODEL"
+      ? `Certified Used ${product.keyword} phone`
+      : `Certified Used ${product.productName}`;
 
   const sku =
     product.type === "BRAND"
@@ -591,7 +593,6 @@ export async function getStaticProps({ params }) {
       title,
       metaName,
       sku,
-      productImageUrl: product.productImageUrl?.replaceAll(" ", "%20") ?? null,
       path: `/${params.matchName}`,
       relatedGoods: product.relatedGoods
         .filter((x) => !!x.specs)
