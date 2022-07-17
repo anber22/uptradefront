@@ -95,7 +95,7 @@ export default function BuyPhone({
 
   const matchMedia = useMediaQuery("(min-width: 1280px");
 
-  const onOptionSelect = useCallback((item) => {
+  const onOptionSelect = useCallback((item, conditionName) => {
     setSearchKeys((prev) => {
       const values = prev.selectedValues.some(
         (x) => x.categoryValueId === item.categoryValueId
@@ -197,9 +197,21 @@ export default function BuyPhone({
         all: false,
         pageNum: searchKeys.pageNum,
         pageSize: 20,
-        valueIds: searchKeys.selectedValues
-          .filter((x) => ![3, 4, 8].includes(x.categoryId))
-          .map((x) => x.categoryValueId),
+        conditions: searchKeys.selectedValues
+          .filter((x) => x.categoryId === 1)
+          .map((x) => x.name),
+        carriers: searchKeys.selectedValues
+          .filter((x) => x.categoryId === 2)
+          .map((x) => x.name),
+        storages: searchKeys.selectedValues
+          .filter((x) => x.categoryId === 5)
+          .map((x) => x.name),
+        colors: searchKeys.selectedValues
+          .filter((x) => x.categoryId === 6)
+          .map((x) => x.name),
+        prices: searchKeys.selectedValues
+          .filter((x) => x.categoryId === 7)
+          .map((x) => x.name),
         brands: searchKeys.selectedValues
           .filter((x) => x.categoryId === 3)
           .map((x) => x.name),
@@ -223,21 +235,7 @@ export default function BuyPhone({
 
       if (!listData.success) return cacheList.current;
 
-      const listResults = listData.data.data.map((item) => {
-        const specs = item.specs.reduce(
-          (acc, { key, value }) => ({ ...acc, [key]: value }),
-          {}
-        );
-        return {
-          ...item,
-          ...specs,
-        };
-      });
-
-      return {
-        ...listData.data,
-        data: listResults,
-      };
+      return listData.data
     } catch (error) {
       return cacheList.current;
     }
@@ -258,7 +256,6 @@ export default function BuyPhone({
     const modelName = search.get("modelName");
     const modelId = search.get("modelId");
 
-    console.log(modelName);
     setSearchKeys((prev) => ({
       ...prev,
       selectedValues: [
@@ -295,7 +292,7 @@ export default function BuyPhone({
                   url: urlcat(
                     `${process.env.BASEURL}/redirect/:gradeAndMerchant`,
                     {
-                      gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
+                      gradeAndMerchant: `${item.productId}-${item.contion}-${item.merchant}`,
                       redirectUrl: item.buyUrl,
                     }
                   ),
@@ -504,7 +501,10 @@ export default function BuyPhone({
             </div>
           ) : null}
 
-          <div style={{ position: !isFocus ? "sticky" : undefined }} className="options-controller-container">
+          <div
+            style={{ position: !isFocus ? "sticky" : undefined }}
+            className="options-controller-container"
+          >
             <div className="option-controllers">
               <div className="filter-controller">
                 <label>
@@ -706,7 +706,7 @@ export default function BuyPhone({
                   <a
                     key={item.productId}
                     href={urlcat(`/redirect/:gradeAndMerchant`, {
-                      gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
+                      gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
                       redirectUrl: item.buyUrl,
                     })}
                     target="_blank"
@@ -719,13 +719,13 @@ export default function BuyPhone({
                     <div className="description">
                       <span>{item.name}</span>
                       <span className="attr">
-                        {`${item.CARRIER} ${item.STORAGE} ${item.COLOR}`}
+                        {`${item.carrier} ${item.storage} ${item.color}`}
                       </span>
                     </div>
 
                     <div className="condition-container">
-                      <div className={`condition ${item.CONDITION} `}>
-                        {item.CONDITION}
+                      <div className={`condition ${item.condition} `}>
+                        {item.condition}
                       </div>
                     </div>
 
@@ -741,7 +741,7 @@ export default function BuyPhone({
                   <a
                     key={item.productId}
                     href={urlcat(`/redirect/:gradeAndMerchant`, {
-                      gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
+                      gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
                       redirectUrl: item.buyUrl,
                     })}
                     className="phone-list-item"
@@ -750,15 +750,15 @@ export default function BuyPhone({
                   >
                     <div className="top">
                       <img width="50" height="50" src={item.brandLogoUrl} />
-                      <div className={`condition ${item.CONDITION} `}>
-                        {item.CONDITION}
+                      <div className={`condition ${item.condition} `}>
+                        {item.condition}
                       </div>
                     </div>
                     <div className="bottom">
                       <div className="description">
                         <span className="attr-name">{item.name}</span>
                         <span className="attr">
-                          {`${item.CARRIER} ${item.STORAGE} ${item.COLOR}`}
+                          {`${item.carrier} ${item.storage} ${item.color}`}
                         </span>
                       </div>
 
@@ -833,17 +833,6 @@ export async function getStaticProps() {
 
   const carrierOptions = data.data.find((x) => x.name === "CARRIER");
 
-  const listResults = listData.data.data.map((item) => {
-    const specs = item.specs.reduce(
-      (acc, { key, value }) => ({ ...acc, [key]: value }),
-      {}
-    );
-    return {
-      ...item,
-      ...specs,
-    };
-  });
-
   const navBarData = await getNavBar();
 
   return {
@@ -851,10 +840,7 @@ export async function getStaticProps() {
       ...navBarData,
       conditions: data.data,
       carrierOptions: carrierOptions ? carrierOptions.values : [],
-      data: {
-        ...listData.data,
-        data: listResults,
-      },
+      data: listData.data,
       products: productData.data.map((x) => ({ name: x.name, value: x.name })),
     },
   };
