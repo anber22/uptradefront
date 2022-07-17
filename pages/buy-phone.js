@@ -211,7 +211,7 @@ export default function BuyPhone({
           .map((x) => x.name),
         prices: searchKeys.selectedValues
           .filter((x) => x.categoryId === 7)
-          .map((x) => x.name.split(' ').join('_')),
+          .map((x) => x.name.split(' ').join('_').toUpperCase()),
         brands: searchKeys.selectedValues
           .filter((x) => x.categoryId === 3)
           .map((x) => x.name),
