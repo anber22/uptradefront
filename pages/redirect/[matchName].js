@@ -1,6 +1,7 @@
 import { useLocation } from "react-use";
 import { useEffect, useLayoutEffect, useState } from "react";
 import urlcat from "urlcat";
+import {NextSeo} from "next-seo";
 
 export default function Redirect() {
   const location = useLocation();
@@ -45,6 +46,7 @@ export default function Redirect() {
 
   return (
     <main className="redirect-page">
+      <NextSeo noindex nofollow />
       <h1>We are redirecting to the deal...</h1>
       <h2>UpTrade &gt; &gt; {merchant}</h2>
     </main>
