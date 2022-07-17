@@ -211,7 +211,7 @@ export default function BuyPhone({
           .map((x) => x.name),
         prices: searchKeys.selectedValues
           .filter((x) => x.categoryId === 7)
-          .map((x) => x.name.split(' ').join('_').toUpperCase()),
+          .map((x) => x.name.split(" ").join("_").toUpperCase()),
         brands: searchKeys.selectedValues
           .filter((x) => x.categoryId === 3)
           .map((x) => x.name),
@@ -235,7 +235,7 @@ export default function BuyPhone({
 
       if (!listData.success) return cacheList.current;
 
-      return listData.data
+      return listData.data;
     } catch (error) {
       return cacheList.current;
     }
@@ -699,10 +699,10 @@ export default function BuyPhone({
             </div>
           </div>
 
-          {data?.data?.length ? (
+          {data?.data?.length || initData?.data?.length ? (
             <>
               <div className="desktop-phone-list">
-                {data?.data?.map((item) => (
+                {(data?.data ?? initData?.data)?.map((item) => (
                   <a
                     key={item.productId}
                     href={urlcat(`/redirect/:gradeAndMerchant`, {
@@ -737,7 +737,7 @@ export default function BuyPhone({
                 ))}
               </div>
               <div className="mobile-phone-list">
-                {data?.data?.map((item) => (
+                {(data?.data ?? initData?.data)?.map((item) => (
                   <a
                     key={item.productId}
                     href={urlcat(`/redirect/:gradeAndMerchant`, {
