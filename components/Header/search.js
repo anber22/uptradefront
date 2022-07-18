@@ -1,8 +1,10 @@
 import SelectSearch from "react-select-search";
 import { useCallback, useState } from "react";
 import urlcat from "urlcat";
+import { useRouter } from "next/router";
 
 export default function Search() {
+  const router = useRouter();
   const [searchKey, setSearchKey] = useState("");
   const getOptions = useCallback(
     async (query) => {
@@ -51,9 +53,15 @@ export default function Search() {
       }}
       renderOption={(optionsProps, optionData) => {
         return (
-          <a {...optionsProps} href={optionData.url}>
-            <button>{optionData.name}</button>
-          </a>
+          <button
+            {...optionsProps}
+            onMouseDown={(event) => {
+              optionsProps.onMouseDown(event);
+              router.push(optionData.url)
+            }}
+          >
+            {optionData.name}
+          </button>
         );
       }}
     />

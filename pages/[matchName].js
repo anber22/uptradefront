@@ -367,7 +367,7 @@ export default function Model({
               <a
                 key={item.productId}
                 href={urlcat(`/redirect/:gradeAndMerchant`, {
-                  gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
+                  gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
                   redirectUrl: item.buyUrl,
                 })}
                 target="_blank"
@@ -380,13 +380,13 @@ export default function Model({
                 <div className="description">
                   <span>{item.name}</span>
                   <span className="attr">
-                    {`${item.CARRIER} ${item.STORAGE} ${item.COLOR}`}
+                    {`${item.carrier} ${item.storage} ${item.color}`}
                   </span>
                 </div>
 
                 <div className="condition-container">
-                  <div className={`condition ${item.CONDITION} `}>
-                    {item.CONDITION}
+                  <div className={`condition ${item.condition} `}>
+                    {item.condition}
                   </div>
                 </div>
 
@@ -403,7 +403,7 @@ export default function Model({
               <a
                 key={item.productId}
                 href={urlcat(`/redirect/:gradeAndMerchant`, {
-                  gradeAndMerchant: `${item.productId}-${item.CONDITION}-${item.merchant}`,
+                  gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
                   redirectUrl: item.buyUrl,
                 })}
                 target="_blank"
@@ -412,15 +412,15 @@ export default function Model({
               >
                 <div className="top">
                   <amp-img width="50" height="50" src={item.brandLogoUrl} />
-                  <div className={`condition ${item.CONDITION} `}>
-                    {item.CONDITION}
+                  <div className={`condition ${item.condition} `}>
+                    {item.condition}
                   </div>
                 </div>
                 <div className="bottom">
                   <div className="description">
                     <span className="attr-name">{item.name}</span>
                     <span className="attr">
-                      {`${item.CARRIER} ${item.STORAGE} ${item.COLOR}`}
+                      {`${item.carrier} ${item.storage} ${item.color}`}
                     </span>
                   </div>
 
@@ -594,18 +594,7 @@ export async function getStaticProps({ params }) {
       metaName,
       sku,
       path: `/${params.matchName}`,
-      relatedGoods: product.relatedGoods
-        .filter((x) => !!x.specs)
-        .map((item) => {
-          const specs = item.specs.reduce(
-            (acc, { key, value }) => ({ ...acc, [key]: value }),
-            {}
-          );
-          return {
-            ...item,
-            ...specs,
-          };
-        }),
+      relatedGoods: product.relatedGoods,
       reviewsInfo,
       ...navbar,
     },
