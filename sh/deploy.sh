@@ -1,9 +1,6 @@
 #!/bin/bash
-corepack enable
 
-rm -rf .next
-pnpm install
-pnpm run build
+pnpm install --frozen-lockfile --prefer-offline
 
 # 启动 pm2
 pm2 flush
@@ -24,3 +21,4 @@ if [ "$(ls -A $NGINX_CACHE_DIR)" ]; then
 fi
 # echo '清理nginx缓存文件'
 # sudo rm -r /usr/local/nginx/data/*
+
