@@ -699,9 +699,11 @@ export default function BuyPhone({
             </div>
           </div>
 
-          {typeof window === "undefined" ? (
-            data?.data?.length || initData?.data?.length
-          ) : data?.data?.length ? (
+          {(
+            typeof window === "undefined"
+              ? data?.data?.length || initData?.data?.length
+              : data?.data?.length
+          ) ? (
             <>
               <div className="desktop-phone-list">
                 {(data?.data ?? initData?.data)?.map((item) => (
