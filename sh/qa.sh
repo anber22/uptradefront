@@ -1,7 +1,7 @@
 #!/bin/bash
 
 corepack enable
-ls
+ls -a .next
 rm -rf build.tar.gz
 rm cache.json
 rm -rf .next
@@ -11,6 +11,7 @@ pnpm -v
 pnpm install --frozen-lockfile --prefer-offline
 pnpm run build
 ls -a .next
+
 rm -rf node_modules
 
 rm -rf build.tar.gz
