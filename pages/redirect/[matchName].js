@@ -31,7 +31,7 @@ export default function Redirect() {
       },
       body: JSON.stringify({
         productId,
-        target: redirectUrl,
+        targetUrl: redirectUrl,
       }),
     }).finally(() => {
       const url = urlcat(redirectUrl, {
