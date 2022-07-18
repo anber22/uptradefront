@@ -468,7 +468,7 @@ export default function Model({
           <a href="/privacy-policy">Privacy Policy</a>
         </div>
 
-        <p>© 2021 UP Trade Technologies, Inc.</p>
+        <p>© 2022 UP Trade Technologies, Inc.</p>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useLocation } from "react-use";
 import { useEffect, useLayoutEffect, useState } from "react";
 import urlcat from "urlcat";
-import {NextSeo} from "next-seo";
+import { NextSeo } from "next-seo";
 
 export default function Redirect() {
   const location = useLocation();
@@ -31,7 +31,7 @@ export default function Redirect() {
       },
       body: JSON.stringify({
         productId,
-        targetUrl: redirectUrl,
+        targetUrl: location.href,
       }),
     }).finally(() => {
       const url = urlcat(redirectUrl, {

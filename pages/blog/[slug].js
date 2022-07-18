@@ -57,7 +57,7 @@ export default function BlogDetail({ data, navbar, appleList }) {
           <a href="/privacy-policy">Privacy Policy</a>
         </div>
 
-        <p>© 2021 UP Trade Technologies, Inc.</p>
+        <p>© 2022 UP Trade Technologies, Inc.</p>
       </div>
     </>
   );

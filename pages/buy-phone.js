@@ -107,11 +107,12 @@ export default function BuyPhone({
 
       return {
         ...prev,
+        searchKey,
         pageNum: 1,
         selectedValues: values,
       };
     });
-  }, []);
+  }, [searchKey]);
 
   const onSearchClick = useCallback(
     (name) => {
@@ -148,10 +149,11 @@ export default function BuyPhone({
   const onOrderClick = useCallback((orderBy) => {
     setSearchKeys((prev) => ({
       ...prev,
+      searchKey,
       orderBy,
       pageNum: 1,
     }));
-  }, []);
+  }, [searchKey]);
 
   const onAccordionClick = useCallback((item) => {
     setExpanded((prev) => {
@@ -254,30 +256,31 @@ export default function BuyPhone({
   }, []);
 
   useEffect(() => {
-    if (!location?.search) return;
+    if (!router?.query) return;
 
-    const search = new URLSearchParams(location.search);
-    const brand = search.get("brand");
-    const brandCategoryValueId = search.get("brandCategoryValueId");
-    const modelName = search.get("modelName");
-    const modelId = search.get("modelId");
+    const { brand, brandCategoryValueId, modelName, modelId } = router.query;
 
-    setSearchKeys((prev) => ({
-      ...prev,
+    setSearchKeys({
+      pageNum: 1,
+      searchKey: "",
+      orderBy: "LOWEST_PRICE",
+      brands: [],
+      models: [],
+      merchants: [],
       selectedValues: [
         modelId
-          ? { name: modelName, categoryValueId: Number(modelId), categoryId: 4 }
-          : undefined,
+            ? { name: modelName, categoryValueId: Number(modelId), categoryId: 4 }
+            : undefined,
         brand
-          ? {
+            ? {
               name: brand,
               categoryValueId: Number(brandCategoryValueId),
               categoryId: 3,
             }
-          : undefined,
+            : undefined,
       ].filter(Boolean),
-    }));
-  }, []);
+    });
+  }, [router]);
 
   return (
     <>
@@ -705,94 +708,90 @@ export default function BuyPhone({
             </div>
           </div>
 
-          {(
-            typeof window === "undefined"
-              ? data?.data?.length || initData?.data?.length
-              : data?.data?.length
-          ) ? (
-            <>
-              <div className="desktop-phone-list">
-                {(data?.data ?? initData?.data)?.map((item) => (
-                  <a
-                    key={item.productId}
-                    href={urlcat(`/redirect/:gradeAndMerchant`, {
-                      gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
-                      redirectUrl: item.buyUrl,
-                    })}
-                    target="_blank"
-                    rel="nofollow noreferrer"
-                    className="phone-list-item"
-                  >
-                    <div className="img-container">
-                      <img width="100" height="100" src={item.brandLogoUrl} />
-                    </div>
-                    <div className="description">
-                      <span>{item.name}</span>
-                      <span className="attr">
+          {typeof window === 'undefined' ? !!initData.data.length : !!data?.data?.length ? (
+              <>
+                <div className="desktop-phone-list">
+                  {(data?.data ?? initData?.data)?.map((item) => (
+                      <a
+                          key={item.productId}
+                          href={urlcat(`/redirect/:gradeAndMerchant`, {
+                            gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
+                            redirectUrl: item.buyUrl,
+                          })}
+                          target="_blank"
+                          rel="nofollow noreferrer"
+                          className="phone-list-item"
+                      >
+                        <div className="img-container">
+                          <img width="100" height="100" src={item.brandLogoUrl} />
+                        </div>
+                        <div className="description">
+                          <span>{item.name}</span>
+                          <span className="attr">
                         {`${item.carrier} ${item.storage} ${item.color}`}
                       </span>
-                    </div>
+                        </div>
 
-                    <div className="condition-container">
-                      <div className={`condition ${item.condition} `}>
-                        {item.condition}
-                      </div>
-                    </div>
+                        <div className="condition-container">
+                          <div className={`condition ${item.condition} `}>
+                            {item.condition}
+                          </div>
+                        </div>
 
-                    <div className="action">
-                      <span className="price">${item.currentPrice / 100}</span>
-                      <div className="view-detail">View Detail</div>
-                    </div>
-                  </a>
-                ))}
-              </div>
-              <div className="mobile-phone-list">
-                {(data?.data ?? initData?.data)?.map((item) => (
-                  <a
-                    key={item.productId}
-                    href={urlcat(`/redirect/:gradeAndMerchant`, {
-                      gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
-                      redirectUrl: item.buyUrl,
-                    })}
-                    className="phone-list-item"
-                    target="_blank"
-                    rel="nofollow noreferrer"
-                  >
-                    <div className="top">
-                      <img width="50" height="50" src={item.brandLogoUrl} />
-                      <div className={`condition ${item.condition} `}>
-                        {item.condition}
-                      </div>
-                    </div>
-                    <div className="bottom">
-                      <div className="description">
-                        <span className="attr-name">{item.name}</span>
-                        <span className="attr">
+                        <div className="action">
+                          <span className="price">${item.currentPrice / 100}</span>
+                          <div className="view-detail">View Detail</div>
+                        </div>
+                      </a>
+                  ))}
+                </div>
+                <div className="mobile-phone-list">
+                  {(data?.data ?? initData?.data)?.map((item) => (
+                      <a
+                          key={item.productId}
+                          href={urlcat(`/redirect/:gradeAndMerchant`, {
+                            gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
+                            redirectUrl: item.buyUrl,
+                          })}
+                          className="phone-list-item"
+                          target="_blank"
+                          rel="nofollow noreferrer"
+                      >
+                        <div className="top">
+                          <img width="50" height="50" src={item.brandLogoUrl} />
+                          <div className={`condition ${item.condition} `}>
+                            {item.condition}
+                          </div>
+                        </div>
+                        <div className="bottom">
+                          <div className="description">
+                            <span className="attr-name">{item.name}</span>
+                            <span className="attr">
                           {`${item.carrier} ${item.storage} ${item.color}`}
                         </span>
-                      </div>
+                          </div>
 
-                      <span className="price">${item.currentPrice / 100}</span>
-                    </div>
-                  </a>
-                ))}
-              </div>
-              <div className="next-page-container">
-                <Pagination
-                  onChange={(value) =>
-                    setSearchKeys((prev) => ({ ...prev, pageNum: value }))
-                  }
-                  current={searchKeys.pageNum}
-                  total={data?.count ?? 0}
-                  pageSize={20}
-                />
-              </div>{" "}
-            </>
+                          <span className="price">${item.currentPrice / 100}</span>
+                        </div>
+                      </a>
+                  ))}
+                </div>
+                <div className="next-page-container">
+                  <Pagination
+                      onChange={(value) =>
+                          setSearchKeys((prev) => ({ ...prev, pageNum: value }))
+                      }
+                      current={searchKeys.pageNum}
+                      total={data?.count ?? 0}
+                      pageSize={20}
+                  />
+                </div>{" "}
+              </>
           ) : (
-            <div style={{ fontSize: 14 }}>
-              We couldn&apos;t find anything that matches what you were looking
-              for. Try to change the filter setting.
-            </div>
+              <div style={{ fontSize: 14 }}>
+                We couldn&apos;t find anything that matches what you were looking
+                for. Try to change the filter setting.
+              </div>
           )}
         </div>
       </main>
@@ -803,7 +802,7 @@ export default function BuyPhone({
           <a href="/privacy-policy">Privacy Policy</a>
         </div>
 
-        <p>© 2021 UP Trade Technologies, Inc.</p>
+        <p>© 2022 UP Trade Technologies, Inc.</p>
       </div>
     </>
   );
@@ -838,6 +837,8 @@ export async function getStaticProps() {
         carrierOptions: [],
         data: [],
         products: [],
+        navbar: [],
+        appleList: [],
       },
     };
 

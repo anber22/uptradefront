@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function BuyNav({ navbar }) {
   const [selectedBrand, setSelectedBrand] = useState("");
-  const [selectedNavList, setSelectedNavList] = useState(navbar[0].values);
+  const [selectedNavList, setSelectedNavList] = useState(navbar?.[0]?.values);
 
   return (
     <li className="main-menu-dropdown">
