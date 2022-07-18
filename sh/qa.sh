@@ -4,7 +4,6 @@ corepack enable
 ls -a .next
 rm -rf build.tar.gz
 rm cache.json
-rm -rf .next
 
 ls
 pnpm -v
