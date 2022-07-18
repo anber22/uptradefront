@@ -134,7 +134,7 @@ export default function Home({ listedProduct, reviews, navbar, appleList }) {
               <a href={x.url} key={index}>
                 <div className="phone-card" key={index}>
                   <div className="image-container">
-                    {x.photo ? (
+                    {x.photoUrl ? (
                       <amp-img
                         alt="phone"
                         width="120"
@@ -163,7 +163,7 @@ export default function Home({ listedProduct, reviews, navbar, appleList }) {
               <a href={x.url} key={index}>
                 <div className="phone-card" key={index}>
                   <div className="image-container">
-                    {x.photo ? (
+                    {x.photoUrl ? (
                       <amp-img
                         alt="phone"
                         width="120"
