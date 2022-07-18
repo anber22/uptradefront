@@ -10,7 +10,7 @@ ls
 pnpm -v
 pnpm install --frozen-lockfile --prefer-offline
 pnpm run build
-
+ls -a .next
 rm -rf node_modules
 
 rm -rf build.tar.gz
