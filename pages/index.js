@@ -134,12 +134,14 @@ export default function Home({ listedProduct, reviews, navbar, appleList }) {
               <a href={x.url} key={index}>
                 <div className="phone-card" key={index}>
                   <div className="image-container">
-                    <amp-img
-                      alt="phone"
-                      width="120"
-                      height="120"
-                      src={x.photoUrl}
-                    />
+                    {x.photo ? (
+                      <amp-img
+                        alt="phone"
+                        width="120"
+                        height="120"
+                        src={x.photoUrl}
+                      />
+                    ) : null}
                   </div>
                   <div className="phone-info">
                     <strong>{x.name}</strong>
@@ -161,12 +163,14 @@ export default function Home({ listedProduct, reviews, navbar, appleList }) {
               <a href={x.url} key={index}>
                 <div className="phone-card" key={index}>
                   <div className="image-container">
-                    <amp-img
-                      alt="phone"
-                      width="120"
-                      height="120"
-                      src={x.photoUrl}
-                    />
+                    {x.photo ? (
+                      <amp-img
+                        alt="phone"
+                        width="120"
+                        height="120"
+                        src={x.photoUrl}
+                      />
+                    ) : null}
                   </div>
                   <div className="phone-info">
                     <strong>{x.name}</strong>

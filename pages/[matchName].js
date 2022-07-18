@@ -191,13 +191,23 @@ export default function Model({
                 data-hero
                 className="mobile-img"
                 layout="fixed"
-                src={productMobileImageUrl ? productMobileImageUrl : "/default-image.png"}
+                src={
+                  productMobileImageUrl
+                    ? productMobileImageUrl
+                    : "/default-image.png"
+                }
                 sizes="(max-width: 1024px) 100vw, 1024px"
-                srcset={`${productMobileImageUrl ?? "/default-image.png"} 1024w, ${
-                    productMobileImageUrl ?? "/default-image.png"
-                } 300w, ${productMobileImageUrl ?? "/default-image.png"} 768w, ${
-                    productMobileImageUrl ?? "/default-image.png"
-                } 1536w, ${productMobileImageUrl ?? "/default-image.png"} 2048w`}
+                srcset={`${
+                  productMobileImageUrl ?? "/default-image.png"
+                } 1024w, ${
+                  productMobileImageUrl ?? "/default-image.png"
+                } 300w, ${
+                  productMobileImageUrl ?? "/default-image.png"
+                } 768w, ${
+                  productMobileImageUrl ?? "/default-image.png"
+                } 1536w, ${
+                  productMobileImageUrl ?? "/default-image.png"
+                } 2048w`}
                 width="250"
                 height="250"
               />
@@ -375,7 +385,9 @@ export default function Model({
                 className="phone-list-item"
               >
                 <div className="img-container">
-                  <amp-img width="100" height="100" src={item.brandLogoUrl} />
+                  {item.brandLogoUrl ? (
+                    <amp-img width="100" height="100" src={item.brandLogoUrl} />
+                  ) : null}
                 </div>
                 <div className="description">
                   <span>{item.name}</span>
@@ -411,7 +423,9 @@ export default function Model({
                 className="phone-list-item"
               >
                 <div className="top">
-                  <amp-img width="50" height="50" src={item.brandLogoUrl} />
+                  {item.brandLogoUrl ? (
+                    <amp-img width="50" height="50" src={item.brandLogoUrl} />
+                  ) : null}
                   <div className={`condition ${item.condition} `}>
                     {item.condition}
                   </div>
@@ -594,7 +608,8 @@ export async function getStaticProps({ params }) {
       metaName,
       sku,
       productImageUrl: product.productImageUrl?.replaceAll(" ", "%20") ?? null,
-      productMobileImageUrl: product.productMobileImageUrl?.replaceAll(" ", "%20") ?? null,
+      productMobileImageUrl:
+        product.productMobileImageUrl?.replaceAll(" ", "%20") ?? null,
       path: `/${params.matchName}`,
       relatedGoods: product.relatedGoods,
       reviewsInfo,
