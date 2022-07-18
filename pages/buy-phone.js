@@ -183,7 +183,7 @@ export default function BuyPhone({
     }
   }, [searchKeys.selectedValues, initialConditions]);
 
-  const { value: data } = useAsync(async () => {
+  const { value: data = initData } = useAsync(async () => {
     if (
       !searchKeys.selectedValues.length &&
       searchKeys.pageNum === 1 &&
@@ -708,26 +708,26 @@ export default function BuyPhone({
             </div>
           </div>
 
-          {typeof window === 'undefined' ? !!initData.data.length : !!data?.data?.length ? (
-              <>
-                <div className="desktop-phone-list">
-                  {(data?.data ?? initData?.data)?.map((item) => (
-                      <a
-                          key={item.productId}
-                          href={urlcat(`/redirect/:gradeAndMerchant`, {
-                            gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
-                            redirectUrl: item.buyUrl,
-                          })}
-                          target="_blank"
-                          rel="nofollow noreferrer"
-                          className="phone-list-item"
-                      >
-                        <div className="img-container">
-                          <img width="100" height="100" src={item.brandLogoUrl} />
-                        </div>
-                        <div className="description">
-                          <span>{item.name}</span>
-                          <span className="attr">
+          {data?.data?.length ? (
+            <>
+              <div className="desktop-phone-list">
+                {(data?.data ?? initData?.data)?.map((item) => (
+                  <a
+                    key={item.productId}
+                    href={urlcat(`/redirect/:gradeAndMerchant`, {
+                      gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
+                      redirectUrl: item.buyUrl,
+                    })}
+                    target="_blank"
+                    rel="nofollow noreferrer"
+                    className="phone-list-item"
+                  >
+                    <div className="img-container">
+                      <img width="100" height="100" src={item.brandLogoUrl} />
+                    </div>
+                    <div className="description">
+                      <span>{item.name}</span>
+                      <span className="attr">
                         {`${item.carrier} ${item.storage} ${item.color}`}
                       </span>
                         </div>
@@ -785,7 +785,7 @@ export default function BuyPhone({
                       total={data?.count ?? 0}
                       pageSize={20}
                   />
-                </div>{" "}
+                </div>
               </>
           ) : (
               <div style={{ fontSize: 14 }}>

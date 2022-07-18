@@ -1,7 +1,6 @@
 let cache = null;
 
 export const getNavBar = async () => {
-  console.log(cache)
   if (!cache) {
     const navbarResponse = await fetch(
       "https://api.276qa.com/search/category/buy/navigation/bar"
