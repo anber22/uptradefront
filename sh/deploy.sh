@@ -2,7 +2,7 @@
 corepack enable
 
 rm -rf .next
-pnpm install --frozen-lockfile --prefer-offline
+pnpm install
 pnpm run build
 
 # 启动 pm2
