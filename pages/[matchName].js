@@ -191,7 +191,7 @@ export default function Model({
                 data-hero
                 className="mobile-img"
                 layout="fixed"
-                src={productMobileImageUrl ?? "/default-image.png"}
+                src={productMobileImageUrl ? productMobileImageUrl : "/default-image.png"}
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 srcset={`${productMobileImageUrl ?? "/default-image.png"} 1024w, ${
                     productMobileImageUrl ?? "/default-image.png"
