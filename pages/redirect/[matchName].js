@@ -42,7 +42,7 @@ export default function Redirect() {
 
       window.location.href = url;
     });
-  }, [location]);
+  }, []);
 
   return (
     <main className="redirect-page">
