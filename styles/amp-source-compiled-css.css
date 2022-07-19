@@ -3945,7 +3945,8 @@ button {
   .model-page .model-info {
     order: -1;
     background-color: #ffffff;
-    text-align: center;
+    display: flex;
+    justify-content: center;
   }
 
   .model-page .desktop-model-description {

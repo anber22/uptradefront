@@ -182,15 +182,16 @@ export default function Model({
             <div className="model-info">
               <amp-img
                 data-hero
-                layout="fixed"
+                layout="responsive"
                 src={
                   productMobileImageUrl
                     ? productMobileImageUrl
                     : "/default-image.png"
                 }
-                srcset={`${productImageUrl ?? "/default-image.png"} 1x, ${
+                sizes="(max-width: 1024px) 250px, 270px"
+                srcset={`${
                   productMobileImageUrl ?? "/default-image.png"
-                } 2x`}
+                } 500w, ${productImageUrl ?? "/default-image.png"} 270w`}
                 width="250"
                 height="250"
               />
