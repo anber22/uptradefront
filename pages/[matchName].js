@@ -191,13 +191,6 @@ export default function Model({
                 srcset={`${productImageUrl ?? "/default-image.png"} 1x, ${
                   productMobileImageUrl ?? "/default-image.png"
                 } 2x`}
-                // srcset={`${productImageUrl ?? "/default-image.png"} 1024w, ${
-                //   productMobileImageUrl ?? "/default-image.png"
-                // } 300w, ${
-                //   productMobileImageUrl ?? "/default-image.png"
-                // } 768w, ${productImageUrl ?? "/default-image.png"} 1536w, ${
-                //   productImageUrl ?? "/default-image.png"
-                // } 2048w`}
                 width="250"
                 height="250"
               />
