@@ -95,24 +95,27 @@ export default function BuyPhone({
 
   const matchMedia = useMediaQuery("(min-width: 1280px");
 
-  const onOptionSelect = useCallback((item, conditionName) => {
-    setSearchKeys((prev) => {
-      const values = prev.selectedValues.some(
-        (x) => x.categoryValueId === item.categoryValueId
-      )
-        ? prev.selectedValues.filter(
-            (x) => x.categoryValueId !== item.categoryValueId
-          )
-        : [...prev.selectedValues, item];
+  const onOptionSelect = useCallback(
+    (item, conditionName) => {
+      setSearchKeys((prev) => {
+        const values = prev.selectedValues.some(
+          (x) => x.categoryValueId === item.categoryValueId
+        )
+          ? prev.selectedValues.filter(
+              (x) => x.categoryValueId !== item.categoryValueId
+            )
+          : [...prev.selectedValues, item];
 
-      return {
-        ...prev,
-        searchKey,
-        pageNum: 1,
-        selectedValues: values,
-      };
-    });
-  }, [searchKey]);
+        return {
+          ...prev,
+          searchKey,
+          pageNum: 1,
+          selectedValues: values,
+        };
+      });
+    },
+    [searchKey]
+  );
 
   const onSearchClick = useCallback(
     (name) => {
@@ -146,14 +149,17 @@ export default function BuyPhone({
     [products, searchKey]
   );
 
-  const onOrderClick = useCallback((orderBy) => {
-    setSearchKeys((prev) => ({
-      ...prev,
-      searchKey,
-      orderBy,
-      pageNum: 1,
-    }));
-  }, [searchKey]);
+  const onOrderClick = useCallback(
+    (orderBy) => {
+      setSearchKeys((prev) => ({
+        ...prev,
+        searchKey,
+        orderBy,
+        pageNum: 1,
+      }));
+    },
+    [searchKey]
+  );
 
   const onAccordionClick = useCallback((item) => {
     setExpanded((prev) => {
@@ -258,26 +264,28 @@ export default function BuyPhone({
   useEffect(() => {
     if (!router?.query) return;
 
-    const { brand, brandCategoryValueId, modelName, modelId } = router.query;
+    const { brand, brandCategoryValueId, modelName, modelId, searchKey } =
+      router.query;
 
+    setSearchKey(searchKey ?? "");
     setSearchKeys({
       pageNum: 1,
-      searchKey: "",
+      searchKey: searchKey ?? "",
       orderBy: "LOWEST_PRICE",
       brands: [],
       models: [],
       merchants: [],
       selectedValues: [
         modelId
-            ? { name: modelName, categoryValueId: Number(modelId), categoryId: 4 }
-            : undefined,
+          ? { name: modelName, categoryValueId: Number(modelId), categoryId: 4 }
+          : undefined,
         brand
-            ? {
+          ? {
               name: brand,
               categoryValueId: Number(brandCategoryValueId),
               categoryId: 3,
             }
-            : undefined,
+          : undefined,
       ].filter(Boolean),
     });
   }, [router]);
@@ -730,68 +738,68 @@ export default function BuyPhone({
                       <span className="attr">
                         {`${item.carrier} ${item.storage} ${item.color}`}
                       </span>
-                        </div>
+                    </div>
 
-                        <div className="condition-container">
-                          <div className={`condition ${item.condition} `}>
-                            {item.condition}
-                          </div>
-                        </div>
+                    <div className="condition-container">
+                      <div className={`condition ${item.condition} `}>
+                        {item.condition}
+                      </div>
+                    </div>
 
-                        <div className="action">
-                          <span className="price">${item.currentPrice / 100}</span>
-                          <div className="view-detail">View Detail</div>
-                        </div>
-                      </a>
-                  ))}
-                </div>
-                <div className="mobile-phone-list">
-                  {(data?.data ?? initData?.data)?.map((item) => (
-                      <a
-                          key={item.productId}
-                          href={urlcat(`/redirect/:gradeAndMerchant`, {
-                            gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
-                            redirectUrl: item.buyUrl,
-                          })}
-                          className="phone-list-item"
-                          target="_blank"
-                          rel="nofollow noreferrer"
-                      >
-                        <div className="top">
-                          <img width="50" height="50" src={item.brandLogoUrl} />
-                          <div className={`condition ${item.condition} `}>
-                            {item.condition}
-                          </div>
-                        </div>
-                        <div className="bottom">
-                          <div className="description">
-                            <span className="attr-name">{item.name}</span>
-                            <span className="attr">
+                    <div className="action">
+                      <span className="price">${item.currentPrice / 100}</span>
+                      <div className="view-detail">View Detail</div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              <div className="mobile-phone-list">
+                {(data?.data ?? initData?.data)?.map((item) => (
+                  <a
+                    key={item.productId}
+                    href={urlcat(`/redirect/:gradeAndMerchant`, {
+                      gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
+                      redirectUrl: item.buyUrl,
+                    })}
+                    className="phone-list-item"
+                    target="_blank"
+                    rel="nofollow noreferrer"
+                  >
+                    <div className="top">
+                      <img width="50" height="50" src={item.brandLogoUrl} />
+                      <div className={`condition ${item.condition} `}>
+                        {item.condition}
+                      </div>
+                    </div>
+                    <div className="bottom">
+                      <div className="description">
+                        <span className="attr-name">{item.name}</span>
+                        <span className="attr">
                           {`${item.carrier} ${item.storage} ${item.color}`}
                         </span>
-                          </div>
+                      </div>
 
-                          <span className="price">${item.currentPrice / 100}</span>
-                        </div>
-                      </a>
-                  ))}
-                </div>
-                <div className="next-page-container">
-                  <Pagination
-                      onChange={(value) =>
-                          setSearchKeys((prev) => ({ ...prev, pageNum: value }))
-                      }
-                      current={searchKeys.pageNum}
-                      total={data?.count ?? 0}
-                      pageSize={20}
-                  />
-                </div>
-              </>
-          ) : (
-              <div style={{ fontSize: 14 }}>
-                We couldn&apos;t find anything that matches what you were looking
-                for. Try to change the filter setting.
+                      <span className="price">${item.currentPrice / 100}</span>
+                    </div>
+                  </a>
+                ))}
               </div>
+              <div className="next-page-container">
+                <Pagination
+                  onChange={(value) =>
+                    setSearchKeys((prev) => ({ ...prev, pageNum: value }))
+                  }
+                  current={searchKeys.pageNum}
+                  total={data?.count ?? 0}
+                  pageSize={20}
+                />
+              </div>
+            </>
+          ) : (
+            <div style={{ fontSize: 14 }}>
+              We couldn&apos;t find anything that matches what you were looking
+              for. Try to change the filter setting.
+            </div>
           )}
         </div>
       </main>
