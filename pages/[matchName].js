@@ -180,6 +180,13 @@ export default function Model({
               {keyword || productName}
             </h1>
             <div className="model-info">
+              <amp-img
+                data-hero
+                className="desktop-img"
+                src={productImageUrl ? productImageUrl : "/default-image.png"}
+                width="270"
+                height="270"
+              />
 
               <div className="desktop-model-description">
                 <div className="model-tag-item">
@@ -255,6 +262,19 @@ export default function Model({
               </a>
             </div>
           </div>
+          <div className="mobile-image-container">
+            <amp-img
+                data-hero
+                className="mobile-img"
+                src={
+                  productMobileImageUrl
+                      ? productMobileImageUrl
+                      : "/default-image.png"
+                }
+                width="250"
+                height="250"
+            />
+          </div>
           <div className="right">
             <div className="desktop-reviews-title">
               <h2 className="reviews-title">Customer reviews</h2>
@@ -328,22 +348,6 @@ export default function Model({
             </div>
           </div>
         </div>
-
-        <amp-img
-            data-hero
-            layout="responsive"
-            src={
-              productMobileImageUrl
-                  ? productMobileImageUrl
-                  : "/default-image.png"
-            }
-            sizes="(max-width: 1024px) 250px, 270px"
-            srcset={`${
-                productMobileImageUrl ?? "/default-image.png"
-            } 500w, ${productImageUrl ?? "/default-image.png"} 270w`}
-            width="250"
-            height="250"
-        />
 
         {qa ? (
           <div className="model-page-faq">
