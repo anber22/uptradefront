@@ -70,14 +70,9 @@ export default function FooterBuyNav({ appleList }) {
           className="footer-nav-content"
           style={{ display: selectedNav === "resource" ? "flex" : "none" }}
         >
-          <a href="#" title="...">
+          <a href="/faq" title="...">
             FAQs
           </a>
-          <a href="#" title="...">
-            Return and Exchange Policy
-          </a>
-          <a href="#">Shipping Policy</a>
-          <a href="#">Protection Plan</a>
         </div>
       </section>
 

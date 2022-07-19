@@ -1712,7 +1712,7 @@ header.fixed {
     background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
   }
 
-  .buy-phone-page .carrier-options .selected-carrier-option {
+  .selected-carrier-option {
     color: #ffffff;
     background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
     outline: none;
@@ -4665,6 +4665,11 @@ button {
     display: flex;
     justify-content: center;
     padding: 24px 0;
+  }
+  .selected-carrier-option {
+    color: #ffffff;
+    background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
+    outline: none;
   }
   /*Mobile css  */
 }
