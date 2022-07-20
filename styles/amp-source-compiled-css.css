@@ -1503,7 +1503,6 @@ header.fixed {
     color: #fff;
     background: linear-gradient(90deg, #1ab4e7, #3498db);
     transition: none;
-    border: 1px solid rgba(0, 0, 0, 0.23);
     box-shadow: none;
     line-height: 1.75;
   }
@@ -1712,7 +1711,7 @@ header.fixed {
     background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
   }
 
-  .selected-carrier-option {
+  .buy-phone-page .carrier-options .selected-carrier-option {
     color: #ffffff;
     background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
     outline: none;
@@ -3306,7 +3305,6 @@ button {
     color: #fff;
     background: linear-gradient(90deg, #1ab4e7, #3498db);
     transition: none;
-    border: 1px solid rgba(0, 0, 0, 0.23);
     box-shadow: none;
     line-height: 1.75;
   }
@@ -4666,7 +4664,7 @@ button {
     justify-content: center;
     padding: 24px 0;
   }
-  .selected-carrier-option {
+  .carrier-options .selected-carrier-option {
     color: #ffffff;
     background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
     outline: none;
