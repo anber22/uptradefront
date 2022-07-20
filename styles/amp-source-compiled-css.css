@@ -3424,11 +3424,6 @@ button {
     padding-right: 0;
   }
 
-  .carrier-options .carrier-option:hover {
-    color: #ffffff;
-    background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
-  }
-
   .carrier-options .carrier-option[selected] {
     color: #ffffff;
     background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
