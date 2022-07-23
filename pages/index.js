@@ -152,7 +152,7 @@ export default function Home({ listedProduct, reviews, navbar, appleList }) {
                           <span className="price">${x.lowPrice / 100}</span>
                         </>
                       ) : (
-                        "Sell Out"
+                        "Sold Out"
                       )}
                     </div>
                   </div>
@@ -187,7 +187,7 @@ export default function Home({ listedProduct, reviews, navbar, appleList }) {
                           <span className="price">${x.lowPrice / 100}</span>
                         </>
                       ) : (
-                        "Sell Out"
+                        "Sold Out"
                       )}
                     </div>
                   </div>
