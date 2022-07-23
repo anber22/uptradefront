@@ -146,8 +146,14 @@ export default function Home({ listedProduct, reviews, navbar, appleList }) {
                   <div className="phone-info">
                     <strong>{x.name}</strong>
                     <div>
-                      As low as /
-                      <span className="price">${x.lowPrice / 100}</span>
+                      {x.lowPrice ? (
+                        <>
+                          As low as /
+                          <span className="price">${x.lowPrice / 100}</span>
+                        </>
+                      ) : (
+                        "Sell Out"
+                      )}
                     </div>
                   </div>
                 </div>
@@ -175,8 +181,14 @@ export default function Home({ listedProduct, reviews, navbar, appleList }) {
                   <div className="phone-info">
                     <strong>{x.name}</strong>
                     <div>
-                      As low as /
-                      <span className="price">${x.lowPrice / 100}</span>
+                      {x.lowPrice ? (
+                        <>
+                          As low as /
+                          <span className="price">${x.lowPrice / 100}</span>
+                        </>
+                      ) : (
+                        "Sell Out"
+                      )}
                     </div>
                   </div>
                 </div>
