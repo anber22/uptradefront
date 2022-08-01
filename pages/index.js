@@ -283,7 +283,7 @@ export default function Home({ listedProduct, reviews, navbar, appleList }) {
           <amp-img
             src="/brand/abc.png"
             width="178"
-            height="150"
+            height="168"
             alt="abc news"
             title="abc news"
           />
