@@ -306,12 +306,13 @@ export default function BuyPhone({
                 return {
                   "@type": "ListItem",
                   position: index + 1,
+                  name: `${item.name} ${item.carrier} ${item.storage} ${item.color}`,
                   url: urlcat(
-                    `${process.env.BASEURL}/redirect/:gradeAndMerchant`,
-                    {
-                      gradeAndMerchant: `${item.productId}-${item.contion}-${item.merchant}`,
-                      redirectUrl: item.buyUrl,
-                    }
+                      `${process.env.BASEURL}redirect/:gradeAndMerchant`,
+                      {
+                        gradeAndMerchant: `${item.productId}-${item.contion}-${item.merchant}`,
+                        redirectUrl: item.buyUrl,
+                      }
                   ),
                 };
               }),

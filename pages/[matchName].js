@@ -599,7 +599,7 @@ export async function getStaticProps({ params }) {
       productImageUrl: product.productImageUrl?.replaceAll(" ", "%20") ?? null,
       productMobileImageUrl:
         product.productMobileImageUrl?.replaceAll(" ", "%20") ?? null,
-      path: `/${params.matchName}`,
+      path: `${params.matchName}`,
       relatedGoods: product.relatedGoods,
       reviewsInfo,
       ...navbar,
