@@ -11,6 +11,7 @@ const nextConfig = {
   env: {
     BASEURL: 'https://276qa.com'
   },
+  staticPageGenerationTimeout: 300,
 };
 
 module.exports = nextConfig;

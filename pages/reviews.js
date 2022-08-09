@@ -13,7 +13,7 @@ export default function Reviews({
   data: initData,
   navbar,
   appleList,
-  sellNavbar,
+  sellNavbar = [],
   sellAppleList,
 }) {
   const [params, setParams] = useState({

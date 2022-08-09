@@ -4,6 +4,7 @@ import Search from "./search";
 
 export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
   const isAmp = useAmp();
+
   return (
     <header className="mega-menu UpTrade-header">
       <div className="container full-width">
@@ -355,7 +356,7 @@ export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
                       </ul>
                     </li>
                   ) : (
-                    <BuyNav navbar={sellNavBar} />
+                    <BuyNav navbar={sellNavbar} />
                   )}
 
                   <li className="main-menu-dropdown">
