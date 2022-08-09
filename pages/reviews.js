@@ -9,7 +9,13 @@ import { getNavBar } from "../utils/getNavBar";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 
-export default function Reviews({ data: initData, navbar, appleList }) {
+export default function Reviews({
+  data: initData,
+  navbar,
+  appleList,
+  sellNavbar,
+  sellAppleList,
+}) {
   const [params, setParams] = useState({
     page: 0,
     sort: "highest",
@@ -53,7 +59,7 @@ export default function Reviews({ data: initData, navbar, appleList }) {
       <Head>
         <link rel="stylesheet" href="/rc.css" />
       </Head>
-      <Header navbar={navbar} />
+      <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="reviews-page">
         <NextSeo
           title="Customer Reviews | UpTrade"
@@ -199,15 +205,7 @@ export default function Reviews({ data: initData, navbar, appleList }) {
           </div>
         </div>
       </main>
-      <Footer appleList={appleList} />
-      <div className="copy-right">
-        <div className="terms">
-          <a href="/terms">Terms & Conditions</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-        </div>
-
-        <p>© 2022 UP Trade Technologies, Inc.</p>
-      </div>
+      <Footer appleList={appleList} sellAppleList={sellAppleList} />
     </>
   );
 }

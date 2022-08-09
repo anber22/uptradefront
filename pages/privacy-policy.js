@@ -5,10 +5,15 @@ import { Footer } from "../components/Footer";
 
 export const config = { amp: true };
 
-export default function privacyPolicy({ navbar, appleList }) {
+export default function privacyPolicy({
+  navbar,
+  appleList,
+  sellNavbar,
+  sellAppleList,
+}) {
   return (
     <>
-      <Header navbar={navbar} />
+      <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="terms-page">
         <NextSeo
           title="Privacy Policy | UpTrade"
@@ -233,15 +238,7 @@ export default function privacyPolicy({ navbar, appleList }) {
           </p>
         </div>
       </main>
-      <Footer appleList={appleList} />
-      <div className="copy-right">
-        <div className="terms">
-          <a href="/terms">Terms & Conditions</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-        </div>
-
-        <p>© 2022 UP Trade Technologies, Inc.</p>
-      </div>
+      <Footer appleList={appleList} sellAppleList={sellAppleList} />
     </>
   );
 }

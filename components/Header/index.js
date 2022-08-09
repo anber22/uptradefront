@@ -2,7 +2,7 @@ import { useAmp } from "next/amp";
 import BuyNav from "./buy";
 import Search from "./search";
 
-export const Header = ({ navbar }) => {
+export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
   const isAmp = useAmp();
   return (
     <header className="mega-menu UpTrade-header">
@@ -85,7 +85,14 @@ export const Header = ({ navbar }) => {
                   </li>
 
                   {isAmp ? (
-                    <form className="search-form" action="#" target="_top">
+                    <form
+                      className="search-form"
+                      action="#"
+                      target="_top"
+                      style={{
+                        visibility: hiddenSearch ? "hidden" : undefined,
+                      }}
+                    >
                       <amp-autocomplete
                         filter="substring"
                         src="https://api.276qa.com/search/product"
@@ -108,7 +115,14 @@ export const Header = ({ navbar }) => {
                       </amp-autocomplete>
                     </form>
                   ) : (
-                    <form className="search-form" action="#" target="_top">
+                    <form
+                      className="search-form"
+                      action="#"
+                      target="_top"
+                      style={{
+                        visibility: hiddenSearch ? "hidden" : undefined,
+                      }}
+                    >
                       <Search />
                     </form>
                   )}
@@ -234,6 +248,114 @@ export const Header = ({ navbar }) => {
                     </li>
                   ) : (
                     <BuyNav navbar={navbar} />
+                  )}
+
+                  {isAmp ? (
+                    <li className="main-menu-dropdown">
+                      <a title="Trade-in">
+                        Trade-in
+                        <span className="main-menu-dropdown-icon">
+                          <i className="arrow-down"></i>
+                        </span>
+                      </a>
+                      <label
+                        className="main-menu-dropdown-icon"
+                        htmlFor="main-menu-dropdown-list-buy"
+                      >
+                        <i className="arrow-down arrow-down-mobile"></i>
+                      </label>
+                      <input type="checkbox" id="main-menu-dropdown-list-buy" />
+
+                      <ul
+                        className="main-menu-dropdown-list"
+                        id="desktop-buy-menu-dropdown-list"
+                      >
+                        <div id="desktop-buy-dropdown">
+                          <div className="buy-dropdown-left">
+                            <amp-selector
+                              on={`select: AMP.setState({ selected: event.targetOption })`}
+                            >
+                              {sellNavbar?.map((item) => (
+                                <div
+                                  className="buy-category-item"
+                                  option={item.key}
+                                  key={item.key}
+                                  selected={item.key === "Apple"}
+                                >
+                                  {item.key}
+                                  <amp-img
+                                    src="/svg/arrow-right.svg"
+                                    width="20"
+                                    height="20"
+                                  />
+                                </div>
+                              ))}
+                            </amp-selector>
+
+                            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                            <a id="all-product" href="/trade-in-phone">
+                              See All Products
+                            </a>
+                          </div>
+                          <div className="buy-dropdown-right">
+                            {sellNavbar?.map((x) => {
+                              return (
+                                <div
+                                  key={x.key}
+                                  className={
+                                    x.key === "Apple" ? "show" : "hidden"
+                                  }
+                                  data-amp-bind-class={`selected == '${x.key}' ? 'show' : 'hidden'`}
+                                >
+                                  {x.values.map((item, index) => (
+                                    <a
+                                      key={index}
+                                      href={item.url}
+                                      className="nav-link-item"
+                                    >
+                                      {item.value}
+                                    </a>
+                                  ))}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        <div id="mobile-buy-dropdown">
+                          <amp-accordion>
+                            {sellNavbar?.map((item) => (
+                              <section
+                                className="mobile-by-dropdown-item"
+                                key={item.key}
+                              >
+                                <h3>
+                                  <span>{item.key}</span>{" "}
+                                  <i className="arrow-right"></i>
+                                </h3>
+
+                                <div className="value-container">
+                                  {item.values.map((x, index) => (
+                                    <a
+                                      className="value-item"
+                                      href={x.url}
+                                      key={index}
+                                    >
+                                      {x.value}
+                                    </a>
+                                  ))}
+                                </div>
+                              </section>
+                            ))}
+                          </amp-accordion>
+                          <a id="all-product" href="/buy-phone">
+                            See All Products
+                          </a>
+                        </div>
+                      </ul>
+                    </li>
+                  ) : (
+                    <BuyNav navbar={sellNavBar} />
                   )}
 
                   <li className="main-menu-dropdown">

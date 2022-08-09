@@ -6,10 +6,17 @@ import { Footer } from "../../components/Footer";
 
 export const config = { amp: true };
 
-export default function Blog({ topic, list, navbar, appleList }) {
+export default function Blog({
+  topic,
+  list,
+  navbar,
+  appleList,
+  sellNavbar,
+  sellAppleList,
+}) {
   return (
     <>
-      <Header navbar={navbar} />
+      <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="blog-page">
         <NextSeo
           title="UpTrade Blog | UpTrade"
@@ -122,15 +129,7 @@ export default function Blog({ topic, list, navbar, appleList }) {
           </div>
         </div>
       </main>
-      <Footer appleList={appleList} />
-      <div className="copy-right">
-        <div className="terms">
-          <a href="/terms">Terms & Conditions</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-        </div>
-
-        <p>© 2022 UP Trade Technologies, Inc.</p>
-      </div>
+      <Footer appleList={appleList} sellAppleList={sellAppleList} />
     </>
   );
 }

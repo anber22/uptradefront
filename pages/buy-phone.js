@@ -75,6 +75,8 @@ export default function BuyPhone({
   products,
   navbar,
   appleList,
+  sellNavbar,
+  sellAppleList,
 }) {
   const router = useRouter();
   const [isFocus, setIsFocus] = useState(false);
@@ -308,11 +310,11 @@ export default function BuyPhone({
                   position: index + 1,
                   name: `${item.name} ${item.carrier} ${item.storage} ${item.color}`,
                   url: urlcat(
-                      `${process.env.BASEURL}redirect/:gradeAndMerchant`,
-                      {
-                        gradeAndMerchant: `${item.productId}-${item.contion}-${item.merchant}`,
-                        redirectUrl: item.buyUrl,
-                      }
+                    `${process.env.BASEURL}redirect/:gradeAndMerchant`,
+                    {
+                      gradeAndMerchant: `${item.productId}-${item.contion}-${item.merchant}`,
+                      redirectUrl: item.buyUrl,
+                    }
                   ),
                 };
               }),
@@ -320,7 +322,7 @@ export default function BuyPhone({
           }}
         />
       </Head>
-      <Header navbar={navbar} />
+      <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="buy-phone-page">
         <NextSeo
           title={pageTitleHandler(
@@ -804,15 +806,7 @@ export default function BuyPhone({
           )}
         </div>
       </main>
-      <Footer appleList={appleList} />
-      <div className="copy-right">
-        <div className="terms">
-          <a href="/terms">Terms & Conditions</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-        </div>
-
-        <p>© 2022 UP Trade Technologies, Inc.</p>
-      </div>
+      <Footer appleList={appleList} sellAppleList={sellAppleList} />
     </>
   );
 }

@@ -5,10 +5,16 @@ import { getNavBar } from "../../utils/getNavBar";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 
-export default function BlogDetail({ data, navbar, appleList }) {
+export default function BlogDetail({
+  data,
+  navbar,
+  appleList,
+  sellNavbar,
+  sellAppleList,
+}) {
   return (
     <>
-      <Header navbar={navbar} />
+      <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="blog-page">
         <NextSeo
           title={data?.title}
@@ -50,15 +56,7 @@ export default function BlogDetail({ data, navbar, appleList }) {
           </div>
         </div>
       </main>
-      <Footer appleList={appleList} />
-      <div className="copy-right">
-        <div className="terms">
-          <a href="/terms">Terms & Conditions</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-        </div>
-
-        <p>© 2022 UP Trade Technologies, Inc.</p>
-      </div>
+      <Footer appleList={appleList} sellAppleList={sellAppleList} />
     </>
   );
 }

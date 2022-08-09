@@ -1,13 +1,18 @@
 import { NextSeo } from "next-seo";
-import {getNavBar} from "../utils/getNavBar";
-import {Header} from "../components/Header";
-import {Footer} from "../components/Footer";
+import { getNavBar } from "../utils/getNavBar";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 export const config = { amp: true };
 
-export default function CosmeticConditions({ navbar, appleList }) {
+export default function CosmeticConditions({
+  navbar,
+  appleList,
+  sellNavbar,
+  sellAppleList,
+}) {
   return (
     <>
-      <Header navbar={navbar} />
+      <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="cosmetic-condition-page">
         <NextSeo
           title="Condition Comparison of Used Phones and Devices"
@@ -119,7 +124,7 @@ export default function CosmeticConditions({ navbar, appleList }) {
             </thead>
             <tbody>
               <tr>
-                <td className='first-th'>
+                <td className="first-th">
                   <div className="condition Pristine">Pristine</div>
                 </td>
                 <td>Refurbished</td>
@@ -128,7 +133,7 @@ export default function CosmeticConditions({ navbar, appleList }) {
                 <td />
               </tr>
               <tr>
-                <td className='first-th'>
+                <td className="first-th">
                   <div className="condition Excellent">Excellent</div>
                 </td>
                 <td />
@@ -138,7 +143,7 @@ export default function CosmeticConditions({ navbar, appleList }) {
               </tr>
 
               <tr>
-                <td className='first-th'>
+                <td className="first-th">
                   <div className="condition Good">Good</div>
                 </td>
                 <td />
@@ -148,7 +153,7 @@ export default function CosmeticConditions({ navbar, appleList }) {
               </tr>
 
               <tr>
-                <td className='first-th'>
+                <td className="first-th">
                   <div className="condition Fair">Fair</div>
                 </td>
                 <td />
@@ -160,19 +165,10 @@ export default function CosmeticConditions({ navbar, appleList }) {
           </table>
         </div>
       </main>
-      <Footer appleList={appleList} />
-      <div className="copy-right">
-        <div className="terms">
-          <a href="/terms">Terms & Conditions</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-        </div>
-
-        <p>© 2022 UP Trade Technologies, Inc.</p>
-      </div>
+      <Footer appleList={appleList} sellAppleList={sellAppleList} />
     </>
   );
 }
-
 
 export async function getStaticProps() {
   const navBarData = await getNavBar();
@@ -183,4 +179,3 @@ export async function getStaticProps() {
     },
   };
 }
-

@@ -5,7 +5,12 @@ import { getNavBar } from "../utils/getNavBar";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 
-export default function Contact({ navbar, appleList }) {
+export default function Contact({
+  navbar,
+  appleList,
+  sellNavbar,
+  sellAppleList,
+}) {
   const fullNameRef = useRef();
   const emailRef = useRef();
   const messageRef = useRef();
@@ -87,7 +92,7 @@ export default function Contact({ navbar, appleList }) {
 
   return (
     <>
-      <Header navbar={navbar} />
+      <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="contact-page">
         <NextSeo
           title="Contact us | UpTrade"
@@ -180,15 +185,7 @@ export default function Contact({ navbar, appleList }) {
           </div>
         </div>
       </main>
-      <Footer appleList={appleList} />
-      <div className="copy-right">
-        <div className="terms">
-          <a href="/terms">Terms & Conditions</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-        </div>
-
-        <p>© 2022 UP Trade Technologies, Inc.</p>
-      </div>
+      <Footer appleList={appleList} sellAppleList={sellAppleList} />
     </>
   );
 }

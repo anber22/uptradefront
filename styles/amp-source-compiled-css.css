@@ -1194,6 +1194,16 @@ header.fixed {
     color: #fff;
   }
 
+  .copy-right {
+    padding: 18px 104px;
+  }
+
+  .terms {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 8%;
+  }
+
   .UpTrade-footer a {
     color: #fff;
     text-decoration: none;
@@ -1222,6 +1232,24 @@ header.fixed {
   .UpTrade-footer .footer-nav-list .footer-nav-title {
     font-size: 18px;
     margin-bottom: 16px;
+  }
+
+  .UpTrade-footer .popular-title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 34px;
+    margin-bottom: 8px;
+  }
+
+  .UpTrade-footer .popular-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 8%;
+    font-size: 12px;
+  }
+
+  .popular-container {
+    padding-bottom: 50px;
   }
 
   .UpTrade-footer .footer-subscribe {
@@ -4666,6 +4694,24 @@ button {
     background: linear-gradient(rgb(26, 180, 231) 0%, rgb(52, 152, 219) 100%);
     outline: none;
   }
+
+  .popular-container {
+    display: none;
+  }
+
+  .copy-right {
+    padding: 8px;
+  }
+
+  .terms {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .terms > p {
+    margin-bottom: 0;
+  }
+
   /*Mobile css  */
 }
 
@@ -4728,10 +4774,19 @@ button {
 .home-content .sub-title {
   font-size: 18px;
   font-weight: 700;
-  border-bottom: 2px solid #ffffff;
   padding: 6px 12px;
   display: inline-block;
   align-self: flex-start;
+}
+
+.home-content .brand-tablist {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-content .brand-tablist h3[selected] {
+  outline: none;
+  border-bottom: 2px solid #ffffff;
 }
 
 .home-content .brands {
@@ -4740,10 +4795,22 @@ button {
   column-gap: 24px;
 }
 
+.home-content .brands-hidden {
+  display: none;
+}
+
 .home-content .brand-name {
   font-size: 16px;
   margin-top: 8px;
   text-align: center;
+}
+
+.home-content .three-dot {
+  top: -11px;
+}
+
+.border-top {
+  border-top: 2px solid #f5f4f4;
 }
 
 .home-content .brand:hover {
@@ -4811,14 +4878,13 @@ button {
   row-gap: 50px;
 }
 
-.home-page .home-experts p {
+.home-page .home-experts a {
   color: #3d3d3d;
   font-size: 24px;
   text-align: center;
 }
 
 .copy-right {
-  padding: 18px;
   color: #fff;
   background-color: #4a698f;
   font-size: 14px;
@@ -4827,13 +4893,4 @@ button {
 .copy-right a {
   color: #fff;
   text-decoration: none;
-}
-
-.copy-right .terms {
-  display: flex;
-  margin-bottom: 12px;
-}
-
-.copy-right .terms a {
-  margin-right: 8px;
 }

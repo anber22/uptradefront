@@ -6,14 +6,14 @@ import { Footer } from "../components/Footer";
 
 export const config = { amp: true };
 
-export default function FAQ({ navbar, appleList }) {
+export default function FAQ({ navbar, appleList, sellNavbar, sellAppleList }) {
   return (
     <div>
       <Head>
         <title>Frequently Asked Questions | UpTrade</title>
       </Head>
 
-      <Header navbar={navbar} />
+      <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="faq-page">
         <NextSeo
           title="Frequently Asked Questions | UpTrade"
@@ -194,15 +194,7 @@ export default function FAQ({ navbar, appleList }) {
           </a>
         </div>
       </main>
-      <Footer appleList={appleList} />
-      <div className="copy-right">
-        <div className="terms">
-          <a href="/terms">Terms & Conditions</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-        </div>
-
-        <p>© 2022 UP Trade Technologies, Inc.</p>
-      </div>
+      <Footer appleList={appleList} sellAppleList={sellAppleList} />
     </div>
   );
 }
