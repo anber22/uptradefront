@@ -1066,16 +1066,7 @@ async function getBuyProps(params) {
     reviews: reviewsResponse.reviews.slice(0, 5),
   };
 
-  const title =
-    product.type === "BRAND"
-      ? `Used ${
-          product.brand === "Apple" ? "iPhones" : `${product.brand} Phones`
-        } for Sale - Best Deals | UpTrade`
-      : product.type === "CARRIER"
-      ? `Buy Used Refurbished ${product.brand} Phones | UpTrade`
-      : `Buy Used Refurbished ${
-          product.keyword || product.productName
-        } | UpTrade`;
+  const title = `Used & Refurbished ${product.keyword || product.productName} for Sale - UpTrade®`
 
   const metaName =
     product.type !== "MODEL"
