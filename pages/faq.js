@@ -194,7 +194,12 @@ export default function FAQ({ navbar, appleList, sellNavbar, sellAppleList }) {
           </a>
         </div>
       </main>
-      <Footer appleList={appleList} sellAppleList={sellAppleList} />
+      <Footer
+        appleList={appleList}
+        sellAppleList={sellAppleList}
+        buyNavbar={navbar}
+        sellNavbar={sellNavbar}
+      />
     </div>
   );
 }

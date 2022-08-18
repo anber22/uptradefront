@@ -295,8 +295,6 @@ export default function BuyPhone({
   return (
     <>
       <Head>
-        <link rel="stylesheet" href="/rc.css" />
-
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -726,8 +724,11 @@ export default function BuyPhone({
                   <a
                     key={item.productId}
                     href={urlcat(`/redirect/:gradeAndMerchant`, {
-                      gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
+                      gradeAndMerchant: `buy-${item.name.replace(/\s*/g, "")}-${
+                        item.condition
+                      }-${item.merchant}`,
                       redirectUrl: item.buyUrl,
+                      productId: item.productId,
                     })}
                     target="_blank"
                     rel="nofollow noreferrer"
@@ -761,7 +762,9 @@ export default function BuyPhone({
                   <a
                     key={item.productId}
                     href={urlcat(`/redirect/:gradeAndMerchant`, {
-                      gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
+                      gradeAndMerchant: `buy-${item.name.replace(/\s*/g, "")}-${
+                        item.condition
+                      }-${item.merchant}`,
                       redirectUrl: item.buyUrl,
                     })}
                     className="phone-list-item"
@@ -806,7 +809,12 @@ export default function BuyPhone({
           )}
         </div>
       </main>
-      <Footer appleList={appleList} sellAppleList={sellAppleList} />
+      <Footer
+        appleList={appleList}
+        sellAppleList={sellAppleList}
+        buyNavbar={navbar}
+        sellNavbar={sellNavbar}
+      />
     </>
   );
 }

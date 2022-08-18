@@ -24,14 +24,14 @@ export default function privacyPolicy({
           <h1>Privacy Policy</h1>
           <p>
             Protecting your private information is our priority. This Statement
-            of Privacy applies to uptradeit.com and UP Trade Technologies,
+            of Privacy applies to UpTradeit.com and UpTrade Netowrks Inc,
             Incorporated and governs data collection and usage. For the purposes
-            of this Privacy Policy, unless otherwise noted, all references to UP
-            Trade Technologies, Incorporated include uptradeit.com and UP Trade.
-            The UP Trade website is a UP Trade sells, buys or donate certain
-            electronic devices such as mobile phones. site. By using the UP
-            Trade website, you consent to the data practices described in this
-            statement.
+            of this Privacy Policy, unless otherwise noted, all references to
+            UpTrade Netowrks Inc , Incorporated include UpTradeit.com and UP
+            Trade. The UP Trade website is a UP Trade sells, buys or donate
+            certain electronic devices such as mobile phones. site. By using the
+            UP Trade website, you consent to the data practices described in
+            this statement.
           </p>
           <h2>Collection of your Personal Information</h2>
           <p>
@@ -226,19 +226,24 @@ export default function privacyPolicy({
             UP Trade welcomes your questions or comments regarding the Terms:
           </p>
           <p>
-            UP Trade Technologies, Incorporated <br />
+            UpTrade Netowrks Inc <br />
             3400 N Central Expy, Suite 110-276
             <br />
             Richardson, TX 75080 <br />
           </p>
-          <p>Email Address: support@uptradeit.com</p>
+          <p>Email Address: support@UpTradeit.com</p>
           <div className="terms-divider"></div>
           <p>
-            <p>Last Updated: August 29, 2019</p>
+            <p>Last Updated: July 19, 2022</p>
           </p>
         </div>
       </main>
-      <Footer appleList={appleList} sellAppleList={sellAppleList} />
+      <Footer
+        appleList={appleList}
+        sellAppleList={sellAppleList}
+        buyNavbar={navbar}
+        sellNavbar={sellNavbar}
+      />
     </>
   );
 }

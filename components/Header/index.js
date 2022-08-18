@@ -36,23 +36,25 @@ export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
                   </a>
 
                   {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                  <a href="/buy-phone" className="search-icon-container">
-                    {isAmp ? (
-                      <amp-img
-                        src="/svg/search.svg"
-                        width="24"
-                        height="24"
-                        alt="search"
-                      />
-                    ) : (
-                      <img
-                        src="/svg/search.svg"
-                        width="24"
-                        height="24"
-                        alt="search"
-                      />
-                    )}
-                  </a>
+                  {!hiddenSearch ? (
+                    <a href="/buy-phone" className="search-icon-container">
+                      {isAmp ? (
+                        <amp-img
+                          src="/svg/search.svg"
+                          width="24"
+                          height="24"
+                          alt="search"
+                        />
+                      ) : (
+                        <img
+                          src="/svg/search.svg"
+                          width="24"
+                          height="24"
+                          alt="search"
+                        />
+                      )}
+                    </a>
+                  ) : null}
                   <span className="main-menu-dropdown-icon">
                     <i className="hamburger"></i>
                   </span>
@@ -261,11 +263,14 @@ export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
                       </a>
                       <label
                         className="main-menu-dropdown-icon"
-                        htmlFor="main-menu-dropdown-list-buy"
+                        htmlFor="main-menu-dropdown-list-trade"
                       >
                         <i className="arrow-down arrow-down-mobile"></i>
                       </label>
-                      <input type="checkbox" id="main-menu-dropdown-list-buy" />
+                      <input
+                        type="checkbox"
+                        id="main-menu-dropdown-list-trade"
+                      />
 
                       <ul
                         className="main-menu-dropdown-list"
@@ -349,14 +354,14 @@ export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
                               </section>
                             ))}
                           </amp-accordion>
-                          <a id="all-product" href="/buy-phone">
+                          <a id="all-product" href="/trade-in-phone">
                             See All Products
                           </a>
                         </div>
                       </ul>
                     </li>
                   ) : (
-                    <BuyNav navbar={sellNavbar} />
+                    <BuyNav navbar={sellNavbar} type="Sell" />
                   )}
 
                   <li className="main-menu-dropdown">

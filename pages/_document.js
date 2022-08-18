@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import ampCss from "!raw-loader!../styles/amp-source-compiled-css.css";
+import ampCss from "!raw-loader!../styles/amp-nano.css";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -33,11 +33,11 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <noscript
-              dangerouslySetInnerHTML={{
-                  __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXWLTL3" height="0" width="0" style="display: none; visibility: hidden;" />`,
-              }}
-          />
+          {/* <noscript
+            dangerouslySetInnerHTML={{
+              __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXWLTL3" height="0" width="0" style="display: none; visibility: hidden;" />`,
+            }}
+          /> */}
         </body>
       </Html>
     );

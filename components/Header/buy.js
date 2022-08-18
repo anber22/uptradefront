@@ -1,24 +1,29 @@
 import { useState } from "react";
 
-export default function BuyNav({ navbar }) {
+export default function BuyNav({ navbar, sellNavbar, type }) {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedNavList, setSelectedNavList] = useState(navbar?.[0]?.values);
 
   return (
     <li className="main-menu-dropdown">
       <a title="Blog" key="blog">
-        Buy
+        {type === "Sell" ? "Trade-in" : "Buy"}
         <span className="main-menu-dropdown-icon">
           <i className="arrow-down"></i>
         </span>
       </a>
       <label
         className="main-menu-dropdown-icon"
-        htmlFor="main-menu-dropdown-list-buy"
+        htmlFor={`main-menu-dropdown-list-${
+          type === "Sell" ? "trade-in" : "buy"
+        }`}
       >
         <i className="arrow-down arrow-down-mobile"></i>
       </label>
-      <input type="checkbox" id="main-menu-dropdown-list-buy" />
+      <input
+        type="checkbox"
+        id={`main-menu-dropdown-list-${type === "Sell" ? "trade-in" : "buy"}`}
+      />
 
       <ul
         className="main-menu-dropdown-list"
@@ -44,7 +49,10 @@ export default function BuyNav({ navbar }) {
               </div>
             ))}
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-            <a id="all-product" href="/buy-phone">
+            <a
+              id="all-product"
+              href={type === "Sell" ? "/trade-in-phone" : "/buy-phone"}
+            >
               See All Products
             </a>
           </div>
@@ -91,7 +99,11 @@ export default function BuyNav({ navbar }) {
             </li>
           ))}
           <li className="mobile-by-dropdown-item">
-            <a id="all-product" style={{ padding: 0 }} href="/buy-phone">
+            <a
+              id="all-product"
+              style={{ padding: 0 }}
+              href={type === "Sell" ? "/trade-in-phone" : "/buy-phone"}
+            >
               See All Products
             </a>
           </li>

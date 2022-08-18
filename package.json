@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tippyjs/react": "^4.2.6",
     "dayjs": "^1.11.3",
     "next": "12.1.6",
     "next-seo": "^5.4.0",

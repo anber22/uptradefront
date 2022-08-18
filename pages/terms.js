@@ -24,21 +24,21 @@ export default function Terms({
         <div className="content">
           <h1>Terms and Conditions</h1>
           <div>
-            <h2>greement between User and uptradeit.com</h2>
+            <h2>Agreement between User and UpTradeit.com</h2>
           </div>
           <p>
-            Welcome to uptradeit.com. The uptradeit.com website (the
-            &quotSite&quot) is comprised of various web pages operated by UP
-            Trade Technologies, Incorporated (&quotUP Trade&quot). uptradeit.com
-            is offered to you conditioned on your acceptance without
-            modification of the terms, conditions, and notices contained herein
-            (the &quotTerms&quot). Your use of uptradeit.com constitutes your
+            Welcome to UpTradeit.com. The UpTradeit.com website (the
+            &quot;Site&quot;) is comprised of various web pages operated by
+            UpTrade Netowrks Inc (&quot;UP Trade&quot;). UpTradeit.com is
+            offered to you conditioned on your acceptance without modification
+            of the terms, conditions, and notices contained herein (the
+            &quot;Terms&quot;). Your use of UpTradeit.com constitutes your
             agreement to all such Terms. Please read these terms carefully, and
             keep a copy of them for your reference.
           </p>
 
           <p>
-            uptradeit.com gives users the ability to sell, buy or donate certain
+            UpTradeit.com gives users the ability to sell, buy or donate certain
             electronic devices such as mobile phones.
           </p>
           <p>
@@ -47,7 +47,7 @@ export default function Terms({
           </p>
           <h2>Electronic Communications</h2>
           <p>
-            Visiting uptradeit.com or sending emails to UP Trade constitutes
+            Visiting UpTradeit.com or sending emails to UP Trade constitutes
             electronic communications. You consent to receive electronic
             communications and you agree that all agreements, notices,
             disclosures and other communications that we provide to you
@@ -71,7 +71,7 @@ export default function Terms({
           <p>
             UP Trade does not knowingly collect, either online or offline,
             personal information from persons under the age of thirteen. If you
-            are under 18, you may use uptradeit.com only with permission of a
+            are under 18, you may use UpTradeit.com only with permission of a
             parent or guardian.
           </p>
           <h2>Cancellation/Refund Policy</h2>
@@ -88,8 +88,8 @@ export default function Terms({
           <h2>Links to Third Party Sites/Third Party Services</h2>
 
           <p>
-            uptradeit.com may contain links to other websites (&quotLinked
-            Sites&quot). The Linked Sites are not under the control of UP Trade
+            UpTradeit.com may contain links to other websites (&quot;Linked
+            Sites&quot;). The Linked Sites are not under the control of UP Trade
             and UP Trade is not responsible for the contents of any Linked Site,
             including without limitation any link contained in a Linked Site, or
             any changes or updates to a Linked Site. UP Trade is providing these
@@ -99,19 +99,19 @@ export default function Terms({
           </p>
           <p>
             Third party sites and organizations deliver certain services made
-            available via uptradeit.com. By using any product, service or
-            functionality originating from the uptradeit.com domain, you hereby
+            available via UpTradeit.com. By using any product, service or
+            functionality originating from the UpTradeit.com domain, you hereby
             acknowledge and consent that UP Trade may share such information and
             data with any third party with whom UP Trade has a contractual
             relationship to provide the requested product, service or
-            functionality on behalf of uptradeit.com users and customers.
+            functionality on behalf of UpTradeit.com users and customers.
           </p>
 
           <h2>No Unlawful or Prohibited Use/Intellectual Property</h2>
 
           <p>
             You are granted a non-exclusive, non-transferable, revocable license
-            to access and use uptradeit.com strictly in accordance with these
+            to access and use UpTradeit.com strictly in accordance with these
             terms of use. As a condition of your use of the Site, you warrant to
             UP Trade that you will not use the Site for any purpose that is
             unlawful or prohibited by these Terms. You may not use the Site in
@@ -174,7 +174,7 @@ export default function Terms({
             groups, forums, communities, personal web pages, calendars, and/or
             other message or communication facilities designed to enable you to
             communicate with the public at large or with a group (collectively,
-            &quotCommunication Services&quot). You agree to use the
+            &quot;Communication Services&quot;). You agree to use the
             Communication Services only to post, send and receive messages and
             material that are proper and related to the particular Communication
             Service.
@@ -246,15 +246,15 @@ export default function Terms({
           </p>
 
           <h2>
-            Materials Provided to uptradeit.com or Posted on Any UP Trade Web
+            Materials Provided to UpTradeit.com or Posted on Any UP Trade Web
             Page
           </h2>
 
           <p>
             UP Trade does not claim ownership of the materials you provide to
-            uptradeit.com (including feedback and suggestions) or post, upload,
+            UpTradeit.com (including feedback and suggestions) or post, upload,
             input or submit to any UP Trade Site or our associated services
-            (collectively &quotSubmissions&quot). However, by posting,
+            (collectively &quot;Submissions&quot;). However, by posting,
             uploading, inputting, providing or submitting your Submission you
             are granting UP Trade, our affiliated companies and necessary
             sublicensees permission to use your Submission in connection with
@@ -332,7 +332,7 @@ export default function Terms({
             from our offices within the USA. If you access the Service from a
             location outside the USA, you are responsible for compliance with
             all local laws. You agree that you will not use the UP Trade Content
-            accessed through uptradeit.com in any country or in any manner
+            accessed through UpTradeit.com in any country or in any manner
             prohibited by any applicable laws, restrictions or regulations.
           </p>
           <h2>Indemnification</h2>
@@ -403,9 +403,9 @@ export default function Terms({
             SERVICES AND RELATED GRAPHICS CONTAINED ON THE SITE FOR ANY PURPOSE.
             TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, ALL SUCH
             INFORMATION, SOFTWARE, PRODUCTS, SERVICES AND RELATED GRAPHICS ARE
-            PROVIDED &quotAS IS&quot WITHOUT WARRANTY OR CONDITION OF ANY KIND.
-            UP TRADE TECHNOLOGIES, INCORPORATED AND/OR ITS SUPPLIERS HEREBY
-            DISCLAIM ALL WARRANTIES AND CONDITIONS WITH REGARD TO THIS
+            PROVIDED &quot;AS IS&quot; WITHOUT WARRANTY OR CONDITION OF ANY
+            KIND. UP TRADE TECHNOLOGIES, INCORPORATED AND/OR ITS SUPPLIERS
+            HEREBY DISCLAIM ALL WARRANTIES AND CONDITIONS WITH REGARD TO THIS
             INFORMATION, SOFTWARE, PRODUCTS, SERVICES AND RELATED GRAPHICS,
             INCLUDING ALL IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY,
             FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT.
@@ -482,7 +482,7 @@ export default function Terms({
           <h2>Changes to Terms</h2>
           <p>
             UP Trade reserves the right, in its sole discretion, to change the
-            Terms under which uptradeit.com is offered. The most current version
+            Terms under which UpTradeit.com is offered. The most current version
             of the Terms will supersede all previous versions. UP Trade
             encourages you to periodically review the Terms to stay informed of
             our updates.
@@ -492,19 +492,24 @@ export default function Terms({
             UP Trade welcomes your questions or comments regarding the Terms:{" "}
           </p>
           <p>
-            UP Trade Technologies, Incorporated <br />
+            UpTrade Netowrks Inc <br />
             3400 N Central Expy, Suite 110-276
             <br />
             Richardson, TX 75080 <br />
           </p>
-          <p>Email Address: support@uptradeit.com</p>
+          <p>Email Address: support@UpTradeit.com</p>
           <div className="terms-divider"></div>
           <p>
-            <p>Last Updated: August 29, 2019</p>
+            <p>Last Updated: July 19, 2022</p>
           </p>
         </div>
       </main>
-      <Footer appleList={appleList} sellAppleList={sellAppleList} />
+      <Footer
+        appleList={appleList}
+        sellAppleList={sellAppleList}
+        buyNavbar={navbar}
+        sellNavbar={sellNavbar}
+      />
     </>
   );
 }

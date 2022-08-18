@@ -10,6 +10,58 @@ import { Footer } from "../components/Footer";
 
 export const config = { amp: true };
 
+const defaultReviews = [
+  {
+    store_review_id: 1,
+    reviewer: {
+      first_name: "Richard",
+      last_name: "Kennedy",
+    },
+    rating: 5,
+    comments:
+      "Easy to use and got my check within the time period promised. Will recommend to friends and family who want to sell their old devices.",
+  },
+  {
+    store_review_id: 2,
+    reviewer: {
+      first_name: "Tonia",
+      last_name: "Theriault",
+    },
+    rating: 5,
+    comments:
+      "Transaction was extremely quick easy and was kept updated every step of the way. 100% would recommend to anyone thinking of selling their items.",
+  },
+  {
+    store_review_id: 3,
+    reviewer: {
+      first_name: "Liz",
+      last_name: "Holland",
+    },
+    rating: 5,
+    comments:
+      "My first purchase. ( 2nd experience with your co.) A+ very happy with over all experience, product and price. I have recommended , and I will buy my next phone from you as well as sell",
+  },
+  {
+    store_review_id: 4,
+    reviewer: {
+      first_name: "Philip",
+      last_name: "Sizemore",
+    },
+    rating: 5,
+    comments:
+      "This was by far the easiest way to sell your old cell phone. Simple fast and got a very good price for my phone.",
+  },
+  {
+    store_review_id: 5,
+    reviewer: {
+      first_name: "Kevin",
+      last_name: "Hughes",
+    },
+    rating: 5,
+    comments:
+      "I was pleasantly surprised at how convenient and efficient this whole process of selling my wifes phone was. At first I was a bit skeptical but after dealing with them, I would definitely recommend.",
+  },
+];
 function BuyModel({
   productImageUrl,
   productCategoryValueId,
@@ -32,6 +84,7 @@ function BuyModel({
   productMobileImageUrl,
   sellNavbar,
   sellAppleList,
+  type,
 }) {
   return (
     <div>
@@ -72,9 +125,9 @@ function BuyModel({
               "@context": "https://schema.org",
               "@type": "Product",
               name: metaName,
-              description: `Sell ${
+              description: `Best deals on Certified Used and Refurbished ${
                 keyword || productName
-              } for cash or trade in for credit`,
+              }. Up to 70% off compared to new ✌ Free shipping ✅ 100% fully function ✅ 30 days risk free `,
               image: [
                 productImageUrl ?? `${process.env.BASEURL}/default-image.png`,
               ],
@@ -97,13 +150,13 @@ function BuyModel({
                 name: brand,
               },
               offers: {
-                "@type": "Demand",
-                availability: "https://schema.org/Demand",
+                "@type": "Offer",
+                availability: "https://schema.org/InStock",
                 price: `${price / 100 || ""}`,
                 priceValidUntil: dayjs().add(90, "day").format("YYYY-MM-DD"),
                 url: `${process.env.BASEURL}${path}`,
                 priceCurrency: "USD",
-                itemCondition: "https://schema.org/UsedCondition",
+                itemCondition: "http://schema.org/RefurbishedCondition",
                 seller: {
                   "@type": "Organization",
                   name: "UpTrade",
@@ -252,12 +305,12 @@ function BuyModel({
               <a
                 href={urlcat(
                   "/buy-phone",
-                  price
-                    ? {
+                  !price || type === "BRAND"
+                    ? { brand, brandCategoryValueId }
+                    : {
                         modelName: productName,
                         modelId: productCategoryValueId,
                       }
-                    : { brand, brandCategoryValueId }
                 )}
               >
                 <button className="model-see-more">See More</button>
@@ -368,8 +421,11 @@ function BuyModel({
               <a
                 key={item.productId}
                 href={urlcat(`/redirect/:gradeAndMerchant`, {
-                  gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
+                  gradeAndMerchant: `buy-${item.name?.replace(/\s*/g, "")}-${
+                    item.condition
+                  }-${item.merchant}`,
                   redirectUrl: item.buyUrl,
+                  productId: item.productId,
                 })}
                 target="_blank"
                 rel="noreferrer"
@@ -406,8 +462,11 @@ function BuyModel({
               <a
                 key={item.productId}
                 href={urlcat(`/redirect/:gradeAndMerchant`, {
-                  gradeAndMerchant: `${item.productId}-${item.condition}-${item.merchant}`,
+                  gradeAndMerchant: `buy-${item.name?.replace(/\s*/g, "")}-${
+                    item.condition
+                  }-${item.merchant}`,
                   redirectUrl: item.buyUrl,
+                  productId: item.productId,
                 })}
                 target="_blank"
                 rel="noreferrer"
@@ -439,12 +498,12 @@ function BuyModel({
             <a
               href={urlcat(
                 "/buy-phone",
-                price
-                  ? {
+                !price || type === "BRAND"
+                  ? { brand, brandCategoryValueId }
+                  : {
                       modelName: productName,
                       modelId: productCategoryValueId,
                     }
-                  : { brand, brandCategoryValueId }
               )}
             >
               <button>See More</button>
@@ -452,7 +511,12 @@ function BuyModel({
           </div>
         </div>
       </main>
-      <Footer appleList={appleList} sellAppleList={sellAppleList} />
+      <Footer
+        appleList={appleList}
+        sellAppleList={sellAppleList}
+        buyNavbar={navbar}
+        sellNavbar={sellNavbar}
+      />
     </div>
   );
 }
@@ -500,10 +564,10 @@ function SellModel({
                   name: "All",
                   position: 1,
                   "@type": "ListItem",
-                  item: `${process.env.BASEURL}/buy-phone`,
+                  item: `${process.env.BASEURL}/trade-in-phone`,
                 },
                 {
-                  name: `Refurbished ${keyword || productName}`,
+                  name: `Sell ${keyword || productName}`,
                   position: 2,
                   "@type": "ListItem",
                 },
@@ -519,9 +583,9 @@ function SellModel({
               "@context": "https://schema.org",
               "@type": "Product",
               name: metaName,
-              description: `Best deals on Certified Used and Refurbished ${
+              description: `Sell ${
                 keyword || productName
-              }. Up to 70% off compared to new ✌ Free shipping ✅ 100% fully function ✅ 30 days risk free `,
+              } for cash or trade in for credit.`,
               image: [
                 productImageUrl ?? `${process.env.BASEURL}/default-image.png`,
               ],
@@ -534,7 +598,7 @@ function SellModel({
                 },
                 author: {
                   "@type": "Person",
-                  name: "Pat OBrien",
+                  name: "Richard Kennedy",
                 },
               },
               sku: sku,
@@ -550,7 +614,7 @@ function SellModel({
                 priceValidUntil: dayjs().add(90, "day").format("YYYY-MM-DD"),
                 url: `${process.env.BASEURL}${path}`,
                 priceCurrency: "USD",
-                itemCondition: "https://schema.org/RefurbishedCondition",
+                itemCondition: "https://schema.org/UsedCondition",
                 seller: {
                   "@type": "Organization",
                   name: "UpTrade",
@@ -586,7 +650,7 @@ function SellModel({
           site_name: "UpTrade",
         }}
       />
-      <Header navbar={navbar} hiddenSearch />
+      <Header navbar={navbar} sellNavbar={sellNavbar} hiddenSearch />
       <main className="model-page">
         <div className="icon-list">
           <div className="icon-list-item">
@@ -623,10 +687,7 @@ function SellModel({
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a href="/trade-in-phone">All</a>
             <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
-            <a>
-              {keyword || productName} Trade In or Sell $
-              {keyword || productName}
-            </a>
+            <a>Sell {keyword || productName}</a>
           </div>
           <div className="model-page-description-content">
             {metaDescription}
@@ -670,7 +731,7 @@ function SellModel({
                       Worth up to <strong>${price / 100}</strong>
                     </>
                   ) : (
-                    "Out of Stock"
+                    "No Offer"
                   )}
                 </div>
               </div>
@@ -683,7 +744,7 @@ function SellModel({
                     Worth up to <strong>${price / 100}</strong>
                   </>
                 ) : (
-                  "Out of Stock"
+                  "No Offer"
                 )}
               </div>
               <div className="model-tag-item">
@@ -706,15 +767,9 @@ function SellModel({
 
             <div className="model-info-footer">
               <a
-                href={urlcat(
-                  "/buy-phone",
-                  price
-                    ? {
-                        modelName: productName,
-                        modelId: productCategoryValueId,
-                      }
-                    : { brand, brandCategoryValueId }
-                )}
+                href={urlcat("/trade-in-phone", {
+                  modelName: productName,
+                })}
               >
                 <button className="model-see-more">Get Quotes</button>
               </a>
@@ -823,7 +878,14 @@ function SellModel({
             {relatedGoods?.map((item) => (
               <a
                 key={item.productId}
-                href={item.url}
+                href={urlcat(`/redirect/:gradeAndMerchant`, {
+                  gradeAndMerchant: `tradein-${item.model?.replace(
+                    /\s*/g,
+                    ""
+                  )}-${item.condition}-${item.merchant.replace("-", "")}`,
+                  redirectUrl: item.url,
+                  productId: item.sku,
+                })}
                 target="_blank"
                 rel="noreferrer"
                 className="phone-list-item"
@@ -845,14 +907,18 @@ function SellModel({
                 </div>
 
                 <div className="condition-container">
-                  <div className={`condition ${item.condition} `}>
+                  <div
+                    className={`condition ${item.condition
+                      ?.split(" ")
+                      .join("-")}`}
+                  >
                     {item.condition}
                   </div>
                 </div>
 
                 <div className="action">
                   <span className="price">${item.price / 100}</span>
-                  <div className="view-detail">View Detail</div>
+                  <div className={`condition ${item.type}`}>{item.type}</div>
                 </div>
               </a>
             ))}
@@ -862,7 +928,14 @@ function SellModel({
             {relatedGoods?.map((item) => (
               <a
                 key={item.productId}
-                href={item.url}
+                href={urlcat(`/redirect/:gradeAndMerchant`, {
+                  gradeAndMerchant: `tradein-${item.model?.replace(
+                    /\s*/g,
+                    ""
+                  )}-${item.condition}-${item.merchant.replace("-", "")}`,
+                  redirectUrl: item.url,
+                  productId: item.sku,
+                })}
                 target="_blank"
                 rel="noreferrer"
                 className="phone-list-item"
@@ -875,11 +948,15 @@ function SellModel({
                       src={item.merchantLogoUrl}
                     />
                   ) : null}
-                  <div className={`condition ${item.condition} `}>
+                  <div
+                    className={`condition ${item.condition
+                      ?.split(" ")
+                      .join("-")} `}
+                  >
                     {item.condition}
                   </div>
                 </div>
-                <div className="bottom">
+                <div className="bottom mobile-sell-model-bottom">
                   <div className="description">
                     <span className="attr-name">{item.model}</span>
                     <span className="attr">
@@ -887,7 +964,10 @@ function SellModel({
                     </span>
                   </div>
 
-                  <span className="price">${item.price / 100}</span>
+                  <span className="price">
+                    ${item.price / 100}
+                    <div className={`condition ${item.type}`}>{item.type}</div>
+                  </span>
                 </div>
               </a>
             ))}
@@ -895,22 +975,21 @@ function SellModel({
 
           <div className="model-related-content-footer">
             <a
-              href={urlcat(
-                "/trade-in-phone",
-                price
-                  ? {
-                      modelName: productName,
-                      modelId: productCategoryValueId,
-                    }
-                  : { brand, brandCategoryValueId }
-              )}
+              href={urlcat("/trade-in-phone", {
+                modelName: productName,
+              })}
             >
               <button>See More</button>
             </a>
           </div>
         </div>
       </main>
-      <Footer appleList={appleList} sellAppleList={sellAppleList} />
+      <Footer
+        appleList={appleList}
+        sellAppleList={sellAppleList}
+        buyNavbar={navbar}
+        sellNavbar={sellNavbar}
+      />
     </div>
   );
 }
@@ -1066,12 +1145,14 @@ async function getBuyProps(params) {
     reviews: reviewsResponse.reviews.slice(0, 5),
   };
 
-  const title = `Used & Refurbished ${product.keyword || product.productName} for Sale - UpTrade®`
+  const title = `Used & Refurbished ${
+    product.keyword || product.productName
+  } for Sale - UpTrade®`;
 
   const metaName =
     product.type !== "MODEL"
-      ? `${product.keyword} phone trade-in`
-      : `${product.productName} trade-in`;
+      ? `Certified Used ${product.keyword} phone`
+      : `Certified Used ${product.productName}`;
 
   const sku =
     product.type === "BRAND"
@@ -1145,7 +1226,7 @@ async function getSellProps(params) {
   const reviewsInfo = {
     total: reviewsResponse.stats.total_reviews,
     average_rating: reviewsResponse.stats.average_rating,
-    reviews: reviewsResponse.reviews.slice(0, 5),
+    reviews: defaultReviews,
   };
 
   const title =
@@ -1159,7 +1240,9 @@ async function getSellProps(params) {
       ? `Best ${product.brand} Phones Trade In Value Or Sell ${product.brand} Phones For Cash | UpTrade`
       : `Best ${
           product.keyword || product.productName
-        } Trade In Value Or Sell ${product.brand} For Cash | UpTrade`;
+        } Trade In Value Or Sell ${
+          product.keyword || product.productName
+        } For Cash | UpTrade`;
 
   const metaName =
     product.type !== "MODEL"

@@ -7,7 +7,7 @@ export const config = { amp: true };
 
 export default function Home({
   listedProduct,
-  reviews,
+  reviewsInfo,
   navbar,
   sellNavbar,
   appleList,
@@ -55,19 +55,45 @@ export default function Home({
           }}
         ></script>
       </amp-state>
+      <amp-state id="currentSellTab">
+        <script
+          type="application/json"
+          dangerouslySetInnerHTML={{
+            __html: `{ "current": "apple" }`,
+          }}
+        ></script>
+      </amp-state>
+      <amp-state id="currentType">
+        <script
+          type="application/json"
+          dangerouslySetInnerHTML={{
+            __html: `{ "current": "buy" }`,
+          }}
+        ></script>
+      </amp-state>
       <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="home-page">
         <div className="home-content">
           <div className="home-left">
-            <h1>
+            <h1
+              className="title-show"
+              data-amp-bind-class="currentType.current == 'buy' ? 'title-show' : 'title-hidden'"
+            >
               Buy The Best Used <br />
               Phones For Less.
+            </h1>
+            <h1
+              className="title-hidden"
+              data-amp-bind-class="currentType.current == 'sell' ? 'title-show' : 'title-hidden'"
+            >
+              Trade in / Sell Your <br />
+              Phones For More.
             </h1>
 
             <amp-selector
               role="tablist"
               className="brand-tablist"
-              on={`select: AMP.setState({ currentType: { current: event.targetOption } })`}
+              on={`select: AMP.setState({ currentType: { current: event.targetOption }, selected: selected ? selected : "Apple" })`}
             >
               <h3 className="sub-title" role="tab" selected option="buy">
                 Buy a Phone
@@ -124,7 +150,7 @@ export default function Home({
               data-amp-bind-class="currentType.current == 'sell' ? 'brands' : 'brands-hidden'"
             >
               <div>
-                <a href="/buy-used-refurbished-apple" className="brand">
+                <a href="/trade-in-apple" className="brand">
                   <amp-img
                     width="70"
                     height="70"
@@ -136,7 +162,7 @@ export default function Home({
                 <div className="brand-name">Apple</div>
               </div>
               <div>
-                <a href="/buy-used-refurbished-samsung" className="brand">
+                <a href="/trade-in-samsung" className="brand">
                   <amp-img
                     width="70"
                     height="70"
@@ -148,7 +174,7 @@ export default function Home({
                 <div className="brand-name">Samsung</div>
               </div>
               <div>
-                <a href="/buy-used-refurbished-google" className="brand">
+                <a href="/trade-in-phone" className="brand">
                   <amp-img
                     width="70"
                     height="70"
@@ -175,13 +201,13 @@ export default function Home({
 
         <div className="home-phones">
           <h2 className="home-secondary-title">
-            Buy Newly Listed Certified Used Phones
+            Buy Newly Listed Certified Used Phone
           </h2>
 
           <amp-selector
             role="tablist"
             className="brands"
-            on={`select: AMP.setState({ currentTab: { current: event.targetOption } })`}
+            on={`select: AMP.setState({ currentTab: { current: event.targetOption }, selected: selected ? selected : "Apple" })`}
           >
             <div role="tab" selected option="apple">
               Apple
@@ -274,7 +300,7 @@ export default function Home({
           <amp-selector
             role="tablist"
             className="brands"
-            on={`select: AMP.setState({ currentSellTab: { current: event.targetOption } })`}
+            on={`select: AMP.setState({ currentSellTab: { current: event.targetOption }, selected: selected ? selected : "Apple" })`}
           >
             <div role="tab" selected option="apple">
               Apple
@@ -353,7 +379,7 @@ export default function Home({
           </div>
 
           <div className="button-container">
-            <a href="/buy-phone">
+            <a href="/trade-in-phone">
               <button className="btn btn-primary">View All</button>
             </a>
           </div>
@@ -369,7 +395,7 @@ export default function Home({
           </a>
 
           <div className="reviews-list desktop-reviews-list">
-            {reviews.map((x, index) => (
+            {reviewsInfo.reviews.map((x, index) => (
               <div className="review-card" key={index}>
                 <div className="review-info">
                   <div className="review-ratings">
@@ -402,7 +428,7 @@ export default function Home({
               controls
               // className="reviews-list mobile-reviews-list"
             >
-              {reviews.map((x, index) => (
+              {reviewsInfo.reviews.map((x, index) => (
                 <div
                   className="review-card"
                   key={`${x.store_review_id}-${index}`}
@@ -435,95 +461,98 @@ export default function Home({
           <h2 className="home-secondary-title">
             See What Experts Say About UpTrade
           </h2>
-
-          <amp-img
-            src="/brand/abc.png"
-            width="178"
-            height="168"
-            alt="abc news"
-            title="abc news"
-          />
-
           <a
             href="https://abc7chicago.com/go-back-to-school-going-2021-kids/10955158"
             target="_blank"
             rel="noreferrer"
           >
+            <amp-img
+              src="/brand/abc.png"
+              width="178"
+              height="168"
+              alt="abc news"
+              title="abc news"
+            />
+          </a>
+          <p>
             UpTrade is where technology meets affordability. It&apos;s one of
             the leading websites for Certified Used Smartphones.
-          </a>
-
-          <amp-img
-            src="/brand/bbc.png"
-            width="180"
-            height="116"
-            alt="bbc news"
-            title="bbc news"
-          />
-
+          </p>
           <a
             target="_blank"
             rel="noreferrer"
             href="https://www.nbcnewyork.com/entertainment/the-scene/new-york-live/early-cyber-monday-deals-with-couponology-com/3414992/"
           >
+            <amp-img
+              src="/brand/bbc.png"
+              width="180"
+              height="116"
+              alt="bbc news"
+              title="bbc news"
+            />
+          </a>
+          <p>
             UpTrade offers Certified Preowned iPhone and Android at incredible
             prices.
-          </a>
-
-          <amp-img
-            src="/brand/gear.png"
-            width="300"
-            height="44"
-            title="gear patrol"
-            alt="gear patrol"
-          />
-
+          </p>
           <a
             target="_blank"
             rel="noreferrer"
             href="https://www.gearpatrol.com/tech/a37211440/uptrade-used-smartphones/"
           >
+            <amp-img
+              src="/brand/gear.png"
+              width="300"
+              height="44"
+              title="gear patrol"
+              alt="gear patrol"
+            />
+          </a>
+          <p>
             If you want to be sure your child has a quality phone for back to
             school, but can&apos;t justify the cost of a new one, look to
             UpTrade — you&apos;ll often save between 50 and 70 percent off the
             retail price.
-          </a>
-
-          <amp-img
-            src="/brand/android-central.png"
-            width="300"
-            height="100"
-            title="android central"
-            alt="android central"
-          />
+          </p>
 
           <a
             target="_blank"
             rel="noreferrer"
             href="https://www.androidcentral.com/best-places-buy-used-phone"
           >
+            <amp-img
+              src="/brand/android-central.png"
+              width="300"
+              height="100"
+              title="android central"
+              alt="android central"
+            />
+          </a>
+          <p>
             Best places to buy a used phone <br />
             UpTrade is another good choice if you want to keep the process of
             buying or selling a used phone as simple as it can be.
-          </a>
-
-          <amp-img
-            src="/brand/ios-hacker.png"
-            width="320"
-            height="56"
-            title="ios hacker"
-            alt="ios hacker"
-          />
+          </p>
 
           <a
             href="https://ioshacker.com/iphone/the-best-place-to-buy-used-iphones"
             target="_blank"
             rel="noreferrer"
           >
+            <amp-img
+              src="/brand/ios-hacker.png"
+              width="320"
+              height="56"
+              title="ios hacker"
+              alt="ios hacker"
+            />
+          </a>
+
+          <p>
             The Best Place to Buy Used iPhones <br />
             There’s a lot of ways to buy used phones, but out of all the
             options, UpTrade has proven itself to be the best.
-          </a>
+          </p>
         </div>
       </main>
 
@@ -531,6 +560,7 @@ export default function Home({
         appleList={appleList}
         sellAppleList={sellAppleList}
         buyNavbar={navbar}
+        sellNavbar={sellNavbar}
       />
     </div>
   );
@@ -550,11 +580,17 @@ export async function getStaticProps() {
   ).then((response) => response.json());
   const navBarData = await getNavBar();
 
+  const reviewsInfo = {
+    total: reviewsResponse.stats.total_reviews,
+    average_rating: reviewsResponse.stats.average_rating,
+    reviews: reviewsResponse.reviews.slice(0, 3),
+  };
+
   return {
     props: {
       listedProduct: listedProduct.data,
       sellListData: sellListData.data,
-      reviews: reviewsResponse.reviews.slice(0, 3),
+      reviewsInfo: reviewsInfo,
       ...navBarData,
     },
   };

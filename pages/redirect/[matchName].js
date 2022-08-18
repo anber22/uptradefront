@@ -7,11 +7,10 @@ export default function Redirect() {
   const location = useLocation();
 
   const [merchant, setMerchant] = useState("");
-
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
     const path = location.pathname?.replace("/redirect/", "");
-    const [productId, grade, merchant] = path?.split("-") ?? [];
+    const [type, model, grade, merchant] = path?.split("-") ?? [];
     setMerchant(merchant);
   }, [location]);
 
@@ -19,10 +18,11 @@ export default function Redirect() {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(location.search);
     const redirectUrl = params.get("redirectUrl");
+    const productId = params.get("productId");
     if (!redirectUrl) return;
 
     const path = location.pathname?.replace("/redirect/", "");
-    const [productId] = path?.split("-") ?? [];
+    const [type] = path?.split("-") ?? [];
 
     fetch("https://api.276qa.com/statistics/request-record", {
       method: "POST",
@@ -32,14 +32,14 @@ export default function Redirect() {
       body: JSON.stringify({
         productId,
         targetUrl: location.href,
+        type: type === "tradein" ? "TRADE_IN" : "BUY",
       }),
     }).finally(() => {
       const url = urlcat(redirectUrl, {
         utm_source: "uptradeit.com",
         utm_medium: "affiliate",
-        utm_campaign: "buy",
+        utm_campaign: type === "TRADEIN" ? "sell" : "buy",
       });
-
       window.location.href = url;
     });
   }, []);
@@ -48,7 +48,10 @@ export default function Redirect() {
     <main className="redirect-page">
       <NextSeo noindex nofollow />
       <h1>We are redirecting to the deal...</h1>
-      <h2>UpTrade &gt; &gt; {merchant}</h2>
+      <h2>
+        UpTrade &gt; &gt;{" "}
+        {merchant === "TMobile" ? "T-Mobile" : merchant.replace("%26", "&")}
+      </h2>
     </main>
   );
 }

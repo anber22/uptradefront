@@ -3,7 +3,7 @@ import { useAmp } from "next/amp";
 import FooterBuyNav from "./buy";
 import Subscribe from "./subscribe";
 
-export const Footer = ({ appleList, sellAppleList, buyNavbar }) => {
+export const Footer = ({ appleList, sellAppleList, buyNavbar, sellNavbar }) => {
   const isAmp = useAmp();
   return (
     <>
@@ -34,11 +34,33 @@ export const Footer = ({ appleList, sellAppleList, buyNavbar }) => {
           <div className="footer-nav-container">
             <div className="footer-nav-list">
               <div className="footer-nav-title">Buy</div>
-              {buyNavbar?.map((item) => (
+              {buyNavbar
+                ?.filter((x) => x.key !== "CARRIER")
+                .map((item) => (
+                  <a
+                    key={item.key}
+                    className="footer-nav-item"
+                    href={`/buy-used-refurbished-${item.key
+                      .split(" ")
+                      .join("-")
+                      .toLowerCase()}`}
+                  >
+                    {item.key}
+                  </a>
+                ))}
+              {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+              <a href="/buy-phone" className="footer-nav-item">
+                See All Products
+              </a>
+            </div>
+
+            <div className="footer-nav-list">
+              <div className="footer-nav-title">Trade-in</div>
+              {sellNavbar?.map((item) => (
                 <a
                   key={item.key}
                   className="footer-nav-item"
-                  href={`/buy-used-refurbished-${item.key
+                  href={`/trade-in-${item.key
                     .split(" ")
                     .join("-")
                     .toLowerCase()}`}
@@ -47,7 +69,7 @@ export const Footer = ({ appleList, sellAppleList, buyNavbar }) => {
                 </a>
               ))}
               {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-              <a href="/buy-phone" className="footer-nav-item">
+              <a href="/trade-in-phone" className="footer-nav-item">
                 See All Products
               </a>
             </div>
@@ -85,7 +107,8 @@ export const Footer = ({ appleList, sellAppleList, buyNavbar }) => {
               <amp-accordion>
                 <section className="footer-nav-section">
                   <h3 className="footer-nav">
-                    <span>Popular Searchs</span> <i className="arrow-right"></i>
+                    <span>Popular Searchs (Buy)</span>
+                    <i className="arrow-right"></i>
                   </h3>
 
                   <div className="footer-nav-list">
@@ -93,6 +116,21 @@ export const Footer = ({ appleList, sellAppleList, buyNavbar }) => {
                     {appleList?.map((x, index) => (
                       <a href={x.url} key={index}>
                         Buy Used {x.value}
+                      </a>
+                    ))}
+                  </div>
+                </section>
+                <section className="footer-nav-section">
+                  <h3 className="footer-nav">
+                    <span>Popular Searchs (Trade-in)</span>
+                    <i className="arrow-right"></i>
+                  </h3>
+
+                  <div className="footer-nav-list">
+                    <a href="/trade-in-apple">Trade In iPhone</a>
+                    {sellAppleList?.map((x, index) => (
+                      <a href={x.url} key={index}>
+                        Trade in {x.value}
                       </a>
                     ))}
                   </div>
@@ -114,8 +152,42 @@ export const Footer = ({ appleList, sellAppleList, buyNavbar }) => {
                   </h3>
 
                   <div className="footer-nav-list">
+                    {buyNavbar
+                      ?.filter((x) => x.key !== "CARRIER")
+                      .map((item) => (
+                        <a
+                          key={item.key}
+                          href={`/buy-used-refurbished-${item.key
+                            .split(" ")
+                            .join("-")
+                            .toLowerCase()}`}
+                        >
+                          {item.key}
+                        </a>
+                      ))}
                     {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                    <a href="/buy-phone">See All Products</a>
+                    <a href="/trade-in-phone">See All Products</a>
+                  </div>
+                </section>
+                <section className="footer-nav-section">
+                  <h3 className="footer-nav">
+                    <span>Trade in</span> <i className="arrow-right"></i>
+                  </h3>
+
+                  <div className="footer-nav-list">
+                    {sellNavbar?.map((item) => (
+                      <a
+                        key={item.key}
+                        href={`/trade-in-${item.key
+                          .split(" ")
+                          .join("-")
+                          .toLowerCase()}`}
+                      >
+                        {item.key}
+                      </a>
+                    ))}
+                    {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                    <a href="/trade-in-phone">See All Products</a>
                   </div>
                 </section>
                 <section className="footer-nav-section">
@@ -146,7 +218,12 @@ export const Footer = ({ appleList, sellAppleList, buyNavbar }) => {
               </amp-accordion>
             </div>
           ) : (
-            <FooterBuyNav appleList={appleList} />
+            <FooterBuyNav
+              appleList={appleList}
+              sellAppleList={sellAppleList}
+              sellNavbar={sellNavbar}
+              navbar={buyNavbar?.filter((x) => x.key !== "CARRIER")}
+            />
           )}
           <div className="footer-subscribe">
             {isAmp ? (
@@ -284,9 +361,9 @@ export const Footer = ({ appleList, sellAppleList, buyNavbar }) => {
           <div className="popular-title">Popular Searches (Trade-in)</div>
           <div className="popular-list">
             {sellAppleList?.map((x, index) => (
-                <a href={x.url} className="footer-nav-item" key={index}>
-                  Trade in {x.value}
-                </a>
+              <a href={x.url} className="footer-nav-item" key={index}>
+                Trade in {x.value}
+              </a>
             ))}
           </div>
         </div>
@@ -295,9 +372,14 @@ export const Footer = ({ appleList, sellAppleList, buyNavbar }) => {
         <div className="terms">
           <a href="/terms">Terms & Conditions</a>
           <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/site-map.xml">Sitemap</a>
+          <a href="/sitemap.xml">Sitemap</a>
+          <p className="desktop-terms">
+            © 2022 UpTrade Networks Inc. All Rights Reserved
+          </p>
         </div>
-        <p>©️ 2022 UpTrade Networks Inc. All Rights Reserved</p>
+        <p className="mobile-terms">
+          © 2022 UpTrade Networks Inc. All Rights Reserved
+        </p>
       </div>
     </>
   );
