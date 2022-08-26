@@ -4752,6 +4752,7 @@ button {
 
   .mobile-terms {
     color: #fff;
+    font-size: 12px;
   }
   .terms > p {
     margin-bottom: 0;

@@ -173,7 +173,7 @@ export async function getStaticProps() {
   ).then((response) => response.json());
 
   const topic = blogResponse.data.list[0];
-  const list = blogListResponse.data.list.slice(1).map((x) => ({
+  const list = blogListResponse.data.list.map((x) => ({
     thumbnailFullUrl: x.thumbnailFullUrl,
     title: x.title,
     releaseDt: x.releaseDt,
