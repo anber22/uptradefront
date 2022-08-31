@@ -38,7 +38,7 @@ export default function Redirect() {
       const url = urlcat(redirectUrl, {
         utm_source: "uptradeit.com",
         utm_medium: "affiliate",
-        utm_campaign: type === "TRADEIN" ? "sell" : "buy",
+        utm_campaign: "uptradeit.com",
       });
       window.location.href = url;
     });
