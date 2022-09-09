@@ -576,60 +576,25 @@ function SellModel({
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Product",
-              name: metaName,
-              description: `Sell ${
-                keyword || productName
-              } for cash or trade in for credit.`,
-              image: [
-                productImageUrl ?? `${process.env.BASEURL}/default-image.png`,
-              ],
-              review: {
-                "@type": "Review",
-                reviewRating: {
-                  "@type": "Rating",
-                  ratingValue: "5",
-                  bestRating: "5",
-                },
-                author: {
-                  "@type": "Person",
-                  name: "Richard Kennedy",
-                },
-              },
-              sku: sku,
-              gtin: gtin,
-              brand: {
-                "@type": "Brand",
-                name: brand,
-              },
-              offers: {
-                "@type": "Offer",
-                availability: "https://schema.org/InStock",
-                price: `${price / 100 || ""}`,
-                priceValidUntil: dayjs().add(90, "day").format("YYYY-MM-DD"),
-                url: `${process.env.BASEURL}${path}`,
-                priceCurrency: "USD",
-                itemCondition: "https://schema.org/UsedCondition",
-                seller: {
-                  "@type": "Organization",
-                  name: "UpTrade",
-                },
-              },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: reviewsInfo.average_rating,
-                reviewCount: reviewsInfo.total,
-                bestRating: 5,
-                worstRating: 1,
-              },
-            }),
-          }}
-        />
+        {qa ? (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: Object.entries(qa).map(([title, content]) => ({
+                  "@type": "Question",
+                  name: title,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: content,
+                  },
+                })),
+              }),
+            }}
+          />
+        ) : null}
       </Head>
       <NextSeo
         title={title}
