@@ -308,7 +308,7 @@ export default function BuyPhone({
                   position: index + 1,
                   name: `${item.name} ${item.carrier} ${item.storage} ${item.color}`,
                   url: urlcat(
-                    `${process.env.BASEURL}redirect/:gradeAndMerchant`,
+                    `${process.env.BASEURL}/redirect/:gradeAndMerchant`,
                     {
                       gradeAndMerchant: `${item.productId}-${item.contion}-${item.merchant}`,
                       redirectUrl: item.buyUrl,
