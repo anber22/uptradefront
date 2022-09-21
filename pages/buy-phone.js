@@ -9,6 +9,7 @@ import Head from "next/head";
 import { getNavBar } from "../utils/getNavBar";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import pageCss from "!raw-loader!../styles/buy-in-phone.css";
 
 const orderByDict = {
   LOWEST_PRICE: "Lowest Price",
@@ -317,6 +318,11 @@ export default function BuyPhone({
                 };
               }),
             }),
+          }}
+        />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: pageCss,
           }}
         />
       </Head>

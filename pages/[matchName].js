@@ -85,6 +85,9 @@ function BuyModel({
   sellNavbar,
   sellAppleList,
   type,
+  pageHead,
+  priceTrend,
+  specs,
 }) {
   return (
     <div>
@@ -106,11 +109,25 @@ function BuyModel({
                   name: "All",
                   position: 1,
                   "@type": "ListItem",
+                  item: `${process.env.BASEURL}`,
+                },
+                {
+                  name: "Buy Phone",
+                  position: 2,
+                  "@type": "ListItem",
                   item: `${process.env.BASEURL}/buy-phone`,
                 },
                 {
+                  name: brand,
+                  position: 3,
+                  "@type": "ListItem",
+                  item: `${
+                    process.env.BASEURL
+                  }/buy-used-refurbished-${brand.toLowerCase()}`,
+                },
+                {
                   name: `Refurbished ${keyword || productName}`,
-                  position: 2,
+                  position: 4,
                   "@type": "ListItem",
                 },
               ],
@@ -176,7 +193,7 @@ function BuyModel({
       <NextSeo
         title={title}
         description={metaDescription}
-        canonical={`${process.env.BASEURL}${path}`}
+        canonical={`${process.env.BASEURL}/${path}`}
         openGraph={{
           title: title,
           type: "Product.group",
@@ -193,7 +210,7 @@ function BuyModel({
         }}
       />
       <Header navbar={navbar} sellNavbar={sellNavbar} />
-      <main className="model-page">
+      <main className="model-page buy-model-page">
         <div className="icon-list">
           <div className="icon-list-item">
             <amp-img src="/svg/certified.svg" width="31" height="33" />
@@ -217,22 +234,27 @@ function BuyModel({
             </div>
           </div>
         </div>
-        <div className="model-page-description">
+        <div className="model-page-description" id="top">
           <div className="breadcrumbs">
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-            <a href="/buy-phone">All</a>
+            <a href="/">All</a>
+            <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
+            <a href="/buy-phone">Buy Phone</a>
+            <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
+            <a href={`/buy-used-refurbished-${brand.toLowerCase()}`}>{brand}</a>
             <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
             <a>Refurbished {keyword || productName}</a>
           </div>
-          <div className="model-page-description-content">
-            {metaDescription}
-          </div>
+          <div className="buy-model-page-description-content">{pageHead}</div>
         </div>
         <div className="model-content">
           <div className="left">
-            <h1 className="model-page-title">
-              Best Certified Used {keyword || productName} and Refurbished{" "}
-              {keyword || productName}
+            <h1 className="buy-model-page-title">
+              <span className="first-line">Best Price for</span>{" "}
+              <br className="mobile-break-line" />
+              <span className="second-line">Refurbished Used</span>{" "}
+              <br className="mobile-break-line" />
+              <span>{keyword || productName}</span>
             </h1>
             <div className="model-info">
               <amp-img
@@ -244,24 +266,24 @@ function BuyModel({
               />
 
               <div className="desktop-model-description">
-                <div className="model-tag-item">
+                <div className="buy-model-tag-item">
                   <amp-img src="/svg/check-circle.svg" width="15" height="15" />
                   <div>Professionally Refurbished</div>
                 </div>
-                <div className="model-tag-item">
+                <div className="buy-model-tag-item">
                   <amp-img src="/svg/file-text.svg" width="15" height="15" />
                   <div>Clean IMEI</div>
                 </div>
-                <div className="model-tag-item">
+                <div className="buy-model-tag-item">
                   <amp-img src="/svg/activity.svg" width="15" height="15" />
                   <div>Fully Functional</div>
                 </div>
-                <div className="model-tag-item">
+                <div className="buy-model-tag-item">
                   <amp-img src="/svg/award.svg" width="15" height="15" />
                   <div>30-Day Money Back Guarantee</div>
                 </div>
 
-                <div className="model-price">
+                <div className="buy-model-price">
                   {price ? (
                     <>
                       From <strong>${price / 100}</strong>
@@ -317,198 +339,426 @@ function BuyModel({
               </a>
             </div>
           </div>
-          <div className="mobile-image-container">
-            <amp-img
-              data-hero
-              className="mobile-img"
-              src={
-                productMobileImageUrl
-                  ? productMobileImageUrl
-                  : "/default-image.png"
-              }
-              width="250"
-              height="250"
-            />
-          </div>
+          {type !== "BRAND" ? (
+            <div className="mobile-image-container">
+              <amp-img
+                data-hero
+                className="mobile-img"
+                src={
+                  productMobileImageUrl
+                    ? productMobileImageUrl
+                    : "/default-image.png"
+                }
+                width="250"
+                height="250"
+                alt={`Certified Refurbished ${keyword || productName}`}
+                title={`Certified Refurbished ${keyword || productName}`}
+              />
+            </div>
+          ) : null}
           <div className="right">
-            <div className="desktop-reviews-title">
-              <h2 className="reviews-title">Customer reviews</h2>
-              <div className="reviews-from">
-                <span>Data From</span>
-                <amp-img src="/svg/reviewsio-logo.svg" width="80" height="11" />
-              </div>
-              <div className="reviews-subtitle">
-                {reviewsInfo.average_rating} Rating based on{" "}
-                <a href="/reviews">{reviewsInfo.total} Reviews</a>
-              </div>
-            </div>
-
-            <div className="mobile-reviews-title">
-              <h2 className="reviews-title">
-                <span>Customer reviews</span>
-                <div className="reviews-from">
-                  <span>Data From</span>
-                  <amp-img
-                    src="/svg/reviewsio-logo.svg"
-                    width="80"
-                    height="11"
-                  />
-                </div>
-              </h2>
-
-              <div className="reviews-subtitle">
-                {reviewsInfo.average_rating} Rating based on{" "}
-                <a href="/reviews">{reviewsInfo.total} Reviews</a>
-              </div>
-            </div>
-
-            <div className="divider" />
-
-            <amp-carousel
-              type="slides"
-              height="290"
-              role="region"
-              layout="flex-item"
-            >
-              {reviewsInfo.reviews.map((x) => {
-                return (
-                  <div key={x.store_review_id} className="review-card">
-                    <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
-                    <div className="review-info">
-                      <div className="review-ratings">
-                        {new Array(x.rating).fill("").map((x, index) => (
-                          <amp-img
-                            key={index}
-                            width="24"
-                            height="24"
-                            alt="rating"
-                            src="/rating.svg"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <div
-                      className="review-content"
-                      dangerouslySetInnerHTML={{ __html: x.comments }}
-                    ></div>
-                  </div>
-                );
-              })}
-            </amp-carousel>
-
-            <div className="model-reviews-footer">
-              <a href="/reviews">
-                <button>See All Reviews</button>
-              </a>
-            </div>
+            <h2 className="model-page-sub-title" style={{ marginBottom: 0 }}>
+              Specs
+            </h2>
+            <div className="divider"></div>
+            <div
+              dangerouslySetInnerHTML={{ __html: specs }}
+              className="specs-table"
+            ></div>
           </div>
         </div>
 
-        {qa ? (
-          <div className="model-page-faq">
-            {Object.entries(qa).map(([title, content], index) => (
-              <div className="model-page-faq-item" key={index} id={title}>
-                <div className="model-page-faq-title">{title}</div>
-                <div className="model-page-faq-content">{content}</div>
-              </div>
-            ))}
-          </div>
-        ) : null}
-
-        <div className="model-related-content">
-          <div className="desktop-phone-list">
-            {relatedGoods?.map((item) => (
-              <a
-                key={item.productId}
-                href={urlcat(`/redirect/:gradeAndMerchant`, {
-                  gradeAndMerchant: `buy-${item.name?.replace(/\s*/g, "")}-${
-                    item.condition
-                  }-${item.merchant}`,
-                  redirectUrl: item.buyUrl,
-                  productId: item.productId,
-                })}
-                target="_blank"
-                rel="noreferrer"
-                className="phone-list-item"
-              >
-                <div className="img-container">
-                  {item.brandLogoUrl ? (
-                    <amp-img width="100" height="100" src={item.brandLogoUrl} />
-                  ) : null}
-                </div>
-                <div className="description">
-                  <span>{item.name}</span>
-                  <span className="attr">
-                    {`${item.carrier} ${item.storage} ${item.color}`}
-                  </span>
-                </div>
-
-                <div className="condition-container">
-                  <div className={`condition ${item.condition} `}>
-                    {item.condition}
+        {type !== "BRAND" ? (
+          <div className="model-related-content">
+            <div className="desktop-phone-list">
+              {relatedGoods?.map((item) => (
+                <a
+                  key={item.productId}
+                  href={urlcat(`/redirect/:gradeAndMerchant`, {
+                    gradeAndMerchant: `buy-${item.name?.replace(/\s*/g, "")}-${
+                      item.condition
+                    }-${item.merchant}`,
+                    redirectUrl: item.buyUrl,
+                    productId: item.productId,
+                  })}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="phone-list-item"
+                >
+                  <div className="img-container">
+                    {item.brandLogoUrl ? (
+                      <amp-img
+                        width="100"
+                        height="100"
+                        src={item.brandLogoUrl}
+                      />
+                    ) : null}
                   </div>
-                </div>
-
-                <div className="action">
-                  <span className="price">${item.currentPrice / 100}</span>
-                  <div className="view-detail">View Detail</div>
-                </div>
-              </a>
-            ))}
-          </div>
-
-          <div className="mobile-phone-list">
-            {relatedGoods?.map((item) => (
-              <a
-                key={item.productId}
-                href={urlcat(`/redirect/:gradeAndMerchant`, {
-                  gradeAndMerchant: `buy-${item.name?.replace(/\s*/g, "")}-${
-                    item.condition
-                  }-${item.merchant}`,
-                  redirectUrl: item.buyUrl,
-                  productId: item.productId,
-                })}
-                target="_blank"
-                rel="noreferrer"
-                className="phone-list-item"
-              >
-                <div className="top">
-                  {item.brandLogoUrl ? (
-                    <amp-img width="50" height="50" src={item.brandLogoUrl} />
-                  ) : null}
-                  <div className={`condition ${item.condition} `}>
-                    {item.condition}
-                  </div>
-                </div>
-                <div className="bottom">
                   <div className="description">
-                    <span className="attr-name">{item.name}</span>
+                    <span>{item.name}</span>
                     <span className="attr">
                       {`${item.carrier} ${item.storage} ${item.color}`}
                     </span>
                   </div>
 
-                  <span className="price">${item.currentPrice / 100}</span>
-                </div>
+                  <div className="condition-container">
+                    <div className={`condition ${item.condition} `}>
+                      {item.condition}
+                    </div>
+                  </div>
+
+                  <div className="action">
+                    <span className="price">${item.currentPrice / 100}</span>
+                    <div className="view-detail">View Detail</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            <div className="mobile-phone-list">
+              {relatedGoods?.map((item) => (
+                <a
+                  key={item.productId}
+                  href={urlcat(`/redirect/:gradeAndMerchant`, {
+                    gradeAndMerchant: `buy-${item.name?.replace(/\s*/g, "")}-${
+                      item.condition
+                    }-${item.merchant}`,
+                    redirectUrl: item.buyUrl,
+                    productId: item.productId,
+                  })}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="phone-list-item"
+                >
+                  <div className="top">
+                    {item.brandLogoUrl ? (
+                      <amp-img width="50" height="50" src={item.brandLogoUrl} />
+                    ) : null}
+                    <div className={`condition ${item.condition} `}>
+                      {item.condition}
+                    </div>
+                  </div>
+                  <div className="bottom">
+                    <div className="description">
+                      <span className="attr-name">{item.name}</span>
+                      <span className="attr">
+                        {`${item.carrier} ${item.storage} ${item.color}`}
+                      </span>
+                    </div>
+
+                    <span className="price">${item.currentPrice / 100}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            <div className="model-related-content-footer">
+              <a
+                href={urlcat(
+                  "/buy-phone",
+                  !price || type === "BRAND"
+                    ? { brand, brandCategoryValueId }
+                    : {
+                        modelName: productName,
+                        modelId: productCategoryValueId,
+                      }
+                )}
+              >
+                <button>See More</button>
               </a>
-            ))}
+            </div>
+          </div>
+        ) : (
+          <div className="other-content">
+            <h2 className="model-page-sub-title">
+              Used {keyword} <br className="mobile-break-line" /> for Sale
+            </h2>
+            <div className="phone-list-show">
+              {relatedGoods.map((x, index) => (
+                <a
+                  href={`/buy-used-refurbished-${x.name
+                    .split(" ")
+                    .join("-")
+                    .toLowerCase()}`}
+                  key={index}
+                >
+                  <div className="phone-card" key={index}>
+                    <div className="image-container">
+                      {x.modelImageUrl ? (
+                        <amp-img
+                          alt="phone"
+                          width="120"
+                          height="120"
+                          src={x.modelImageUrl}
+                        />
+                      ) : null}
+                    </div>
+                    <div className="phone-info">
+                      <strong>{x.name} Refurbished</strong>
+                      <div>
+                        {x.currentPrice ? (
+                          <>
+                            As low as /
+                            <span className="price">
+                              ${x.currentPrice / 100}
+                            </span>
+                          </>
+                        ) : (
+                          "Sold Out"
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+        {type !== "BRAND" ? (
+          <div className="other-content">
+            <div className="desktop-divider divider"></div>
+            <h2 className="model-page-sub-title">
+              About <br className="mobile-break-line" /> Used Condition
+            </h2>
+
+            <div className="mobile-divider divider"></div>
+            <div className="used-condition-content">
+              <p className="tips">
+                Tips: All Certified Used Phones/Devices are fully functional.
+                The main difference is cosmetic. The better the condition, the
+                more expensive. If you want the cheapest, pick{" "}
+                <strong>Fair</strong>. If you want a balanced choice, choose{" "}
+                <strong>Good</strong>.
+              </p>
+              <div className="conditions">
+                <div className="model-page-condition-item">
+                  <div className="model-page-condition-card Pristine">
+                    Pristine
+                  </div>
+                  <div className="description">Near flawless. Like New.</div>
+                </div>
+                <div className="model-page-condition-item">
+                  <div className="model-page-condition-card Excellent">
+                    Excellent
+                  </div>
+                  <div className="description">
+                    Minor Scratches (NOT visible at arm&apos;s length)
+                  </div>
+                </div>
+                <div className="model-page-condition-item">
+                  <div className="model-page-condition-card Good">Good</div>
+                  <div className="description">
+                    Light Scratches visible at arm&apos;s length
+                  </div>
+                </div>
+                <div className="model-page-condition-item">
+                  <div className="model-page-condition-card Fair">Fair</div>
+                  <div className="description">
+                    Heavy sign of wear and tear but still fully functional
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {type !== "BRAND" ? (
+          <div className="other-content">
+            <div className="desktop-divider divider"></div>
+            <h2 className="model-page-sub-title">
+              Price Trend of <br className="mobile-break-line" /> Last 7 Days
+            </h2>
+            <div className="mobile-divider divider"></div>
+
+            <div className="price-trend-table">
+              <div className="price-trend-table-title">
+                <span>Date</span>
+                <span>Cheapest Price</span>
+              </div>
+              {Object.entries(priceTrend).map(([key, value]) => (
+                <div className="price-trend-item" key={key}>
+                  <span>{key}</span>
+                  <span>{value / 100}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        {type === "BRAND" ? (
+          <div className="other-content">
+            <h2 className="model-page-sub-title">
+              Compatible <br /> Networks
+            </h2>
+            <div className="mobile-divider divider" />
+            <p className="unlocked-network-tip">
+              Unlocked means being compatible with all networks.
+            </p>
+            <div className="unlocked-networks">
+              <div>Verizon</div>
+              <div> AT&T</div>
+              <div>T-Mobile</div>
+              <div>Sprint</div>
+              <div>US Cellular</div>
+              <div>Cricket</div>
+              <div>Tracfone</div>
+              <div>Boost</div>
+              <div>MetroPCS</div>
+              <div>Dish Wireless</div>
+              <div>Spectrum</div>
+              <div>Xfinity Mobile</div>
+              <div>Mint Mobile</div>
+              <div>Consumer Cellular</div>
+              <div>Google Fi</div>
+              <div>Visible</div>
+              <div>Simple Mobile</div>
+              <div>Total Wireless</div>
+              <div>Straight Talk</div>
+              <div>Ultra Mobile</div>
+              <div>H2O Wireless</div>
+              <div>Tello</div>
+              <div>Ultra Mobile</div>
+              <div>US Mobile</div>
+              <div>Ting</div>
+              <div>Net 10</div>
+              <div>Family Mobile</div>
+              <div>Wing</div>
+              <div>Unreal Mobile</div>
+              <div>& more...</div>
+            </div>
+          </div>
+        ) : null}
+
+        <div className="other-content mobile-reviews">
+          <div className="mobile-reviews-title">
+            <h2 className="reviews-title">
+              <span>Customer reviews</span>
+              <div className="reviews-from">
+                <span>Data From</span>
+                <amp-img src="/svg/reviewsio-logo.svg" width="80" height="11" />
+              </div>
+            </h2>
+
+            <div className="reviews-subtitle">
+              {reviewsInfo.average_rating} Rating based on{" "}
+              <a href="/reviews">{reviewsInfo.total} Reviews</a>
+            </div>
           </div>
 
-          <div className="model-related-content-footer">
-            <a
-              href={urlcat(
-                "/buy-phone",
-                !price || type === "BRAND"
-                  ? { brand, brandCategoryValueId }
-                  : {
-                      modelName: productName,
-                      modelId: productCategoryValueId,
-                    }
-              )}
-            >
-              <button>See More</button>
-            </a>
+          <div className="divider mobile-divider" />
+
+          <amp-carousel
+            type="slides"
+            height="290"
+            role="region"
+            layout="flex-item"
+          >
+            {reviewsInfo.reviews.map((x) => {
+              return (
+                <div key={x.store_review_id} className="review-card">
+                  <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
+                  <div className="review-info">
+                    <div className="review-ratings">
+                      {new Array(x.rating).fill("").map((x, index) => (
+                        <amp-img
+                          key={index}
+                          width="24"
+                          height="24"
+                          alt="rating"
+                          src="/rating.svg"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div
+                    className="review-content"
+                    dangerouslySetInnerHTML={{ __html: x.comments }}
+                  ></div>
+                </div>
+              );
+            })}
+          </amp-carousel>
+        </div>
+
+        <div className="home-reviews">
+          <h2 className="model-page-sub-title">Customer Reviews</h2>
+
+          <a href="/reviews" className="view-more-link">
+            {"View more >"}
+          </a>
+
+          <div className="reviews-list desktop-reviews-list">
+            {reviewsInfo.reviews.slice(0, 3).map((x, index) => (
+              <div className="review-card" key={index}>
+                <div className="review-info">
+                  <div className="review-ratings">
+                    {new Array(x.rating).fill("").map((x, index) => (
+                      <amp-img
+                        key={index}
+                        width="30"
+                        height="30"
+                        alt="rating"
+                        src="/rating.svg"
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div
+                  className="review-content"
+                  dangerouslySetInnerHTML={{ __html: x.comments }}
+                />
+                <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
+              </div>
+            ))}
           </div>
+        </div>
+
+        {type !== "BRAND" ? (
+          <div className="other-content mobile-specs">
+            <h2 className="model-page-sub-title">Specs</h2>
+            <div className="divider"></div>
+            <div
+              dangerouslySetInnerHTML={{ __html: specs }}
+              className="specs-table"
+            ></div>
+          </div>
+        ) : null}
+        {qa ? (
+          <div className="other-content">
+            <div className="desktop-divider divider"></div>
+            <h2 className="model-page-sub-title">FAQ</h2>
+            <div className="divider mobile-divider"></div>
+            <div className="buy-model-page-faq">
+              {Object.entries(qa).map(([title, content], index) => (
+                <div className="buy-model-page-faq-item" key={index} id={title}>
+                  <div className="buy-model-page-faq-title">{title}</div>
+                  <div className="buy-model-page-faq-content">{content}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        <div className="other-content buy-model-page-footer">
+          <button
+            className="second-button back-to-top"
+            on={`tap:AMP.scrollTo(id="top", position="top")`}
+          >
+            Back To Top
+          </button>
+          <a
+            href={urlcat(
+              "/buy-phone",
+              !price || type === "BRAND"
+                ? { brand, brandCategoryValueId }
+                : {
+                    modelName: productName,
+                    modelId: productCategoryValueId,
+                  }
+            )}
+          >
+            <button className="primary-button">See More</button>
+          </a>
         </div>
       </main>
       <Footer
@@ -564,11 +814,25 @@ function SellModel({
                   name: "All",
                   position: 1,
                   "@type": "ListItem",
+                  item: `${process.env.BASEURL}`,
+                },
+                {
+                  name: "Trade-in",
+                  position: 2,
+                  "@type": "ListItem",
                   item: `${process.env.BASEURL}/trade-in-phone`,
                 },
                 {
+                  name: brand,
+                  position: 3,
+                  "@type": "ListItem",
+                  item: `${
+                    process.env.BASEURL
+                  }/trade-in-${brand.toLowerCase()}`,
+                },
+                {
                   name: `Sell ${keyword || productName}`,
-                  position: 2,
+                  position: 4,
                   "@type": "ListItem",
                 },
               ],
@@ -599,7 +863,7 @@ function SellModel({
       <NextSeo
         title={title}
         description={metaDescription}
-        canonical={`${process.env.BASEURL}${path}`}
+        canonical={`${process.env.BASEURL}/${path}`}
         openGraph={{
           title: title,
           type: "Product.group",
@@ -650,9 +914,13 @@ function SellModel({
         <div className="model-page-description">
           <div className="breadcrumbs">
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-            <a href="/trade-in-phone">All</a>
+            <a href="/">All</a>
             <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
-            <a>Sell {keyword || productName}</a>
+            <a href="/trade-in-phone">Trade-in</a>
+            <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
+            <a href={`/trade-in-${brand.toLowerCase()}`}>{brand}</a>
+            <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
+            <a>Refurbished {keyword || productName}</a>
           </div>
           <div className="model-page-description-content">
             {metaDescription}
