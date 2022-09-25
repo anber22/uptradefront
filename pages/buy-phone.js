@@ -9,12 +9,21 @@ import Head from "next/head";
 import { getNavBar } from "../utils/getNavBar";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import Tippy from "@tippyjs/react/headless";
 import pageCss from "!raw-loader!../styles/buy-in-phone.css";
 
 const orderByDict = {
+  RECOMMENDED: "Recommended",
   LOWEST_PRICE: "Lowest Price",
   HIGHEST_PRICE: "Highest Price",
   BEST_CONDITION: "Best Condition",
+};
+
+const conditionDescriptions = {
+  ["Pristine"]: "Near flawless. Like New.",
+  ["Excellent"]: "Minor Scratches (NOT visible at arm's length)",
+  ["Good"]: "Light Scratches visible at arm's length",
+  ["Fair"]: "Heavy sign of wear and tear but still fully functional",
 };
 
 function pageTitleHandler(pageTitle) {
@@ -83,13 +92,13 @@ export default function BuyPhone({
   const [isFocus, setIsFocus] = useState(false);
   const [sortDrawerOpen, setSortDrawerOpen] = useState(false);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
-  const [expanded, setExpanded] = useState([]);
+  const [expanded, setExpanded] = useState(["CONDITION"]);
   const [searchKey, setSearchKey] = useState("");
   const [searchKeys, setSearchKeys] = useState({
     selectedValues: [],
     pageNum: 1,
     searchKey: "",
-    orderBy: "LOWEST_PRICE",
+    orderBy: "RECOMMENDED",
     brands: [],
     models: [],
     merchants: [],
@@ -196,7 +205,7 @@ export default function BuyPhone({
     if (
       !searchKeys.selectedValues.length &&
       searchKeys.pageNum === 1 &&
-      searchKeys.orderBy === "LOWEST_PRICE" &&
+      searchKeys.orderBy === "RECOMMENDED" &&
       !searchKeys.searchKey
     ) {
       return initData;
@@ -274,7 +283,7 @@ export default function BuyPhone({
     setSearchKeys({
       pageNum: 1,
       searchKey: searchKey ?? "",
-      orderBy: "LOWEST_PRICE",
+      orderBy: "RECOMMENDED",
       brands: [],
       models: [],
       merchants: [],
@@ -321,6 +330,7 @@ export default function BuyPhone({
           }}
         />
         <style
+          amp-custom=""
           dangerouslySetInnerHTML={{
             __html: pageCss,
           }}
@@ -726,9 +736,9 @@ export default function BuyPhone({
           {data?.data?.length ? (
             <>
               <div className="desktop-phone-list">
-                {(data?.data ?? initData?.data)?.map((item) => (
+                {(data?.data ?? initData?.data)?.map((item, index) => (
                   <a
-                    key={item.productId}
+                    key={index}
                     href={urlcat(`/redirect/:gradeAndMerchant`, {
                       gradeAndMerchant: `buy-${item.name.replace(/\s*/g, "")}-${
                         item.condition
@@ -751,22 +761,34 @@ export default function BuyPhone({
                     </div>
 
                     <div className="condition-container">
-                      <div className={`condition ${item.condition} `}>
-                        {item.condition}
-                      </div>
+                      <Tippy
+                        render={(attrs) => {
+                          return (
+                            <div
+                              className="condition-description-tooltip"
+                              {...attrs}
+                            >
+                              {conditionDescriptions[item.condition]}
+                            </div>
+                          );
+                        }}
+                      >
+                        <div className={`condition ${item.condition} `}>
+                          {item.condition}
+                        </div>
+                      </Tippy>
                     </div>
 
                     <div className="action">
                       <span className="price">${item.currentPrice / 100}</span>
-                      <div className="view-detail">View Detail</div>
                     </div>
                   </a>
                 ))}
               </div>
               <div className="mobile-phone-list">
-                {(data?.data ?? initData?.data)?.map((item) => (
+                {(data?.data ?? initData?.data)?.map((item, index) => (
                   <a
-                    key={item.productId}
+                    key={index}
                     href={urlcat(`/redirect/:gradeAndMerchant`, {
                       gradeAndMerchant: `buy-${item.name.replace(/\s*/g, "")}-${
                         item.condition
@@ -815,6 +837,51 @@ export default function BuyPhone({
           )}
         </div>
       </main>
+      <div
+        className="other-content condition-description-content"
+        style={{ marginBottom: 40 }}
+      >
+        <div className="desktop-divider divider"></div>
+        <h2 className="model-page-sub-title">
+          About <br className="mobile-break-line" /> Used Condition
+        </h2>
+
+        <div className="mobile-divider divider"></div>
+        <div className="used-condition-content">
+          <p className="tips" style={{ padding: 0, textAlign: "left" }}>
+            Tips: All Certified Used Phones/Devices are fully functional. The
+            main difference is cosmetic. The better the condition, the more
+            expensive. If you want the cheapest, pick <strong>Fair</strong>. If
+            you want a balanced choice, choose <strong>Good</strong>.
+          </p>
+          <div className="conditions">
+            <div className="model-page-condition-item">
+              <div className="model-page-condition-card Pristine">Pristine</div>
+              <div className="description">Near flawless. Like New.</div>
+            </div>
+            <div className="model-page-condition-item">
+              <div className="model-page-condition-card Excellent">
+                Excellent
+              </div>
+              <div className="description">
+                Minor Scratches (NOT visible at arm&apos;s length)
+              </div>
+            </div>
+            <div className="model-page-condition-item">
+              <div className="model-page-condition-card Good">Good</div>
+              <div className="description">
+                Light Scratches visible at arm&apos;s length
+              </div>
+            </div>
+            <div className="model-page-condition-item">
+              <div className="model-page-condition-card Fair">Fair</div>
+              <div className="description">
+                Heavy sign of wear and tear but still fully functional
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <Footer
         appleList={appleList}
         sellAppleList={sellAppleList}
@@ -830,6 +897,7 @@ export async function getStaticProps() {
     all: false,
     pageNum: 1,
     pageSize: 20,
+    orderBy: "RECOMMENDED",
   };
 
   const data = await fetch("https://api.276qa.com/search/category/values").then(

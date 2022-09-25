@@ -30,7 +30,7 @@ export default function Redirect() {
         ["Content-Type"]: "application/json",
       },
       body: JSON.stringify({
-        productId,
+        productId: type === "tradein" ? productId : productId.split("?")[0],
         targetUrl: location.href,
         type: type === "tradein" ? "TRADE_IN" : "BUY",
       }),

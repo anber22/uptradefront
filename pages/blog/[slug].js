@@ -4,6 +4,8 @@ import { NextSeo } from "next-seo";
 import { getNavBar } from "../../utils/getNavBar";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import Head from "next/head";
+export const config = { amp: true };
 
 export default function BlogDetail({
   data,
@@ -11,9 +13,47 @@ export default function BlogDetail({
   appleList,
   sellNavbar,
   sellAppleList,
+  thumbnailFullUrl,
 }) {
   return (
     <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "NewsArticle",
+              headline: data?.title,
+              image: [data.thumbnailFullUrl],
+              datePublished: data.releaseDt,
+              dateModified: data.editDt,
+              author: [
+                {
+                  "@type": "Person",
+                  name: data.author,
+                  url: `${process.env.BASEURL}/who-we-are`,
+                },
+              ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org/",
+              "@type": "WebPage",
+              name: "Quick Brown Fox",
+              speakable: {
+                "@type": "SpeakableSpecification",
+                cssSelector: [".blog-detail-content"],
+              },
+              url: "http://www.quickbrownfox_example.com/quick-brown-fox",
+            }),
+          }}
+        />
+      </Head>
       <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="blog-page">
         <NextSeo
@@ -25,7 +65,7 @@ export default function BlogDetail({
             type: "Website",
             images: [
               {
-                url: `${process.env.BASEURL}/og_logo.png`,
+                url: data.thumbnailFullUrl,
                 width: 200,
                 height: 200,
               },
@@ -42,11 +82,9 @@ export default function BlogDetail({
           <div className="blog-detail-main">
             <h1>{data.title}</h1>
             <div className="detail-release-data">
-              <div>{dayjs(data.releaseDt).format("MMM DD, YYYY")}</div>
               <div>
-                <img src="/svg/twitter-s.svg" width="24" height="14" />
-                <img src="/svg/facebook-s.svg" width="24" height="14" />
-                <img src="/svg/email.svg" width="24" height="14" />
+                {dayjs(data.releaseDt).format("MMM DD, YYYY")}{" "}
+                <span style={{ marginLeft: 8 }}>{data.author}</span>
               </div>
             </div>
             <div
@@ -123,9 +161,15 @@ export async function getStaticProps({ params }) {
       data: {
         title: blogDetailResponse.data.title,
         releaseDt: blogDetailResponse.data.releaseDt,
-        content: blogDetailResponse.data.content,
+        editDt: blogDetailResponse.data.editDt,
+        content: blogDetailResponse.data.content
+          .replaceAll("!important", "")
+          .replaceAll("target", "")
+          .replaceAll("img", `amp-img layout="responsive"`),
         slug: blogDetailResponse.data.slug,
         seoDesc: blogDetailResponse.data.seoDesc,
+        thumbnailFullUrl: blogDetailResponse.data.thumbnailFullUrl,
+        author: blogDetailResponse.data.author,
       },
       ...navbarData,
     },

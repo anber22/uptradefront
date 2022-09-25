@@ -301,6 +301,7 @@ export default function TradeInPhone({
     <>
       <Head>
         <style
+          amp-custom=""
           dangerouslySetInnerHTML={{
             __html: pageCss,
           }}

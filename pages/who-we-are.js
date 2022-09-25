@@ -41,6 +41,7 @@ export default function AboutUs({
           </div>
 
           <amp-img
+            style={{ minWidth: 840 }}
             src="/who-we-are-background.jpg"
             width="840"
             height="561"

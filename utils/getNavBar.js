@@ -10,8 +10,10 @@ export const getNavBar = async () => {
       "https://api.276qa.com/search/trade-in/category/navigation/bar"
     ).then((response) => response.json());
 
-    const appleList = navbarResponse.data.find((x) => x.key === "Apple").values;
-    const sellAppleList = sellNavbarResponse.data.find(
+    const appleList = navbarResponse?.data?.find(
+      (x) => x.key === "Apple"
+    ).values;
+    const sellAppleList = sellNavbarResponse?.data?.find(
       (x) => x.key === "Apple"
     ).values;
 

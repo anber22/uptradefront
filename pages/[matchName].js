@@ -10,6 +10,34 @@ import { Footer } from "../components/Footer";
 
 export const config = { amp: true };
 
+const carrierDescription = {
+  Unlocked: `An unlocked phone will work with any carrier. Buying an
+  unlocked phone is a great choice if you aren’t sure which
+  carrier you want to use yet, or if you want to be sure it
+  works with your current carrier. An unlocked phone is also a
+  great gift option since it will work with any carrier or
+  service plan someone may already be using.`,
+  Verizon: `Verizon Wireless is one of the largest wireless phone carriers
+  in the U.S., with over 100 million users. Refurbished Verizon
+  phone will be compatible with Verizon’s network. If you are
+  using the Verizon network, it’s recommended to purchase a
+  Verizon-compatible used phone.`,
+  ["AT&T"]: `AT&T Wireless is one of the largest wireless phone carriers in
+  the U.S., with over 100 million users. Refurbished AT&T phone
+  will be compatible with AT&T’s network. If you are an AT&T
+  user, it’s recommended to purchase a AT&T-compatible used
+  phone.`,
+  ["T-Mobile"]: `T-Mobile is one of the largest wireless phone carriers in the
+  U.S., with over 100 million users. Refurbished T-Mobile phone
+  will be compatible with T-Mobile’s network. If you are using
+  the T-Mobile network, it’s recommended to purchase a
+  T-Mobile-compatible used phone.`,
+  Sprint: ` Sprint was one of the largest wireless phone carriers in the
+  U.S. It merged into T-Mobile in 2020. Refurbished Sprint phone
+  will be compatible with their network. If you are using the
+  Sprint network, it’s recommended to purchase a
+  Sprint-compatible used phone.`,
+};
 const defaultReviews = [
   {
     store_review_id: 1,
@@ -106,7 +134,7 @@ function BuyModel({
               name: "Breadcrumb",
               itemListElement: [
                 {
-                  name: "All",
+                  name: "Home",
                   position: 1,
                   "@type": "ListItem",
                   item: `${process.env.BASEURL}`,
@@ -125,12 +153,14 @@ function BuyModel({
                     process.env.BASEURL
                   }/buy-used-refurbished-${brand.toLowerCase()}`,
                 },
-                {
-                  name: `Refurbished ${keyword || productName}`,
-                  position: 4,
-                  "@type": "ListItem",
-                },
-              ],
+                type !== "BRAND"
+                  ? {
+                      name: `Refurbished ${keyword || productName}`,
+                      position: 4,
+                      "@type": "ListItem",
+                    }
+                  : undefined,
+              ].filter(Boolean),
             }),
           }}
         />
@@ -189,6 +219,26 @@ function BuyModel({
             }),
           }}
         />
+
+        {qa ? (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: Object.entries(qa).map(([title, content]) => ({
+                  "@type": "Question",
+                  name: title,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: content,
+                  },
+                })),
+              }),
+            }}
+          />
+        ) : null}
       </Head>
       <NextSeo
         title={title}
@@ -211,6 +261,7 @@ function BuyModel({
       />
       <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="model-page buy-model-page">
+        <div className="model-header-placeholder" id="top"></div>
         <div className="icon-list">
           <div className="icon-list-item">
             <amp-img src="/svg/certified.svg" width="31" height="33" />
@@ -234,16 +285,44 @@ function BuyModel({
             </div>
           </div>
         </div>
-        <div className="model-page-description" id="top">
+        <div className="model-page-description">
           <div className="breadcrumbs">
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-            <a href="/">All</a>
+            <a href="/">Home</a>
             <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
             <a href="/buy-phone">Buy Phone</a>
-            <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
-            <a href={`/buy-used-refurbished-${brand.toLowerCase()}`}>{brand}</a>
-            <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
-            <a>Refurbished {keyword || productName}</a>
+
+            {type === "BRAND" ? (
+              <>
+                <amp-img
+                  src="/svg/black-arrow-right.svg"
+                  width="12"
+                  height="12"
+                />
+                <span>{brand}</span>
+              </>
+            ) : type !== "CARRIER" ? (
+              <>
+                <amp-img
+                  src="/svg/black-arrow-right.svg"
+                  width="12"
+                  height="12"
+                />
+                <a href={`/buy-used-refurbished-${brand.toLowerCase()}`}>
+                  {brand}
+                </a>
+              </>
+            ) : null}
+            {type !== "BRAND" ? (
+              <>
+                <amp-img
+                  src="/svg/black-arrow-right.svg"
+                  width="12"
+                  height="12"
+                />
+                <a>Refurbished {keyword || productName}</a>{" "}
+              </>
+            ) : null}
           </div>
           <div className="buy-model-page-description-content">{pageHead}</div>
         </div>
@@ -263,24 +342,32 @@ function BuyModel({
                 src={productImageUrl ? productImageUrl : "/default-image.png"}
                 width="270"
                 height="270"
+                alt={`Certified Refurbished ${keyword || productName}`}
+                title={`Certified Refurbished ${keyword || productName}`}
               />
 
               <div className="desktop-model-description">
-                <div className="buy-model-tag-item">
-                  <amp-img src="/svg/check-circle.svg" width="15" height="15" />
-                  <div>Professionally Refurbished</div>
-                </div>
-                <div className="buy-model-tag-item">
-                  <amp-img src="/svg/file-text.svg" width="15" height="15" />
-                  <div>Clean IMEI</div>
-                </div>
-                <div className="buy-model-tag-item">
-                  <amp-img src="/svg/activity.svg" width="15" height="15" />
-                  <div>Fully Functional</div>
-                </div>
-                <div className="buy-model-tag-item">
-                  <amp-img src="/svg/award.svg" width="15" height="15" />
-                  <div>30-Day Money Back Guarantee</div>
+                <div>
+                  <div className="buy-model-tag-item">
+                    <amp-img
+                      src="/svg/check-circle.svg"
+                      width="15"
+                      height="15"
+                    />
+                    <div>Professionally Refurbished</div>
+                  </div>
+                  <div className="buy-model-tag-item">
+                    <amp-img src="/svg/file-text.svg" width="15" height="15" />
+                    <div>Clean IMEI</div>
+                  </div>
+                  <div className="buy-model-tag-item">
+                    <amp-img src="/svg/activity.svg" width="15" height="15" />
+                    <div>Fully Functional</div>
+                  </div>
+                  <div className="buy-model-tag-item">
+                    <amp-img src="/svg/award.svg" width="15" height="15" />
+                    <div>30-Day Money Back Guarantee</div>
+                  </div>
                 </div>
 
                 <div className="buy-model-price">
@@ -327,7 +414,9 @@ function BuyModel({
               <a
                 href={urlcat(
                   "/buy-phone",
-                  !price || type === "BRAND"
+                  type === "CARRIER"
+                    ? {}
+                    : !price || type === "BRAND"
                     ? { brand, brandCategoryValueId }
                     : {
                         modelName: productName,
@@ -356,16 +445,78 @@ function BuyModel({
               />
             </div>
           ) : null}
-          <div className="right">
-            <h2 className="model-page-sub-title" style={{ marginBottom: 0 }}>
-              Specs
-            </h2>
-            <div className="divider"></div>
-            <div
-              dangerouslySetInnerHTML={{ __html: specs }}
-              className="specs-table"
-            ></div>
-          </div>
+          {type === "BRAND" ? (
+            <div className="right">
+              <h2 className="model-page-sub-title compatible-title">
+                Compatible <br className="mobile-break-line" /> Networks
+              </h2>
+              <div className="divider" style={{ margin: "16px 0" }} />
+              <p className="unlocked-network-tip">
+                Unlocked means being compatible with all networks.
+              </p>
+              <div className="unlocked-networks">
+                <div>Verizon</div>
+                <div> AT&T</div>
+                <div>T-Mobile</div>
+                <div>Sprint</div>
+                <div>US Cellular</div>
+                <div>Cricket</div>
+                <div>Tracfone</div>
+                <div>Boost</div>
+                <div>MetroPCS</div>
+                <div>Dish Wireless</div>
+                <div>Spectrum</div>
+                <div>Xfinity Mobile</div>
+                <div>Mint Mobile</div>
+                <div>Consumer Cellular</div>
+                <div>Google Fi</div>
+                <div>Visible</div>
+                <div>Simple Mobile</div>
+                <div>Total Wireless</div>
+                <div>Straight Talk</div>
+                <div>Ultra Mobile</div>
+                <div>H2O Wireless</div>
+                <div>Tello</div>
+                <div>Ultra Mobile</div>
+                <div>US Mobile</div>
+                <div>Ting</div>
+                <div>Net 10</div>
+                <div>Family Mobile</div>
+                <div>Wing</div>
+                <div>Unreal Mobile</div>
+                <div>& more...</div>
+              </div>
+            </div>
+          ) : type === "CARRIER" ? (
+            <div className="right">
+              <h2
+                className="model-page-sub-title compatible-title"
+                style={{ marginBottom: 0, fontSize: 22 }}
+              >
+                About {brand}
+              </h2>
+              <div className="divider" style={{ margin: "16px 0" }}></div>
+              <div className="carrier-description">
+                <div className="carrier-content">
+                  {carrierDescription[brand]}
+                </div>
+              </div>
+            </div>
+          ) : specs ? (
+            <div className="right">
+              <h2
+                className="model-page-sub-title"
+                style={{ marginBottom: 0, fontSize: 22 }}
+              >
+                Specs
+              </h2>
+              <div className="divider" style={{ margin: "16px 0" }}></div>
+              <div
+                dangerouslySetInnerHTML={{ __html: specs }}
+                className="specs-table"
+              ></div>
+            </div>
+          ) : null}
         </div>
 
         {type !== "BRAND" ? (
@@ -409,7 +560,6 @@ function BuyModel({
 
                   <div className="action">
                     <span className="price">${item.currentPrice / 100}</span>
-                    <div className="view-detail">View Detail</div>
                   </div>
                 </a>
               ))}
@@ -456,7 +606,9 @@ function BuyModel({
               <a
                 href={urlcat(
                   "/buy-phone",
-                  !price || type === "BRAND"
+                  type === "CARRIER"
+                    ? {}
+                    : !price || type === "BRAND"
                     ? { brand, brandCategoryValueId }
                     : {
                         modelName: productName,
@@ -470,7 +622,7 @@ function BuyModel({
           </div>
         ) : (
           <div className="other-content">
-            <h2 className="model-page-sub-title">
+            <h2 className="model-page-sub-title" style={{ marginTop: 24 }}>
               Used {keyword} <br className="mobile-break-line" /> for Sale
             </h2>
             <div className="phone-list-show">
@@ -512,18 +664,34 @@ function BuyModel({
                 </a>
               ))}
             </div>
+            <a
+              className="view-all-button"
+              href={urlcat(
+                "/buy-phone",
+                type === "CARRIER"
+                  ? {}
+                  : !price || type === "BRAND"
+                  ? { brand, brandCategoryValueId }
+                  : {
+                      modelName: productName,
+                      modelId: productCategoryValueId,
+                    }
+              )}
+            >
+              <button className="primary-button">View All</button>
+            </a>
           </div>
         )}
         {type !== "BRAND" ? (
           <div className="other-content">
             <div className="desktop-divider divider"></div>
-            <h2 className="model-page-sub-title">
+            <h2 className="model-page-sub-title" style={{ marginBottom: 24 }}>
               About <br className="mobile-break-line" /> Used Condition
             </h2>
 
             <div className="mobile-divider divider"></div>
             <div className="used-condition-content">
-              <p className="tips">
+              <p className="tips" style={{ marginBottom: 24 }}>
                 Tips: All Certified Used Phones/Devices are fully functional.
                 The main difference is cosmetic. The better the condition, the
                 more expensive. If you want the cheapest, pick{" "}
@@ -562,7 +730,7 @@ function BuyModel({
           </div>
         ) : null}
 
-        {type !== "BRAND" ? (
+        {type !== "BRAND" && type !== "CARRIER" ? (
           <div className="other-content">
             <div className="desktop-divider divider"></div>
             <h2 className="model-page-sub-title">
@@ -578,7 +746,7 @@ function BuyModel({
               {Object.entries(priceTrend).map(([key, value]) => (
                 <div className="price-trend-item" key={key}>
                   <span>{key}</span>
-                  <span>{value / 100}</span>
+                  <span>${Math.floor(value / 100)}</span>
                 </div>
               ))}
             </div>
@@ -586,7 +754,10 @@ function BuyModel({
         ) : null}
 
         {type === "BRAND" ? (
-          <div className="other-content">
+          <div
+            className="other-content mobile-compatible"
+            style={{ marginBottom: 32 }}
+          >
             <h2 className="model-page-sub-title">
               Compatible <br /> Networks
             </h2>
@@ -631,13 +802,13 @@ function BuyModel({
 
         <div className="other-content mobile-reviews">
           <div className="mobile-reviews-title">
-            <h2 className="reviews-title">
-              <span>Customer reviews</span>
+            <div className="reviews-title">
+              <h2>Customer reviews</h2>
               <div className="reviews-from">
                 <span>Data From</span>
                 <amp-img src="/svg/reviewsio-logo.svg" width="80" height="11" />
               </div>
-            </h2>
+            </div>
 
             <div className="reviews-subtitle">
               {reviewsInfo.average_rating} Rating based on{" "}
@@ -681,11 +852,21 @@ function BuyModel({
         </div>
 
         <div className="home-reviews">
-          <h2 className="model-page-sub-title">Customer Reviews</h2>
+          <div className="desktop-divider divider"></div>
+          <h2 className="model-page-sub-title" style={{ marginBottom: 24 }}>
+            Customer Reviews
+          </h2>
 
-          <a href="/reviews" className="view-more-link">
-            {"View more >"}
-          </a>
+          <div className="reviews-subtitle">
+            <span>
+              {reviewsInfo.average_rating} Rating based on{" "}
+              <a href="/reviews">{reviewsInfo.total} Reviews </a>
+            </span>
+            <span style={{ marginLeft: 24 }}>
+              Data From
+              <amp-img src="/svg/reviewsio-logo.svg" width="80" height="11" />
+            </span>
+          </div>
 
           <div className="reviews-list desktop-reviews-list">
             {reviewsInfo.reviews.slice(0, 3).map((x, index) => (
@@ -712,8 +893,20 @@ function BuyModel({
             ))}
           </div>
         </div>
-
-        {type !== "BRAND" ? (
+        {type === "CARRIER" ? (
+          <div className="other-content mobile-specs">
+            <h2
+              className="model-page-sub-title compatible-title"
+              style={{ marginBottom: 0 }}
+            >
+              About {brand}
+            </h2>
+            <div className="divider" style={{ margin: "16px 0" }}></div>
+            <div className="carrier-description">
+              <div className="carrier-content">{carrierDescription[brand]}</div>
+            </div>
+          </div>
+        ) : type !== "BRAND" && specs ? (
           <div className="other-content mobile-specs">
             <h2 className="model-page-sub-title">Specs</h2>
             <div className="divider"></div>
@@ -739,7 +932,10 @@ function BuyModel({
           </div>
         ) : null}
 
-        <div className="other-content buy-model-page-footer">
+        <div
+          className="other-content buy-model-page-footer"
+          style={{ marginTop: 32 }}
+        >
           <button
             className="second-button back-to-top"
             on={`tap:AMP.scrollTo(id="top", position="top")`}
@@ -749,7 +945,9 @@ function BuyModel({
           <a
             href={urlcat(
               "/buy-phone",
-              !price || type === "BRAND"
+              type === "CARRIER"
+                ? {}
+                : !price || type === "BRAND"
                 ? { brand, brandCategoryValueId }
                 : {
                     modelName: productName,
@@ -757,7 +955,7 @@ function BuyModel({
                   }
             )}
           >
-            <button className="primary-button">See More</button>
+            <button className="primary-button">See Products</button>
           </a>
         </div>
       </main>
@@ -793,6 +991,7 @@ function SellModel({
   productMobileImageUrl,
   sellNavbar,
   sellAppleList,
+  type,
 }) {
   return (
     <div>
@@ -811,13 +1010,13 @@ function SellModel({
               name: "Breadcrumb",
               itemListElement: [
                 {
-                  name: "All",
+                  name: "Home",
                   position: 1,
                   "@type": "ListItem",
                   item: `${process.env.BASEURL}`,
                 },
                 {
-                  name: "Trade-in",
+                  name: "Trade In Phone",
                   position: 2,
                   "@type": "ListItem",
                   item: `${process.env.BASEURL}/trade-in-phone`,
@@ -830,11 +1029,13 @@ function SellModel({
                     process.env.BASEURL
                   }/trade-in-${brand.toLowerCase()}`,
                 },
-                {
-                  name: `Sell ${keyword || productName}`,
-                  position: 4,
-                  "@type": "ListItem",
-                },
+                type !== "BRAND"
+                  ? {
+                      name: `Sell ${keyword || productName}`,
+                      position: 4,
+                      "@type": "ListItem",
+                    }
+                  : undefined,
               ],
             }),
           }}
@@ -881,6 +1082,7 @@ function SellModel({
       />
       <Header navbar={navbar} sellNavbar={sellNavbar} hiddenSearch />
       <main className="model-page">
+        <div className="model-header-placeholder" id="top"></div>
         <div className="icon-list">
           <div className="icon-list-item">
             <amp-img src="/svg/dollar-sign.svg" width="31" height="33" />
@@ -914,13 +1116,25 @@ function SellModel({
         <div className="model-page-description">
           <div className="breadcrumbs">
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-            <a href="/">All</a>
+            <a href="/">Home</a>
             <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
-            <a href="/trade-in-phone">Trade-in</a>
+            <a href="/trade-in-phone">Trade In Phone</a>
             <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
-            <a href={`/trade-in-${brand.toLowerCase()}`}>{brand}</a>
-            <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
-            <a>Refurbished {keyword || productName}</a>
+            {type === "BRAND" ? (
+              <span>{brand}</span>
+            ) : (
+              <a href={`/trade-in-${brand.toLowerCase()}`}>{brand}</a>
+            )}
+            {type !== "BRAND" ? (
+              <>
+                <amp-img
+                  src="/svg/black-arrow-right.svg"
+                  width="12"
+                  height="12"
+                />
+                <a>Sell {keyword || productName}</a>{" "}
+              </>
+            ) : null}
           </div>
           <div className="model-page-description-content">
             {metaDescription}
@@ -1465,9 +1679,9 @@ async function getSellProps(params) {
   const title =
     product.type === "BRAND"
       ? `Best ${
-          product.brand === "Apple" ? "iPhones" : `${product.brand} Phones`
+          product.keyword || product.productName
         } Trade In Value Or Sell ${
-          product.brand === "Apple" ? "iPhones" : `${product.brand} Phones`
+          product.keyword || product.productName
         } For Cash | UpTrade`
       : product.type === "CARRIER"
       ? `Best ${product.brand} Phones Trade In Value Or Sell ${product.brand} Phones For Cash | UpTrade`
