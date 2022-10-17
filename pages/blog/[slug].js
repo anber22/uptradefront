@@ -44,12 +44,12 @@ export default function BlogDetail({
             __html: JSON.stringify({
               "@context": "https://schema.org/",
               "@type": "WebPage",
-              name: "Quick Brown Fox",
+              name: data?.title,
               speakable: {
                 "@type": "SpeakableSpecification",
                 cssSelector: [".blog-detail-content"],
               },
-              url: "http://www.quickbrownfox_example.com/quick-brown-fox",
+              url: `${process.env.BASEURL}/blog/${data?.slug}`,
             }),
           }}
         />
