@@ -38,7 +38,7 @@ export default function BlogDetail({
             }),
           }}
         />
-        <script
+        {/* <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -52,7 +52,7 @@ export default function BlogDetail({
               url: `${process.env.BASEURL}/blog/${data?.slug}`,
             }),
           }}
-        />
+        /> */}
       </Head>
       <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="blog-page">
