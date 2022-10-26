@@ -1420,7 +1420,10 @@ function SellModel({
             ))}
           </div>
 
-          <div className="model-related-content-footer">
+          <div
+            className="model-related-content-footer"
+            style={{ marginBottom: 32 }}
+          >
             <a
               href={urlcat("/trade-in-phone", {
                 modelName: productName,

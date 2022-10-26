@@ -8,7 +8,7 @@ import Head from "next/head";
 import { getNavBar } from "../utils/getNavBar";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-
+import pageCss from "!raw-loader!../styles/reviews.css";
 export default function Reviews({
   data: initData,
   navbar,
@@ -50,14 +50,17 @@ export default function Reviews({
     } catch {
       return initData;
     }
-
-    return initData;
   }, [initData, params]);
 
   return (
     <>
       <Head>
-        <link rel="stylesheet" href="/rc.css" />
+        <style
+          amp-custom=""
+          dangerouslySetInnerHTML={{
+            __html: pageCss,
+          }}
+        />
       </Head>
       <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="reviews-page">
