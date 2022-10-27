@@ -23,7 +23,7 @@ export default function BlogDetail({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "NewsArticle",
+              "@type": "BlogPosting",
               headline: data?.title,
               image: [data.thumbnailFullUrl],
               datePublished: data.releaseDt,
