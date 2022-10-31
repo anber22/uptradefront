@@ -329,9 +329,8 @@ function BuyModel({
         <div className="model-content">
           <div className="left">
             <h1 className="buy-model-page-title">
-              <span className="first-line">Best Price for</span>{" "}
-              <br className="mobile-break-line" />
-              <span className="second-line">Refurbished Used</span>{" "}
+              <span>Best Price for</span> <br className="mobile-break-line" />
+              <span>Refurbished & Used</span>{" "}
               <br className="mobile-break-line" />
               <span>{keyword || productName}</span>
             </h1>
@@ -1595,7 +1594,7 @@ async function getBuyProps(params) {
     reviews: reviewsResponse.reviews.slice(0, 5),
   };
 
-  const title = `Used & Refurbished ${
+  const title = `Buy Refurbished & Used ${
     product.keyword || product.productName
   } for Sale - UpTrade®`;
 
