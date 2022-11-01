@@ -11,32 +11,17 @@ import { Footer } from "../components/Footer";
 export const config = { amp: true };
 
 const carrierDescription = {
-  Unlocked: `An unlocked phone will work with any carrier. Buying an
-  unlocked phone is a great choice if you aren’t sure which
-  carrier you want to use yet, or if you want to be sure it
-  works with your current carrier. An unlocked phone is also a
-  great gift option since it will work with any carrier or
-  service plan someone may already be using.`,
-  Verizon: `Verizon Wireless is one of the largest wireless phone carriers
-  in the U.S., with over 100 million users. Refurbished Verizon
-  phone will be compatible with Verizon’s network. If you are
-  using the Verizon network, it’s recommended to purchase a
-  Verizon-compatible used phone.`,
-  ["AT&T"]: `AT&T Wireless is one of the largest wireless phone carriers in
-  the U.S., with over 100 million users. Refurbished AT&T phone
-  will be compatible with AT&T’s network. If you are an AT&T
-  user, it’s recommended to purchase a AT&T-compatible used
-  phone.`,
-  ["T-Mobile"]: `T-Mobile is one of the largest wireless phone carriers in the
-  U.S., with over 100 million users. Refurbished T-Mobile phone
-  will be compatible with T-Mobile’s network. If you are using
-  the T-Mobile network, it’s recommended to purchase a
-  T-Mobile-compatible used phone.`,
-  Sprint: ` Sprint was one of the largest wireless phone carriers in the
-  U.S. It merged into T-Mobile in 2020. Refurbished Sprint phone
-  will be compatible with their network. If you are using the
-  Sprint network, it’s recommended to purchase a
-  Sprint-compatible used phone.`,
+  Unlocked: `An unlocked phone will work with any carrier. Buying an unlocked phone is a great choice if you aren’t sure which carrier you want to use yet, or if you want to be sure it works with your current carrier. An unlocked phone is also a great gift option since it will work with any carrier or service plan someone may already be using.`,
+  Verizon: `Verizon Wireless is one of the largest wireless phone carriers in the U.S., with over 100 million users. Refurbished Verizon phone will be compatible with Verizon’s network. If you are using the Verizon network, it’s recommended to purchase a Verizon-compatible used phone.`,
+  ["AT&T"]: `AT&T Wireless is one of the largest wireless phone carriers in the U.S., with over 100 million users. Refurbished AT&T phone will be compatible with AT&T’s network. If you are an AT&T user, it’s recommended to purchase a AT&T-compatible used phone.`,
+  ["T-Mobile"]: `T-Mobile is one of the largest wireless phone carriers in the U.S., with over 100 million users. Refurbished T-Mobile phone will be compatible with T-Mobile’s network. If you are using the T-Mobile network, it’s recommended to purchase a T-Mobile-compatible used phone.`,
+  Sprint: `Sprint was one of the largest wireless phone carriers in the U.S. It merged into T-Mobile in 2020. Refurbished Sprint phone will be compatible with their network. If you are using the Sprint network, it’s recommended to purchase a Sprint-compatible used phone.`,
+  [`Xfinity Mobile`]: `Comcast launched Xfinity Mobile in 2017. Xfinity Mobile is a Mobile Virtual Network Operator (MVNO) operating on the Verizon mobile network. An Unlocked or Xfinity Used Phone can work on the Xfinity network. Scroll down to find an Xfinity refurbished phone on sale.`,
+  [`MetroPCS`]: `Metro by T-Mobile (formerly known as MetroPCS and also known simply as Metro) mainly provides pre-paid wireless services. The company was acquired by T-Mobile in 2013. It used to run on its independent CDMA network but later merged into T-Mobile network after the acquisition. An Unlocked or Metro Used Phone can work on the Metro network. Scroll down to find a Metro refurbished phone on sale.`,
+  Cricket: `Cricket Wireless mainly provides pre-paid wireless services. The company was acquired by AT&T in 2014. It used to run on its independent CDMA network but later merged into the AT&T network after the acquisition. An Unlocked or Cricket Used Phone can work on the Cricket network. Scroll down to find a Cricket refurbished phone on sale.`,
+  [`US Cellular`]: `US Cellular is an American wireless phone service provider. It runs on its independent CDMA, 4G, and 5G networks. An Unlocked or US Cellular Used Phone can work on the US Cellular network. Scroll down to find a US Cellular refurbished phone on sale.`,
+  Tracfone: `Tracfone offers pre-paid, no-contract wireless phone services. It was acquired by Verizon in 2021 involving 20 million subscribers. An Unlocked or Tracfone Used Phone can work on the Tracfone network. Scroll down to find a Tracfone refurbished phone on sale.`,
+  Boost: `Boost Mobile offers mainly pre-paid wireless phone services. It is now owned by Dish Wireless. An Unlocked or Boost Mobile Used Phone can work on the Boost Mobile network. Scroll down to find a Boost Mobile refurbished phone on sale.`,
 };
 const defaultReviews = [
   {
