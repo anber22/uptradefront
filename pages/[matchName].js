@@ -909,7 +909,10 @@ function BuyModel({
               {Object.entries(qa).map(([title, content], index) => (
                 <div className="buy-model-page-faq-item" key={index} id={title}>
                   <div className="buy-model-page-faq-title">{title}</div>
-                  <div className="buy-model-page-faq-content">{content}</div>
+                  <div
+                    className="buy-model-page-faq-content"
+                    dangerouslySetInnerHTML={{ __html: content }}
+                  ></div>
                 </div>
               ))}
             </div>
@@ -1298,7 +1301,10 @@ function SellModel({
             {Object.entries(qa).map(([title, content], index) => (
               <div className="model-page-faq-item" key={index} id={title}>
                 <div className="model-page-faq-title">{title}</div>
-                <div className="model-page-faq-content">{content}</div>
+                <div
+                  className="model-page-faq-content"
+                  dangerouslySetInnerHTML={{ __html: content }}
+                ></div>
               </div>
             ))}
           </div>
