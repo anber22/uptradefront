@@ -794,6 +794,7 @@ export default function BuyPhone({
                         item.condition
                       }-${item.merchant}`,
                       redirectUrl: item.buyUrl,
+                      productId: item.productId,
                     })}
                     className="phone-list-item"
                     target="_blank"
