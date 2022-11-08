@@ -50,7 +50,13 @@ export default function Redirect() {
       <h1>We are redirecting to the deal...</h1>
       <h2>
         UpTrade &gt; &gt;{" "}
-        {merchant === "TMobile" ? "T-Mobile" : merchant.replace("%26", "&")}
+        {merchant === "TMobile"
+          ? "T-Mobile"
+          : merchant.toLowerCase() === "bestbuy"
+          ? "Best Buy"
+          : merchant
+              ?.replace("%26", "&")
+              ?.replace(/^\S/, (s) => s.toUpperCase())}
       </h2>
     </main>
   );
