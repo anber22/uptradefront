@@ -40,29 +40,31 @@ export default function Blog({
         <div className="blog-page-title">
           <h1>Tech Talk</h1>
         </div>
-        <div className="blog-main-content">
-          <h2>Featured Tech Talk</h2>
-          <a href={`/blog/${topic.slug}`}>
-            <div className="blog-topic-card">
-              {topic.thumbnailFullUrl ? (
-                <amp-img
-                  src={topic.thumbnailFullUrl}
-                  width="1000"
-                  height="500"
-                  layout="responsive"
-                  data-hero
-                />
-              ) : null}
-              <div className="blog-topic-card-content">
-                <h3>{topic.title}</h3>
-                <div className="topic-desc">{topic.seoDesc}</div>
-                <div className="topic-release">
-                  {dayjs(topic.releaseDt).format("MMM DD, YYYY")}
+        {topic ? (
+          <div className="blog-main-content">
+            <h2>Featured Tech Talk</h2>
+            <a href={`/blog/${topic?.slug}`}>
+              <div className="blog-topic-card">
+                {topic?.thumbnailFullUrl ? (
+                  <amp-img
+                    src={topic?.thumbnailFullUrl}
+                    width="1000"
+                    height="500"
+                    layout="responsive"
+                    data-hero
+                  />
+                ) : null}
+                <div className="blog-topic-card-content">
+                  <h3>{topic?.title}</h3>
+                  <div className="topic-desc">{topic?.seoDesc}</div>
+                  <div className="topic-release">
+                    {dayjs(topic?.releaseDt).format("MMM DD, YYYY")}
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
-        </div>
+            </a>
+          </div>
+        ) : null}
         <div className="blog-list-content">
           {list.slice(0, 3).map((item, index) => (
             // eslint-disable-next-line react/jsx-key
@@ -185,7 +187,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      topic,
+      topic: topic ? topic : null,
       list,
       ...navBarData,
     },
