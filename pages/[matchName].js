@@ -399,12 +399,13 @@ function BuyModel({
                 href={urlcat(
                   "/buy-phone",
                   type === "CARRIER"
-                    ? {}
+                    ? { toResult: 1 }
                     : !price || type === "BRAND"
-                    ? { brand, brandCategoryValueId }
+                    ? { brand, brandCategoryValueId, toResult: 1 }
                     : {
                         modelName: productName,
                         modelId: productCategoryValueId,
+                        toResult: 1,
                       }
                 )}
               >
@@ -591,12 +592,13 @@ function BuyModel({
                 href={urlcat(
                   "/buy-phone",
                   type === "CARRIER"
-                    ? {}
+                    ? { toResult: 1 }
                     : !price || type === "BRAND"
-                    ? { brand, brandCategoryValueId }
+                    ? { brand, brandCategoryValueId, toResult: 1 }
                     : {
                         modelName: productName,
                         modelId: productCategoryValueId,
+                        toResult: 1,
                       }
                 )}
               >
@@ -653,12 +655,13 @@ function BuyModel({
               href={urlcat(
                 "/buy-phone",
                 type === "CARRIER"
-                  ? {}
+                  ? { toResult: 1 }
                   : !price || type === "BRAND"
-                  ? { brand, brandCategoryValueId }
+                  ? { brand, brandCategoryValueId, toResult: 1 }
                   : {
                       modelName: productName,
                       modelId: productCategoryValueId,
+                      toResult: 1,
                     }
               )}
             >
@@ -933,12 +936,13 @@ function BuyModel({
             href={urlcat(
               "/buy-phone",
               type === "CARRIER"
-                ? {}
+                ? { toResult: 1 }
                 : !price || type === "BRAND"
-                ? { brand, brandCategoryValueId }
+                ? { brand, brandCategoryValueId, toResult: 1 }
                 : {
                     modelName: productName,
                     modelId: productCategoryValueId,
+                    toResult: 1,
                   }
             )}
           >

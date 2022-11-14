@@ -276,8 +276,14 @@ export default function BuyPhone({
   useEffect(() => {
     if (!router?.query) return;
 
-    const { brand, brandCategoryValueId, modelName, modelId, searchKey } =
-      router.query;
+    const {
+      brand,
+      brandCategoryValueId,
+      modelName,
+      modelId,
+      searchKey,
+      toResult,
+    } = router.query;
 
     setSearchKey(searchKey ?? "");
     setSearchKeys({
@@ -300,6 +306,10 @@ export default function BuyPhone({
           : undefined,
       ].filter(Boolean),
     });
+
+    if (toResult) {
+      window.scrollTo(0, 350);
+    }
   }, [router]);
 
   return (
