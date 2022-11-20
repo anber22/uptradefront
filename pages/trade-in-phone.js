@@ -91,7 +91,7 @@ export default function TradeInPhone({
   const [searchKey, setSearchKey] = useState("");
   const [visible, setVisible] = useState(false);
   const [searchKeys, setSearchKeys] = useState({
-    selectedOption: ["Cash", "Trade-in"],
+    selectedOption: ["Cash", "Trade-In"],
     selectedCarrier: "Unlocked",
     selectedStorage: conditionData.find((x) => x.id === 3)?.values[0]?.name,
     selectedCondition: "GOOD",
@@ -269,7 +269,7 @@ export default function TradeInPhone({
     setIsInit(!searchKey);
 
     setSearchKeys({
-      selectedOption: ["Cash", "Trade-in"],
+      selectedOption: ["Cash", "Trade-In"],
       selectedCarrier: "Unlocked",
       selectedStorage: conditionData.find((x) => x.id === 3)?.values[0]?.name,
       selectedCondition: "GOOD",
