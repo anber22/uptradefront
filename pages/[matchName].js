@@ -101,6 +101,10 @@ function BuyModel({
   pageHead,
   priceTrend,
   specs,
+  skuType,
+  carrier,
+  storage,
+  color,
 }) {
   return (
     <div>
@@ -143,6 +147,54 @@ function BuyModel({
                       name: `Refurbished ${keyword || productName}`,
                       position: 4,
                       "@type": "ListItem",
+                      item: `${
+                        process.env.BASEURL
+                      }/buy-used-refurbished-${productName
+                        .split(" ")
+                        .join("-")
+                        .toLowerCase()}`,
+                    }
+                  : undefined,
+                skuType && skuType === "CARRIER"
+                  ? {
+                      name: `${keyword || productName} ${carrier}`,
+                      position: 5,
+                      "@type": "ListItem",
+                      item: `${
+                        process.env.BASEURL
+                      }/buy-used-refurbished-${productName
+                        .split(" ")
+                        .join("-")
+                        .toLowerCase()}-${carrier.toLowerCase()}`,
+                    }
+                  : undefined,
+                skuType && skuType === "COLOR"
+                  ? {
+                      name: `${keyword || productName} ${color}`,
+                      position: 5,
+                      "@type": "ListItem",
+                      item: `${
+                        process.env.BASEURL
+                      }/buy-used-refurbished-${productName
+                        .split(" ")
+                        .join("-")
+                        .toLowerCase()}-${color
+                        .split(" ")
+                        .join("-")
+                        .toLowerCase()}`,
+                    }
+                  : undefined,
+                skuType && skuType === "STORAGE"
+                  ? {
+                      name: `${keyword || productName} ${storage}`,
+                      position: 5,
+                      "@type": "ListItem",
+                      item: `${
+                        process.env.BASEURL
+                      }/buy-used-refurbished-${productName
+                        .split(" ")
+                        .join("-")
+                        .toLowerCase()}-${storage.toLowerCase()}`,
                     }
                   : undefined,
               ].filter(Boolean),
@@ -243,6 +295,8 @@ function BuyModel({
           description: metaDescription,
           site_name: "UpTrade",
         }}
+        noindex={!!skuType}
+        nofollow={!!skuType}
       />
       <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="model-page buy-model-page">
@@ -305,7 +359,54 @@ function BuyModel({
                   width="12"
                   height="12"
                 />
-                <a>Refurbished {keyword || productName}</a>{" "}
+                <a
+                  href={
+                    !!skuType
+                      ? `/buy-used-refurbished-${productName
+                          .split(" ")
+                          .join("-")
+                          .toLowerCase()}`
+                      : undefined
+                  }
+                >
+                  Refurbished {keyword || productName}
+                </a>{" "}
+              </>
+            ) : null}
+            {skuType && skuType === "CARRIER" ? (
+              <>
+                <amp-img
+                  src="/svg/black-arrow-right.svg"
+                  width="12"
+                  height="12"
+                />
+                <a>
+                  {keyword || productName} {carrier}
+                </a>
+              </>
+            ) : null}
+            {skuType && skuType === "COLOR" ? (
+              <>
+                <amp-img
+                  src="/svg/black-arrow-right.svg"
+                  width="12"
+                  height="12"
+                />
+                <a>
+                  {keyword || productName} {color}
+                </a>
+              </>
+            ) : null}
+            {skuType && skuType === "STORAGE" ? (
+              <>
+                <amp-img
+                  src="/svg/black-arrow-right.svg"
+                  width="12"
+                  height="12"
+                />
+                <a>
+                  {keyword || productName} {storage}
+                </a>
               </>
             ) : null}
           </div>
@@ -317,7 +418,12 @@ function BuyModel({
               <span>Best Price for</span> <br className="mobile-break-line" />
               <span>Refurbished & Used</span>{" "}
               <br className="mobile-break-line" />
-              <span>{keyword || productName}</span>
+              <span>
+                {keyword || productName}{" "}
+                {skuType && skuType === "CARRIER" ? carrier : null}
+                {skuType && skuType === "COLOR" ? color : null}
+                {skuType && skuType === "STORAGE" ? storage : null}
+              </span>
             </h1>
             <div className="model-info">
               <amp-img
@@ -331,28 +437,49 @@ function BuyModel({
               />
 
               <div className="desktop-model-description">
-                <div>
-                  <div className="buy-model-tag-item">
-                    <amp-img
-                      src="/svg/check-circle.svg"
-                      width="15"
-                      height="15"
-                    />
-                    <div>Professionally Refurbished</div>
+                {!!skuType ? (
+                  <div>
+                    <div className="buy-model-tag-item">
+                      <div>Brand: {brand}</div>
+                    </div>
+                    <div className="buy-model-tag-item">
+                      <div>Model: {productName}</div>
+                    </div>
+                    <div className="buy-model-tag-item">
+                      <div>Storage: {storage}</div>
+                    </div>
+                    <div className="buy-model-tag-item">
+                      <div>Condition: Certified Used & Refurbished</div>
+                    </div>
                   </div>
-                  <div className="buy-model-tag-item">
-                    <amp-img src="/svg/file-text.svg" width="15" height="15" />
-                    <div>Clean IMEI</div>
+                ) : (
+                  <div>
+                    <div className="buy-model-tag-item">
+                      <amp-img
+                        src="/svg/check-circle.svg"
+                        width="15"
+                        height="15"
+                      />
+                      <div>Professionally Refurbished</div>
+                    </div>
+                    <div className="buy-model-tag-item">
+                      <amp-img
+                        src="/svg/file-text.svg"
+                        width="15"
+                        height="15"
+                      />
+                      <div>Clean IMEI</div>
+                    </div>
+                    <div className="buy-model-tag-item">
+                      <amp-img src="/svg/activity.svg" width="15" height="15" />
+                      <div>Fully Functional</div>
+                    </div>
+                    <div className="buy-model-tag-item">
+                      <amp-img src="/svg/award.svg" width="15" height="15" />
+                      <div>30-Day Money Back Guarantee</div>
+                    </div>
                   </div>
-                  <div className="buy-model-tag-item">
-                    <amp-img src="/svg/activity.svg" width="15" height="15" />
-                    <div>Fully Functional</div>
-                  </div>
-                  <div className="buy-model-tag-item">
-                    <amp-img src="/svg/award.svg" width="15" height="15" />
-                    <div>30-Day Money Back Guarantee</div>
-                  </div>
-                </div>
+                )}
 
                 <div className="buy-model-price">
                   {price ? (
@@ -376,22 +503,45 @@ function BuyModel({
                   "Out of Stock"
                 )}
               </div>
-              <div className="model-tag-item">
-                <amp-img src="/svg/check-circle.svg" width="15" height="15" />
-                <div>Professionally Refurbished</div>
-              </div>
-              <div className="model-tag-item">
-                <amp-img src="/svg/file-text.svg" width="15" height="15" />
-                <div>Clean IMEI</div>
-              </div>
-              <div className="model-tag-item">
-                <amp-img src="/svg/activity.svg" width="15" height="15" />
-                <div>Fully Functional</div>
-              </div>
-              <div className="model-tag-item">
-                <amp-img src="/svg/award.svg" width="15" height="15" />
-                <div>30-Day Money Back Guarantee</div>
-              </div>
+              {!!skuType ? (
+                <>
+                  <div className="model-tag-item">
+                    <div>Brand: {brand}</div>
+                  </div>
+                  <div className="model-tag-item">
+                    <div>Model: {productName}</div>
+                  </div>
+                  <div className="model-tag-item">
+                    <div>Storage {storage}</div>
+                  </div>
+                  <div className="model-tag-item">
+                    <div>Condition: Certified Used & Refurbished</div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="model-tag-item">
+                    <amp-img
+                      src="/svg/check-circle.svg"
+                      width="15"
+                      height="15"
+                    />
+                    <div>Professionally Refurbished</div>
+                  </div>
+                  <div className="model-tag-item">
+                    <amp-img src="/svg/file-text.svg" width="15" height="15" />
+                    <div>Clean IMEI</div>
+                  </div>
+                  <div className="model-tag-item">
+                    <amp-img src="/svg/activity.svg" width="15" height="15" />
+                    <div>Fully Functional</div>
+                  </div>
+                  <div className="model-tag-item">
+                    <amp-img src="/svg/award.svg" width="15" height="15" />
+                    <div>30-Day Money Back Guarantee</div>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="model-info-footer">
@@ -1451,9 +1601,19 @@ export async function getStaticPaths() {
     "https://api.276qa.com/product/search/low-price"
   ).then((response) => response.json());
 
-  if (!response.success) return { paths: [], fallback: false };
+  const skuResponse = await fetch(
+    "https://api.276qa.com/product/search/sku-static"
+  ).then((response) => response.json());
 
-  const result = response.data;
+  if (!response.success || !skuResponse.success)
+    return { paths: [], fallback: false };
+
+  const result = [
+    ...response.data,
+    ...skuResponse.data.carrierData,
+    ...skuResponse.data.colorData,
+    ...skuResponse.data.storageData,
+  ];
 
   await fs.writeFile(
     path.join(process.cwd(), "cache.json"),
@@ -1461,6 +1621,39 @@ export async function getStaticPaths() {
   );
 
   const buyPaths = result.map((x) => {
+    if (x.skuType === "CARRIER") {
+      return {
+        params: {
+          matchName: `buy-used-refurbished-${x.productName
+            .split(" ")
+            .join("-")
+            .toLowerCase()}-${x.carrier.toLowerCase()}`,
+        },
+      };
+    }
+
+    if (x.skuType === "COLOR") {
+      return {
+        params: {
+          matchName: `buy-used-refurbished-${x.productName
+            .split(" ")
+            .join("-")
+            .toLowerCase()}-${x.color.split(" ").join("-").toLowerCase()}`,
+        },
+      };
+    }
+
+    if (x.skuType === "STORAGE") {
+      return {
+        params: {
+          matchName: `buy-used-refurbished-${x.productName
+            .split(" ")
+            .join("-")
+            .toLowerCase()}-${x.storage.toLowerCase()}`,
+        },
+      };
+    }
+
     if (x.type === "BRAND") {
       return {
         params: {
@@ -1559,6 +1752,35 @@ async function getBuyProps(params) {
   const searchResponse = JSON.parse(cache);
 
   const products = searchResponse.filter((x) => {
+    if (x.skuType == "CARRIER") {
+      return (
+        params.matchName ===
+        `buy-used-refurbished-${x.productName
+          .split(" ")
+          .join("-")
+          .toLowerCase()}-${x.carrier.toLowerCase()}`
+      );
+    }
+    if (x.skuType === "COLOR") {
+      return (
+        params.matchName ===
+        `buy-used-refurbished-${x.productName
+          .split(" ")
+          .join("-")
+          .toLowerCase()}-${x.color.split(" ").join("-").toLowerCase()}`
+      );
+    }
+
+    if (x.skuType === "STORAGE") {
+      return (
+        params.matchName ===
+        `buy-used-refurbished-${x.productName
+          .split(" ")
+          .join("-")
+          .toLowerCase()}-${x.storage.toLowerCase()}`
+      );
+    }
+
     if (x.type === "BRAND")
       return (
         params.matchName ===
@@ -1589,9 +1811,15 @@ async function getBuyProps(params) {
     reviews: reviewsResponse.reviews.slice(0, 5),
   };
 
-  const title = `Buy Refurbished & Used ${
-    product.keyword || product.productName
-  } for Sale - UpTrade®`;
+  const title = !!product.skuType
+    ? `Buy Refurbished & Used ${
+        product.keyword || product.productName
+      } ${product[
+        product.skuType?.toLowerCase()
+      ]?.toLowerCase()} for Sale - UpTrade®`
+    : `Buy Refurbished & Used ${
+        product.keyword || product.productName
+      } for Sale - UpTrade®`;
 
   const metaName =
     product.type !== "MODEL"
