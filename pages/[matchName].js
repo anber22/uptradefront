@@ -415,16 +415,11 @@ function BuyModel({
         <div className="model-content">
           <div className="left">
             <h1 className="buy-model-page-title">
-              <span>Best Certified</span> <br className="mobile-break-line" />
-              <span>Used {keyword || productName}</span>
-              <br className="mobile-break-line" />
-              <span>
-                and Refurbished
-                {keyword || productName}{" "}
-                {skuType && skuType === "CARRIER" ? carrier : null}
-                {skuType && skuType === "COLOR" ? color : null}
-                {skuType && skuType === "STORAGE" ? storage : null}
-              </span>
+              Best Certified Used {keyword || productName} and Refurbished{" "}
+              {keyword || productName}{" "}
+              {skuType && skuType === "CARRIER" ? carrier : null}
+              {skuType && skuType === "COLOR" ? color : null}
+              {skuType && skuType === "STORAGE" ? storage : null}
             </h1>
             <div className="model-info">
               <amp-img
