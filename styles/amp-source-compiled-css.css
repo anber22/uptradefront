@@ -132,19 +132,7 @@ p {
   margin-top: 0;
   margin-bottom: 1rem;
 }
-abbr[title],
-abbr[data-original-title] {
-  text-decoration: underline;
-  text-decoration: underline dotted;
-  border-bottom: 0;
-  text-decoration-skip-ink: none;
-  cursor: help;
-}
-address {
-  margin-bottom: 1rem;
-  font-style: normal;
-  line-height: inherit;
-}
+
 ol,
 ul,
 dl {
@@ -156,13 +144,6 @@ ul ul,
 ol ul,
 ul ol {
   margin-bottom: 0;
-}
-dt {
-  font-weight: 700;
-}
-dd {
-  margin-bottom: 0.5rem;
-  margin-left: 0;
 }
 blockquote {
   margin: 0 0 1rem;
@@ -282,17 +263,6 @@ table thead th {
 @media (prefers-color-scheme: dark) {
   table tbody + tbody {
     border-top: 2px solid #343a40;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  .form-control-plaintext {
-    color: #212529;
-  }
-}
-@media (prefers-color-scheme: dark) {
-  .form-control-plaintext {
-    color: #f8f9fa;
   }
 }
 
