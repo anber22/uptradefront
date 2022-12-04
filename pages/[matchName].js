@@ -415,8 +415,11 @@ function BuyModel({
         <div className="model-content">
           <div className="left">
             <h1 className="buy-model-page-title">
-              Best Certified Used {keyword || productName} and Refurbished{" "}
-              {keyword || productName}{" "}
+              Best Certified Used {keyword || productName}{" "}
+              {skuType && skuType === "CARRIER" ? carrier : null}
+              {skuType && skuType === "COLOR" ? color : null}
+              {skuType && skuType === "STORAGE" ? storage : null} and{" "}
+              Refurbished {keyword || productName}{" "}
               {skuType && skuType === "CARRIER" ? carrier : null}
               {skuType && skuType === "COLOR" ? color : null}
               {skuType && skuType === "STORAGE" ? storage : null}
@@ -1623,7 +1626,12 @@ export async function getStaticPaths() {
           matchName: `buy-used-refurbished-${x.productName
             .split(" ")
             .join("-")
-            .toLowerCase()}-${x.carrier.toLowerCase()}`,
+            .toLowerCase()}-${x.carrier
+            .replaceAll("&", "")
+            .replaceAll("-", "")
+            .split(" ")
+            .join("-")
+            .toLowerCase()}`,
         },
       };
     }
@@ -1754,7 +1762,12 @@ async function getBuyProps(params) {
         `buy-used-refurbished-${x.productName
           .split(" ")
           .join("-")
-          .toLowerCase()}-${x.carrier.toLowerCase()}`
+          .toLowerCase()}-${x.carrier
+          .replaceAll("&", "")
+          .replaceAll("-", "")
+          .split(" ")
+          .join("-")
+          .toLowerCase()}`
       );
     }
     if (x.skuType === "COLOR") {
