@@ -1604,7 +1604,7 @@ export async function getStaticPaths() {
     "https://api.276qa.com/product/search/sku-static"
   ).then((response) => response.json());
 
-  if (!response.success || !skuResponse.success)
+  if (!response.success || !skuResponse.isSuccess)
     return { paths: [], fallback: false };
 
   const result = [
