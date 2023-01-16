@@ -280,7 +280,7 @@ function BuyModel({
       <NextSeo
         title={title}
         description={metaDescription}
-        canonical={`${process.env.BASEURL}/${path}`}
+        canonical={`${process.env.BASEURL}${path}`}
         openGraph={{
           title: title,
           type: "Product.group",
@@ -489,6 +489,22 @@ function BuyModel({
                     "Out of Stock"
                   )}
                 </div>
+                <a
+                  href={urlcat(
+                    "/buy-phone",
+                    type === "CARRIER"
+                      ? { toResult: 1 }
+                      : !price || type === "BRAND"
+                      ? { brand, brandCategoryValueId, toResult: 1 }
+                      : {
+                          modelName: productName,
+                          modelId: productCategoryValueId,
+                          toResult: 1,
+                        }
+                  )}
+                >
+                  <button className="model-see-more">See More</button>
+                </a>
               </div>
             </div>
 
@@ -543,7 +559,7 @@ function BuyModel({
               )}
             </div>
 
-            <div className="model-info-footer">
+            <div className="mobile-model-info-footer">
               <a
                 href={urlcat(
                   "/buy-phone",
@@ -735,7 +751,6 @@ function BuyModel({
                 </a>
               ))}
             </div>
-
             <div className="model-related-content-footer">
               <a
                 href={urlcat(
@@ -1057,17 +1072,26 @@ function BuyModel({
             <div className="desktop-divider divider"></div>
             <h2 className="model-page-sub-title">FAQ</h2>
             <div className="divider mobile-divider"></div>
-            <div className="buy-model-page-faq">
+            <amp-accordion>
               {Object.entries(qa).map(([title, content], index) => (
-                <div className="buy-model-page-faq-item" key={index} id={title}>
-                  <div className="buy-model-page-faq-title">{title}</div>
-                  <div
-                    className="buy-model-page-faq-content"
-                    dangerouslySetInnerHTML={{ __html: content }}
-                  ></div>
-                </div>
+                <>
+                  <section className="buy-model-page-faq-item">
+                    <h3 className="buy-model-page-faq-title">
+                      <img
+                        src="/svg/arrow-down.svg"
+                        alt="arrow-down"
+                        style={{ width: 24, height: 24 }}
+                      />
+                      {title}
+                    </h3>
+                    <div
+                      className="buy-model-page-faq-content"
+                      dangerouslySetInnerHTML={{ __html: content }}
+                    ></div>
+                  </section>
+                </>
               ))}
-            </div>
+            </amp-accordion>
           </div>
         ) : null}
 
@@ -1082,6 +1106,7 @@ function BuyModel({
             Back To Top
           </button>
           <a
+            className="see-more"
             href={urlcat(
               "/buy-phone",
               type === "CARRIER"
@@ -1204,7 +1229,7 @@ function SellModel({
       <NextSeo
         title={title}
         description={metaDescription}
-        canonical={`${process.env.BASEURL}/${path}`}
+        canonical={`${process.env.BASEURL}${path}`}
         openGraph={{
           title: title,
           type: "Product.group",
@@ -1600,19 +1625,14 @@ export async function getStaticPaths() {
     "https://api.276qa.com/product/search/low-price"
   ).then((response) => response.json());
 
-  const skuResponse = await fetch(
-    "https://api.276qa.com/product/search/sku-static"
-  ).then((response) => response.json());
+  const skuResponse = {
+    isSuccess: true,
+  };
 
   if (!response.success || !skuResponse.isSuccess)
     return { paths: [], fallback: false };
 
-  const result = [
-    ...response.data,
-    ...skuResponse.data.carrierData,
-    ...skuResponse.data.colorData,
-    ...skuResponse.data.storageData,
-  ];
+  const result = [...response.data];
 
   await fs.writeFile(
     path.join(process.cwd(), "cache.json"),
