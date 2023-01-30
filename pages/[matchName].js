@@ -1080,9 +1080,22 @@ function BuyModel({
                       <img
                         src="/svg/arrow-down.svg"
                         alt="arrow-down"
-                        style={{ width: 24, height: 24 }}
+                        style={{
+                          width: 24,
+                          height: 24,
+                          display: "inline-block",
+                        }}
                       />
-                      {title}
+                      <div
+                        className="buy-model-faq-title-content"
+                        style={{
+                          display: "inline-block",
+                          paddingLeft: 24,
+                          marginTop: -24,
+                        }}
+                      >
+                        {title}
+                      </div>
                     </h3>
                     <div
                       className="buy-model-page-faq-content"

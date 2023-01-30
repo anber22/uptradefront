@@ -2892,6 +2892,10 @@ header.fixed {
     font-weight: 600;
     color: #3d3d3d;
   }
+
+  .buy-model-faq-title-content {
+    display: inline-block;
+  }
   /*  Desktop css*/
 }
 
@@ -4076,6 +4080,7 @@ button {
   .model-page .model-page-description .breadcrumbs > * {
     text-decoration: none;
     color: rgb(68, 68, 68);
+    font-size: 8px;
   }
 
   .model-page-description-content {
@@ -5118,6 +5123,18 @@ button {
   }
   .see-more {
     display: none;
+  }
+
+  .buy-model-page-faq-content {
+    color: grey;
+    font-size: 12px;
+    padding-left: 24px;
+  }
+
+  .buy-model-faq-title-content {
+    display: inline-block;
+    padding-left: -24px;
+    margin-top: -24px;
   }
   /*Mobile css  */
 }
