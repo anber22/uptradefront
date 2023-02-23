@@ -675,13 +675,22 @@ function BuyModel({
               {relatedGoods?.map((item) => (
                 <a
                   key={item.productId}
-                  href={urlcat(`/redirect/:gradeAndMerchant`, {
-                    gradeAndMerchant: `buy-${item.name?.replace(/\s*/g, "")}-${
-                      item.condition
-                    }-${item.merchant}`,
-                    redirectUrl: item.buyUrl,
-                    productId: item.productId,
-                  })}
+                  href={
+                    item.merchant === "SmartphonesPLUS"
+                      ? urlcat(`/redirect-coupon/:gradeAndMerchant`, {
+                          gradeAndMerchant: item.merchant,
+                          redirectUrl: item.buyUrl,
+                          id: item.productId,
+                        })
+                      : urlcat(`/redirect/:gradeAndMerchant`, {
+                          gradeAndMerchant: `buy-${item.name?.replace(
+                            /\s*/g,
+                            ""
+                          )}-${item.condition}-${item.merchant}`,
+                          redirectUrl: item.buyUrl,
+                          id: item.productId,
+                        })
+                  }
                   target="_blank"
                   rel="noreferrer"
                   className="phone-list-item"
@@ -708,9 +717,27 @@ function BuyModel({
                     </div>
                   </div>
 
-                  <div className="action">
-                    <span className="price">${item.currentPrice / 100}</span>
-                  </div>
+                  {item.merchant === "SmartphonesPLUS" ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        columnGap: 16,
+                        justifyContent: "flex-end",
+                        alignItems: "baseline",
+                      }}
+                    >
+                      <span className="old-price">
+                        ${item.currentPrice / 100}
+                      </span>
+                      <span className="price">
+                        ${Number((item.currentPrice / 100) * 0.75).toFixed()}
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="action">
+                      <span className="price">${item.currentPrice / 100}</span>
+                    </div>
+                  )}
                 </a>
               ))}
             </div>
@@ -719,13 +746,22 @@ function BuyModel({
               {relatedGoods?.map((item) => (
                 <a
                   key={item.productId}
-                  href={urlcat(`/redirect/:gradeAndMerchant`, {
-                    gradeAndMerchant: `buy-${item.name?.replace(/\s*/g, "")}-${
-                      item.condition
-                    }-${item.merchant}`,
-                    redirectUrl: item.buyUrl,
-                    productId: item.productId,
-                  })}
+                  href={
+                    item.merchant === "SmartphonesPLUS"
+                      ? urlcat(`/redirect-coupon/:gradeAndMerchant`, {
+                          gradeAndMerchant: item.merchant,
+                          redirectUrl: item.buyUrl,
+                          id: item.productId,
+                        })
+                      : urlcat(`/redirect/:gradeAndMerchant`, {
+                          gradeAndMerchant: `buy-${item.name?.replace(
+                            /\s*/g,
+                            ""
+                          )}-${item.condition}-${item.merchant}`,
+                          redirectUrl: item.buyUrl,
+                          id: item.productId,
+                        })
+                  }
                   target="_blank"
                   rel="noreferrer"
                   className="phone-list-item"
@@ -746,7 +782,24 @@ function BuyModel({
                       </span>
                     </div>
 
-                    <span className="price">${item.currentPrice / 100}</span>
+                    {item.merchant === "SmartphonesPLUS" ? (
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "flex-end",
+                        }}
+                      >
+                        <span className="old-price">
+                          ${item.currentPrice / 100}
+                        </span>
+                        <span className="price">
+                          ${Number((item.currentPrice / 100) * 0.75).toFixed()}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="price">${item.currentPrice / 100}</span>
+                    )}
                   </div>
                 </a>
               ))}

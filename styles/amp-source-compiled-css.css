@@ -1668,13 +1668,20 @@ header.fixed {
 
   .desktop-phone-list .phone-list-item .action {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    justify-content: flex-end;
+    align-items: baseline;
+    column-gap: 8px;
   }
 
   .desktop-phone-list .phone-list-item .price {
     font-size: 36px;
     color: #3d3d3d;
+  }
+
+  .old-price {
+    text-decoration: line-through;
+    font-size: 24;
+    color: #727171;
   }
 
   .desktop-phone-list .phone-list-item .view-detail {
@@ -1908,7 +1915,7 @@ header.fixed {
 
   .model-page .model-info-footer {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     flex: 1;
   }
@@ -2897,6 +2904,7 @@ header.fixed {
   .buy-model-faq-title-content {
     display: inline-block;
   }
+
   /*  Desktop css*/
 }
 
@@ -3694,6 +3702,12 @@ button {
 
   .mobile-phone-list .phone-list-item .bottom .price {
     font-size: 36px;
+  }
+
+  .old-price {
+    text-decoration: line-through;
+    font-size: 24px;
+    color: #727171;
   }
 
   .phone-list-item .condition {

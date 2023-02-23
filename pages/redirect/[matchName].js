@@ -18,7 +18,7 @@ export default function Redirect() {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(location.search);
     const redirectUrl = params.get("redirectUrl");
-    const productId = params.get("productId");
+    const productId = params.get("id");
     if (!redirectUrl) return;
 
     const path = location.pathname?.replace("/redirect/", "");
