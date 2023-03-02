@@ -503,7 +503,7 @@ function BuyModel({
                         }
                   )}
                 >
-                  <button className="model-see-more">See More</button>
+                  <button className="model-see-more">View Products</button>
                 </a>
               </div>
             </div>
@@ -574,7 +574,7 @@ function BuyModel({
                       }
                 )}
               >
-                <button className="model-see-more">See More</button>
+                <button className="model-see-more">View Products</button>
               </a>
             </div>
           </div>
@@ -819,7 +819,7 @@ function BuyModel({
                       }
                 )}
               >
-                <button>See More</button>
+                <button>More</button>
               </a>
             </div>
           </div>
@@ -882,7 +882,7 @@ function BuyModel({
                     }
               )}
             >
-              <button className="primary-button">View All</button>
+              <button className="primary-button">More</button>
             </a>
           </div>
         )}
@@ -1130,24 +1130,24 @@ function BuyModel({
                 <>
                   <section className="buy-model-page-faq-item">
                     <h3 className="buy-model-page-faq-title">
-                      <img
-                        src="/svg/arrow-down.svg"
-                        alt="arrow-down"
-                        style={{
-                          width: 24,
-                          height: 24,
-                          display: "inline-block",
-                        }}
-                      />
                       <div
-                        className="buy-model-faq-title-content"
                         style={{
-                          display: "inline-block",
-                          paddingLeft: 24,
-                          marginTop: -24,
+                          display: "flex",
+                          minHeight: 62,
+                          alignItems: "center",
                         }}
                       >
-                        {title}
+                        <img
+                          src="/svg/arrow-down.svg"
+                          alt="arrow-down"
+                          style={{
+                            width: 24,
+                            height: 24,
+                          }}
+                        />
+                        <div className="buy-model-faq-title-content">
+                          {title}
+                        </div>
                       </div>
                     </h3>
                     <div
@@ -1172,7 +1172,6 @@ function BuyModel({
             Back To Top
           </button>
           <a
-            className="see-more"
             href={urlcat(
               "/buy-phone",
               type === "CARRIER"
@@ -1186,7 +1185,7 @@ function BuyModel({
                   }
             )}
           >
-            <button className="primary-button">See Products</button>
+            <button className="primary-button">View Products</button>
           </a>
         </div>
       </main>
