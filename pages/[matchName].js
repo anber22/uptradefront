@@ -1564,7 +1564,7 @@ function SellModel({
                     ""
                   )}-${item.condition}-${item.merchant.replace("-", "")}`,
                   redirectUrl: item.url,
-                  productId: item.sku,
+                  id: item.sku,
                 })}
                 target="_blank"
                 rel="noreferrer"
@@ -1614,7 +1614,7 @@ function SellModel({
                     ""
                   )}-${item.condition}-${item.merchant.replace("-", "")}`,
                   redirectUrl: item.url,
-                  productId: item.sku,
+                  id: item.sku,
                 })}
                 target="_blank"
                 rel="noreferrer"

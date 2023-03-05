@@ -297,6 +297,7 @@ export default function TradeInPhone({
     setSearchKey(modelName);
   }, [router]);
 
+  console.log(data);
   return (
     <>
       <Head>
@@ -544,7 +545,7 @@ export default function TradeInPhone({
                           ""
                         )}-${item.condition}-${item.merchant.replace("-", "")}`,
                         redirectUrl: item.url,
-                        productId: item.sku,
+                        id: item.sku,
                       })}
                       target="_blank"
                       rel="nofollow noreferrer"
@@ -593,7 +594,7 @@ export default function TradeInPhone({
                           ""
                         )}-${item.condition}-${item.merchant.replace("-", "")}`,
                         redirectUrl: item.url,
-                        productId: item.sku,
+                        id: item.sku,
                       })}
                       className="phone-list-item"
                       target="_blank"
