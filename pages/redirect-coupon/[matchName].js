@@ -17,7 +17,7 @@ export default function RedirectCoupon() {
     const id = params.get("id");
     if (!id) return;
 
-    fetch("https://api.276qa.com/statistics/request-record", {
+    fetch("http://47.90.166.239:9000/statistics/request-record", {
       method: "POST",
       headers: {
         ["Content-Type"]: "application/json",

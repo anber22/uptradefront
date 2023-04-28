@@ -12,7 +12,9 @@ export default function Search() {
 
       try {
         const productData = await fetch(
-          urlcat("https://api.276qa.com/search/product", { name: searchKey })
+          urlcat("http://47.90.166.239:9000/search/product", {
+            name: searchKey,
+          })
         ).then((response) => response.json());
 
         if (!productData.success) return products;
@@ -57,7 +59,7 @@ export default function Search() {
             {...optionsProps}
             onMouseDown={(event) => {
               optionsProps.onMouseDown(event);
-              router.push(optionData.url)
+              router.push(optionData.url);
             }}
           >
             {optionData.name}

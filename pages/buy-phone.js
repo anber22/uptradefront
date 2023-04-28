@@ -148,7 +148,9 @@ export default function BuyPhone({
 
       try {
         const productData = await fetch(
-          urlcat("https://api.276qa.com/search/product", { name: searchKey })
+          urlcat("http://47.90.166.239:9000/search/product", {
+            name: searchKey,
+          })
         ).then((response) => response.json());
 
         if (!productData.success) return products;
@@ -188,7 +190,7 @@ export default function BuyPhone({
       const ids = searchKeys.selectedValues.map((x) => x.categoryValueId);
 
       const response = await fetch(
-        urlcat("https://api.276qa.com/search/category/values", {
+        urlcat("http://47.90.166.239:9000/search/category/values", {
           parentCategoryValueIds: ids.join(","),
         })
       ).then((response) => response.json());
@@ -251,7 +253,7 @@ export default function BuyPhone({
         orderBy: searchKeys.orderBy,
       };
 
-      const listData = await fetch("https://api.276qa.com/search", {
+      const listData = await fetch("http://47.90.166.239:9000/search", {
         method: "POST",
         headers: {
           ["Content-Type"]: "application/json",
@@ -268,9 +270,12 @@ export default function BuyPhone({
   }, [searchKeys, initData]);
 
   const [, addRank] = useAsyncFn(async (name) => {
-    return fetch(urlcat("https://api.276qa.com/search/:name/rank", { name }), {
-      method: "PUT",
-    });
+    return fetch(
+      urlcat("http://47.90.166.239:9000/search/:name/rank", { name }),
+      {
+        method: "PUT",
+      }
+    );
   }, []);
 
   useEffect(() => {
@@ -962,10 +967,10 @@ export async function getStaticProps() {
     orderBy: "RECOMMENDED",
   };
 
-  const data = await fetch("https://api.276qa.com/search/category/values").then(
-    (response) => response.json()
-  );
-  const listData = await fetch("https://api.276qa.com/search", {
+  const data = await fetch(
+    "http://47.90.166.239:9000/search/category/values"
+  ).then((response) => response.json());
+  const listData = await fetch("http://47.90.166.239:9000/search", {
     method: "POST",
     headers: {
       ["Content-Type"]: "application/json",
@@ -973,9 +978,9 @@ export async function getStaticProps() {
     body: JSON.stringify(body),
   }).then((response) => response.json());
 
-  const productData = await fetch("https://api.276qa.com/search/product").then(
-    (response) => response.json()
-  );
+  const productData = await fetch(
+    "http://47.90.166.239:9000/search/product"
+  ).then((response) => response.json());
 
   if (!data.success || !listData.success || !productData.success)
     return {

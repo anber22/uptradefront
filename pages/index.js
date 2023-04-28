@@ -568,7 +568,7 @@ export default function Home({
 
 export async function getStaticProps() {
   const listedProduct = await fetch(
-    "https://api.276qa.com/search/newly-listed-product"
+    "http://47.90.166.239:9000/search/newly-listed-product"
   ).then((response) => response.json());
 
   const reviewsResponse = await fetch(
@@ -576,7 +576,7 @@ export async function getStaticProps() {
   ).then((response) => response.json());
 
   const sellListData = await fetch(
-    "https://api.276qa.com/search/trade-in/sell-your-phone"
+    "http://47.90.166.239:9000/search/trade-in/sell-your-phone"
   ).then((response) => response.json());
   const navBarData = await getNavBar();
 

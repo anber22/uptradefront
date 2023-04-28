@@ -98,7 +98,7 @@ export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
                     >
                       <amp-autocomplete
                         filter="substring"
-                        src="https://api.276qa.com/search/product"
+                        src="http://47.90.166.239:9000/search/product"
                         query="name"
                         filter-value="name"
                         items="data"

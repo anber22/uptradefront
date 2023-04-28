@@ -107,7 +107,7 @@ export default function TradeInPhone({
     if (!searchKey) return products;
     try {
       const productData = await fetch(
-        urlcat("https://api.276qa.com/search/trade-in/host-list", {
+        urlcat("http://47.90.166.239:9000/search/trade-in/host-list", {
           name: searchKey,
         })
       ).then((response) => response.json());
@@ -165,7 +165,7 @@ export default function TradeInPhone({
 
   const [, addRank] = useAsyncFn(async (name) => {
     return fetch(
-      urlcat("https://api.276qa.com/search/trade-in/:name/rank", { name }),
+      urlcat("http://47.90.166.239:9000/search/trade-in/:name/rank", { name }),
       {
         method: "PUT",
       }
@@ -191,9 +191,12 @@ export default function TradeInPhone({
       if (!searchKeys.searchKey) return conditionData;
 
       const response = await fetch(
-        urlcat("https://api.276qa.com/search/trade-in/category/all-category", {
-          model: searchKeys.searchKey,
-        })
+        urlcat(
+          "http://47.90.166.239:9000/search/trade-in/category/all-category",
+          {
+            model: searchKeys.searchKey,
+          }
+        )
       ).then((response) => response.json());
 
       if (!response.success) return conditionData;
@@ -236,7 +239,7 @@ export default function TradeInPhone({
       };
 
       const listData = await fetch(
-        "https://api.276qa.com/search/trade-in/search",
+        "http://47.90.166.239:9000/search/trade-in/search",
         {
           method: "POST",
           headers: {
@@ -665,15 +668,15 @@ export default function TradeInPhone({
 export async function getStaticProps() {
   const navBarData = await getNavBar();
   const shortCutsData = await fetch(
-    "https://api.276qa.com/search/trade-in/sell-your-phone?brand=Apple"
+    "http://47.90.166.239:9000/search/trade-in/sell-your-phone?brand=Apple"
   ).then((response) => response.json());
 
   const productData = await fetch(
-    "https://api.276qa.com/search/trade-in/host-list"
+    "http://47.90.166.239:9000/search/trade-in/host-list"
   ).then((response) => response.json());
 
   const conditionData = await fetch(
-    "https://api.276qa.com/search/trade-in/category/all-category"
+    "http://47.90.166.239:9000/search/trade-in/category/all-category"
   ).then((response) => response.json());
 
   if (
