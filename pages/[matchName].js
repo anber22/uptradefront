@@ -1931,6 +1931,7 @@ async function getBuyProps(params) {
 
   const navbar = await getNavBar();
 
+  console.log("done");
   return {
     props: {
       ...product,
