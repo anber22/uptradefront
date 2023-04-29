@@ -107,7 +107,7 @@ export default function TradeInPhone({
     if (!searchKey) return products;
     try {
       const productData = await fetch(
-        urlcat("http://47.90.166.239:9000/search/trade-in/host-list", {
+        urlcat("https://api-v2.276qa.com/search/trade-in/host-list", {
           name: searchKey,
         })
       ).then((response) => response.json());
@@ -165,7 +165,7 @@ export default function TradeInPhone({
 
   const [, addRank] = useAsyncFn(async (name) => {
     return fetch(
-      urlcat("http://47.90.166.239:9000/search/trade-in/:name/rank", { name }),
+      urlcat("https://api-v2.276qa.com/search/trade-in/:name/rank", { name }),
       {
         method: "PUT",
       }
@@ -192,7 +192,7 @@ export default function TradeInPhone({
 
       const response = await fetch(
         urlcat(
-          "http://47.90.166.239:9000/search/trade-in/category/all-category",
+          "https://api-v2.276qa.com/search/trade-in/category/all-category",
           {
             model: searchKeys.searchKey,
           }
@@ -239,7 +239,7 @@ export default function TradeInPhone({
       };
 
       const listData = await fetch(
-        "http://47.90.166.239:9000/search/trade-in/search",
+        "https://api-v2.276qa.com/search/trade-in/search",
         {
           method: "POST",
           headers: {
@@ -668,15 +668,15 @@ export default function TradeInPhone({
 export async function getStaticProps() {
   const navBarData = await getNavBar();
   const shortCutsData = await fetch(
-    "http://47.90.166.239:9000/search/trade-in/sell-your-phone?brand=Apple"
+    "https://api-v2.276qa.com/search/trade-in/sell-your-phone?brand=Apple"
   ).then((response) => response.json());
 
   const productData = await fetch(
-    "http://47.90.166.239:9000/search/trade-in/host-list"
+    "https://api-v2.276qa.com/search/trade-in/host-list"
   ).then((response) => response.json());
 
   const conditionData = await fetch(
-    "http://47.90.166.239:9000/search/trade-in/category/all-category"
+    "https://api-v2.276qa.com/search/trade-in/category/all-category"
   ).then((response) => response.json());
 
   if (

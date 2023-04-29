@@ -1687,7 +1687,7 @@ export default function Model({ pageType, ...props }) {
 
 export async function getStaticPaths() {
   const response = await fetch(
-    "http://47.90.166.239:9000/product/search/low-price"
+    "https://api-v2.276qa.com/product/search/low-price"
   ).then((response) => response.json());
 
   const skuResponse = {
@@ -1778,7 +1778,7 @@ export async function getStaticPaths() {
   });
 
   const sellResponse = await fetch(
-    "http://47.90.166.239:9000/product/trade-in/statics-data"
+    "https://api-v2.276qa.com/product/trade-in/statics-data"
   ).then((response) => response.json());
 
   const sellResult = sellResponse.data;

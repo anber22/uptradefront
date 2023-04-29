@@ -24,7 +24,7 @@ export default function Redirect() {
     const path = location.pathname?.replace("/redirect/", "");
     const [type] = path?.split("-") ?? [];
 
-    fetch("http://47.90.166.239:9000/statistics/request-record", {
+    fetch("https://api-v2.276qa.com/statistics/request-record", {
       method: "POST",
       headers: {
         ["Content-Type"]: "application/json",

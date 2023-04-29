@@ -12,7 +12,7 @@ export default function Search() {
 
       try {
         const productData = await fetch(
-          urlcat("http://47.90.166.239:9000/search/product", {
+          urlcat("https://api-v2.276qa.com/search/product", {
             name: searchKey,
           })
         ).then((response) => response.json());
