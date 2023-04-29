@@ -749,6 +749,11 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/buy-used-refurbished-iphone-13-super",
+        destination: "/buy-used-refurbished-iphone-13",
+        permanent: true,
+      },
     ];
   },
 };
