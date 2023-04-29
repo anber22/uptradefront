@@ -30,7 +30,7 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/buy-phone/*",
+        source: "/buy-phone/:path",
         destination: "/buy-phone",
         permanent: true,
       },
@@ -261,21 +261,21 @@ const nextConfig = {
       },
       {
         source: "/buy-used-refurbished-galaxy-s20-plus-5g",
-        destination: "/buy-used-refurbished-galaxy-s20+",
+        destination: "/buy-used-refurbished-galaxy-s20%2B",
         permanent: true,
       },
       {
         source: "/buy-used-refurbished-galaxy-s9-plus",
-        destination: "/buy-used-refurbished-galaxy-s9+",
+        destination: "/buy-used-refurbished-galaxy-s9%2B",
         permanent: true,
       },
       {
         source: "/buy-used-refurbished-galaxy-s10-plus",
-        destination: "/buy-used-refurbished-galaxy-s10+",
+        destination: "/buy-used-refurbished-galaxy-s10%2B",
         permanent: true,
       },
       {
-        source: "/trade-in-lg-k22+",
+        source: "/trade-in-lg-k22%2B",
         destination: "/trade-in-lg-k22",
         permanent: true,
       },
@@ -655,12 +655,12 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/sell-checkout/*",
+        source: "/sell-checkout/:path",
         destination: "/",
         permanent: true,
       },
       {
-        source: "/tag/*",
+        source: "/tag/:path",
         destination: "/",
         permanent: true,
       },
