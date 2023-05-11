@@ -167,15 +167,13 @@ export async function getStaticProps() {
       body: JSON.stringify({
         tagSlug: "",
         featured: false,
-        pageNum: 0,
-        pageSize: 0,
         all: false,
       }),
     }
   ).then((response) => response.json());
 
-  const topic = blogResponse.data.list[0];
-  const list = blogListResponse.data.list.map((x) => ({
+  const topic = blogResponse.data.data[0];
+  const list = blogListResponse.data.data.map((x) => ({
     thumbnailFullUrl: x.thumbnailFullUrl,
     title: x.title,
     releaseDt: x.releaseDt,

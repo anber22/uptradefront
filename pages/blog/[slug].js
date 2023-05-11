@@ -130,14 +130,12 @@ export async function getStaticPaths() {
       body: JSON.stringify({
         tagSlug: "",
         featured: false,
-        pageNum: 0,
-        pageSize: 0,
-        all: false,
+        all: true,
       }),
     }
   ).then((response) => response.json());
 
-  const list = [...blogListResponse.data.list, ...blogResponse.data.list];
+  const list = [...blogListResponse.data.data, ...blogResponse.data.data];
 
   const paths = list.map((x) => ({
     params: {
