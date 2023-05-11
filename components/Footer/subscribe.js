@@ -6,36 +6,33 @@ export default function Subscribe() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [, subscribe] = useAsyncFn(async () => {
-      if (
-        !ref.current.value ||
-        !ref.current.value.match(
-          /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/g
-        )
-      ) {
-        setMessage(
-          !ref.current.value
-            ? "Please enter a valid email"
-            : !ref.current.value.match(
-                /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/g
-              )
-            ? "Invalid email address, only letters, numbers, periods (‘.’), and underscores (‘_’) are allowed in your user name and domain."
-            : ""
-        );
-        return;
-      }
+    if (
+      !ref.current.value ||
+      !ref.current.value.match(
+        /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/g
+      )
+    ) {
+      setMessage(
+        !ref.current.value
+          ? "Please enter a valid email"
+          : !ref.current.value.match(
+              /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/g
+            )
+          ? "Invalid email address, only letters, numbers, periods (‘.’), and underscores (‘_’) are allowed in your user name and domain."
+          : ""
+      );
+      return;
+    }
 
     const formData = new FormData();
     formData.append("email", ref.current.value);
-    await fetch(
-      "https://api-gateway.uptradeit.com/api/message_books/subscribed",
-      {
-        method: "POST",
-        body: formData,
-        headers: {
-          ["Access-Control-Allow-Credentials"]: true,
-        },
-      }
-    ).then((response) => setIsSuccess(true));
+    await fetch("https://api-v2.276qa.com/api/message_books/subscribed", {
+      method: "POST",
+      body: formData,
+      headers: {
+        ["Access-Control-Allow-Credentials"]: true,
+      },
+    }).then((response) => setIsSuccess(true));
   }, []);
 
   return (

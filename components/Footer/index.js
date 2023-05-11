@@ -235,7 +235,7 @@ export const Footer = ({ appleList, sellAppleList, buyNavbar, sellNavbar }) => {
                 <form
                   className="subscribe-form"
                   method="post"
-                  action-xhr="https://api-gateway.uptradeit.com/api/message_books/subscribed"
+                  action-xhr="https://api-v2.276qa.com/api/message_books/subscribed"
                   custom-validation-reporting="show-all-on-submit"
                   on="submit-error: AMP.setState({ subSuccess: true })"
                   target="_top"

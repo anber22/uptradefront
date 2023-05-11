@@ -143,7 +143,7 @@ export default function Blog({
 
 export async function getStaticProps() {
   const blogResponse = await fetch(
-    "https://api-gateway.uptradeit.com/api/market/blog/search",
+    "https://api-v2.276qa.com/api/market/blog/search",
     {
       method: "POST",
       headers: {
@@ -158,7 +158,7 @@ export async function getStaticProps() {
   ).then((response) => response.json());
 
   const blogListResponse = await fetch(
-    "https://api-gateway.uptradeit.com/api/market/blog/search",
+    "https://api-v2.276qa.com/api/market/blog/search",
     {
       method: "POST",
       headers: {
