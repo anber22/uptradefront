@@ -95,7 +95,7 @@ export default function Blog({
             className="button-container"
             data-amp-bind-class="showMore ? 'more-blog-list-hidden' : 'button-container'"
           >
-            <button on="tap: AMP.setState({ showMore: true })">
+            <button on="tap: AMP.setState({ showMore: true, selected: 'Apple' })">
               View more
             </button>
           </div>
