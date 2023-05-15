@@ -52,6 +52,11 @@ function MyApp({ Component, pageProps }) {
               custom-element="amp-list"
               src="https://cdn.ampproject.org/v0/amp-list-0.1.js"
             ></script>
+            <script
+              async
+              custom-element="amp-analytics"
+              src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
+            ></script>
           </>
         ) : null}
       </Head>
@@ -63,6 +68,29 @@ function MyApp({ Component, pageProps }) {
 							'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 							})(window,document,'script','dataLayer','GTM-TXWLTL3');`}
       </Script> */}
+      <amp-analytics
+        type="googleanalytics"
+        config="https://amp.analytics-debugger.com/ga4.json"
+        data-credentials="include"
+      >
+        <script
+          type="application/json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              vars: {
+                GA4_MEASUREMENT_ID: "G-3PTJE2KCTS",
+                GA4_ENDPOINT_HOSTNAME: "www.google-analytics.com",
+                DEFAULT_PAGEVIEW_ENABLED: true,
+                GOOGLE_CONSENT_ENABLED: false,
+                WEBVITALS_TRACKING: false,
+                PERFORMANCE_TIMING_TRACKING: false,
+                SEND_DOUBLECLICK_BEACON: false,
+              },
+            }),
+          }}
+        ></script>
+      </amp-analytics>
+
       <Component {...pageProps} />
       {isAmp ? (
         <a href="/contact" className="global-help" target="_blank">
