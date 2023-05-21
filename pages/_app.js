@@ -70,7 +70,7 @@ function MyApp({ Component, pageProps }) {
       </Script> */}
       <amp-analytics
         type="googleanalytics"
-        config="https://amp.analytics-debugger.com/ga4.json"
+        config="/ga4.json"
         data-credentials="include"
       >
         <script
