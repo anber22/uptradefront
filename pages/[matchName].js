@@ -1686,18 +1686,21 @@ export default function Model({ pageType, ...props }) {
 }
 
 export async function getStaticPaths() {
+  console.log("fetch static data");
   const response = await fetch(
-    "https://api-v2.276qa.com/product/search/low-price"
+    "https://uptrade-datafeed.s3.us-east-2.amazonaws.com/buy-low-price-data.json"
   ).then((response) => response.json());
 
-  const skuResponse = {
-    isSuccess: true,
-  };
+  const skuResponse = await fetch(
+    "https://uptrade-datafeed.s3.us-east-2.amazonaws.com/sku-statistic-data.json"
+  ).then((response) => response.json());
 
-  if (!response.success || !skuResponse.isSuccess)
-    return { paths: [], fallback: false };
-
-  const result = [...response.data];
+  const result = [
+    ...response.data,
+    ...skuResponse.data.carrierData,
+    ...skuResponse.data.colorData,
+    ...skuResponse.data.storageData,
+  ];
 
   await fs.writeFile(
     path.join(process.cwd(), "cache.json"),
@@ -1777,8 +1780,10 @@ export async function getStaticPaths() {
     };
   });
 
+  console.log("fetch sell data");
+
   const sellResponse = await fetch(
-    "https://api-v2.276qa.com/product/trade-in/statics-data"
+    "https://uptrade-datafeed.s3.us-east-2.amazonaws.com/trade-in-statistic-data.json"
   ).then((response) => response.json());
 
   const sellResult = sellResponse.data;
@@ -1830,6 +1835,7 @@ async function getBuyProps(params) {
   if (reviewsResponseCache) {
     reviewsResponse = reviewsResponseCache;
   } else {
+    console.log("fetch reviews");
     reviewsResponse = await fetch(
       "https://api.reviews.io/merchant/reviews?page=0&per_page=1000&order=rating&sort=highest_rated&store=uptradeit-com"
     ).then((response) => response.json());

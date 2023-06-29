@@ -73,18 +73,21 @@ export default function Contact({
     </body>
     </html>`;
 
-    await fetch("https://api-v2.276qa.com/api/message_books/createemail", {
-      method: "POST",
-      headers: {
-        ["Content-Type"]: "application/json",
-      },
-      body: JSON.stringify({
-        toEmail: emailRef.current.value,
-        content,
-        nickName: "",
-        subject: "Customer Message",
-      }),
-    }).then(() => setSubmitSuccess(true));
+    await fetch(
+      "https://api-single.uptradeit.com/api/message_books/createemail",
+      {
+        method: "POST",
+        headers: {
+          ["Content-Type"]: "application/json",
+        },
+        body: JSON.stringify({
+          toEmail: emailRef.current.value,
+          content,
+          nickName: "",
+          subject: "Customer Message",
+        }),
+      }
+    ).then(() => setSubmitSuccess(true));
   }, []);
 
   return (

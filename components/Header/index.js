@@ -98,7 +98,7 @@ export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
                     >
                       <amp-autocomplete
                         filter="substring"
-                        src="https://api-v2.276qa.com/search/product"
+                        src="https://api-single.uptradeit.com/search/product"
                         query="name"
                         filter-value="name"
                         items="data"
@@ -153,7 +153,7 @@ export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
                         <div id="desktop-buy-dropdown">
                           <div className="buy-dropdown-left">
                             <amp-selector
-                              on={`select: AMP.setState({ selected: event.targetOption })`}
+                              on={`select: AMP.setState({ selected: event.targetOption, sellSelected: "Apple" })`}
                             >
                               {navbar?.map((item) => (
                                 <div
@@ -279,7 +279,7 @@ export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
                         <div id="desktop-buy-dropdown">
                           <div className="buy-dropdown-left">
                             <amp-selector
-                              on={`select: AMP.setState({ selected: event.targetOption })`}
+                              on={`select: AMP.setState({ sellSelected: event.targetOption, selected: "Apple" })`}
                             >
                               {sellNavbar?.map((item) => (
                                 <div
@@ -311,7 +311,7 @@ export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
                                   className={
                                     x.key === "Apple" ? "show" : "hidden"
                                   }
-                                  data-amp-bind-class={`selected == '${x.key}' ? 'show' : 'hidden'`}
+                                  data-amp-bind-class={`sellSelected == '${x.key}' ? 'show' : 'hidden'`}
                                 >
                                   {x.values.map((item, index) => (
                                     <a

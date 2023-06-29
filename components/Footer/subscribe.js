@@ -26,13 +26,16 @@ export default function Subscribe() {
 
     const formData = new FormData();
     formData.append("email", ref.current.value);
-    await fetch("https://api-v2.276qa.com/api/message_books/subscribed", {
-      method: "POST",
-      body: formData,
-      headers: {
-        ["Access-Control-Allow-Credentials"]: true,
-      },
-    }).then((response) => setIsSuccess(true));
+    await fetch(
+      "https://api-single.uptradeit.com/api/message_books/subscribed",
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          ["Access-Control-Allow-Credentials"]: true,
+        },
+      }
+    ).then((response) => setIsSuccess(true));
   }, []);
 
   return (

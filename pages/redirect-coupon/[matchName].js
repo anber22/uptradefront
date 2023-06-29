@@ -17,7 +17,7 @@ export default function RedirectCoupon() {
     const id = params.get("id");
     if (!id) return;
 
-    fetch("https://api-v2.276qa.com/statistics/request-record", {
+    fetch("https://api-single.uptradeit.com/statistics/request-record", {
       method: "POST",
       headers: {
         ["Content-Type"]: "application/json",

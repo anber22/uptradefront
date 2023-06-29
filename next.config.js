@@ -9,7 +9,7 @@ const nextConfig = {
     return config;
   },
   env: {
-    BASEURL: "https://276qa.com",
+    BASEURL: "https://uptradeit.com",
   },
   staticPageGenerationTimeout: 300,
   async redirects() {
@@ -385,11 +385,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/blog/is-a-used-iPhone-worth-buying",
-        destination: "/blog",
-        permanent: true,
-      },
-      {
         source: "/blog/sell-broken-iphone",
         destination: "/blog",
         permanent: true,
@@ -421,16 +416,6 @@ const nextConfig = {
       },
       {
         source: "/apple/iphone-xr",
-        destination: "/buy-used-refurbished-iphone-xr",
-        permanent: true,
-      },
-      {
-        source: "/buy-used-refurbished-iphone-se-2020-2nd-gen",
-        destination: "/buy-used-refurbished-iphone-xr",
-        permanent: true,
-      },
-      {
-        source: "/buy-used-refurbished-iphone-se-(2nd-gen)",
         destination: "/buy-used-refurbished-iphone-xr",
         permanent: true,
       },

@@ -2,12 +2,13 @@ let cache = null;
 
 export const getNavBar = async () => {
   if (!cache) {
+    console.log("navbardata");
     const navbarResponse = await fetch(
-      "https://api-v2.276qa.com/search/category/buy/navigation/bar"
+      "https://api-single.uptradeit.com/search/category/buy/navigation/bar"
     ).then((response) => response.json());
 
     const sellNavbarResponse = await fetch(
-      "https://api-v2.276qa.com/search/trade-in/category/navigation/bar"
+      "https://api-single.uptradeit.com/search/trade-in/category/navigation/bar"
     ).then((response) => response.json());
 
     const appleList = navbarResponse?.data?.find(

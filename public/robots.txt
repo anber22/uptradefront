@@ -1,2 +1,5 @@
+Sitemap: https://uptradeit.com/sitemap.xml
+
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /redirect/*

@@ -106,7 +106,7 @@ export default function BlogDetail({
 
 export async function getStaticPaths() {
   const blogResponse = await fetch(
-    "https://api-v2.276qa.com/api/market/blog/search",
+    "https://api-single.uptradeit.com/api/market/blog/search",
     {
       method: "POST",
       headers: {
@@ -120,8 +120,9 @@ export async function getStaticPaths() {
     }
   ).then((response) => response.json());
 
+  console.log("fetch blog list");
   const blogListResponse = await fetch(
-    "https://api-v2.276qa.com/api/market/blog/search",
+    "https://api-single.uptradeit.com/api/market/blog/search",
     {
       method: "POST",
       headers: {
@@ -147,8 +148,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+  console.log("fetch blog detail");
   const blogDetailResponse = await fetch(
-    urlcat("https://api-v2.276qa.com/api/market/blog/slug", {
+    urlcat("https://api-single.uptradeit.com/api/market/blog/slug", {
       slug: params.slug,
     })
   ).then((response) => response.json());
