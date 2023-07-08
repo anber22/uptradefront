@@ -60,7 +60,7 @@ function MyApp({ Component, pageProps }) {
           </>
         ) : null}
         {!isAmp ? (
-          <script id="google-tag-manager" strategy="afterInteractive">
+          <script async id="google-tag-manager" strategy="afterInteractive">
             {`
            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
