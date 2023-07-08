@@ -12,7 +12,6 @@ export default function RedirectCoupon() {
   const [type, setType] = useState()
   
   useEffect(() => {
-    console.log('初始化')
     if(window && window.urlObj){
       setRedirectUrl(window.urlObj.redirectUrl)
       setMatchName(window.urlObj.matchName)
@@ -30,7 +29,6 @@ export default function RedirectCoupon() {
         }),
       });
     } else if(window && !window.urlObj) {
-      console.log('页面地址', window.location)
       window.location.replace(window.origin)
     }
   }, []);

@@ -16,13 +16,8 @@ export default function Redirect() {
     const [type, model, grade, merchant] = path?.split("-") ?? [];
   }, [location]);
   useEffect(() => {
-    console.log('进入',window)
-  
-    console.log('window信息', window)
-      
     if(window && window.urlObj){
-      console.log('初始化', window)
-      setMerchant('TMobile'); // 要改的
+      setMerchant(window.urlObj.merchant); // 要改的
       setRedirectUrl(window.urlObj.redirectUrl)
       setMatchName(window.urlObj.matchName)
       setId(window.urlObj.id)

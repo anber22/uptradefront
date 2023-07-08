@@ -344,30 +344,6 @@ export default function BuyPhone({
   return (
     <>
       <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ItemList",
-              name: "ProductList",
-              itemListElement: data?.data?.map((item, index) => {
-                return {
-                  "@type": "ListItem",
-                  position: index + 1,
-                  name: `${item.name} ${item.carrier} ${item.storage} ${item.color}`,
-                  url: urlcat(
-                    `${process.env.BASEURL}/redirect/:gradeAndMerchant`,
-                    {
-                      gradeAndMerchant: `${item.productId}-${item.contion}-${item.merchant}`,
-                      redirectUrl: item.buyUrl,
-                    }
-                  ),
-                };
-              }),
-            }),
-          }}
-        />
         <style
           amp-custom=""
           dangerouslySetInnerHTML={{

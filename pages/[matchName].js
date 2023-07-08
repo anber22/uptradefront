@@ -314,7 +314,7 @@ function BuyModel({
             }}
           />
         ) : null}
-         <style
+        <style
           amp-custom=""
           dangerouslySetInnerHTML={{
             __html: pageCss,
@@ -1355,6 +1355,12 @@ function SellModel({
             }}
           />
         ) : null}
+        <style
+          amp-custom=""
+          dangerouslySetInnerHTML={{
+            __html: pageCss,
+          }}
+        />
       </Head>
       <NextSeo
         title={title}
