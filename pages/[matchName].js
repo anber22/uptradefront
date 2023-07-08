@@ -2,13 +2,13 @@ import Head from "next/head";
 import urlcat from "urlcat";
 import { NextSeo } from "next-seo";
 import { promises as fs } from "fs";
+import { useState } from "react";
 import path from "path";
 import dayjs from "dayjs";
 import { getNavBar } from "../utils/getNavBar";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-
-export const config = { amp: true };
+import pageCss from "!raw-loader!../styles/buy-in-phone.css";
 
 const carrierDescription = {
   Unlocked: `An unlocked phone will work with any carrier. Buying an unlocked phone is a great choice if you aren’t sure which carrier you want to use yet, or if you want to be sure it works with your current carrier. An unlocked phone is also a great gift option since it will work with any carrier or service plan someone may already be using.`,
@@ -106,14 +106,52 @@ function BuyModel({
   storage,
   color,
 }) {
+  const getUrl = item =>{
+    var urlObj = {}
+    let result = ''
+    if(item.merchant === "SmartphonesPLUS"){
+      result = urlcat(`/redirect-coupon/buy`)
+      urlObj = {
+        gradeAndMerchant: item.merchant,
+        redirectUrl: item.buyUrl,
+        id: item.productId,
+      }
+    }else{
+      result = urlcat(`/redirect/buy`)
+      urlObj = {
+        merchant: item.merchant,
+        gradeAndMerchant: `buy-${item.name.replace(
+          /\s*/g,
+          ""
+        )}-${item.condition}-${item.merchant}`,
+        redirectUrl: item.buyUrl,
+        id: item.productId
+      }
+    }
+    var newWin = window.open(result)
+    newWin.urlObj = urlObj
+  }
+  const [rangeIndex, setRangeIndex] = useState(0)
+  const [nodeIndex, setNodeIndex] = useState(-1);
+  const changeFAQ = (index) => {
+    if (nodeIndex === index) {
+      nodeIndex = setNodeIndex(-1);
+    } else {
+      nodeIndex = setNodeIndex(index);
+    }
+  };
+  const changeRangeIndex = (index) => {
+    if (index === 1) {
+      if (rangeIndex < reviewsInfo.reviews.length) {
+        setRangeIndex(rangeIndex + 1);
+      }
+    } else if (rangeIndex > 0) {
+      setRangeIndex(rangeIndex - 1);
+    }
+  }
   return (
     <div>
       <Head>
-        <script
-          async
-          custom-element="amp-carousel"
-          src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
-        ></script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -276,6 +314,12 @@ function BuyModel({
             }}
           />
         ) : null}
+         <style
+          amp-custom=""
+          dangerouslySetInnerHTML={{
+            __html: pageCss,
+          }}
+        />
       </Head>
       <NextSeo
         title={title}
@@ -303,21 +347,21 @@ function BuyModel({
         <div className="model-header-placeholder" id="top"></div>
         <div className="icon-list">
           <div className="icon-list-item">
-            <amp-img src="/svg/certified.svg" width="31" height="33" />
+            <img src="/svg/certified.svg" width="31" height="33" />
             <div className="item-list-item-description">
               <strong>UpTrade Certified</strong>
               <div>Quality, fully functional, used refurbished phones</div>
             </div>
           </div>
           <div className="icon-list-item">
-            <amp-img src="/svg/return.svg" width="31" height="33" />
+            <img src="/svg/return.svg" width="31" height="33" />
             <div className="item-list-item-description">
               <strong>30 Day Free Returns</strong>
               <div>Return for any reason or no reason at all</div>
             </div>
           </div>
           <div className="icon-list-item">
-            <amp-img src="/svg/secure-payment.svg" width="31" height="33" />
+            <img src="/svg/secure-payment.svg" width="31" height="33" />
             <div className="item-list-item-description">
               <strong>Secure Payment</strong>
               <div>Visa, MasterCard, American Express</div>
@@ -328,12 +372,12 @@ function BuyModel({
           <div className="breadcrumbs">
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a href="/">Home</a>
-            <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
+            <img src="/svg/black-arrow-right.svg" width="12" height="12" />
             <a href="/buy-phone">Buy Phone</a>
 
             {type === "BRAND" ? (
               <>
-                <amp-img
+                <img
                   src="/svg/black-arrow-right.svg"
                   width="12"
                   height="12"
@@ -342,7 +386,7 @@ function BuyModel({
               </>
             ) : type !== "CARRIER" ? (
               <>
-                <amp-img
+                <img
                   src="/svg/black-arrow-right.svg"
                   width="12"
                   height="12"
@@ -354,7 +398,7 @@ function BuyModel({
             ) : null}
             {type !== "BRAND" ? (
               <>
-                <amp-img
+                <img
                   src="/svg/black-arrow-right.svg"
                   width="12"
                   height="12"
@@ -375,7 +419,7 @@ function BuyModel({
             ) : null}
             {skuType && skuType === "CARRIER" ? (
               <>
-                <amp-img
+                <img
                   src="/svg/black-arrow-right.svg"
                   width="12"
                   height="12"
@@ -387,7 +431,7 @@ function BuyModel({
             ) : null}
             {skuType && skuType === "COLOR" ? (
               <>
-                <amp-img
+                <img
                   src="/svg/black-arrow-right.svg"
                   width="12"
                   height="12"
@@ -399,7 +443,7 @@ function BuyModel({
             ) : null}
             {skuType && skuType === "STORAGE" ? (
               <>
-                <amp-img
+                <img
                   src="/svg/black-arrow-right.svg"
                   width="12"
                   height="12"
@@ -425,7 +469,7 @@ function BuyModel({
               {skuType && skuType === "STORAGE" ? storage : null}
             </h1>
             <div className="model-info">
-              <amp-img
+              <img
                 data-hero
                 className="desktop-img"
                 src={productImageUrl ? productImageUrl : "/default-image.png"}
@@ -454,7 +498,7 @@ function BuyModel({
                 ) : (
                   <div>
                     <div className="buy-model-tag-item">
-                      <amp-img
+                      <img
                         src="/svg/check-circle.svg"
                         width="15"
                         height="15"
@@ -462,7 +506,7 @@ function BuyModel({
                       <div>Professionally Refurbished</div>
                     </div>
                     <div className="buy-model-tag-item">
-                      <amp-img
+                      <img
                         src="/svg/file-text.svg"
                         width="15"
                         height="15"
@@ -470,11 +514,11 @@ function BuyModel({
                       <div>Clean IMEI</div>
                     </div>
                     <div className="buy-model-tag-item">
-                      <amp-img src="/svg/activity.svg" width="15" height="15" />
+                      <img src="/svg/activity.svg" width="15" height="15" />
                       <div>Fully Functional</div>
                     </div>
                     <div className="buy-model-tag-item">
-                      <amp-img src="/svg/award.svg" width="15" height="15" />
+                      <img src="/svg/award.svg" width="15" height="15" />
                       <div>30-Day Money Back Guarantee</div>
                     </div>
                   </div>
@@ -536,7 +580,7 @@ function BuyModel({
               ) : (
                 <>
                   <div className="model-tag-item">
-                    <amp-img
+                    <img
                       src="/svg/check-circle.svg"
                       width="15"
                       height="15"
@@ -544,15 +588,15 @@ function BuyModel({
                     <div>Professionally Refurbished</div>
                   </div>
                   <div className="model-tag-item">
-                    <amp-img src="/svg/file-text.svg" width="15" height="15" />
+                    <img src="/svg/file-text.svg" width="15" height="15" />
                     <div>Clean IMEI</div>
                   </div>
                   <div className="model-tag-item">
-                    <amp-img src="/svg/activity.svg" width="15" height="15" />
+                    <img src="/svg/activity.svg" width="15" height="15" />
                     <div>Fully Functional</div>
                   </div>
                   <div className="model-tag-item">
-                    <amp-img src="/svg/award.svg" width="15" height="15" />
+                    <img src="/svg/award.svg" width="15" height="15" />
                     <div>30-Day Money Back Guarantee</div>
                   </div>
                 </>
@@ -580,7 +624,7 @@ function BuyModel({
           </div>
           {type !== "BRAND" ? (
             <div className="mobile-image-container">
-              <amp-img
+              <img
                 data-hero
                 className="mobile-img"
                 src={
@@ -673,31 +717,32 @@ function BuyModel({
           <div className="model-related-content">
             <div className="desktop-phone-list">
               {relatedGoods?.map((item) => (
-                <a
-                  key={item.productId}
-                  href={
-                    item.merchant === "SmartphonesPLUS"
-                      ? urlcat(`/redirect-coupon/:gradeAndMerchant`, {
-                          gradeAndMerchant: item.merchant,
-                          redirectUrl: item.buyUrl,
-                          id: item.productId,
-                        })
-                      : urlcat(`/redirect/:gradeAndMerchant`, {
-                          gradeAndMerchant: `buy-${item.name?.replace(
-                            /\s*/g,
-                            ""
-                          )}-${item.condition}-${item.merchant}`,
-                          redirectUrl: item.buyUrl,
-                          id: item.productId,
-                        })
-                  }
-                  target="_blank"
-                  rel="noreferrer"
-                  className="phone-list-item"
-                >
+                // <a
+                //   key={item.productId}
+                //   href={
+                //     item.merchant === "SmartphonesPLUS"
+                //       ? urlcat(`/redirect-coupon/:gradeAndMerchant`, {
+                //           gradeAndMerchant: item.merchant,
+                //           redirectUrl: item.buyUrl,
+                //           id: item.productId,
+                //         })
+                //       : urlcat(`/redirect/:gradeAndMerchant`, {
+                //           gradeAndMerchant: `buy-${item.name?.replace(
+                //             /\s*/g,
+                //             ""
+                //           )}-${item.condition}-${item.merchant}`,
+                //           redirectUrl: item.buyUrl,
+                //           id: item.productId,
+                //         })
+                //   }
+                //   target="_blank"
+                //   rel="noreferrer"
+                //   className="phone-list-item"
+                // >
+                <div key={item.productId} className="phone-list-item" onClick={() => {getUrl(item)}}>
                   <div className="img-container">
                     {item.brandLogoUrl ? (
-                      <amp-img
+                      <img
                         width="100"
                         height="100"
                         src={item.brandLogoUrl}
@@ -738,37 +783,38 @@ function BuyModel({
                       <span className="price">${item.currentPrice / 100}</span>
                     </div>
                   )}
-                </a>
+                </div>
               ))}
             </div>
 
             <div className="mobile-phone-list">
               {relatedGoods?.map((item) => (
-                <a
-                  key={item.productId}
-                  href={
-                    item.merchant === "SmartphonesPLUS"
-                      ? urlcat(`/redirect-coupon/:gradeAndMerchant`, {
-                          gradeAndMerchant: item.merchant,
-                          redirectUrl: item.buyUrl,
-                          id: item.productId,
-                        })
-                      : urlcat(`/redirect/:gradeAndMerchant`, {
-                          gradeAndMerchant: `buy-${item.name?.replace(
-                            /\s*/g,
-                            ""
-                          )}-${item.condition}-${item.merchant}`,
-                          redirectUrl: item.buyUrl,
-                          id: item.productId,
-                        })
-                  }
-                  target="_blank"
-                  rel="noreferrer"
-                  className="phone-list-item"
-                >
+                // <a
+                //   key={item.productId}
+                //   href={
+                //     item.merchant === "SmartphonesPLUS"
+                //       ? urlcat(`/redirect-coupon/:gradeAndMerchant`, {
+                //           gradeAndMerchant: item.merchant,
+                //           redirectUrl: item.buyUrl,
+                //           id: item.productId,
+                //         })
+                //       : urlcat(`/redirect/:gradeAndMerchant`, {
+                //           gradeAndMerchant: `buy-${item.name?.replace(
+                //             /\s*/g,
+                //             ""
+                //           )}-${item.condition}-${item.merchant}`,
+                //           redirectUrl: item.buyUrl,
+                //           id: item.productId,
+                //         })
+                //   }
+                //   target="_blank"
+                //   rel="noreferrer"
+                //   className="phone-list-item"
+                // >
+                <div key={item.productId} className="phone-list-item" onClick={() => {getUrl(item)}}>
                   <div className="top">
                     {item.brandLogoUrl ? (
-                      <amp-img width="50" height="50" src={item.brandLogoUrl} />
+                      <img width="50" height="50" src={item.brandLogoUrl} />
                     ) : null}
                     <div className={`condition ${item.condition} `}>
                       {item.condition}
@@ -801,7 +847,7 @@ function BuyModel({
                       <span className="price">${item.currentPrice / 100}</span>
                     )}
                   </div>
-                </a>
+                </div>
               ))}
             </div>
             <div className="model-related-content-footer">
@@ -840,7 +886,7 @@ function BuyModel({
                   <div className="phone-card" key={index}>
                     <div className="image-container">
                       {x.modelImageUrl ? (
-                        <amp-img
+                        <img
                           alt="phone"
                           width="120"
                           height="120"
@@ -1010,7 +1056,7 @@ function BuyModel({
               <h2>Customer reviews</h2>
               <div className="reviews-from">
                 <span>Data From</span>
-                <amp-img src="/svg/reviewsio-logo.svg" width="80" height="11" />
+                <img src="/svg/reviewsio-logo.svg" width="80" height="11" />
               </div>
             </div>
 
@@ -1021,38 +1067,40 @@ function BuyModel({
           </div>
 
           <div className="divider mobile-divider" />
-
-          <amp-carousel
-            type="slides"
-            height="290"
-            role="region"
-            layout="flex-item"
-          >
-            {reviewsInfo.reviews.map((x) => {
-              return (
-                <div key={x.store_review_id} className="review-card">
-                  <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
-                  <div className="review-info">
-                    <div className="review-ratings">
-                      {new Array(x.rating).fill("").map((x, index) => (
-                        <amp-img
-                          key={index}
-                          width="24"
-                          height="24"
-                          alt="rating"
-                          src="/rating.svg"
-                        />
-                      ))}
+            <div className="review-box">
+              {reviewsInfo.reviews.map((x, index) => {
+                return rangeIndex === index ?
+                  (<div key={x.store_review_id} className="review-card">
+                    <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
+                    <div className="review-info">
+                      <div className="review-ratings">
+                        {new Array(x.rating).fill("").map((x, index) => (
+                          <img
+                            key={index}
+                            width="24"
+                            height="24"
+                            alt="rating"
+                            src="/rating.svg"
+                          />
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div
-                    className="review-content"
-                    dangerouslySetInnerHTML={{ __html: x.comments }}
-                  ></div>
-                </div>
-              );
-            })}
-          </amp-carousel>
+                    <div
+                      className="review-content"
+                      dangerouslySetInnerHTML={{ __html: x.comments }}
+                    ></div>
+                  </div>)
+                  : false
+              })}
+              { rangeIndex > 0 ? (
+                <img src="/left-white-arrow.png" className="last-one" onClick={() => changeRangeIndex(-1)}/>
+                ) : '' 
+              }
+              { rangeIndex < (reviewsInfo.reviews.length - 1) ? (
+                <img src="/right-white-arrow.png" className="next-one" onClick={() => changeRangeIndex(1)}/>
+                ) : '' 
+              }
+            </div>
         </div>
 
         <div className="home-reviews">
@@ -1068,7 +1116,7 @@ function BuyModel({
             </span>
             <span style={{ marginLeft: 24 }}>
               Data From
-              <amp-img src="/svg/reviewsio-logo.svg" width="80" height="11" />
+              <img src="/svg/reviewsio-logo.svg" width="80" height="11" />
             </span>
           </div>
 
@@ -1078,7 +1126,7 @@ function BuyModel({
                 <div className="review-info">
                   <div className="review-ratings">
                     {new Array(x.rating).fill("").map((x, index) => (
-                      <amp-img
+                      <img
                         key={index}
                         width="30"
                         height="30"
@@ -1125,17 +1173,17 @@ function BuyModel({
             <div className="desktop-divider divider"></div>
             <h2 className="model-page-sub-title">FAQ</h2>
             <div className="divider mobile-divider"></div>
-            <amp-accordion>
               {Object.entries(qa).map(([title, content], index) => (
                 <>
                   <section className="buy-model-page-faq-item">
-                    <h3 className="buy-model-page-faq-title">
+                    <h3 className="buy-model-page-faq-title cursor">
                       <div
                         style={{
                           display: "flex",
                           minHeight: 62,
                           alignItems: "center",
                         }}
+                        onClick={() => changeFAQ(index)}
                       >
                         <img
                           src="/svg/arrow-down.svg"
@@ -1150,14 +1198,13 @@ function BuyModel({
                         </div>
                       </div>
                     </h3>
-                    <div
+                    { nodeIndex === index ? (<div
                       className="buy-model-page-faq-content"
                       dangerouslySetInnerHTML={{ __html: content }}
-                    ></div>
+                    ></div>) : '' }
                   </section>
                 </>
               ))}
-            </amp-accordion>
           </div>
         ) : null}
 
@@ -1223,14 +1270,32 @@ function SellModel({
   sellAppleList,
   type,
 }) {
+  const getUrl = item => {
+    var urlObj = {}
+    let result = ''
+    result = urlcat(`/redirect/tradein`)
+    urlObj = {
+      merchant: item.merchant,
+      redirectUrl: item.url,
+      id: item.sku
+    }
+    var newwin = window.open(result)
+    newwin.urlObj = urlObj
+    console.log('xxxxx', newwin.urlObj)
+  }
+  const [rangeIndex, setRangeIndex] = useState(0)
+  const changeRangeIndex = (index) => {
+    if (index === 1) {
+      if (rangeIndex < reviewsInfo.reviews.length) {
+        setRangeIndex(rangeIndex + 1);
+      }
+    } else if (rangeIndex > 0) {
+      setRangeIndex(rangeIndex - 1);
+    }
+  }
   return (
     <div>
       <Head>
-        <script
-          async
-          custom-element="amp-carousel"
-          src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
-        ></script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1315,28 +1380,28 @@ function SellModel({
         <div className="model-header-placeholder" id="top"></div>
         <div className="icon-list">
           <div className="icon-list-item">
-            <amp-img src="/svg/dollar-sign.svg" width="31" height="33" />
+            <img src="/svg/dollar-sign.svg" width="31" height="33" />
             <div className="item-list-item-description">
               <strong>Cash Option</strong>
               <div>If you just want cash</div>
             </div>
           </div>
           <div className="icon-list-item">
-            <amp-img src="/svg/award.svg" width="31" height="33" />
+            <img src="/svg/award.svg" width="31" height="33" />
             <div className="item-list-item-description">
               <strong>Best Offer</strong>
               <div>Guaranteed Most Value</div>
             </div>
           </div>
           <div className="icon-list-item">
-            <amp-img src="/svg/truck.svg" width="31" height="33" />
+            <img src="/svg/truck.svg" width="31" height="33" />
             <div className="item-list-item-description">
               <strong>Free Shipping</strong>
               <div>Free shipping to sell your phone</div>
             </div>
           </div>
           <div className="icon-list-item">
-            <amp-img src="/svg/certified.svg" width="31" height="33" />
+            <img src="/svg/certified.svg" width="31" height="33" />
             <div className="item-list-item-description">
               <strong>UpTrade Certified</strong>
               <div>Certified and Trusted Companies</div>
@@ -1347,9 +1412,9 @@ function SellModel({
           <div className="breadcrumbs">
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a href="/">Home</a>
-            <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
+            <img src="/svg/black-arrow-right.svg" width="12" height="12" />
             <a href="/trade-in-phone">Trade In Phone</a>
-            <amp-img src="/svg/black-arrow-right.svg" width="12" height="12" />
+            <img src="/svg/black-arrow-right.svg" width="12" height="12" />
             {type === "BRAND" ? (
               <span>{brand}</span>
             ) : (
@@ -1357,7 +1422,7 @@ function SellModel({
             )}
             {type !== "BRAND" ? (
               <>
-                <amp-img
+                <img
                   src="/svg/black-arrow-right.svg"
                   width="12"
                   height="12"
@@ -1376,7 +1441,7 @@ function SellModel({
               Trade in {keyword || productName} or Sell {keyword || productName}
             </h1>
             <div className="model-info">
-              <amp-img
+              <img
                 data-hero
                 className="desktop-img"
                 src={productImageUrl ? productImageUrl : "/default-image.png"}
@@ -1386,19 +1451,19 @@ function SellModel({
 
               <div className="desktop-model-description">
                 <div className="model-tag-item">
-                  <amp-img src="/svg/dollar-sign.svg" width="15" height="15" />
+                  <img src="/svg/dollar-sign.svg" width="15" height="15" />
                   <div>Most Cash/Value</div>
                 </div>
                 <div className="model-tag-item">
-                  <amp-img src="/svg/truck.svg" width="15" height="15" />
+                  <img src="/svg/truck.svg" width="15" height="15" />
                   <div>Free Shipping</div>
                 </div>
                 <div className="model-tag-item">
-                  <amp-img src="/svg/check-circle.svg" width="15" height="15" />
+                  <img src="/svg/check-circle.svg" width="15" height="15" />
                   <div>Trusted Companies</div>
                 </div>
                 <div className="model-tag-item">
-                  <amp-img src="/svg/file-text.svg" width="15" height="15" />
+                  <img src="/svg/file-text.svg" width="15" height="15" />
                   <div>Easy to compare</div>
                 </div>
 
@@ -1425,19 +1490,19 @@ function SellModel({
                 )}
               </div>
               <div className="model-tag-item">
-                <amp-img src="/svg/dollar-sign.svg" width="15" height="15" />
+                <img src="/svg/dollar-sign.svg" width="15" height="15" />
                 <div>Most Cash/Value</div>
               </div>
               <div className="model-tag-item">
-                <amp-img src="/svg/truck.svg" width="15" height="15" />
+                <img src="/svg/truck.svg" width="15" height="15" />
                 <div>Free Shipping</div>
               </div>
               <div className="model-tag-item">
-                <amp-img src="/svg/check-circle.svg" width="15" height="15" />
+                <img src="/svg/check-circle.svg" width="15" height="15" />
                 <div>Trusted Companies</div>
               </div>
               <div className="model-tag-item">
-                <amp-img src="/svg/file-text.svg" width="15" height="15" />
+                <img src="/svg/file-text.svg" width="15" height="15" />
                 <div>Easy to compare</div>
               </div>
             </div>
@@ -1453,7 +1518,7 @@ function SellModel({
             </div>
           </div>
           <div className="mobile-image-container">
-            <amp-img
+            <img
               data-hero
               className="mobile-img"
               src={
@@ -1470,7 +1535,7 @@ function SellModel({
               <h2 className="reviews-title">Customer reviews</h2>
               <div className="reviews-from">
                 <span>Data From</span>
-                <amp-img src="/svg/reviewsio-logo.svg" width="80" height="11" />
+                <img src="/svg/reviewsio-logo.svg" width="80" height="11" />
               </div>
               <div className="reviews-subtitle">
                 {reviewsInfo.average_rating} Rating based on{" "}
@@ -1483,7 +1548,7 @@ function SellModel({
                 <span>Customer reviews</span>
                 <div className="reviews-from">
                   <span>Data From</span>
-                  <amp-img
+                  <img
                     src="/svg/reviewsio-logo.svg"
                     width="80"
                     height="11"
@@ -1499,38 +1564,38 @@ function SellModel({
 
             <div className="divider" />
 
-            <amp-carousel
-              type="slides"
-              height="290"
-              role="region"
-              layout="flex-item"
-            >
-              {reviewsInfo.reviews.map((x) => {
-                return (
-                  <div key={x.store_review_id} className="review-card">
-                    <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
-                    <div className="review-info">
-                      <div className="review-ratings">
-                        {new Array(x.rating).fill("").map((x, index) => (
-                          <amp-img
-                            key={index}
-                            width="24"
-                            height="24"
-                            alt="rating"
-                            src="/rating.svg"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <div
-                      className="review-content"
-                      dangerouslySetInnerHTML={{ __html: x.comments }}
-                    ></div>
-                  </div>
-                );
-              })}
-            </amp-carousel>
-
+            {reviewsInfo.reviews.map((x, index) => {
+                 return rangeIndex === index ?
+                 (<div key={x.store_review_id} className="review-card">
+                   <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
+                   <div className="review-info">
+                     <div className="review-ratings">
+                       {new Array(x.rating).fill("").map((x, index) => (
+                         <img
+                           key={index}
+                           width="24"
+                           height="24"
+                           alt="rating"
+                           src="/rating.svg"
+                         />
+                       ))}
+                     </div>
+                   </div>
+                   <div
+                     className="review-content"
+                     dangerouslySetInnerHTML={{ __html: x.comments }}
+                   ></div>
+                 </div>)
+                 : false
+             })}
+             { rangeIndex > 0 ? (
+               <img src="/left-white-arrow.png" className="last-one" onClick={() => changeRangeIndex(-1)}/>
+               ) : '' 
+             }
+             { rangeIndex < (reviewsInfo.reviews.length - 1) ? (
+               <img src="/right-white-arrow.png" className="next-one" onClick={() => changeRangeIndex(1)}/>
+               ) : '' 
+             }
             <div className="model-reviews-footer">
               <a href="/reviews">
                 <button>See All Reviews</button>
@@ -1556,23 +1621,10 @@ function SellModel({
         <div className="model-related-content">
           <div className="desktop-phone-list">
             {relatedGoods?.map((item) => (
-              <a
-                key={item.productId}
-                href={urlcat(`/redirect/:gradeAndMerchant`, {
-                  gradeAndMerchant: `tradein-${item.model?.replace(
-                    /\s*/g,
-                    ""
-                  )}-${item.condition}-${item.merchant.replace("-", "")}`,
-                  redirectUrl: item.url,
-                  id: item.sku,
-                })}
-                target="_blank"
-                rel="noreferrer"
-                className="phone-list-item"
-              >
+              <div key={item.productId} className="phone-list-item" onClick={() => {getUrl(item)}}>
                 <div className="img-container">
                   {item.merchantLogoUrl ? (
-                    <amp-img
+                    <img
                       width="100"
                       height="100"
                       src={item.merchantLogoUrl}
@@ -1600,29 +1652,16 @@ function SellModel({
                   <span className="price">${item.price / 100}</span>
                   <div className={`condition ${item.type}`}>{item.type}</div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
 
           <div className="mobile-phone-list">
             {relatedGoods?.map((item) => (
-              <a
-                key={item.productId}
-                href={urlcat(`/redirect/:gradeAndMerchant`, {
-                  gradeAndMerchant: `tradein-${item.model?.replace(
-                    /\s*/g,
-                    ""
-                  )}-${item.condition}-${item.merchant.replace("-", "")}`,
-                  redirectUrl: item.url,
-                  id: item.sku,
-                })}
-                target="_blank"
-                rel="noreferrer"
-                className="phone-list-item"
-              >
+              <div key={item.productId} className="phone-list-item" onClick={() => {getUrl(item)}}>
                 <div className="top">
                   {item.merchantLogoUrl ? (
-                    <amp-img
+                    <img
                       width="50"
                       height="50"
                       src={item.merchantLogoUrl}
@@ -1649,7 +1688,7 @@ function SellModel({
                     <div className={`condition ${item.type}`}>{item.type}</div>
                   </span>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
 
