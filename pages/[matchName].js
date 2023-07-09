@@ -131,6 +131,9 @@ function BuyModel({
     var newWin = window.open(result)
     newWin.urlObj = urlObj
   }
+  const toTop = () => {
+    window.scrollTo(0,0)
+  }
   const [rangeIndex, setRangeIndex] = useState(0)
   const [nodeIndex, setNodeIndex] = useState(-1);
   const changeFAQ = (index) => {
@@ -1214,7 +1217,7 @@ function BuyModel({
         >
           <button
             className="second-button back-to-top"
-            on={`tap:AMP.scrollTo(id="top", position="top")`}
+            onClick={() => {toTop()}}
           >
             Back To Top
           </button>
