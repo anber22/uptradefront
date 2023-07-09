@@ -1281,7 +1281,6 @@ function SellModel({
     }
     var newwin = window.open(result)
     newwin.urlObj = urlObj
-    console.log('xxxxx', newwin.urlObj)
   }
   const [rangeIndex, setRangeIndex] = useState(0)
   const changeRangeIndex = (index) => {

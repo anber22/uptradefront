@@ -301,7 +301,18 @@ export default function TradeInPhone({
 
     setSearchKey(modelName);
   }, [router]);
-
+  const getUrl = item => {
+    var urlObj = {}
+    let result = ''
+    result = urlcat(`/redirect/tradein`)
+    urlObj = {
+      merchant: item.merchant,
+      redirectUrl: item.url,
+      id: item.sku
+    }
+    var newwin = window.open(result)
+    newwin.urlObj = urlObj
+  }
   return (
     <>
       <Head>
@@ -541,20 +552,7 @@ export default function TradeInPhone({
               <>
                 <div className="desktop-phone-list">
                   {data.data?.map((item, index) => (
-                    <a
-                      key={item.index}
-                      href={urlcat(`/redirect/:gradeAndMerchant`, {
-                        gradeAndMerchant: `tradein-${item.model.replace(
-                          /\s*/g,
-                          ""
-                        )}-${item.condition}-${item.merchant.replace("-", "")}`,
-                        redirectUrl: item.url,
-                        id: item.sku,
-                      })}
-                      target="_blank"
-                      rel="nofollow noreferrer"
-                      className="phone-list-item"
-                    >
+                    <div key={item.productId} className="phone-list-item" onClick={() => {getUrl(item)}}>
                       <div className="img-container">
                         <img
                           width="100"
@@ -585,25 +583,12 @@ export default function TradeInPhone({
                           {item.type}
                         </div>
                       </div>
-                    </a>
+                    </div>
                   ))}
                 </div>
                 <div className="mobile-phone-list">
                   {data.data?.map((item, index) => (
-                    <a
-                      key={item.index}
-                      href={urlcat(`/redirect/:gradeAndMerchant`, {
-                        gradeAndMerchant: `tradein-${item.model.replace(
-                          /\s*/g,
-                          ""
-                        )}-${item.condition}-${item.merchant.replace("-", "")}`,
-                        redirectUrl: item.url,
-                        id: item.sku,
-                      })}
-                      className="phone-list-item"
-                      target="_blank"
-                      rel="nofollow noreferrer"
-                    >
+                    <div key={item.productId} className="phone-list-item" onClick={() => {getUrl(item)}}>
                       <div className="top">
                         <img
                           width="50"
@@ -633,7 +618,7 @@ export default function TradeInPhone({
                           </div>
                         </span>
                       </div>
-                    </a>
+                    </div>
                   ))}
                 </div>
                 <div className="next-page-container">
