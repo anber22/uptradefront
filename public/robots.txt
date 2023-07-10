@@ -3,3 +3,4 @@ Sitemap: https://uptradeit.com/sitemap.xml
 User-agent: *
 Allow: /
 Disallow: /redirect/*
+Disallow: /redirect-coupon/*
