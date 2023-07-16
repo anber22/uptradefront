@@ -38,29 +38,28 @@ export default function Home({
           }}
         />
       </Head>
-     
+      <NextSeo
+        title="Buy Used Phones | Sell My Phone | UpTrade"
+        description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping."
+        canonical={process.env.BASEURL}
+        openGraph={{
+          title: "Buy Used Phones | Sell My Phone | UpTrade",
+          type: "Website",
+          images: [
+            {
+              url: `${process.env.BASEURL}/og_logo.png`,
+              width: 200,
+              height: 200,
+            },
+          ],
+          url: process.env.BASEURL,
+          description:
+            "Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping.",
+          site_name: "UpTrade",
+        }}
+      />
       <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="home-page" onClick={() => changeRangeIndex(1)}>
-        <NextSeo
-          title="Buy Used Phones | Sell My Phone | UpTrade"
-          description="Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping."
-          canonical={process.env.BASEURL}
-          openGraph={{
-            title: "Buy Used Phones | Sell My Phone | UpTrade",
-            type: "Website",
-            images: [
-              {
-                url: `${process.env.BASEURL}/og_logo.png`,
-                width: 200,
-                height: 200,
-              },
-            ],
-            url: process.env.BASEURL,
-            description:
-              "Experience the UpTrade Difference. Buy the Best Certified Used Phones for Less. High Quality Refurbished Phones. Money Back Guarantee. Sell Your Used Phone For More. Fast and Easy. Free Shipping.",
-            site_name: "UpTrade",
-          }}
-        />
         <div className="home-content">
           <div className="home-left">
             { buyStatus === 0 ? (<h1
