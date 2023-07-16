@@ -17,6 +17,8 @@ export default function Home({
 }) {
   const [rangeIndex, setRangeIndex] = useState(0)
   const [buyStatus, setBuyStatus] = useState(0)
+  const [buyType, setBuyType] = useState(0)
+  const [tradeInType, setTradeInType] = useState(0)
   const changeRangeIndex = index => {
     console.log('下一页')
     if (index === 1) {
@@ -59,7 +61,7 @@ export default function Home({
         }}
       />
       <Header navbar={navbar} sellNavbar={sellNavbar} />
-      <main className="home-page" onClick={() => changeRangeIndex(1)}>
+      <main className="home-page">
         <div className="home-content">
           <div className="home-left">
             { buyStatus === 0 ? (<h1
@@ -186,83 +188,85 @@ export default function Home({
 
    
           <div className="brands">
-            <div role="tab">
+            <div onClick={() => {setBuyType(0)}} className={buyType === 0 ? 'tab-selected' : ''} role="tab">
               Apple
             </div>
-            <div role="tab">
+            <div onClick={() => {setBuyType(1)}} className={buyType === 1 ? 'tab-selected' : ''} role="tab">
               Samsung
             </div>
-          </div>  
-
-          <div
-            className="phone-list-show"
-            // data-amp-bind-class="currentTab.current == 'apple' ? 'phone-list-show' : 'phone-list-hidden'"
-          >
-            {listedProduct["Apple"].map((x, index) => (
-              <a href={x.url} key={index}>
-                <div className="phone-card" key={index}>
-                  <div className="image-container">
-                    {x.photoUrl ? (
-                      <img
-                        alt="phone"
-                        width="120"
-                        height="120"
-                        src={x.photoUrl}
-                      />
-                    ) : null}
-                  </div>
-                  <div className="phone-info">
-                    <strong>{x.name}</strong>
-                    <div>
-                      {x.lowPrice ? (
-                        <>
-                          As low as /
-                          <span className="price">${x.lowPrice / 100}</span>
-                        </>
-                      ) : (
-                        "Sold Out"
-                      )}
+          </div>
+          {
+            buyType === 0 ? (
+            <div
+              className="phone-list-show"
+            >
+              {listedProduct["Apple"].map((x, index) => (
+                <a href={x.url} key={index}>
+                  <div className="phone-card" key={index}>
+                    <div className="image-container">
+                      {x.photoUrl ? (
+                        <img
+                          alt="phone"
+                          width="120"
+                          height="120"
+                          src={x.photoUrl}
+                        />
+                      ) : null}
+                    </div>
+                    <div className="phone-info">
+                      <strong>{x.name}</strong>
+                      <div>
+                        {x.lowPrice ? (
+                          <>
+                            As low as /
+                            <span className="price">${x.lowPrice / 100}</span>
+                          </>
+                        ) : (
+                          "Sold Out"
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            ))}
-          </div>
-
-          <div
-            className="phone-list-hidden"
-            // data-amp-bind-class="currentTab.current == 'samsung' ? 'phone-list-show' : 'phone-list-hidden'"
-          >
-            {listedProduct["Samsung"].map((x, index) => (
-              <a href={x.url} key={index}>
-                <div className="phone-card" key={index}>
-                  <div className="image-container">
-                    {x.photoUrl ? (
-                      <img
-                        alt="phone"
-                        width="120"
-                        height="120"
-                        src={x.photoUrl}
-                      />
-                    ) : null}
-                  </div>
-                  <div className="phone-info">
-                    <strong>{x.name}</strong>
-                    <div>
-                      {x.lowPrice ? (
-                        <>
-                          As low as /
-                          <span className="price">${x.lowPrice / 100}</span>
-                        </>
-                      ) : (
-                        "Sold Out"
-                      )}
+                </a>
+              ))}
+            </div>) : 
+            (<div
+              className="phone-list-show"
+            >
+              {listedProduct["Samsung"].map((x, index) => (
+                <a href={x.url} key={index}>
+                  <div className="phone-card" key={index}>
+                    <div className="image-container">
+                      {x.photoUrl ? (
+                        <img
+                          alt="phone"
+                          width="120"
+                          height="120"
+                          src={x.photoUrl}
+                        />
+                      ) : null}
+                    </div>
+                    <div className="phone-info">
+                      <strong>{x.name}</strong>
+                      <div>
+                        {x.lowPrice ? (
+                          <>
+                            As low as /
+                            <span className="price">${x.lowPrice / 100}</span>
+                          </>
+                        ) : (
+                          "Sold Out"
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            ))}
-          </div>
+                </a>
+              ))}
+            </div>)
+          }
+          
+
+        
 
           <div className="button-container">
             <a href="/buy-phone">
@@ -274,80 +278,93 @@ export default function Home({
         <div className="home-phones border-top">
           <h2 className="home-secondary-title">Trade in / Sell Your Phone</h2>
           <div className="brands">
-            <div role="tab">
+            <div setTradeInType  
+              onClick={() => {setTradeInType(0)}} 
+              className={tradeInType === 0 ? 'tab-selected' : ''} 
+              role="tab"
+            >
               Apple
             </div>
-            <div role="tab">
+            <div
+              onClick={() => {setTradeInType(1)}} 
+              className={tradeInType === 1 ? 'tab-selected' : ''} 
+              role="tab"
+            >
               Samsung
             </div>
           </div>
-          <div
-            className="phone-list-show"
-            // data-amp-bind-class="currentSellTab.current == 'apple' ? 'phone-list-show' : 'phone-list-hidden'"
-          >
-            {sellListData["Apple"].map((x, index) => (
-              <a href={x.url} key={index}>
-                <div className="phone-card" key={index}>
-                  <div className="image-container">
-                    {x.photoUrl ? (
-                      <img
-                        alt="phone"
-                        width="120"
-                        height="120"
-                        src={x.photoUrl}
-                      />
-                    ) : null}
-                  </div>
-                  <div className="phone-info">
-                    <strong>{x.name}</strong>
-                    <div>
-                      {x.price ? (
-                        <>
-                          Up to <span className="price">${x.price / 100}</span>
-                        </>
-                      ) : (
-                        "Sold Out"
-                      )}
+          {
+            tradeInType === 0 ? 
+            (<div
+                className="phone-list-show"
+              >
+                {sellListData["Apple"].map((x, index) => (
+                  <a href={x.url} key={index}>
+                    <div className="phone-card" key={index}>
+                      <div className="image-container">
+                        {x.photoUrl ? (
+                          <img
+                            alt="phone"
+                            width="120"
+                            height="120"
+                            src={x.photoUrl}
+                          />
+                        ) : null}
+                      </div>
+                      <div className="phone-info">
+                        <strong>{x.name}</strong>
+                        <div>
+                          {x.price ? (
+                            <>
+                              Up to <span className="price">${x.price / 100}</span>
+                            </>
+                          ) : (
+                            "Sold Out"
+                          )}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <div
+                className="phone-list-show"
+              >
+                {sellListData["Samsung"].map((x, index) => (
+                  <a href={x.url} key={index}>
+                    <div className="phone-card" key={index}>
+                      <div className="image-container">
+                        {x.photoUrl ? (
+                          <img
+                            alt="phone"
+                            width="120"
+                            height="120"
+                            src={x.photoUrl}
+                          />
+                        ) : null}
+                      </div>
+                      <div className="phone-info">
+                        <strong>{x.name}</strong>
+                        <div>
+                          {x.price ? (
+                            <>
+                              Up to <span className="price">${x.price / 100}</span>
+                            </>
+                          ) : (
+                            "Sold Out"
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )
+          }
+          
 
-          <div
-            className="phone-list-hidden"
-            // data-amp-bind-class="currentSellTab.current == 'samsung' ? 'phone-list-show' : 'phone-list-hidden'"
-          >
-            {sellListData["Samsung"].map((x, index) => (
-              <a href={x.url} key={index}>
-                <div className="phone-card" key={index}>
-                  <div className="image-container">
-                    {x.photoUrl ? (
-                      <img
-                        alt="phone"
-                        width="120"
-                        height="120"
-                        src={x.photoUrl}
-                      />
-                    ) : null}
-                  </div>
-                  <div className="phone-info">
-                    <strong>{x.name}</strong>
-                    <div>
-                      {x.price ? (
-                        <>
-                          Up to <span className="price">${x.price / 100}</span>
-                        </>
-                      ) : (
-                        "Sold Out"
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
+          
 
           <div className="button-container">
             <a href="/trade-in-phone">
