@@ -342,8 +342,8 @@ function BuyModel({
           description: metaDescription,
           site_name: "UpTrade",
         }}
-        noindex={!!skuType}
-        nofollow={!!skuType}
+        index={true}
+        follow={true}
       />
       <Header navbar={navbar} sellNavbar={sellNavbar} />
       <main className="model-page buy-model-page">
