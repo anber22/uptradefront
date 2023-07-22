@@ -114,7 +114,7 @@ function BuyModel({
       urlObj = {
         gradeAndMerchant: item.merchant,
         redirectUrl: item.buyUrl,
-        id: item.productId,
+        id: item.productId
       }
     }else{
       result = urlcat(`/redirect/buy`)
@@ -128,15 +128,13 @@ function BuyModel({
         id: item.productId
       }
     }
-    var newWin = window.open(result)
-    newWin.urlObj = urlObj
-  }
-  const toTop = () => {
-    window.scrollTo(0,0)
+    var newwin = window.open(result)
+    newwin.urlObj = urlObj
   }
   const [rangeIndex, setRangeIndex] = useState(0)
   const [nodeIndex, setNodeIndex] = useState(-1);
   const changeFAQ = (index) => {
+    console.log('节点');
     if (nodeIndex === index) {
       nodeIndex = setNodeIndex(-1);
     } else {
@@ -317,7 +315,7 @@ function BuyModel({
             }}
           />
         ) : null}
-        <style
+         <style
           amp-custom=""
           dangerouslySetInnerHTML={{
             __html: pageCss,
@@ -1217,7 +1215,7 @@ function BuyModel({
         >
           <button
             className="second-button back-to-top"
-            onClick={() => {toTop()}}
+            on={`tap:AMP.scrollTo(id="top", position="top")`}
           >
             Back To Top
           </button>
@@ -1280,10 +1278,11 @@ function SellModel({
     urlObj = {
       merchant: item.merchant,
       redirectUrl: item.url,
-      id: item.sku
+      id: item.sku,
+      type: 'tradein'
     }
-    var newwin = window.open(result)
-    newwin.urlObj = urlObj
+    var newWin = window.open(result)
+    newWin.urlObj = urlObj
   }
   const [rangeIndex, setRangeIndex] = useState(0)
   const changeRangeIndex = (index) => {
@@ -1357,12 +1356,6 @@ function SellModel({
             }}
           />
         ) : null}
-        <style
-          amp-custom=""
-          dangerouslySetInnerHTML={{
-            __html: pageCss,
-          }}
-        />
       </Head>
       <NextSeo
         title={title}
@@ -1571,40 +1564,39 @@ function SellModel({
             </div>
 
             <div className="divider" />
-            <div className="review-box">
-              {reviewsInfo.reviews.map((x, index) => {
-                  return rangeIndex === index ?
-                  (<div key={x.store_review_id} className="review-card">
-                    <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
-                    <div className="review-info">
-                      <div className="review-ratings">
-                        {new Array(x.rating).fill("").map((x, index) => (
-                          <img
-                            key={index}
-                            width="24"
-                            height="24"
-                            alt="rating"
-                            src="/rating.svg"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <div
-                      className="review-content"
-                      dangerouslySetInnerHTML={{ __html: x.comments }}
-                    ></div>
-                  </div>)
-                  : false
-              })}
-              { rangeIndex > 0 ? (
-                <img src="/left-white-arrow.png" className="last-one" onClick={() => changeRangeIndex(-1)}/>
-                ) : '' 
-              }
-              { rangeIndex < (reviewsInfo.reviews.length - 1) ? (
-                <img src="/right-white-arrow.png" className="next-one" onClick={() => changeRangeIndex(1)}/>
-                ) : '' 
-              }
-            </div>
+
+            {reviewsInfo.reviews.map((x, index) => {
+                 return rangeIndex === index ?
+                 (<div key={x.store_review_id} className="review-card">
+                   <div className="review-author">{`${x.reviewer.first_name} ${x.reviewer.last_name}`}</div>
+                   <div className="review-info">
+                     <div className="review-ratings">
+                       {new Array(x.rating).fill("").map((x, index) => (
+                         <img
+                           key={index}
+                           width="24"
+                           height="24"
+                           alt="rating"
+                           src="/rating.svg"
+                         />
+                       ))}
+                     </div>
+                   </div>
+                   <div
+                     className="review-content"
+                     dangerouslySetInnerHTML={{ __html: x.comments }}
+                   ></div>
+                 </div>)
+                 : false
+             })}
+             { rangeIndex > 0 ? (
+               <img src="/left-white-arrow.png" className="last-one" onClick={() => changeRangeIndex(-1)}/>
+               ) : '' 
+             }
+             { rangeIndex < (reviewsInfo.reviews.length - 1) ? (
+               <img src="/right-white-arrow.png" className="next-one" onClick={() => changeRangeIndex(1)}/>
+               ) : '' 
+             }
             <div className="model-reviews-footer">
               <a href="/reviews">
                 <button>See All Reviews</button>

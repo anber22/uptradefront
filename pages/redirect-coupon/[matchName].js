@@ -43,7 +43,11 @@ export default function RedirectCoupon() {
         />
       </Head>
       <main className="redirect-page">
-        <NextSeo nofollow noindex />
+        <NextSeo 
+          title={ type === "tradein" ? "UpTrade Trade-In Redirect Coupon" : "UpTrade Buy Redirect Coupon" }
+          nofollow 
+          noindex 
+        />
         <h1>25% Off Your Order</h1>
         <div className="copy-input">
           <div className="coupon-code">UPTRADE25</div>

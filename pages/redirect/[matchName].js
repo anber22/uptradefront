@@ -10,6 +10,7 @@ export default function Redirect() {
   const [id, setId] = useState()
   const [type, setType] = useState()
   const [merchant, setMerchant] = useState("");
+
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
     const path = location.pathname?.replace("/redirect/", "");
@@ -50,7 +51,6 @@ export default function Redirect() {
         window.location.href = url;
       });
     } else if(window && !window.urlObj) {
-      console.log('页面地址', window.location)
       window.location.replace(window.origin)
     }
   }, []);
@@ -58,7 +58,11 @@ export default function Redirect() {
 
   return (
     <main className="redirect-page">
-      <NextSeo noindex nofollow />
+      <NextSeo 
+        title={ type === "tradein" ? "UpTrade Trade-In Redirect" : "UpTrade Buy Redirect" }
+        noindex 
+        nofollow
+      />
       <h1>We are redirecting to the deal...</h1>
       <h2>
         UpTrade &gt; &gt;{" "}

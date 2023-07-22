@@ -308,7 +308,8 @@ export default function TradeInPhone({
     urlObj = {
       merchant: item.merchant,
       redirectUrl: item.url,
-      id: item.sku
+      id: item.sku,
+      type: 'tradein'
     }
     var newwin = window.open(result)
     newwin.urlObj = urlObj
