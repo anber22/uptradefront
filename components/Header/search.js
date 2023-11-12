@@ -12,7 +12,7 @@ export default function Search() {
 
       try {
         const productData = await fetch(
-          urlcat("https://api-single.uptradeit.com/search/product", {
+          urlcat("https://api-single-test.uptradeit.com/api/search/product", {
             name: searchKey,
           })
         ).then((response) => response.json());

@@ -82,6 +82,7 @@ function BuyModel({
   price,
   reviewsInfo,
   relatedGoods,
+  amazonPartner,
   metaDescription,
   qa,
   path,
@@ -717,6 +718,42 @@ function BuyModel({
         {type !== "BRAND" ? (
           <div className="model-related-content">
             <div className="desktop-phone-list">
+              <div className="phone-list-item" onClick={() => {getUrl({
+                merchant: 'amazon',
+                name: amazonPartner.name,
+                condition: amazonPartner.condition,
+                buyUrl: amazonPartner.buyUrl,
+                productId: `AMAZON-PARTNER-${amazonPartner.name}`
+              })}}>
+                <div className="img-container">
+                  {amazonPartner.brandLogoUrl ? (
+                    <img
+                      width="100"
+                      height="100"
+                      src={amazonPartner.brandLogoUrl}
+                    />
+                  ) : null}
+                </div>
+                <div className="description">
+                  <span>{amazonPartner.name}</span>
+                  {/* <span className="attr">
+                    {`${item.carrier} ${item.storage} ${item.color}`}
+                  </span> */}
+                </div>
+
+                <div className="condition-container">
+                  <div className={`condition ${amazonPartner.condition} `}>
+                    {amazonPartner.condition}
+                  </div>
+                </div>
+
+                <div className="action">
+                  <span className="price color-red">
+                    <img className="sale-img" src="/sale.png"/>
+                    Sale
+                  </span>
+                </div>
+              </div>
               {relatedGoods?.map((item) => (
                 // <a
                 //   key={item.productId}
@@ -789,6 +826,54 @@ function BuyModel({
             </div>
 
             <div className="mobile-phone-list">
+              <div className="phone-list-item" onClick={() => {getUrl({
+                merchant: 'amazon',
+                name: amazonPartner.name,
+                condition: amazonPartner.condition,
+                buyUrl: amazonPartner.buyUrl,
+                productId: `AMAZON-PARTNER-${amazonPartner.name}`
+              })}}>
+                <div className="top">
+                  {amazonPartner.brandLogoUrl ? (
+                    <img width="50" height="50" src={amazonPartner.brandLogoUrl} />
+                  ) : null}
+                  <div className={`condition ${amazonPartner.condition} `}>
+                    {amazonPartner.condition}
+                  </div>
+                </div>
+                <div className="bottom">
+                  <div className="description">
+                    <span className="attr-name">{amazonPartner.name}</span>
+                    {/* <span className="attr">
+                      {`${item.carrier} ${item.storage} ${item.color}`}
+                    </span> */}
+                  </div>
+                  <div className="action">
+                    <span className="price color-red">
+                      <img className="sale-img" src="/sale.png"/>
+                      Sale
+                    </span>
+                  </div>
+                  {/* {amazonPartner.merchant === "SmartphonesPLUS" ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-end",
+                      }}
+                    >
+                      <span className="old-price">
+                        ${item.currentPrice / 100}
+                      </span>
+                      <span className="price">
+                        ${Number((item.currentPrice / 100) * 0.75).toFixed()}
+                      </span>
+                    </div>
+                  ) : (
+                    <span className="price">${item.currentPrice / 100}</span>
+                  )} */}
+                </div>
+              </div>
               {relatedGoods?.map((item) => (
                 // <a
                 //   key={item.productId}
@@ -1728,11 +1813,11 @@ export default function Model({ pageType, ...props }) {
 export async function getStaticPaths() {
   console.log("fetch static data");
   const response = await fetch(
-    "https://uptrade-datafeed.s3.us-east-2.amazonaws.com/buy-low-price-data.json"
+    "https://uptrtest.s3.us-east-2.amazonaws.com/buy-low-price-data.json"
   ).then((response) => response.json());
 
   const skuResponse = await fetch(
-    "https://uptrade-datafeed.s3.us-east-2.amazonaws.com/sku-statistic-data.json"
+    "https://uptrtest.s3.us-east-2.amazonaws.com/sku-statistic-data.json"
   ).then((response) => response.json());
 
   const result = [
@@ -1976,7 +2061,7 @@ async function getBuyProps(params) {
       : `${product.brand}-${product.productName.split(" ").join("-")}`;
 
   const navbar = await getNavBar();
-
+  console.log('参数', product)
   return {
     props: {
       ...product,
@@ -1989,6 +2074,7 @@ async function getBuyProps(params) {
         product.productMobileImageUrl?.replaceAll(" ", "%20") ?? null,
       path: `/${params.matchName}`,
       relatedGoods: product.relatedGoods,
+      amazonPartner: product.amazonPartner,
       reviewsInfo,
       ...navbar,
     },

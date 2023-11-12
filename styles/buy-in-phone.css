@@ -535,3 +535,9 @@
 .rc-pagination.rc-pagination-disabled .rc-pagination-item-ellipsis {
   opacity: 1;
 }
+.color-red{
+  color: #BC0000 !important;
+}
+.sale-img{
+  margin-right: 6px;
+}
