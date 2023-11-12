@@ -777,6 +777,7 @@ function BuyModel({
                 //   rel="noreferrer"
                 //   className="phone-list-item"
                 // >
+                // 针对amazon的特殊处理，固定一条在第一位
                 <div key={item.productId} className="phone-list-item" onClick={() => {getUrl(item)}}>
                   <div className="img-container">
                     {item.brandLogoUrl ? (
