@@ -135,7 +135,6 @@ function BuyModel({
   const [rangeIndex, setRangeIndex] = useState(0)
   const [nodeIndex, setNodeIndex] = useState(-1);
   const changeFAQ = (index) => {
-    console.log('节点');
     if (nodeIndex === index) {
       nodeIndex = setNodeIndex(-1);
     } else {
@@ -1812,7 +1811,6 @@ export default function Model({ pageType, ...props }) {
 }
 
 export async function getStaticPaths() {
-  console.log("fetch static data");
   const response = await fetch(
     "https://uptrtest.s3.us-east-2.amazonaws.com/buy-low-price-data.json"
   ).then((response) => response.json());
@@ -1906,7 +1904,6 @@ export async function getStaticPaths() {
     };
   });
 
-  console.log("fetch sell data");
 
   const sellResponse = await fetch(
     "https://uptrade-datafeed.s3.us-east-2.amazonaws.com/trade-in-statistic-data.json"
@@ -1961,7 +1958,6 @@ async function getBuyProps(params) {
   if (reviewsResponseCache) {
     reviewsResponse = reviewsResponseCache;
   } else {
-    console.log("fetch reviews");
     reviewsResponse = await fetch(
       "https://api.reviews.io/merchant/reviews?page=0&per_page=1000&order=rating&sort=highest_rated&store=uptradeit-com"
     ).then((response) => response.json());
@@ -2062,7 +2058,6 @@ async function getBuyProps(params) {
       : `${product.brand}-${product.productName.split(" ").join("-")}`;
 
   const navbar = await getNavBar();
-  console.log('参数', product)
   return {
     props: {
       ...product,
