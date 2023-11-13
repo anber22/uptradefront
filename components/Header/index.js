@@ -98,7 +98,7 @@ export const Header = ({ navbar, sellNavbar, hiddenSearch }) => {
                     >
                       <amp-autocomplete
                         filter="substring"
-                        src="https://api-single-test.uptradeit.com/api/search/product"
+                        src="https://api-single.uptradeit.com/api/search/product"
                         query="name"
                         filter-value="name"
                         items="data"

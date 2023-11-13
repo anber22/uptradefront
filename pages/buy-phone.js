@@ -148,7 +148,7 @@ export default function BuyPhone({
 
       try {
         const productData = await fetch(
-          urlcat("https://api-single-test.uptradeit.com/api/search/product", {
+          urlcat("https://api-single.uptradeit.com/api/search/product", {
             name: searchKey,
           })
         ).then((response) => response.json());
@@ -190,7 +190,7 @@ export default function BuyPhone({
       const ids = searchKeys.selectedValues.map((x) => x.categoryValueId);
 
       const response = await fetch(
-        urlcat("https://api-single-test.uptradeit.com/api/search/category/values", {
+        urlcat("https://api-single.uptradeit.com/api/search/category/values", {
           parentCategoryValueIds: ids.join(","),
         })
       ).then((response) => response.json());
@@ -253,7 +253,7 @@ export default function BuyPhone({
         orderBy: searchKeys.orderBy,
       };
 
-      const listData = await fetch("https://api-single-test.uptradeit.com/api/search", {
+      const listData = await fetch("https://api-single.uptradeit.com/api/search", {
         method: "POST",
         headers: {
           ["Content-Type"]: "application/json",
@@ -271,7 +271,7 @@ export default function BuyPhone({
 
   const [, addRank] = useAsyncFn(async (name) => {
     return fetch(
-      urlcat("https://api-single-test.uptradeit.com/api/search/:name/rank", { name }),
+      urlcat("https://api-single.uptradeit.com/api/search/:name/rank", { name }),
       {
         method: "PUT",
       }
@@ -971,10 +971,10 @@ export async function getStaticProps() {
 
   console.log("fetch category data");
   const data = await fetch(
-    "https://api-single-test.uptradeit.com/api/search/category/values"
+    "https://api-single.uptradeit.com/api/search/category/values"
   ).then((response) => response.json());
-  const listData = await fetch("https://api-single-test.uptradeit.com/api/search", {
-    method: "POST",
+  const listData = await fetch("https://api-single.uptradeit.com/api/search", {
+    method: "POST", 
     headers: {
       ["Content-Type"]: "application/json",
     },
@@ -982,7 +982,7 @@ export async function getStaticProps() {
   }).then((response) => response.json());
 
   const productData = await fetch(
-    "https://api-single-test.uptradeit.com/api/search/product"
+    "https://api-single.uptradeit.com/api/search/product"
   ).then((response) => response.json());
 
   if (!data.success || !listData.success || !productData.success)

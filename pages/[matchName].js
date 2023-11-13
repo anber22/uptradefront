@@ -1816,11 +1816,11 @@ export default function Model({ pageType, ...props }) {
 
 export async function getStaticPaths() {
   const response = await fetch(
-    "https://uptrtest.s3.us-east-2.amazonaws.com/buy-low-price-data.json"
+    "https://uptrade-datafeed.s3.us-east-2.amazonaws.com/buy-low-price-data.json"
   ).then((response) => response.json());
 
   const skuResponse = await fetch(
-    "https://uptrtest.s3.us-east-2.amazonaws.com/sku-statistic-data.json"
+    "https://uptrade-datafeed.s3.us-east-2.amazonaws.com/sku-statistic-data.json"
   ).then((response) => response.json());
 
   const result = [
