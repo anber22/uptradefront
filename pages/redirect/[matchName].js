@@ -31,7 +31,7 @@ export default function Redirect() {
       const path = location.pathname?.replace("/redirect/", "");
       const [type] = path?.split("-") ?? [];
   
-      fetch("https://api-single.uptradeit.com/api/statistics/request-record", {
+      fetch("https://api-single.uptradeit.com/statistics/request-record", {
         method: "POST",
         headers: {
           ["Content-Type"]: "application/json",

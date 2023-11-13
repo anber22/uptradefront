@@ -143,7 +143,7 @@ export default function Blog({
 
 export async function getStaticProps() {
   const blogResponse = await fetch(
-    "https://api-single.uptradeit.com/api/market/blog/search",
+    "https://api-single.uptradeit.com/market/blog/search",
     {
       method: "POST",
       headers: {
@@ -158,7 +158,7 @@ export async function getStaticProps() {
   ).then((response) => response.json());
 
   const blogListResponse = await fetch(
-    "https://api-single.uptradeit.com/api/market/blog/search",
+    "https://api-single.uptradeit.com/market/blog/search",
     {
       method: "POST",
       headers: {

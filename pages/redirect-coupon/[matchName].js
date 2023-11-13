@@ -17,7 +17,7 @@ export default function RedirectCoupon() {
       setMatchName(window.urlObj.matchName)
       setId(window.urlObj.id)
       setType(window.urlObj.type)
-      fetch("https://api-single.uptradeit.com/api/statistics/request-record", {
+      fetch("https://api-single.uptradeit.com/statistics/request-record", {
         method: "POST",
         headers: {
           ["Content-Type"]: "application/json",
