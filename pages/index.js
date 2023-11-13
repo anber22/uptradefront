@@ -556,7 +556,7 @@ export default function Home({
 
 export async function getStaticProps() {
   const listedProduct = await fetch(
-    "https://api-single.uptradeit.com/api/search/newly-listed-product"
+    "https://api-single.uptradeit.com/search/newly-listed-product"
   ).then((response) => response.json());
 
   const reviewsResponse = await fetch(
@@ -564,7 +564,7 @@ export async function getStaticProps() {
   ).then((response) => response.json());
 
   const sellListData = await fetch(
-    "https://api-single.uptradeit.com/api/search/trade-in/sell-your-phone"
+    "https://api-single.uptradeit.com/search/trade-in/sell-your-phone"
   ).then((response) => response.json());
   const navBarData = await getNavBar();
 

@@ -74,7 +74,7 @@ export default function Contact({
     </html>`;
 
     await fetch(
-      "https://api-single.uptradeit.com/api/api/message_books/createemail",
+      "https://api-single.uptradeit.com/api/message_books/createemail",
       {
         method: "POST",
         headers: {
