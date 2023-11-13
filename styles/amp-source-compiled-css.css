@@ -367,8 +367,8 @@ header.fixed {
   .main-menu-dropdown-list:not(.main-menu-dropdown-megamenu)
   a,
 .mega-menu .main-menu .main-menu-dropdown-list:not(.main-menu-dropdown-shop) a {
-  transition: -webkit-transform 0.25s ease-out;
-  -webkit-transform: translate3d(0, 0, 0);
+  transition: transform 0.25s ease-out;
+  transform: translate3d(0, 0, 0);
 }
 .mega-menu
   .main-menu
@@ -378,7 +378,7 @@ header.fixed {
   .main-menu
   .main-menu-dropdown-list:not(.main-menu-dropdown-shop)
   a:hover {
-  -webkit-transform: translate3d(3px, 0, 0);
+  transform: translate3d(3px, 0, 0);
 }
 .mega-menu
   .main-menu
@@ -432,7 +432,7 @@ header.fixed {
   border-radius: 3px;
   left: 10px;
   position: relative;
-  text--webkit-transform: uppercase;
+  text-transform: uppercase;
   font-size: 0.75rem;
   top: -2px;
 }
@@ -759,12 +759,12 @@ header.fixed {
     min-width: 250px;
     right: 100%;
     left: 54px;
-    -webkit-transform: translate(-100%, 0);
+    transform: translate(-100%, 0);
   }
   .header .main-menu .main-menu-dropdown-list.main-menu-dropdown-megamenu {
     min-width: 800px;
     left: 50%;
-    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
   }
   .header .main-menu input[type="checkbox"]:checked + .main-menu-dropdown-list {
     display: none;
@@ -829,7 +829,7 @@ header.fixed {
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   width: 20px;
   height: 1px;
 }
@@ -1526,7 +1526,7 @@ header.fixed {
     border: none;
     padding: 12px 0;
     font-weight: 700;
-    text--webkit-transform: uppercase;
+    text-transform: uppercase;
     font-size: 16px;
     line-height: 1.5;
     margin-bottom: 0;
@@ -3838,7 +3838,7 @@ button {
     border: none;
     padding: 12px 0;
     font-weight: 700;
-    text--webkit-transform: uppercase;
+    text-transform: uppercase;
     font-size: 16px;
     line-height: 1.5;
     margin-bottom: 0;
