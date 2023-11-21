@@ -42,7 +42,7 @@ export default function Redirect() {
           type: window.urlObj.type === "tradein" ? "TRADE_IN" : "BUY",
         }),
       }).finally(() => {
-        const url = ''
+        let url = ''
         if(merchant === 'Gazelle' || merchant === 'gazelle' || matchName === 'Gazelle'){
           url = urlcat(window.urlObj.redirectUrl);
         }else{
