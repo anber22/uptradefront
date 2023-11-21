@@ -42,7 +42,16 @@ export default function Redirect() {
           type: window.urlObj.type === "tradein" ? "TRADE_IN" : "BUY",
         }),
       }).finally(() => {
-        const url = urlcat(window.urlObj.redirectUrl, (merchant === 'Gazelle' || matchName === 'Gazelle') ? {} : {
+        if(merchant === 'Gazelle' || merchant === 'gazelle' || matchName === 'Gazelle'){
+          const url = urlcat(window.urlObj.redirectUrl);
+        }else{
+          const url = urlcat(window.urlObj.redirectUrl, {
+            utm_source: "uptradeit.com",
+            utm_medium: "affiliate",
+            utm_campaign: "uptradeit.com",
+          });
+        }
+        const url = urlcat(window.urlObj.redirectUrl, () ? {} : {
           utm_source: "uptradeit.com",
           utm_medium: "affiliate",
           utm_campaign: "uptradeit.com",
