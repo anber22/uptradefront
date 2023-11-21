@@ -43,7 +43,7 @@ export default function Redirect() {
         }),
       }).finally(() => {
         let url = ''
-        if(merchant === 'Gazelle' || merchant === 'gazelle' || matchName === 'Gazelle'){
+        if(window.urlObj.merchant === 'Gazelle' || window.urlObj.merchant === 'gazelle' || window.urlObj.matchName === 'Gazelle'){
           url = urlcat(window.urlObj.redirectUrl);
         }else{
           url = urlcat(window.urlObj.redirectUrl, {
