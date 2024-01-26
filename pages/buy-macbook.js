@@ -1,7 +1,6 @@
 import { useAsync, useAsyncFn } from "react-use";
 import { useCallback, useState, useEffect } from "react";
 import Pagination from "rc-pagination";
-import SelectSearch from "react-select-search";
 import urlcat from "urlcat";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -10,7 +9,7 @@ import { getNavBar } from "../utils/getNavBar";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import Tippy from "@tippyjs/react/headless";
-import pageCss from "!raw-loader!../styles/buy-in-phone.css";
+import pageCss from "../styles/buy-in-phone.css";
 
 const orderByDict = {
   RECOMMENDED: "Recommended",
@@ -28,7 +27,6 @@ const conditionDescriptions = {
 
 function pageTitleHandler(pageTitle) {
   let showTitle = pageTitle;
-
   if (pageTitle && pageTitle.substr(pageTitle.length - 1) === "|") {
     showTitle = pageTitle.substr(0, pageTitle.length - 1);
   }
@@ -86,7 +84,7 @@ export default function BuyPhone({
   navbar,
   appleList,
   sellNavbar,
-  sellAppleList,
+  sellAppleList
 }) {
   const router = useRouter();
   const [isFocus, setIsFocus] = useState(false);
@@ -108,16 +106,24 @@ export default function BuyPhone({
   const matchMedia = useMediaQuery("(min-width: 1280px");
 
   const onOptionSelect = useCallback(
-    (item, conditionName) => {
+    (item, conditionName, isDelete) => {
+      console.log('item', item, conditionName)
       setSearchKeys((prev) => {
-        const values = prev.selectedValues.some(
-          (x) => x.categoryValueId === item.categoryValueId
-        )
-          ? prev.selectedValues.filter(
-              (x) => x.categoryValueId !== item.categoryValueId
-            )
-          : [...prev.selectedValues, item];
-
+        let values = []
+        if(isDelete){
+          values = prev.selectedValues.filter(
+            (x) => x.value !== item.value
+          )
+        }else{
+          values = prev.selectedValues.some(
+            (x) => x.value === item.name
+          )
+            ? prev.selectedValues.filter(
+                (x) => x.value !== item.name
+              )
+            : [...prev.selectedValues, {name: conditionName?.toLowerCase(), value: item.name}];
+        }
+       
         return {
           ...prev,
           searchKey,
@@ -162,7 +168,7 @@ export default function BuyPhone({
     },
     [products, searchKey]
   );
-
+  
   const onOrderClick = useCallback(
     (orderBy) => {
       setSearchKeys((prev) => ({
@@ -190,9 +196,7 @@ export default function BuyPhone({
       const ids = searchKeys.selectedValues.map((x) => x.categoryValueId);
 
       const response = await fetch(
-        urlcat("https://api-single.uptradeit.com/search/category/values", {
-          parentCategoryValueIds: ids.join(","),
-        })
+        urlcat("https://api-single.uptradeit.com/search/product/macbook/condition/list")
       ).then((response) => response.json());
 
       if (!response.success) return initialConditions;
@@ -204,6 +208,7 @@ export default function BuyPhone({
   }, [searchKeys.selectedValues, initialConditions]);
 
   const { value: data = initData } = useAsync(async () => {
+    console.log('触发遍历',conditions)
     if (
       !searchKeys.selectedValues.length &&
       searchKeys.pageNum === 1 &&
@@ -212,7 +217,7 @@ export default function BuyPhone({
     ) {
       return initData;
     }
-
+    console.log('searchKeys.selectedValues', searchKeys.selectedValues)
     try {
       // filter data
       const body = {
@@ -220,40 +225,43 @@ export default function BuyPhone({
         pageNum: searchKeys.pageNum,
         pageSize: 20,
         conditions: searchKeys.selectedValues
-          .filter((x) => x.categoryId === 1)
-          .map((x) => x.name),
-        carriers: searchKeys.selectedValues
-          .filter((x) => x.categoryId === 2)
-          .map((x) => x.name),
-        storages: searchKeys.selectedValues
-          .filter((x) => x.categoryId === 5)
-          .map((x) => x.name),
-        colors: searchKeys.selectedValues
-          .filter((x) => x.categoryId === 6)
-          .map((x) => x.name),
-        prices: searchKeys.selectedValues
-          .filter((x) => x.categoryId === 7)
-          .map((x) =>
-            x.name
-              .split(" ")
-              .filter((x) => x !== "-")
-              .join("_")
-              .toUpperCase()
-          ),
+          .filter((x) => x.name === 'condition')
+          .map((x) => x.value),
         brands: searchKeys.selectedValues
-          .filter((x) => x.categoryId === 3)
-          .map((x) => x.name),
+          .filter((x) => x.name === 'brand')
+          .map((x) => x.value),
         models: searchKeys.selectedValues
-          .filter((x) => x.categoryId === 4)
-          .map((x) => x.name),
+          .filter((x) => x.name === 'model')
+          .map((x) => x.value),
+        screenSizes: searchKeys.selectedValues
+          .filter((x) => x.name === 'screen size')
+          .map((x) => x.value),
+        years: searchKeys.selectedValues
+          .filter((x) => x.name === 'years')
+          .map((x) => x.value),
+        cpus: searchKeys.selectedValues
+          .filter((x) => x.name === 'cpu')
+          .map((x) => x.value),
+        rams: searchKeys.selectedValues
+          .filter((x) => x.name === 'ram')
+          .map((x) => x.value),
+        storages: searchKeys.selectedValues
+          .filter((x) => x.name === 'storage')
+          .map((x) => x.value),
+        colors: searchKeys.selectedValues
+          .filter((x) => x.name === 'color')
+          .map((x) => x.value),
+        prices: searchKeys.selectedValues
+          .filter((x) => x.name === 'price')
+          .map((x) => x.value),
         merchants: searchKeys.selectedValues
-          .filter((x) => x.categoryId === 8)
-          .map((x) => x.name),
+          .filter((x) => x.name === 'merchant')
+          .map((x) => x.value),
         searchKey: searchKeys.searchKey,
         orderBy: searchKeys.orderBy,
       };
-
-      const listData = await fetch("https://api-single.uptradeit.com/search", {
+console.log('body', body,searchKeys.selectedValues)
+      const listData = await fetch("https://api-single.uptradeit.com/search/product/macbook/result/list", {
         method: "POST",
         headers: {
           ["Content-Type"]: "application/json",
@@ -278,19 +286,34 @@ export default function BuyPhone({
     );
   }, []);
 
+  const getId = (key, value) => {
+    // console.log('aaa', conditions)
+    // const target = conditions.find(item => item.name.toLowerCase() === key)
+    // console.log('target', key, target)
+
+    return
+  }
   useEffect(() => {
     if (!router?.query) return;
-
     const {
-      brand,
-      brandCategoryValueId,
-      modelName,
-      modelId,
-      searchKey,
+      year,
+      screenSize,
+      cpu,
+      ram,
+      model,
+      storage,
+      color,
       toResult,
     } = router.query;
-
+    console.log('xxx', year,
+    screenSize,
+    cpu,
+    ram,
+    model,
+    storage,
+    color)
     setSearchKey(searchKey ?? "");
+
     setSearchKeys({
       pageNum: 1,
       searchKey: searchKey ?? "",
@@ -299,21 +322,18 @@ export default function BuyPhone({
       models: [],
       merchants: [],
       selectedValues: [
-        modelId
-          ? { name: modelName, categoryValueId: Number(modelId), categoryId: 4 }
-          : undefined,
-        brand
-          ? {
-              name: brand,
-              categoryValueId: Number(brandCategoryValueId),
-              categoryId: 3,
-            }
-          : undefined,
+        year ? {name: 'year', value:year} : undefined,
+        screenSize ? {name: 'screen size', value: screenSize} : undefined,
+        model ? {name: 'model', value: model} : undefined,
+        cpu ? {name: 'cpu', value: cpu} : undefined,
+        ram ? {name: 'ram', value: ram} : undefined,
+        storage ? {name: 'storage', value:storage} : undefined,
+        color ? {name: 'color', value: color} : undefined
       ].filter(Boolean),
     });
 
     if (toResult) {
-      window.scrollTo(0, 350);
+      window.scrollTo(0, 0);
     }
   }, [router]);
   const getUrl = item =>{
@@ -355,13 +375,13 @@ export default function BuyPhone({
       <main className="buy-phone-page">
         <NextSeo
           title={pageTitleHandler(
-            `Browse Used Refurbished Phones and Devices for Sale`
+            `Browse Certified Refrubished Product for Sales`
           )}
           canonical={`${process.env.BASEURL}/buy-phone`}
           description={`Considering buying a used phone? Browse UpTrade certified phones. View photos of the phone you'll receive. 30 day free returns. Free shipping.`}
           openGraph={{
             title: pageTitleHandler(
-              `Browse Used Refurbished Phones and Devices for Sale`
+              `Browse Certified Refrubished Product for Sales`
             ),
             type: "Product.group",
             "twitter:image":
@@ -378,7 +398,7 @@ export default function BuyPhone({
             site_name: "UpTrade",
           }}
         />
-        <div className="buy-phone-conditions">
+         <div className="buy-phone-conditions">
           <div className="conditions-content">
             {conditions.map((data) => (
               <div className="condition-section" key={data.id}>
@@ -410,10 +430,10 @@ export default function BuyPhone({
                     ? data.values.map((item) => (
                         <div
                           key={item.categoryValueId}
-                          onClick={() => onOptionSelect(item)}
+                          onClick={() => onOptionSelect(item, data.name)}
                           className={`condition-item ${
                             searchKeys.selectedValues.some(
-                              (x) => x.categoryValueId === item.categoryValueId
+                              (x) => x.value === item.name
                             )
                               ? "selected-condition-item"
                               : undefined
@@ -431,128 +451,15 @@ export default function BuyPhone({
 
         <div className="buy-phone-content">
           <div className="buy-phone-page-title">
-            <h1>Browse Refurbished Phones and Devices for Sale</h1>
+            <h1>Browse Certified Refrubished Product for Sales</h1>
             <h2>
-              Among hundreds of used phone and device sellers, we have selected
-              a handful of certified resellers and marketplaces that provide
-              quality certified used or refurbished phones and devices.
+            Experience peace of mind and simplified shopping. From thousands of sellers, we select the best certified resellers for top-notch quality. Our apple-to-apple comparisons make finding the best price effortless. Buy Used Without The Risk.
             </h2>
           </div>
 
-          <div className="buy-phone-search-form">
-            <SelectSearch
-              options={products}
-              name="search"
-              value={searchKey}
-              onChange={(key) => setSearchKey(key)}
-              placeholder="Search phone manufacturer and model"
-              search
-              getOptions={getOptions}
-              debounce={1000}
-              renderValue={(props, snapshot, className) => {
-                return (
-                  <input
-                    {...props}
-                    value={searchKey}
-                    onChange={(event) => {
-                      setSearchKey(event.target.value);
-                      props.onChange(event);
-                    }}
-                    onKeyDown={(event) => {
-                      props.onKeyDown(event);
-                      if (event.key === "Enter") {
-                        onSearchClick();
-                      }
-                    }}
-                    onFocus={(e) => {
-                      props.onFocus(e);
-                      setIsFocus(true);
-                    }}
-                    onBlur={(e) => {
-                      props.onBlur(e);
-                      setIsFocus(false);
-                    }}
-                    className={className}
-                  />
-                );
-              }}
-              renderOption={(optionsProps, optionData) => {
-                return (
-                  <button
-                    {...optionsProps}
-                    onMouseDown={(event) => {
-                      optionsProps.onMouseDown(event);
-                      onSearchClick(optionData.name);
-                      addRank(optionData.name);
-                    }}
-                  >
-                    {optionData.name}
-                  </button>
-                );
-              }}
-            />
-            <button
-              className="btn btn-primary search-button"
-              onClick={() => onSearchClick()}
-            >
-              Search
-            </button>
-            <svg
-              className="form-search-icon"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              onClick={() => onSearchClick()}
-            >
-              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-            </svg>
-          </div>
           <div
-            className="carrier-options"
-            style={{
-              height: !matchMedia && !chevronExpand ? 88 : undefined,
-            }}
-          >
-            {carrierOptions.map((item) => (
-              <div
-                key={item.categoryValueId}
-                className={`carrier-option ${
-                  searchKeys.selectedValues.some(
-                    (x) => x.categoryValueId === item.categoryValueId
-                  )
-                    ? "selected-carrier-option"
-                    : undefined
-                }`}
-                onClick={() => onOptionSelect(item)}
-              >
-                {item.name}
-              </div>
-            ))}
-          </div>
-
-          {!matchMedia ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "12px",
-              }}
-            >
-              <img
-                src="/svg/chevron-states.svg"
-                className="chevron"
-                width="18"
-                height="18"
-                style={{
-                  transform: chevronExpand ? "rotate(180deg)" : undefined,
-                }}
-                onClick={() => setChevronExpand(!chevronExpand)}
-              />
-            </div>
-          ) : null}
-
-          <div
-            style={{ position: !isFocus ? "sticky" : undefined }}
-            className="options-controller-container"
+            style={{ position: "sticky"}}
+            className="options-controller-container-mac-book"
           >
             <div className="option-controllers">
               <div className="filter-controller">
@@ -613,11 +520,11 @@ export default function BuyPhone({
                         </div>
                         <div className="condition-content">
                           {expanded.some((x) => x === data.name)
-                            ? data.values.map((item) => (
+                            ? data.values?.map((item) => (
                                 <div
                                   key={item.categoryValueId}
                                   onClick={() => {
-                                    onOptionSelect(item);
+                                    onOptionSelect(item, data.name);
                                     setFilterDrawerOpen(false);
                                     document.body.style.overflow = "unset";
                                     document.body.style.position = "unset";
@@ -625,8 +532,8 @@ export default function BuyPhone({
                                   className={`condition-item ${
                                     searchKeys.selectedValues.some(
                                       (x) =>
-                                        x.categoryValueId ===
-                                        item.categoryValueId
+                                        x.value ===
+                                        item.name
                                     )
                                       ? "selected-condition-item"
                                       : undefined
@@ -733,12 +640,12 @@ export default function BuyPhone({
               <div className="filter-options">
                 {searchKeys.selectedValues.map((x) => (
                   <div className="filter-option" key={x.categoryValueId}>
-                    {x.name}
+                    {x.value}
                     <svg
                       width="24px"
                       height="24px"
                       viewBox="0 0 24 24"
-                      onClick={() => onOptionSelect(x)}
+                      onClick={() => onOptionSelect(x, '', true)}
                     >
                       <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
                     </svg>
@@ -781,7 +688,11 @@ export default function BuyPhone({
                     <div className="description">
                       <span>{item.name}</span>
                       <span className="attr">
-                        {`${item.carrier} ${item.storage} ${item.color}`}
+                        {`${item.year} ${item.cpu} `}
+                        <br/>
+                        {`${item.screenSize}`}
+                        <br/>
+                        {`${item.ram} ${item.storage}`}
                       </span>
                     </div>
 
@@ -816,7 +727,7 @@ export default function BuyPhone({
                     ) : (
                       <div className="action">
                         <span className="price">
-                          ${item.currentPrice / 100}
+                          ${Math.floor(Number(item.currentPrice / 100))}
                         </span>
                       </div>
                     )}
@@ -858,7 +769,11 @@ export default function BuyPhone({
                       <div className="description">
                         <span className="attr-name">{item.name}</span>
                         <span className="attr">
-                          {`${item.carrier} ${item.storage} ${item.color}`}
+                        {`${item.year} ${item.cpu} `}
+                        <br/>
+                        {`${item.screenSize} ${item.color}`}
+                        <br/>
+                        {`${item.ram} ${item.storage}`}
                         </span>
                       </div>
 
@@ -880,7 +795,7 @@ export default function BuyPhone({
                         </div>
                       ) : (
                         <span className="price">
-                          ${item.currentPrice / 100}
+                          ${Math.floor(Number(item.currentPrice / 100))}
                         </span>
                       )}
                     </div>
@@ -968,19 +883,19 @@ export async function getStaticProps() {
     pageSize: 20,
     orderBy: "RECOMMENDED",
   };
-
-  console.log("fetch category data");
   const data = await fetch(
-    "https://api-single.uptradeit.com/search/category/values"
+    "https://api-single.uptradeit.com/search/product/macbook/condition/list"
   ).then((response) => response.json());
-  const listData = await fetch("https://api-single.uptradeit.com/search", {
+  const listData = await fetch("https://api-single.uptradeit.com/search/product/macbook/result/list", {
     method: "POST",
     headers: {
       ["Content-Type"]: "application/json",
     },
     body: JSON.stringify(body),
   }).then((response) => response.json());
-
+  console.log('xxx', data.data)
+  console.log('xxx', data.data[3].values)
+  console.log('bbb', listData.data)
   const productData = await fetch(
     "https://api-single.uptradeit.com/search/product"
   ).then((response) => response.json());
@@ -997,7 +912,8 @@ export async function getStaticProps() {
       },
     };
 
-  const carrierOptions = data.data.find((x) => x.name === "CARRIER");
+  const carrierOptions = {values: []}
+  // data.data.find((x) => x.name === "CARRIER");
 
   const navBarData = await getNavBar();
 

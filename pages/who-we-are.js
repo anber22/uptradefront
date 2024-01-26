@@ -40,7 +40,7 @@ export default function AboutUs({
             </div>
           </div>
 
-          <amp-img
+          <img
             style={{ minWidth: 840 }}
             src="/who-we-are-background.jpg"
             width="840"
@@ -48,7 +48,7 @@ export default function AboutUs({
             className="mission-background"
           />
 
-          <amp-img
+          <img
             src="/who-we-are-background.jpg"
             width="840"
             height="561"
@@ -61,7 +61,7 @@ export default function AboutUs({
 
           <div className="values-group">
             <div className="values-item">
-              <amp-img
+              <img
                 src="/svg/checkcircle.svg"
                 width="38"
                 height="38"
@@ -75,7 +75,7 @@ export default function AboutUs({
               </p>
             </div>
             <div className="values-item">
-              <amp-img
+              <img
                 src="/svg/recycle.svg"
                 width="38"
                 height="38"
@@ -88,7 +88,7 @@ export default function AboutUs({
               </p>
             </div>
             <div className="values-item">
-              <amp-img
+              <img
                 src="/svg/shield.svg"
                 width="38"
                 height="38"
@@ -101,7 +101,7 @@ export default function AboutUs({
               </p>
             </div>
             <div className="values-item">
-              <amp-img
+              <img
                 src="/svg/cubeopen.svg"
                 width="38"
                 height="38"
@@ -114,7 +114,7 @@ export default function AboutUs({
               </p>
             </div>
             <div className="values-item">
-              <amp-img
+              <img
                 src="/svg/star.svg"
                 width="38"
                 height="38"
@@ -127,7 +127,7 @@ export default function AboutUs({
               </p>
             </div>
             <div className="values-item">
-              <amp-img
+              <img
                 src="/svg/group.svg"
                 width="38"
                 height="38"

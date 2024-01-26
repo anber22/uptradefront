@@ -45,7 +45,7 @@ export default function BuyNav({ navbar, sellNavbar, type }) {
                 }}
               >
                 {item.key}
-                <img src="/svg/arrow-right.svg" width="20" height="20" />
+                <img src="/svg/arrow-down.svg" width="18" height="18" />
               </div>
             ))}
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
@@ -82,7 +82,7 @@ export default function BuyNav({ navbar, sellNavbar, type }) {
                   setSelectedNavList(item.values);
                 }}
               >
-                <span>{item.key}</span> <i className="arrow-right"></i>
+                <span>{item.key}</span> <img src="/svg/arrow-down.svg" width="18" height="18" />
               </h3>
               <div
                 className="header-nav-content"

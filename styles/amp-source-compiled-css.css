@@ -2566,7 +2566,9 @@ header.fixed {
   .options-controller-container {
     top: 132px;
   }
-
+  .options-controller-container-mac-book{
+    top: 0px;
+  }
   .mobile-image-container {
     display: none;
   }
@@ -3143,7 +3145,9 @@ button {
     align-items: center;
     padding: 19.3vw 4.5vw 24vw;
   }
-
+  .review-box{
+    background-color: red;
+  }
   .home-reviews .view-more-link {
     margin-top: 24px;
     margin-bottom: 24px;
@@ -4964,7 +4968,10 @@ button {
     font-size: 16px;
     font-weight: 700;
   }
-
+  .other-content .review-box {
+    display: flex;
+    background-color: red;
+  }
   .mobile-reviews-title .reviews-from {
     display: flex;
 
@@ -5021,7 +5028,9 @@ button {
   .options-controller-container {
     top: 112px;
   }
-
+  .options-controller-container-mac-book{
+    top: 0px;
+  }
   .mobile-image-container {
     background-color: #ffffff;
     display: flex;
